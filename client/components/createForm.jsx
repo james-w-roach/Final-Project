@@ -22,17 +22,19 @@ export default class CreateForm extends React.Component {
     event.preventDefault();
     const { toggleCreate } = this.context;
     const { tripName } = this.state;
+    // eslint-disable-next-line no-console
+    console.log(tripName);
     toggleCreate();
   }
 
   render() {
     return (
-      <>
+      <div className="main">
         <form onSubmit={this.handleSubmit}>
-          <input type="text" name="trip-name" placeholder="New Itinerary" onChange={this.handleChange}/>
-          <input type="submit" value="Finish Itinerary"/>
+          <input className="name" type="text" name="trip-name" placeholder="New Itinerary" onChange={this.handleChange}/>
+          <input className="finish button" type="submit" value="Finish Itinerary"/>
         </form>
-      </>
+      </div>
     );
   }
 }

@@ -12,8 +12,8 @@ export default class CreateButton extends React.Component {
   render() {
     const { toggleCreate } = this.context;
     return (
-      <div>
-        <button htmlClass="create button" onClick={toggleCreate}>
+      <div className="main">
+        <button className="create button" onClick={toggleCreate}>
           Create New Itinerary +
         </button>
       </div>
