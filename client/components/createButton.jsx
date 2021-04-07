@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../../server/app-context';
 
 export default class CreateButton extends React.Component {
   constructor(props) {
@@ -6,22 +7,18 @@ export default class CreateButton extends React.Component {
     this.state = {
       isCreating: false
     };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    this.setState({
-      isCreating: true
-    });
   }
 
   render() {
+    const { toggleCreate } = this.context;
     return (
       <div>
-        <button htmlClass="create button" onClick={this.handleClick}>
+        <button htmlClass="create button" onClick={toggleCreate}>
           Create New Itinerary +
         </button>
       </div>
     );
   }
 }
+
+CreateButton.contextType = AppContext;
