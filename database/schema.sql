@@ -11,4 +11,4 @@ create table "public"."itineraries" (
   "tripName"    text           not null,
   "createdAt"   timestamptz(6) not null default now(),
   primary key ("tripId")
-)
+);

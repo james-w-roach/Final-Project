@@ -1,7 +1,9 @@
 require('dotenv/config');
 const express = require('express');
 const staticMiddleware = require('./static-middleware');
-const ClientError = require('./error-middleware');
+const ClientError = require('./client-error');
+const errorMiddleware = require('./error-middleware');
+
 const pg = require('pg');
 
 const db = new pg.Pool({
@@ -11,9 +13,13 @@ const db = new pg.Pool({
   }
 });
 
+const jsonMiddleware = express.json();
+
 const app = express();
 
 app.use(staticMiddleware);
+
+app.use(jsonMiddleware);
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
@@ -33,8 +39,10 @@ app.post('/planner/itineraries', (req, res, next) => {
   const params = [tripName];
   db.query(sql, params)
     .then(result => {
-      const [trip] = result.row;
+      const [trip] = result.rows;
       res.status(201).json(trip);
     })
     .catch(err => next(err));
 });
+
+app.use(errorMiddleware);

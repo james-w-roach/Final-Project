@@ -21,9 +21,15 @@ export default class CreateForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const { toggleCreate } = this.context;
-    const { tripName } = this.state;
-    // eslint-disable-next-line no-console
-    console.log(tripName);
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    };
+    fetch('/planner/itineraries', req)
+      .then(res => res.json());
     toggleCreate();
   }
 
