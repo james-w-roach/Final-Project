@@ -42,12 +42,40 @@ body {
   padding: 1.5rem;
 }
 
-.name {
-  position: absolute;
-  top: 0.5rem;
-}
-
 .finish {
   position: absolute;
-  bottom: 0.5rem;
+  bottom: 0.3rem;
+  left: 0.3rem;
+  width: 365px;
+  padding: 1rem 2rem;
+}
+
+.name {
+  font-size: 1.5rem;
+  text-align: center;
+  background-color: #364e68;
+  color: white;
+  border: none;
+  border-radius: 0.2rem;
+  position: absolute;
+  top: 0.3rem;
+  left: 0.3rem;
+  width: 300px;
+  padding: 1rem 2rem;
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 1);
+}
+
+@media screen and (min-width: 576px) {
+  .name {
+    background-color: transparent;
+    color: #364e68;
+    font-size: 3rem;
+  }
+
+  ::placeholder {
+    color: #364e68;
+  }
 }
