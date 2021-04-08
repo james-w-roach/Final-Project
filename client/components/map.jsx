@@ -1,11 +1,13 @@
 import mapboxgl from 'mapbox-gl';
 import React from 'react';
 import MapboxWorker from 'mapbox-gl/dist/mapbox-gl-csp-worker';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 mapboxgl.workerClass = MapboxWorker;
 mapboxgl.accessToken = process.env.MAPBOX_API_KEY;
 
-class Map extends React.PureComponent {
+class Mapbox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,6 +34,13 @@ class Map extends React.PureComponent {
         zoom: map.getZoom().toFixed(2)
       });
     });
+
+    map.addControl(
+      new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl
+      })
+    );
   }
 
   render() {
@@ -43,4 +52,4 @@ class Map extends React.PureComponent {
   }
 }
 
-export default Map;
+export default Mapbox;

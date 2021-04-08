@@ -29,6 +29,10 @@ module.exports = {
       {
         test: /\bmapbox-gl-csp-worker.js\b/i,
         use: { loader: 'worker-loader' }
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
