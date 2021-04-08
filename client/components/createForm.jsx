@@ -1,5 +1,6 @@
 import React from 'react';
 import AppContext from '../../server/app-context';
+import Map from './map';
 
 export default class CreateForm extends React.Component {
   constructor(props) {
@@ -36,6 +37,7 @@ export default class CreateForm extends React.Component {
   render() {
     return (
       <div className="main">
+        <Map />
         <form onSubmit={this.handleSubmit}>
           <input className="name" type="text" name="trip-name" placeholder="New Itinerary" onChange={this.handleChange}/>
           <input className="finish button" type="submit" value="Finish Itinerary"/>

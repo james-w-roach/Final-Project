@@ -1,6 +1,6 @@
 require('dotenv/config');
 const path = require('path');
-
+const webpack = require('webpack');
 const clientPath = path.join(__dirname, 'client');
 const serverPublicPath = path.join(__dirname, 'server/public');
 
@@ -25,9 +25,16 @@ module.exports = {
             ]
           }
         }
+      },
+      {
+        test: /\bmapbox-gl-csp-worker.js\b/i,
+        use: { loader: 'worker-loader' }
       }
     ]
   },
+  plugins: [
+    new webpack.EnvironmentPlugin(['MAPBOX_API_KEY'])
+  ],
   devtool: 'source-map',
   devServer: {
     host: '0.0.0.0',
