@@ -26,15 +26,12 @@ body {
 
 .main {
   font-family: 'Rubik', serif;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 6rem;
-  bottom: 0;
+  position: relative;
+  width: 375px;
+  height: 716px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("http://www.freelargeimages.com/wp-content/uploads/2014/11/Google_world_map-9.png");
 }
 
 .create {
@@ -68,14 +65,68 @@ body {
   color: rgba(255, 255, 255, 1);
 }
 
+.map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.mapboxgl-ctrl-top-right {
+  width: 365px;
+  top: 65px;
+  left: 15px;
+}
+
+.mapboxgl-ctrl-bottom-right,
+.mapboxgl-ctrl-bottom-left {
+  bottom: 65px;
+}
+
 @media screen and (min-width: 576px) {
   .name {
     background-color: transparent;
     color: #364e68;
     font-size: 3rem;
+    text-align: left;
+    outline: none;
+    left: 1rem;
   }
 
   ::placeholder {
     color: #364e68;
   }
+
+  .main {
+    flex-direction: row;
+    width: 100vw;
+  }
+
+  .map-container {
+    border: solid  #364e68;
+    border-radius: 0.3rem;
+    position: absolute;
+    top: 90px;
+    left: 50px;
+    width: 45vw;
+    height: 500px;
+  }
+
+  .mapboxgl-ctrl-top-right {
+    width: 100%;
+    top: 0;
+    left: 15px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .mapboxgl-ctrl-bottom-right,
+  .mapboxgl-ctrl-bottom-left {
+    bottom: 0;
+  }
+}
+
+.mapboxgl-ctrl-geocoder {
+  width: 100%;
 }
