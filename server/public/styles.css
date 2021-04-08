@@ -26,15 +26,12 @@ body {
 
 .main {
   font-family: 'Rubik', serif;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 6rem;
-  bottom: 0;
+  position: relative;
+  width: 375px;
+  height: 716px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("http://www.freelargeimages.com/wp-content/uploads/2014/11/Google_world_map-9.png");
 }
 
 .create {
@@ -78,4 +75,12 @@ body {
   ::placeholder {
     color: #364e68;
   }
+}
+
+.map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
