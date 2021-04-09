@@ -27,16 +27,16 @@ app.listen(process.env.PORT, () => {
 });
 
 app.post('/planner/itineraries', (req, res, next) => {
-  const { tripName } = req.body;
+  const { tripName, locations } = req.body;
   if (!tripName) {
     throw new ClientError(400, 'please enter an itinerary name');
   }
   const sql = `
-     insert into "itineraries" ("tripName")
-          values ($1)
-       returning "tripName"
+     insert into "itineraries" ("tripName", "locations")
+          values ($1, $2)
+       returning "tripName", "locations"
   `;
-  const params = [tripName];
+  const params = [tripName, locations];
   db.query(sql, params)
     .then(result => {
       const [trip] = result.rows;
