@@ -64,7 +64,7 @@ class Mapbox extends React.Component {
       <div>
         <div ref={this.mapContainer} className="map-container" />
         <form onSubmit={this.handleAdd}>
-          <input type="submit"/>
+          <input type="submit" value={`Add ${this.state.location.split(',')[0]}`} />
         </form>
       </div>
     );
