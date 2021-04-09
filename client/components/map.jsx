@@ -41,7 +41,7 @@ class Mapbox extends React.Component {
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl
       })
-        .on('result', result => console.log(result))
+        .on('result', result => console.log(result.result['place_name_en-US']))
     );
   }
 
