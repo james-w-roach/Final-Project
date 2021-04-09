@@ -33,6 +33,7 @@ class Mapbox extends React.Component {
         lat: map.getCenter().lat.toFixed(4),
         zoom: map.getZoom().toFixed(2)
       });
+      console.log(this.state);
     });
 
     map.addControl(
@@ -40,6 +41,7 @@ class Mapbox extends React.Component {
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl
       })
+        .on('result', result => console.log(result))
     );
   }
 
