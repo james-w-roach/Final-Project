@@ -40,7 +40,7 @@ app.get('/api/travelPlanner/itineraries', (req, res, next) => {
 
 app.post('/api/travelPlanner/itineraries', (req, res, next) => {
   const { tripName, locations } = req.body;
-  JSON.stringify(locations);
+  const locationsJSON = JSON.stringify(locations);
   if (!tripName) {
     throw new ClientError(400, 'please enter an itinerary name');
   } else if (!locations) {
@@ -51,7 +51,7 @@ app.post('/api/travelPlanner/itineraries', (req, res, next) => {
           values ($1, $2)
        returning "tripName", "locations"
   `;
-  const params = [tripName, locations];
+  const params = [tripName, locationsJSON];
   db.query(sql, params)
     .then(result => {
       const [trip] = result.rows;
