@@ -26,6 +26,18 @@ app.listen(process.env.PORT, () => {
   console.log(`express server listening on port ${process.env.PORT}`);
 });
 
+app.get('/api/travelPlanner/itineraries', (req, res, next) => {
+  const sql = `
+    select *
+      from "itineraries"
+  `;
+  db.query(sql)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/travelPlanner/itineraries', (req, res, next) => {
   const { tripName, locations } = req.body;
   JSON.stringify(locations);
