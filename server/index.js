@@ -26,10 +26,13 @@ app.listen(process.env.PORT, () => {
   console.log(`express server listening on port ${process.env.PORT}`);
 });
 
-app.post('/planner/itineraries', (req, res, next) => {
+app.post('/api/travelPlanner/itineraries', (req, res, next) => {
   const { tripName, locations } = req.body;
+  JSON.stringify(locations);
   if (!tripName) {
     throw new ClientError(400, 'please enter an itinerary name');
+  } else if (!locations) {
+    throw new ClientError(400, 'please add one or more locations');
   }
   const sql = `
      insert into "itineraries" ("tripName", "locations")

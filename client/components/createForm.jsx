@@ -11,6 +11,7 @@ export default class CreateForm extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlePush = this.handlePush.bind(this);
   }
 
   handleChange(event) {
@@ -26,19 +27,26 @@ export default class CreateForm extends React.Component {
     const req = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
       },
       body: JSON.stringify(this.state)
     };
-    fetch('/planner/itineraries', req)
+    fetch('/api/travelPlanner/itineraries', req)
       .then(res => res.json());
     toggleCreate();
+  }
+
+  handlePush(newLocation) {
+    this.setState({
+      locations: this.state.locations.concat(newLocation)
+    });
   }
 
   render() {
     return (
       <div className="main">
-        <Mapbox />
+        <Mapbox onSubmit={this.handlePush} />
         <form onSubmit={this.handleSubmit}>
           <input className="name" type="text" name="trip-name" placeholder="New Itinerary" onChange={this.handleChange}/>
           <input className="finish button" type="submit" value="Finish Itinerary"/>
