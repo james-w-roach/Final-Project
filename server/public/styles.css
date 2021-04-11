@@ -84,6 +84,21 @@ body {
   bottom: 65px;
 }
 
+.add-button {
+  position: absolute;
+  bottom: 90px;
+  width: 365px;
+  left: 5px;
+}
+
+.added {
+  background-color: green;
+}
+
+.not-added {
+  background-color: red;
+}
+
 @media screen and (min-width: 576px) {
   .name {
     background-color: transparent;

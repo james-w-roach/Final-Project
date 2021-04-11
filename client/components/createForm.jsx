@@ -40,6 +40,9 @@ export default class CreateForm extends React.Component {
   handlePush(newLocation) {
     this.setState({
       locations: this.state.locations.concat(newLocation)
+    }, () => {
+      const newLocationsJSON = JSON.stringify(this.state.locations);
+      localStorage.setItem('locations', newLocationsJSON);
     });
   }
 
