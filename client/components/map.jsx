@@ -20,6 +20,7 @@ class Mapbox extends React.Component {
     this.mapContainer = React.createRef();
     this.handleAdd = this.handleAdd.bind(this);
     this.setAddClass = this.setAddClass.bind(this);
+    this.setAddValue = this.setAddValue.bind(this);
   }
 
   componentDidMount() {
@@ -45,27 +46,31 @@ class Mapbox extends React.Component {
         mapboxgl: mapboxgl
       })
         .on('result', result => {
+          this.setState({
+            inLocalStorage: null
+          });
           const locationName = result.result['place_name_en-US'];
-          if (localStorage.getItem('newLocationsJSON')) {
-            const localStorageParse = JSON.parse(localStorage.getItem('newLocationsJSON'));
-            for (const key in localStorageParse.location) {
-              if (key !== locationName) {
-                this.setState({
-                  location: locationName,
-                  inLocalStorage: false
-                }, () => this.setAddClass());
-              } else {
+          if (localStorage.getItem('locations')) {
+            const localStorageParse = JSON.parse(localStorage.getItem('locations'));
+            for (let i = 0; i < localStorageParse.length; i++) {
+              if (localStorageParse[i].location === locationName) {
                 this.setState({
                   location: locationName,
                   inLocalStorage: true
-                }, () => this.setAddClass());
+                });
+              }
+              if (this.state.inLocalStorage === null) {
+                this.setState({
+                  location: locationName,
+                  inLocalStorage: false
+                });
               }
             }
           } else {
             this.setState({
               location: locationName,
               inLocalStorage: false
-            }, () => this.setAddClass());
+            });
           }
         })
     );
@@ -73,15 +78,19 @@ class Mapbox extends React.Component {
 
   handleAdd() {
     event.preventDefault();
-    if (!this.inLocalStorage) {
+    if (!this.state.inLocalStorage) {
       const newLocation = {
         lng: this.state.lng,
         lat: this.state.lat,
         location: this.state.location
       };
       this.props.onSubmit(newLocation);
+      this.setState({
+        inLocalStorage: true
+      });
       this.setAddClass();
     } else {
+      window.alert(`${this.state.location.split(',')[0]} has already been added.`);
       this.setAddClass();
     }
   }
@@ -94,12 +103,20 @@ class Mapbox extends React.Component {
     }
   }
 
+  setAddValue() {
+    if (!this.state.inLocalStorage || this.state.inLocalStorage === null) {
+      return `Add ${this.state.location.split(',')[0]}`;
+    } else {
+      return `${this.state.location.split(',')[0]} Added!`;
+    }
+  }
+
   render() {
     return (
       <div>
         <div ref={this.mapContainer} className="map-container" />
         <form onSubmit={this.handleAdd}>
-          <input type="submit" className={this.setAddClass()} value={`Add ${this.state.location.split(',')[0]}`} />
+          <input type="submit" className={this.setAddClass()} value={this.setAddValue()} />
         </form>
       </div>
     );
