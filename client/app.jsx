@@ -36,12 +36,16 @@ export default class App extends React.Component {
   }
 
   renderPage() {
+    const trip = {
+      name: this.state.currentTripName,
+      locations: this.state.currentLocations
+    };
     if (this.state.isCreating === false) {
       return <Home />;
     } if (this.state.isCreating) {
       return <Create toggleCreate={this.toggleCreate} />;
     } if (this.state.isCreating === null) {
-      return <Itinerary tripName={this.state.currentTripName} locations={this.state.currentLocations} />;
+      return <Itinerary trip={trip} />;
     }
   }
 

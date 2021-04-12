@@ -4,12 +4,11 @@ import Header from '../components/header';
 
 export default class Itinerary extends React.Component {
   render() {
-    const tripName = this.props.tripName;
-    const locations = this.props.locations;
+    const trip = this.props.trip;
     return (
       <>
         <Header />
-        <ViewTrip tripName={tripName} locations={locations}/>
+        <ViewTrip trip={trip} />
       </>
     );
   }

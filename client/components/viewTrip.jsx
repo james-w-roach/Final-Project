@@ -1,18 +1,14 @@
 import React from 'react';
 
 export default class ViewTrip extends React.Component {
-  constructor(props) {
-    super(props);
-    this.logTrip = this.logTrip.bind(this);
-  }
-
-  logTrip() {
-    console.log(this.props.tripName);
-    console.log(this.props.locations);
-  }
-
   render() {
-    this.logTrip();
-    return <h1>Hello World!</h1>;
+    const { name, locations } = this.props.trip;
+    const locationsList = locations.map(location => <li key={location.split(',')[0]}>{location}</li>);
+    return (
+      <>
+        <h1>{name}</h1>
+        <ul>{locationsList}</ul>
+      </>
+    );
   }
 }
