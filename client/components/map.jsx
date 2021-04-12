@@ -15,12 +15,16 @@ class Mapbox extends React.Component {
       lat: 42.35,
       zoom: 9,
       location: '',
-      inLocalStorage: null
+      inLocations: null,
+      tripName: '',
+      locations: [],
+      showFinish: null
     };
     this.mapContainer = React.createRef();
-    this.handleAdd = this.handleAdd.bind(this);
-    this.setAddClass = this.setAddClass.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.setAddValue = this.setAddValue.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleLift = this.handleLift.bind(this);
   }
 
   componentDidMount() {
@@ -46,77 +50,106 @@ class Mapbox extends React.Component {
         mapboxgl: mapboxgl
       })
         .on('result', result => {
-          this.setState({
-            inLocalStorage: null
-          });
+          this.setState({ inLocations: null, showFinish: false });
           const locationName = result.result['place_name_en-US'];
-          if (localStorage.getItem('locations')) {
-            const localStorageParse = JSON.parse(localStorage.getItem('locations'));
-            for (let i = 0; i < localStorageParse.length; i++) {
-              if (localStorageParse[i].location === locationName) {
+          if (!this.state.locations[0]) {
+            this.setState({
+              location: locationName,
+              inLocations: false
+            });
+          } else {
+            for (let i = 0; i < this.state.locations.length; i++) {
+              if (this.state.locations[i] === locationName) {
                 this.setState({
                   location: locationName,
-                  inLocalStorage: true
-                });
-              }
-              if (this.state.inLocalStorage === null) {
+                  inLocations: true
+                }, () => setTimeout(() => {
+                  this.setState({
+                    showFinish: true
+                  });
+                }, 2000));
+                break;
+              } else {
                 this.setState({
                   location: locationName,
-                  inLocalStorage: false
+                  inLocations: false
                 });
               }
             }
-          } else {
-            this.setState({
-              location: locationName,
-              inLocalStorage: false
-            });
           }
         })
     );
   }
 
-  handleAdd() {
-    event.preventDefault();
-    if (!this.state.inLocalStorage) {
-      const newLocation = {
-        lng: this.state.lng,
-        lat: this.state.lat,
-        location: this.state.location
-      };
-      this.props.onSubmit(newLocation);
+  handleClick() {
+    if (!this.state.location) {
+      return;
+    }
+    if (!this.state.inLocations) {
+      const newLocation = this.state.location;
       this.setState({
-        inLocalStorage: true
-      });
-      this.setAddClass();
+        locations: this.state.locations.concat(newLocation),
+        inLocations: true,
+        showFinish: false
+      }, () => setTimeout(() => {
+        this.setState({
+          showFinish: true
+        });
+      }, 2000));
     } else {
       window.alert(`${this.state.location.split(',')[0]} has already been added.`);
-      this.setAddClass();
-    }
-  }
-
-  setAddClass() {
-    if (!this.state.inLocalStorage || this.state.inLocalStorage === null) {
-      return 'add-button not-added';
-    } else {
-      return 'add-button added';
     }
   }
 
   setAddValue() {
-    if (!this.state.inLocalStorage || this.state.inLocalStorage === null) {
+    if (!this.state.location) {
+      return 'Search for a location to add';
+    } else if (!this.state.inLocations || this.state.inLocations === null) {
       return `Add ${this.state.location.split(',')[0]}`;
     } else {
       return `${this.state.location.split(',')[0]} Added!`;
     }
   }
 
+  handleChange(event) {
+    const name = event.target.value;
+    this.setState({
+      tripName: name
+    });
+  }
+
+  handleLift() {
+    event.preventDefault();
+    const trip = {
+      tripName: this.state.tripName,
+      locations: this.state.locations
+    };
+    this.props.onSubmit(trip);
+  }
+
   render() {
+    let addClass;
+    let finishClass;
+    if (this.state.showFinish) {
+      addClass = 'hidden';
+      finishClass = 'finish button';
+    } else if (this.state.inLocations === false) {
+      addClass = 'add button';
+      finishClass = 'hidden';
+    } else if (!this.state.location) {
+      addClass = 'add button';
+      finishClass = 'hidden';
+    } else {
+      finishClass = 'finish hidden';
+      addClass = 'add button added';
+    }
     return (
       <div>
         <div ref={this.mapContainer} className="map-container" />
-        <form onSubmit={this.handleAdd}>
-          <input type="submit" className={this.setAddClass()} value={this.setAddValue()} />
+        <button onClick={this.handleClick} className={addClass}>{this.setAddValue()}</button>
+        <form onSubmit={this.handleLift}>
+          <input className="name" type="text" name="trip-name" placeholder="New Itinerary" onChange={this.handleChange} />
+          <input className={finishClass} type="submit" value="Finish Itinerary" />
         </form>
       </div>
     );

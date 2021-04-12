@@ -39,9 +39,17 @@ body {
   padding: 1.5rem;
 }
 
+.add {
+  position: absolute;
+  bottom: 5px;
+  width: 365px;
+  left: 5px;
+  padding: 1rem 2rem;
+}
+
 .finish {
   position: absolute;
-  bottom: 0.3rem;
+  bottom: 5px;
   left: 0.3rem;
   width: 365px;
   padding: 1rem 2rem;
@@ -84,19 +92,9 @@ body {
   bottom: 65px;
 }
 
-.add-button {
-  position: absolute;
-  bottom: 90px;
-  width: 365px;
-  left: 5px;
-}
-
 .added {
-  background-color: green;
-}
-
-.not-added {
-  background-color: red;
+  background-color: white;
+  color: #364e68;
 }
 
 @media screen and (min-width: 576px) {
@@ -138,10 +136,18 @@ body {
 
   .mapboxgl-ctrl-bottom-right,
   .mapboxgl-ctrl-bottom-left {
-    bottom: 0;
+    position: relative;
   }
 }
 
 .mapboxgl-ctrl-geocoder {
   width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.none {
+  bottom: 5px;
 }
