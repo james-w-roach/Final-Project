@@ -2,21 +2,31 @@ import React from 'react';
 import Home from './pages/home';
 import Create from './pages/create';
 import AppContext from '../server/app-context';
+import Itinerary from './pages/itinerary';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCreating: false
+      isCreating: false,
+      currentTripName: '',
+      currentLocations: []
     };
     this.renderPage = this.renderPage.bind(this);
     this.toggleCreate = this.toggleCreate.bind(this);
   }
 
-  toggleCreate() {
+  toggleCreate(trip) {
+    if (trip) {
+      const { tripName, locations } = trip;
+      this.setState({
+        currentTripName: tripName,
+        currentLocations: locations
+      });
+    }
     if (this.state.isCreating) {
       this.setState({
-        isCreating: false
+        isCreating: null
       });
     } else {
       this.setState({
@@ -26,10 +36,12 @@ export default class App extends React.Component {
   }
 
   renderPage() {
-    if (!this.state.isCreating) {
+    if (this.state.isCreating === false) {
       return <Home />;
     } if (this.state.isCreating) {
-      return <Create />;
+      return <Create toggleCreate={this.toggleCreate} />;
+    } if (this.state.isCreating === null) {
+      return <Itinerary tripName={this.state.currentTripName} locations={this.state.currentLocations} />;
     }
   }
 

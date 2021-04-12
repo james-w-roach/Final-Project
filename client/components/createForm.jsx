@@ -1,5 +1,4 @@
 import React from 'react';
-import AppContext from '../../server/app-context';
 import Mapbox from './map';
 
 export default class CreateForm extends React.Component {
@@ -9,7 +8,7 @@ export default class CreateForm extends React.Component {
   }
 
   handleSubmit(trip) {
-    const { toggleCreate } = this.context;
+    const toggleCreate = this.props.toggleCreate;
     const req = {
       method: 'POST',
       headers: {
@@ -20,7 +19,7 @@ export default class CreateForm extends React.Component {
     };
     fetch('/api/travelPlanner/itineraries', req)
       .then(res => res.json());
-    toggleCreate();
+    toggleCreate(trip);
   }
 
   render() {
@@ -33,5 +32,3 @@ export default class CreateForm extends React.Component {
     );
   }
 }
-
-CreateForm.contextType = AppContext;
