@@ -26,17 +26,32 @@ app.listen(process.env.PORT, () => {
   console.log(`express server listening on port ${process.env.PORT}`);
 });
 
-app.post('/planner/itineraries', (req, res, next) => {
-  const { tripName } = req.body;
+app.get('/api/travelPlanner/itineraries', (req, res, next) => {
+  const sql = `
+    select *
+      from "itineraries"
+  `;
+  db.query(sql)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/travelPlanner/itineraries', (req, res, next) => {
+  const { tripName, locations } = req.body;
+  const locationsJSON = JSON.stringify(locations);
   if (!tripName) {
     throw new ClientError(400, 'please enter an itinerary name');
+  } else if (!locations) {
+    throw new ClientError(400, 'please add one or more locations');
   }
   const sql = `
-     insert into "itineraries" ("tripName")
-          values ($1)
-       returning "tripName"
+     insert into "itineraries" ("tripName", "locations")
+          values ($1, $2)
+       returning "tripName", "locations"
   `;
-  const params = [tripName];
+  const params = [tripName, locationsJSON];
   db.query(sql, params)
     .then(result => {
       const [trip] = result.rows;
