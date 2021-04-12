@@ -22,7 +22,7 @@ class Mapbox extends React.Component {
     };
     this.mapContainer = React.createRef();
     this.handleClick = this.handleClick.bind(this);
-    this.setAddValue = this.setAddValue.bind(this);
+    this.getButtonText = this.getButtonText.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleLift = this.handleLift.bind(this);
   }
@@ -69,12 +69,13 @@ class Mapbox extends React.Component {
                   });
                 }, 2000));
                 break;
-              } else {
-                this.setState({
-                  location: locationName,
-                  inLocations: false
-                });
               }
+            }
+            if (!this.state.inLocations) {
+              this.setState({
+                location: locationName,
+                inLocations: false
+              });
             }
           }
         })
@@ -101,7 +102,7 @@ class Mapbox extends React.Component {
     }
   }
 
-  setAddValue() {
+  getButtonText() {
     if (!this.state.location) {
       return 'Search for a location to add';
     } else if (!this.state.inLocations || this.state.inLocations === null) {
@@ -133,7 +134,7 @@ class Mapbox extends React.Component {
     if (this.state.showFinish) {
       addClass = 'hidden';
       finishClass = 'finish button';
-    } else if (this.state.inLocations === false) {
+    } else if (!this.state.inLocations) {
       addClass = 'add button';
       finishClass = 'hidden';
     } else if (!this.state.location) {
@@ -146,7 +147,7 @@ class Mapbox extends React.Component {
     return (
       <div>
         <div ref={this.mapContainer} className="map-container" />
-        <button onClick={this.handleClick} className={addClass}>{this.setAddValue()}</button>
+        <button onClick={this.handleClick} className={addClass}>{this.getButtonText()}</button>
         <form onSubmit={this.handleLift}>
           <input className="name" type="text" name="trip-name" placeholder="New Itinerary" onChange={this.handleChange} />
           <input className={finishClass} type="submit" value="Finish Itinerary" />

@@ -6,7 +6,6 @@ export default class CreateForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.setClass = this.setClass.bind(this);
   }
 
   handleSubmit(trip) {
@@ -22,13 +21,6 @@ export default class CreateForm extends React.Component {
     fetch('/api/travelPlanner/itineraries', req)
       .then(res => res.json());
     toggleCreate();
-  }
-
-  setClass(hideFinish) {
-    if (!hideFinish) {
-      return 'hidden';
-    }
-    return 'finish button';
   }
 
   render() {
