@@ -115,6 +115,14 @@ ul {
   list-style-type: none;
   padding: 0.7rem 15px;
   margin-bottom: 10px;
+  position: relative;
+}
+
+.fa-arrow-right {
+  position: absolute;
+  right: 10px;
+  top: 25px;
+  font-size: 1.5rem;
 }
 
 .icons {

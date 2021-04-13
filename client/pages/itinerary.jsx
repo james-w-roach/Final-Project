@@ -11,10 +11,12 @@ export default class Itinerary extends React.Component {
 
   toggleView(view) {
     const trip = this.props.trip;
-    if (view === 'location') {
+    if (!view) {
       return <ViewTrip trip={trip} toggleView={this.toggleView} />;
-    } else {
+    } else if (view === 'location') {
       return <ViewLocation toggleView={this.toggleView} />;
+    } else {
+      <ViewTrip trip={trip} toggleView={this.toggleView} />;
     }
   }
 

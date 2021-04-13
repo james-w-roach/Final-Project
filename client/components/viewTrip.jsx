@@ -6,7 +6,10 @@ export default class ViewTrip extends React.Component {
     const locationsList = locations.map(location => {
       return (
         <li className="trip-list-item" key={location.split(',')[0]}>
-          {location}
+          <div>
+            {location}
+            <i className="fas fa-arrow-right"></i>
+          </div>
           <div className="icons">
             0 <i className="fas fa-utensils"></i>
             0 <i className="fas fa-map-marker-alt"></i>
