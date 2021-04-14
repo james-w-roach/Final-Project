@@ -187,3 +187,8 @@ ul {
 .none {
   bottom: 5px;
 }
+
+.location-map {
+  width: 365px;
+  height: 200px;
+}
