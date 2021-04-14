@@ -5,7 +5,7 @@ export default class ViewTrip extends React.Component {
     const { name, locations } = this.props.trip;
     const locationsList = locations.map(location => {
       return (
-        <li className="trip-list-item" key={location.name.split(',')[0]}>
+        <li className="trip-list-item" key={location.name.split(',')[0]} onClick={() => this.props.toggleView(location)}>
           <div>
             {location.name}
             <i className="fas fa-arrow-right"></i>

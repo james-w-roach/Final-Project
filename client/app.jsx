@@ -9,11 +9,13 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       isCreating: false,
+      view: null,
       currentTripName: '',
       currentLocations: []
     };
     this.renderPage = this.renderPage.bind(this);
     this.toggleCreate = this.toggleCreate.bind(this);
+    this.toggleView = this.toggleView.bind(this);
   }
 
   toggleCreate(trip) {
@@ -35,6 +37,14 @@ export default class App extends React.Component {
     }
   }
 
+  toggleView(location) {
+    if (location) {
+      this.setState({ view: 'location' });
+    } else {
+      this.setState({ view: 'itinerary' });
+    }
+  }
+
   renderPage() {
     const trip = {
       name: this.state.currentTripName,
@@ -45,7 +55,7 @@ export default class App extends React.Component {
     } if (this.state.isCreating) {
       return <Create toggleCreate={this.toggleCreate} />;
     } if (this.state.isCreating === null) {
-      return <Itinerary trip={trip} />;
+      return <Itinerary trip={trip} view={this.state.view} toggleView={this.toggleView} />;
     }
   }
 
