@@ -8,7 +8,7 @@ export default class ViewTrip extends React.Component {
         <li className="trip-list-item" key={location.name.split(',')[0]} onClick={() => this.props.toggleView(location)}>
           <div>
             {location.name}
-            <i className="fas fa-arrow-right"></i>
+            <i className="fas fa-arrow-right list-arrow"></i>
           </div>
           <div className="icons">
             {location.restaurants.length} <i className="fas fa-utensils"></i>
