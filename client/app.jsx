@@ -3,13 +3,15 @@ import Home from './pages/home';
 import Create from './pages/create';
 import AppContext from '../server/app-context';
 import Itinerary from './pages/itinerary';
+import LocationPage from './pages/locationPage';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isCreating: false,
-      view: null,
+      view: 'itinerary',
+      locationView: {},
       currentTripName: '',
       currentLocations: []
     };
@@ -38,9 +40,12 @@ export default class App extends React.Component {
   }
 
   toggleView(location) {
-    if (location) {
-      this.setState({ view: 'location' });
-    } else {
+    if (this.state.view === 'itinerary') {
+      this.setState({
+        view: 'location',
+        locationView: location
+      });
+    } else if (this.state.view === 'location') {
       this.setState({ view: 'itinerary' });
     }
   }
@@ -54,8 +59,10 @@ export default class App extends React.Component {
       return <Home />;
     } if (this.state.isCreating) {
       return <Create toggleCreate={this.toggleCreate} />;
-    } if (this.state.isCreating === null) {
+    } if (this.state.isCreating === null && this.state.view === 'itinerary') {
       return <Itinerary trip={trip} view={this.state.view} toggleView={this.toggleView} />;
+    } if (this.state.isCreating === null && this.state.view === 'location') {
+      return <LocationPage locationView={this.state.locationView} view={this.state.view} toggleView={this.toggleView} />;
     }
   }
 
