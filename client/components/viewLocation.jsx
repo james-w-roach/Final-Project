@@ -4,23 +4,23 @@ import LocationMap from './locationMap';
 export default class ViewLocation extends React.Component {
   render() {
     return (
-     <>
-        <div>
+     <div className="location-page">
+        <div className="trip-list-item center">
           <i onClick={() => this.props.toggleView()} className="fas fa-arrow-left"></i>
-          <h1>{this.props.location.name}</h1>
+          <h2>{this.props.location.name.split(',')[0]} </h2>
         </div>
         <LocationMap location={this.props.location} />
         <div>
-          <div className="trip-list-item">
+          <div className="trip-list-item center">
             Points of Interest
-            <i className="fas fa-arrow-right"></i>
+            <i className="fas fa-arrow-right lp"></i>
           </div>
-          <div className="trip-list-item">
+          <div className="trip-list-item center">
             Restaurants
-            <i className="fas fa-arrow-right"></i>
+            <i className="fas fa-arrow-right lp"></i>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }

@@ -88,8 +88,11 @@ body {
   left: 15px;
 }
 
-.mapboxgl-ctrl-bottom-right,
-.mapboxgl-ctrl-bottom-left {
+.map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-right {
+  bottom: 65px;
+}
+
+.map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-left {
   bottom: 65px;
 }
 
@@ -118,10 +121,29 @@ ul {
   position: relative;
 }
 
+.center {
+  text-align: center;
+}
+
 .fa-arrow-right {
   position: absolute;
   right: 10px;
   top: 25px;
+  font-size: 1.5rem;
+}
+
+.location-page {
+  padding: 10px;
+}
+
+.lp {
+  top: 8px;
+}
+
+.fa-arrow-left {
+  position: absolute;
+  left: 10px;
+  top: 13px;
   font-size: 1.5rem;
 }
 
@@ -189,6 +211,8 @@ ul {
 }
 
 .location-map {
-  width: 365px;
   height: 200px;
+  border: solid #364e68;
+  border-radius: 0.4rem;
+  margin: 0 auto 10px;
 }

@@ -11,7 +11,7 @@ export default class LocationMap extends React.Component {
     this.state = {
       lng: this.props.location.lng,
       lat: this.props.location.lat,
-      zoom: 10
+      zoom: 8
     };
     this.mapContainer = React.createRef();
   }
