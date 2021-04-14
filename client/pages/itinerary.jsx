@@ -8,7 +8,7 @@ export default class Itinerary extends React.Component {
     return (
       <>
         <Header />
-        <ViewTrip trip={trip} />
+        <ViewTrip trip={trip} toggleView={this.props.toggleView} />
       </>
     );
   }

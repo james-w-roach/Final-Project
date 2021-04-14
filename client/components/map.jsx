@@ -14,7 +14,7 @@ class Mapbox extends React.Component {
       lng: -70.9,
       lat: 42.35,
       zoom: 9,
-      location: '',
+      location: {},
       inLocations: null,
       tripName: '',
       locations: [],
@@ -52,16 +52,30 @@ class Mapbox extends React.Component {
         .on('result', result => {
           this.setState({ inLocations: null, showFinish: false });
           const locationName = result.result['place_name_en-US'];
+          const lng = result.result.center[0];
+          const lat = result.result.center[1];
           if (!this.state.locations[0]) {
             this.setState({
-              location: locationName,
+              location: {
+                name: locationName,
+                lat,
+                lng,
+                restaurants: [],
+                poi: []
+              },
               inLocations: false
             });
           } else {
             for (let i = 0; i < this.state.locations.length; i++) {
-              if (this.state.locations[i] === locationName) {
+              if (this.state.locations[i].name === locationName) {
                 this.setState({
-                  location: locationName,
+                  location: {
+                    name: locationName,
+                    lat,
+                    lng,
+                    restaurants: [],
+                    poi: []
+                  },
                   inLocations: true
                 }, () => setTimeout(() => {
                   this.setState({
@@ -73,7 +87,13 @@ class Mapbox extends React.Component {
             }
             if (!this.state.inLocations) {
               this.setState({
-                location: locationName,
+                location: {
+                  name: locationName,
+                  lat,
+                  lng,
+                  restaurants: [],
+                  poi: []
+                },
                 inLocations: false
               });
             }
@@ -83,7 +103,7 @@ class Mapbox extends React.Component {
   }
 
   handleClick() {
-    if (!this.state.location) {
+    if (!this.state.location.name) {
       return;
     }
     if (!this.state.inLocations) {
@@ -98,17 +118,17 @@ class Mapbox extends React.Component {
         });
       }, 2000));
     } else {
-      window.alert(`${this.state.location.split(',')[0]} has already been added.`);
+      window.alert(`${this.state.location.name.split(',')[0]} has already been added.`);
     }
   }
 
   getButtonText() {
-    if (!this.state.location) {
+    if (!this.state.location.name) {
       return 'Search For a Location to Add';
     } else if (!this.state.inLocations || this.state.inLocations === null) {
-      return `Add ${this.state.location.split(',')[0]}`;
+      return `Add ${this.state.location.name.split(',')[0]}`;
     } else {
-      return `${this.state.location.split(',')[0]} Added!`;
+      return `${this.state.location.name.split(',')[0]} Added!`;
     }
   }
 

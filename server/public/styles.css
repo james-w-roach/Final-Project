@@ -74,25 +74,6 @@ body {
   color: rgba(255, 255, 255, 1);
 }
 
-.map-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
-.mapboxgl-ctrl-top-right {
-  width: 365px;
-  top: 65px;
-  left: 15px;
-}
-
-.mapboxgl-ctrl-bottom-right,
-.mapboxgl-ctrl-bottom-left {
-  bottom: 65px;
-}
-
 .added {
   background-color: white;
   color: #364e68;
@@ -115,6 +96,33 @@ ul {
   list-style-type: none;
   padding: 0.7rem 15px;
   margin-bottom: 10px;
+  position: relative;
+}
+
+.center {
+  text-align: center;
+}
+
+.list-arrow {
+  position: absolute;
+  right: 10px;
+  top: 25px;
+  font-size: 1.5rem;
+}
+
+.location-page {
+  padding: 10px;
+}
+
+.locations {
+  top: 8px;
+}
+
+.back-arrow {
+  position: absolute;
+  left: 10px;
+  top: 13px;
+  font-size: 1.5rem;
 }
 
 .icons {
@@ -143,33 +151,6 @@ ul {
     flex-direction: row;
     width: 100vw;
   }
-
-  .map-container {
-    border: solid  #364e68;
-    border-radius: 0.3rem;
-    position: absolute;
-    top: 90px;
-    left: 50px;
-    width: 45vw;
-    height: 500px;
-  }
-
-  .mapboxgl-ctrl-top-right {
-    width: 100%;
-    top: 0;
-    left: 15px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .mapboxgl-ctrl-bottom-right,
-  .mapboxgl-ctrl-bottom-left {
-    position: relative;
-  }
-}
-
-.mapboxgl-ctrl-geocoder {
-  width: 100%;
 }
 
 .hidden {
