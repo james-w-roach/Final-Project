@@ -5,14 +5,14 @@ export default class ViewTrip extends React.Component {
     const { name, locations } = this.props.trip;
     const locationsList = locations.map(location => {
       return (
-        <li className="trip-list-item" key={location.split(',')[0]}>
+        <li className="trip-list-item" key={location.name.split(',')[0]}>
           <div>
-            {location}
+            {location.name}
             <i className="fas fa-arrow-right"></i>
           </div>
           <div className="icons">
-            0 <i className="fas fa-utensils"></i>
-            0 <i className="fas fa-map-marker-alt"></i>
+            {location.restaurants.length} <i className="fas fa-utensils"></i>
+            {location.poi.length} <i className="fas fa-map-marker-alt"></i>
           </div>
         </li>
       );
