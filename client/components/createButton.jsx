@@ -2,20 +2,12 @@ import React from 'react';
 import AppContext from '../../server/app-context';
 
 export default class CreateButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isCreating: false
-    };
-  }
-
   render() {
-    const { toggleCreate } = this.context;
     return (
       <div className="main">
-        <button className="create button" onClick={toggleCreate}>
+        <a className="create button" href={'#create'}>
           Create New Itinerary +
-        </button>
+        </a>
       </div>
     );
   }

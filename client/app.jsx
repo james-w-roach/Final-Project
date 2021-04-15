@@ -13,11 +13,18 @@ export default class App extends React.Component {
       view: 'itinerary',
       locationView: {},
       currentTripName: '',
-      currentLocations: []
+      currentLocations: [],
+      route: window.location.hash
     };
     this.renderPage = this.renderPage.bind(this);
     this.toggleCreate = this.toggleCreate.bind(this);
     this.toggleView = this.toggleView.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('hashchange', () => {
+      this.setState({ route: window.location.hash });
+    });
   }
 
   toggleCreate(trip) {
@@ -28,9 +35,10 @@ export default class App extends React.Component {
         currentLocations: locations
       });
     }
-    if (this.state.isCreating) {
+    if (this.state.isCreating === false) {
       this.setState({
-        isCreating: null
+        isCreating: null,
+        route: '#itinerary'
       });
     } else {
       this.setState({
@@ -51,13 +59,14 @@ export default class App extends React.Component {
   }
 
   renderPage() {
+    const { route } = this.state;
     const trip = {
       name: this.state.currentTripName,
       locations: this.state.currentLocations
     };
-    if (this.state.isCreating === false) {
+    if (route === '') {
       return <Home />;
-    } if (this.state.isCreating) {
+    } if (route === '#create') {
       return <Create toggleCreate={this.toggleCreate} />;
     } if (this.state.isCreating === null && this.state.view === 'itinerary') {
       return <Itinerary trip={trip} view={this.state.view} toggleView={this.toggleView} />;
