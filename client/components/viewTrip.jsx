@@ -20,7 +20,10 @@ export default class ViewTrip extends React.Component {
     return (
       <>
         <div className="main">
-          <h1 className="name">{name}</h1>
+          <div className="name">
+            <i onClick={() => this.props.toggleView()} className="fas fa-arrow-left back-arrow"></i>
+            <h1>{name}</h1>
+          </div>
           <ul>{locationsList}</ul>
         </div>
       </>
