@@ -20,7 +20,7 @@ export default class ItineraryList extends React.Component {
       return (
         <li className="trip-list-item" key={itinerary.tripId}>
           <i className="fas fa-arrow-right list-arrow"></i>
-          <a href={'#itinerary'}>
+          <a href={`#itinerary/${itinerary.tripId}`}>
             <div>
               {itinerary.tripName}
             </div>

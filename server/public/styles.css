@@ -17,6 +17,11 @@ body {
   height: 6rem;
 }
 
+.home-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
 .button {
   background-color: #364e68;
   color: white;
@@ -38,6 +43,7 @@ body {
 .create {
   border-radius: 0.4rem;
   padding: 1.5rem;
+  margin: 1rem 0;
 }
 
 .add {

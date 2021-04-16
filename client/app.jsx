@@ -1,20 +1,23 @@
 import React from 'react';
 import Home from './pages/home';
 import Create from './pages/create';
-import AppContext from '../server/app-context';
 import Itinerary from './pages/itinerary';
 import LocationPage from './pages/locationPage';
 import parseRoute from '../server/parseRoute';
+import ItineraryList from './pages/itineraryList';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCreating: false,
       view: 'itinerary',
-      locationView: {},
-      currentTripName: '',
-      currentLocations: [],
+      location: {
+        name: '',
+        lng: '',
+        lat: '',
+        poi: [],
+        restaurants: []
+      },
       route: parseRoute(window.location.hash)
     };
     this.renderPage = this.renderPage.bind(this);
@@ -25,16 +28,23 @@ export default class App extends React.Component {
     window.addEventListener('hashchange', () => {
       this.setState({ route: window.location.hash });
     });
+    window.addEventListener('beforeunload', () => {
+      const locationJSON = JSON.stringify(this.state.location);
+      localStorage.setItem('Location', locationJSON);
+    });
+    if (localStorage.getItem('Location')) {
+      const locationParse = JSON.parse(localStorage.getItem('Location'));
+      this.setState({ location: locationParse });
+    }
   }
 
   toggleView(location) {
-    if (this.state.view === 'itinerary') {
+    if (this.state.route === '#itinerary') {
       this.setState({
-        view: 'location',
-        locationView: location
-      });
-    } else if (this.state.view === 'location') {
-      this.setState({ view: 'itinerary' });
+        location
+      }, () => { window.location.hash = '#location'; });
+    } else if (this.state.route === '#location') {
+      window.location.hash = '#itinerary';
     }
   }
 
@@ -43,24 +53,23 @@ export default class App extends React.Component {
     if (route === '') {
       return <Home />;
     } if (route === '#create') {
-      return <Create toggleCreate={this.toggleCreate} />;
+      return <Create />;
     } if (route === '#itinerary') {
-      return <Itinerary view={this.state.view} toggleView={this.toggleView} />;
-    } else {
-      return <LocationPage trip={route.trip} location={route.location} />;
+      return <Itinerary toggleView={this.toggleView} />;
+    } if (typeof route === 'object') {
+      return <Itinerary trip={route[1]} toggleView={this.toggleView} />;
+    } else if (route === '#location') {
+      return <LocationPage toggleView={this.toggleView} location={this.state.location} />;
+    } else if (route === '#itineraryList') {
+      return <ItineraryList />;
     }
   }
 
   render() {
-    const { isCreating } = this.state;
-    const { toggleCreate } = this;
-    const contextValue = { isCreating, toggleCreate };
     return (
-      <AppContext.Provider value={contextValue}>
-        <>
-          { this.renderPage() }
-        </>
-      </AppContext.Provider>
+      <>
+        { this.renderPage() }
+      </>
     );
   }
 }

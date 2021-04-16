@@ -13,7 +13,19 @@ export default class ViewTrip extends React.Component {
   componentDidMount() {
     fetch('/api/travelPlanner/itineraries')
       .then(res => res.json())
-      .then(itineraries => this.setState({ itinerary: itineraries[(itineraries.length - 1)] }));
+      .then(itineraries => {
+        if (!this.props.trip) {
+          this.setState({ itinerary: itineraries[(itineraries.length - 1)] });
+        } else {
+          for (let i = 0; i < itineraries.length; i++) {
+            if (itineraries[i].tripId === this.props.trip) {
+              this.setState({
+                itinerary: itineraries[i]
+              });
+            }
+          }
+        }
+      });
   }
 
   render() {
@@ -22,7 +34,7 @@ export default class ViewTrip extends React.Component {
     const locationsList = itinerary.locations.map(location => {
       return (
         <li className="trip-list-item" key={location.name.split(',')[0]} >
-          <a href={`#location?${tripName}/${location.name.split(',')[0]}`}>
+          <a href={'#location'} onClick={() => this.props.toggleView(location)}>
             <div>
               {location.name}
               <i className="fas fa-arrow-right list-arrow"></i>
@@ -39,8 +51,8 @@ export default class ViewTrip extends React.Component {
       <>
         <div className="main">
           <div className="name">
-            <i onClick={() => this.props.toggleView()} className="fas fa-arrow-left back-arrow"></i>
-            <h1>{tripName}</h1>
+            <i className="fas fa-arrow-left back-arrow"></i>
+            {tripName}
           </div>
           <ul>{locationsList}</ul>
         </div>

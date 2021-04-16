@@ -7,7 +7,7 @@ export default class Create extends React.Component {
     return (
       <>
         <Header />
-        <CreateForm toggleCreate={this.props.toggleCreate} />
+        <CreateForm />
       </>
     );
   }
