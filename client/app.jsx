@@ -4,6 +4,7 @@ import Create from './pages/create';
 import AppContext from '../server/app-context';
 import Itinerary from './pages/itinerary';
 import LocationPage from './pages/locationPage';
+import parseRoute from '../server/parseRoute';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,10 +15,9 @@ export default class App extends React.Component {
       locationView: {},
       currentTripName: '',
       currentLocations: [],
-      route: window.location.hash
+      route: parseRoute(window.location.hash)
     };
     this.renderPage = this.renderPage.bind(this);
-    this.toggleCreate = this.toggleCreate.bind(this);
     this.toggleView = this.toggleView.bind(this);
   }
 
@@ -25,26 +25,6 @@ export default class App extends React.Component {
     window.addEventListener('hashchange', () => {
       this.setState({ route: window.location.hash });
     });
-  }
-
-  toggleCreate(trip) {
-    if (trip) {
-      const { tripName, locations } = trip;
-      this.setState({
-        currentTripName: tripName,
-        currentLocations: locations
-      });
-    }
-    if (this.state.isCreating === false) {
-      this.setState({
-        isCreating: null,
-        route: '#itinerary'
-      });
-    } else {
-      this.setState({
-        isCreating: true
-      });
-    }
   }
 
   toggleView(location) {
@@ -60,18 +40,14 @@ export default class App extends React.Component {
 
   renderPage() {
     const { route } = this.state;
-    const trip = {
-      name: this.state.currentTripName,
-      locations: this.state.currentLocations
-    };
     if (route === '') {
       return <Home />;
     } if (route === '#create') {
       return <Create toggleCreate={this.toggleCreate} />;
-    } if (this.state.isCreating === null && this.state.view === 'itinerary') {
-      return <Itinerary trip={trip} view={this.state.view} toggleView={this.toggleView} />;
-    } if (this.state.isCreating === null && this.state.view === 'location') {
-      return <LocationPage locationView={this.state.locationView} view={this.state.view} toggleView={this.toggleView} />;
+    } if (route === '#itinerary') {
+      return <Itinerary view={this.state.view} toggleView={this.toggleView} />;
+    } else {
+      return <LocationPage trip={route.trip} location={route.location} />;
     }
   }
 

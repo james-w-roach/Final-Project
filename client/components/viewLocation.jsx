@@ -2,11 +2,16 @@ import React from 'react';
 import LocationMap from './locationMap';
 
 export default class ViewLocation extends React.Component {
+  componentDidMount() {
+    fetch(`/api/travelPlanner/itineraries/${this.props.tripName}`)
+      .then(res => res.json());
+  }
+
   render() {
     return (
      <div className="location-page">
         <div className="trip-list-item center">
-          <i onClick={() => this.props.toggleView()} className="fas fa-arrow-left back-arrow"></i>
+          <i className="fas fa-arrow-left back-arrow"></i>
           <h2>{this.props.location.name.split(',')[0]} </h2>
         </div>
         <LocationMap location={this.props.location} />

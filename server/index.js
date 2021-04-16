@@ -38,6 +38,20 @@ app.get('/api/travelPlanner/itineraries', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/travelPlanner/itineraries/:tripName', (req, res, next) => {
+  const tripName = req.params.tripName;
+  const sql = `
+    select ($1)
+      from "itineraries"
+  `;
+  const params = [tripName];
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/travelPlanner/itineraries', (req, res, next) => {
   const { tripName, locations } = req.body;
   const locationsJSON = JSON.stringify(locations);
