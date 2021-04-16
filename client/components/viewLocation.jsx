@@ -3,19 +3,13 @@ import LocationMap from './locationMap';
 
 export default class ViewLocation extends React.Component {
   render() {
-    let location;
-    if (localStorage.getItem('Location')) {
-      location = JSON.parse(localStorage.getItem('Location'));
-    } else {
-      location = this.props.location;
-    }
     return (
      <div className="location-page">
         <div className="trip-list-item center">
-          <i className="fas fa-arrow-left back-arrow"></i>
+          <a onClick={() => history.back()}><i className="fas fa-arrow-left location back-arrow"></i></a>
           <h2>{this.props.location.name.split(',')[0]} </h2>
         </div>
-        <LocationMap location={location} />
+        <LocationMap location={this.props.location} />
         <div>
           <div className="trip-list-item center">
             Points of Interest

@@ -39,7 +39,7 @@ export default class App extends React.Component {
   }
 
   toggleView(location) {
-    if (this.state.route === '#itinerary') {
+    if (this.state.route.startsWith('#itinerary')) {
       this.setState({
         location
       }, () => { window.location.hash = '#location'; });
@@ -56,8 +56,9 @@ export default class App extends React.Component {
       return <Create />;
     } if (route === '#itinerary') {
       return <Itinerary toggleView={this.toggleView} />;
-    } if (typeof route === 'object') {
-      return <Itinerary trip={route[1]} toggleView={this.toggleView} />;
+    } if (route.startsWith('#itinerary/')) {
+      const trip = parseInt(route.split('/')[1]);
+      return <Itinerary trip={trip} toggleView={this.toggleView} />;
     } else if (route === '#location') {
       return <LocationPage toggleView={this.toggleView} location={this.state.location} />;
     } else if (route === '#itineraryList') {

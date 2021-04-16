@@ -116,6 +116,13 @@ ul {
   font-size: 1.5rem;
 }
 
+.trip-list-arrow {
+  position: absolute;
+  right: 10px;
+  top: 19px;
+  font-size: 1.5rem;
+}
+
 .location-page {
   padding: 10px;
 }
@@ -127,8 +134,15 @@ ul {
 .back-arrow {
   position: absolute;
   left: 10px;
-  top: 13px;
-  font-size: 1.5rem;
+  top: 13.5px;
+  font-size: 2rem;
+}
+
+.location {
+  position: absolute;
+  left: 10px;
+  top: 9px;
+  font-size: 2rem;
 }
 
 .icons {
@@ -165,4 +179,26 @@ ul {
 
 .none {
   bottom: 5px;
+}
+
+a {
+  text-decoration: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.list-item {
+  color: #364e68;
+}
+
+.back {
+  color: white;
+}
+
+a:visited {
+  text-decoration: none;
 }

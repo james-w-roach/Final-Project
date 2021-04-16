@@ -34,7 +34,11 @@ export default class ViewTrip extends React.Component {
     const locationsList = itinerary.locations.map(location => {
       return (
         <li className="trip-list-item" key={location.name.split(',')[0]} >
-          <a href={'#location'} onClick={() => this.props.toggleView(location)}>
+          <a className="list-item" href={'#location'}
+            onClick={() => {
+              this.props.toggleView(location);
+              history.forward();
+            }}>
             <div>
               {location.name}
               <i className="fas fa-arrow-right list-arrow"></i>
@@ -51,7 +55,7 @@ export default class ViewTrip extends React.Component {
       <>
         <div className="main">
           <div className="name">
-            <i className="fas fa-arrow-left back-arrow"></i>
+            <a className="back" href={'#itineraryList'} onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
             {tripName}
           </div>
           <ul>{locationsList}</ul>
