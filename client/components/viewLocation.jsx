@@ -3,6 +3,7 @@ import LocationMap from './locationMap';
 
 export default class ViewLocation extends React.Component {
   render() {
+    if (!this.props.location) return null;
     return (
      <div className="location-page">
         <div className="trip-list-item center">
