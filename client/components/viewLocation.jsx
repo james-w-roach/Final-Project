@@ -16,6 +16,7 @@ export default class ViewLocation extends React.Component {
           <h2>Points of Interest</h2>
         </div>
         <ViewPOI />
+        <button className="button add">Add Points of Interest +</button>
       </div>
     );
   }

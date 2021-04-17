@@ -30,7 +30,7 @@ export default class ItineraryList extends React.Component {
         return (
           <li className="trip-list-item" key={itinerary.tripId}>
             <i className="fas fa-arrow-right trip-list-arrow"></i>
-            <a className="list-item" href={`#itinerary/${itinerary.tripId}`} onClick={() => history.forward()}>
+            <a className="list-item" href={`#itinerary/${itinerary.tripId}`} >
               <div>
                 {itinerary.tripName}
               </div>

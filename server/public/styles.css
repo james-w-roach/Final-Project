@@ -161,21 +161,28 @@ ul {
   background-color: white;
   border: solid 0.15rem #364e68;
   border-radius: 0.4rem;
-  height: 250px;
+  height: 260px;
   margin: auto;
+  padding: 10px;
   position: relative;
   overflow: hidden;
   overflow-y: scroll;
 }
 
+.poi-list li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
 .poi-list-item {
+  color: #364e68;
   display: flex;
-  margin: 0 auto 10px;
 }
 
 .poi-img {
   width: 100px;
+  height: 100px;
   border-radius: 0.4rem;
+  margin-right: 10px;
 }
 
 @media screen and (min-width: 576px) {
