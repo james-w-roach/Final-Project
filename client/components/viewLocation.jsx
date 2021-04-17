@@ -6,7 +6,7 @@ export default class ViewLocation extends React.Component {
     return (
      <div className="location-page">
         <div className="trip-list-item center">
-          <i onClick={() => this.props.toggleView()} className="fas fa-arrow-left back-arrow"></i>
+          <a onClick={() => history.back()}><i className="fas fa-arrow-left location back-arrow"></i></a>
           <h2>{this.props.location.name.split(',')[0]} </h2>
         </div>
         <LocationMap location={this.props.location} />

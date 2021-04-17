@@ -8,7 +8,6 @@ export default class CreateForm extends React.Component {
   }
 
   handleSubmit(trip) {
-    const toggleCreate = this.props.toggleCreate;
     const req = {
       method: 'POST',
       headers: {
@@ -18,8 +17,10 @@ export default class CreateForm extends React.Component {
       body: JSON.stringify(trip)
     };
     fetch('/api/travelPlanner/itineraries', req)
-      .then(res => res.json());
-    toggleCreate(trip);
+      .then(res => {
+        res.json();
+        window.location.hash = '#itinerary';
+      });
   }
 
   render() {

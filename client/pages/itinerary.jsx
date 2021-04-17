@@ -4,12 +4,13 @@ import Header from '../components/header';
 
 export default class Itinerary extends React.Component {
   render() {
-    const trip = this.props.trip;
     return (
       <>
         <Header />
-        <ViewTrip trip={trip} toggleView={this.props.toggleView} />
+        <ViewTrip toggleView={this.props.toggleView} trip={this.props.trip} />
       </>
     );
   }
 }
+
+// <ViewTrip trip={itinerary} toggleView={this.props.toggleView} />

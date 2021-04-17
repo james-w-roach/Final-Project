@@ -7,7 +7,7 @@ export default class LocationPage extends React.Component {
     return (
       <>
         <Header />
-        <ViewLocation location={this.props.locationView} toggleView={this.props.toggleView} />
+        <ViewLocation location={this.props.location} />
       </>
     );
   }
