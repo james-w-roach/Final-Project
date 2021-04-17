@@ -11,13 +11,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: 'itinerary',
-      location: {
-        name: '',
-        lng: '',
-        lat: '',
-        poi: [],
-        restaurants: []
-      },
+      location: null,
       route: parseRoute(window.location.hash)
     };
     this.renderPage = this.renderPage.bind(this);
