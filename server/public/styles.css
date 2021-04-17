@@ -86,10 +86,13 @@ body {
 }
 
 ul {
+  padding-left: 0;
+}
+
+.trip-list {
   position: absolute;
   top: 75px;
   left: 5px;
-  padding-left: 0;
   width: 365px;
 }
 
@@ -151,6 +154,28 @@ ul {
   justify-content: space-between;
   width: 20%;
   align-items: center;
+}
+
+.poi-list {
+  font-family: 'Rubik', serif;
+  background-color: white;
+  border: solid 0.15rem #364e68;
+  border-radius: 0.4rem;
+  height: 250px;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.poi-list-item {
+  display: flex;
+  margin: 0 auto 10px;
+}
+
+.poi-img {
+  width: 100px;
+  border-radius: 0.4rem;
 }
 
 @media screen and (min-width: 576px) {

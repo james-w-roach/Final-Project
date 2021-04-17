@@ -50,7 +50,7 @@ export default class ItineraryList extends React.Component {
             <a className="back" href="" onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
             Itineraries
           </div>
-          <ul>{list}</ul>
+          <ul className="trip-list">{list}</ul>
         </div>
       </>
     );

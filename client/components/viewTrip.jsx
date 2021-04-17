@@ -58,7 +58,7 @@ export default class ViewTrip extends React.Component {
             <a className="back" href={'#itineraryList'} onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
             {tripName}
           </div>
-          <ul>{locationsList}</ul>
+          <ul className="trip-list">{locationsList}</ul>
         </div>
       </>
     );
