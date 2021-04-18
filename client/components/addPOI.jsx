@@ -8,12 +8,11 @@ export default class AddPOI extends React.Component {
     super(props);
     this.state = {
       searchInput: '',
-      searchResult: null,
-      poi: []
+      searchResult: null
     };
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleAdd = this.handleAdd.bind(this);
+    this.sendPostRequest = this.sendPostRequest.bind(this);
   }
 
   handleChange(event) {
@@ -23,8 +22,17 @@ export default class AddPOI extends React.Component {
     });
   }
 
-  handleAdd(result) {
-    this.setState({ poi: this.state.poi.concat(result) });
+  sendPostRequest() {
+    const req = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.props.locations)
+    };
+    fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`, req)
+      .then(res => res.json())
+      .then(this.props.changeComponent());
   }
 
   search() {
@@ -47,7 +55,7 @@ export default class AddPOI extends React.Component {
           <li className="trip-list-item" key={result.id}>
             <h3>{result.name}</h3> <br />
             <h4>{`${result.location.address}, ${result.location.formattedAddress[1]}, ${result.location.cc}`}</h4>
-            <button onClick={() => this.handleAdd(result)} className="add-poi button">+</button>
+            <button onClick={() => this.props.handleAdd(result)} className="add-poi button">+</button>
           </li>
         );
       });
@@ -60,7 +68,9 @@ export default class AddPOI extends React.Component {
         </form>
         <ul className="results">{results}</ul>
         <button className="button add"
-        onClick={() => this.props.changeComponent()}>Finish</button>
+          onClick={() => {
+            this.sendPostRequest();
+          }}>Save</button>
       </>
     );
   }

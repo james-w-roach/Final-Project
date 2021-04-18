@@ -3,6 +3,10 @@ import LocationMap from './locationMap';
 import ViewPOI from './viewPOI';
 
 export default class ViewLocation extends React.Component {
+  componentDidMount() {
+    this.props.getLocationData();
+  }
+
   render() {
     if (!this.props.location) return null;
     return (

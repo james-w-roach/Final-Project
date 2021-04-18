@@ -36,7 +36,7 @@ export default class ViewTrip extends React.Component {
         <li className="trip-list-item" key={location.name.split(',')[0]} >
           <a className="list-item" href={'#location'}
             onClick={() => {
-              this.props.toggleView(location);
+              this.props.toggleView(location, itinerary.tripId);
               history.forward();
             }}>
             <div>
@@ -44,7 +44,6 @@ export default class ViewTrip extends React.Component {
               <i className="fas fa-arrow-right list-arrow"></i>
             </div>
             <div className="icons">
-              {location.restaurants.length} <i className="fas fa-utensils"></i>
               {location.poi.length} <i className="fas fa-map-marker-alt"></i>
             </div>
           </a>
