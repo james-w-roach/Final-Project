@@ -25,9 +25,9 @@ export default class LocationPage extends React.Component {
   renderPage() {
     const { component } = this.state;
     if (component === 'location') {
-      return <ViewLocation location={this.props.location} />;
+      return <ViewLocation location={this.props.location} changeComponent={this.changeComponent} />;
     } else {
-      return <AddPOI location={this.props.location} />;
+      return <AddPOI location={this.props.location} changeComponent={this.changeComponent} />;
     }
   }
 

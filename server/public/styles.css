@@ -185,6 +185,38 @@ ul {
   margin-right: 10px;
 }
 
+.poi-form {
+  position: relative;
+  padding: 10px;
+}
+
+.search {
+  position: relative;
+  width: 320px;
+}
+
+.search::placeholder {
+  color: #364e68;
+}
+
+.poi-search {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  bottom: 22px;
+  border-radius: 0.4rem;
+  border: none;
+}
+
+.results {
+  height: 565px;
+  margin: auto;
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
 @media screen and (min-width: 576px) {
   .name {
     background-color: transparent;
