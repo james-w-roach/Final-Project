@@ -13,6 +13,7 @@ export default class AddPOI extends React.Component {
     };
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   handleChange(event) {
@@ -20,6 +21,10 @@ export default class AddPOI extends React.Component {
     this.setState({
       searchInput: input
     });
+  }
+
+  handleAdd(result) {
+    this.setState({ poi: this.state.poi.concat(result) });
   }
 
   search() {
@@ -40,8 +45,9 @@ export default class AddPOI extends React.Component {
       results = this.state.searchResult.map(result => {
         return (
           <li className="trip-list-item" key={result.id}>
-            {result.name}
-            {`${result.location.address}, ${result.location.city}, ${result.location.cc}`}
+            <h3>{result.name}</h3> <br />
+            <h4>{`${result.location.address}, ${result.location.formattedAddress[1]}, ${result.location.cc}`}</h4>
+            <button onClick={() => this.handleAdd(result)} className="add-poi button">+</button>
           </li>
         );
       });
@@ -49,11 +55,12 @@ export default class AddPOI extends React.Component {
     return (
       <>
         <form className="poi-form" onSubmit={this.search}>
-          <input className="trip-list-item search" required="required" type="text" name="trip-name" placeholder="Search for a place to go:" onChange={this.handleChange} />
-          <input type="submit" className="poi-search" placeholder="Search for a place:" />
+          <input className="trip-list-item search" required="required" type="text" name="trip-name" placeholder="Search for a place:" onChange={this.handleChange} />
+          <input type="submit" className="poi-search" value="Go" />
         </form>
         <ul className="results">{results}</ul>
-        <button className="button add" onClick={() => this.props.changeComponent()}>Finish</button>
+        <button className="button add"
+        onClick={() => this.props.changeComponent()}>Finish</button>
       </>
     );
   }

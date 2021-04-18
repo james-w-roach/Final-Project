@@ -193,6 +193,7 @@ ul {
 .search {
   position: relative;
   width: 320px;
+  font-size: 1rem;
 }
 
 .search::placeholder {
@@ -201,11 +202,14 @@ ul {
 
 .poi-search {
   position: absolute;
-  right: 12px;
-  top: 12px;
-  bottom: 22px;
-  border-radius: 0.4rem;
+  right: 11px;
+  top: 11px;
+  bottom: 21px;
+  border-radius: 0 0.3rem 0.3rem 0;
   border: none;
+  background-color: #364e68;
+  color: white;
+  padding: 0 1rem;
 }
 
 .results {
@@ -215,6 +219,13 @@ ul {
   position: relative;
   overflow: hidden;
   overflow-y: scroll;
+}
+
+.add-poi {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  padding: 0.2rem 0.6rem;
 }
 
 @media screen and (min-width: 576px) {
