@@ -14,7 +14,7 @@ body {
   font-family: 'Spectral', serif;
   background-color: #98ccd3;
   color: white;
-  height: 6rem;
+  height: 60px;
 }
 
 .home-buttons {
@@ -34,7 +34,7 @@ body {
   font-family: 'Rubik', serif;
   position: relative;
   width: 375px;
-  height: 716px;
+  height: 692px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,7 +127,9 @@ ul {
 }
 
 .location-page {
+  position: relative;
   padding: 10px;
+  height: 672px;
 }
 
 .locations {
@@ -157,7 +159,7 @@ ul {
 }
 
 .poi-list-container {
-  max-height: 280px;
+  max-height: 250px;
   background-color: white;
   border: solid 0.15rem #364e68;
   border-radius: 0.4rem;
@@ -166,7 +168,7 @@ ul {
 
 .poi-list {
   font-family: 'Rubik', serif;
-  max-height: 250px;
+  max-height: 230px;
   height: auto;
   margin: auto;
   margin-bottom: 7px;
@@ -196,7 +198,7 @@ ul {
 
 .poi-form {
   position: relative;
-  padding: 10px;
+  padding: 10px 0;
 }
 
 .search {
@@ -212,7 +214,7 @@ ul {
 
 .poi-search {
   position: absolute;
-  right: 11px;
+  right: 1px;
   top: 11px;
   bottom: 11px;
   border-radius: 0 0.3rem 0.3rem 0;
@@ -223,9 +225,9 @@ ul {
 }
 
 .results {
-  height: 550px;
+  height: 520px;
   margin: auto;
-  padding: 0 10px 10px;
+  padding: 0 0 10px;
   position: relative;
   overflow: hidden;
   overflow-y: scroll;
@@ -258,6 +260,29 @@ ul {
 .add-page {
   margin-left: 14px;
   margin-bottom: 5px;
+}
+
+.navbar {
+  height: 60px;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: 'Rubik', serif;
+  font-size: 1.5rem;
+}
+
+.navbar-anchor {
+  color: #364e68;
+}
+
+.background-img {
+  position: absolute;
+  top: 60px;
 }
 
 @media screen and (min-width: 576px) {

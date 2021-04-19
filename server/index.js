@@ -82,11 +82,12 @@ app.put('/api/travelPlanner/itineraries/:tripId', (req, res, next) => {
      update "itineraries"
         set "locations" = $1
       where "tripId" = $2
+    returning "locations";
   `;
   const params = [locationsJSON, tripId];
   db.query(sql, params)
     .then(result => {
-      res.status(200).json(result.rows);
+      res.status(200).json(result.rows[0]);
     })
     .catch(err => next(err));
 });

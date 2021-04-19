@@ -1,6 +1,7 @@
 import React from 'react';
 import CreateForm from '../components/createForm';
 import Header from '../components/header';
+import NavBar from '../components/navbar';
 
 export default class Create extends React.Component {
   render() {
@@ -8,6 +9,7 @@ export default class Create extends React.Component {
       <>
         <Header />
         <CreateForm />
+        <NavBar />
       </>
     );
   }

@@ -8,9 +8,6 @@ export default class HomeButtons extends React.Component {
           <a className="create button" href={'#create'}>
             Create New Itinerary +
           </a>
-          <a className="create button" href={'#itineraryList'}>
-            View Current Itineraries
-          </a>
         </div>
       </div>
     );

@@ -14,7 +14,6 @@ export default class AddPOI extends React.Component {
     };
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.sendPostRequest = this.sendPostRequest.bind(this);
   }
 
   handleChange(event) {
@@ -22,18 +21,6 @@ export default class AddPOI extends React.Component {
     this.setState({
       searchInput: input
     });
-  }
-
-  sendPostRequest() {
-    const req = {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.props.locations)
-    };
-    fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`, req)
-      .then(res => res.json());
   }
 
   search() {
@@ -49,7 +36,7 @@ export default class AddPOI extends React.Component {
   render() {
     let results;
     if (!this.state.searchResult) {
-      results = <li className="trip-list-item">No places added yet</li>;
+      results = <li className="trip-list-item">Search for places to add</li>;
     } else {
       results = this.state.searchResult.map(result => {
         return (
@@ -66,17 +53,18 @@ export default class AddPOI extends React.Component {
     }
     return (
       <>
-        <form className="poi-form" onSubmit={this.search}>
-          <input className="trip-list-item search" required="required" type="text" name="trip-name" placeholder="Search for a place:" onChange={this.handleChange} />
-          <input type="submit" className="poi-search" value="Go" />
-        </form>
-        <img className="foursquare-logo add-page" src={logo} />
-        <ul className="results">{results}</ul>
-        <button className="button add"
-          onClick={() => {
-            this.sendPostRequest();
-            this.props.changeComponent();
-          }}>Save</button>
+        <div className="location-page">
+          <form className="poi-form" onSubmit={this.search}>
+            <input className="trip-list-item search" required="required" type="text" name="trip-name" placeholder="Search for a place:" onChange={this.handleChange} />
+            <input type="submit" className="poi-search" value="Go" />
+          </form>
+          <img className="foursquare-logo add-page" src={logo} />
+          <ul className="results">{results}</ul>
+          <button className="button add"
+            onClick={() => {
+              this.props.sendPutRequest();
+            }}>Save</button>
+        </div>
       </>
     );
   }
