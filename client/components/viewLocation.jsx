@@ -19,7 +19,7 @@ export default class ViewLocation extends React.Component {
         <div className="trip-list-item center">
           <h2>Points of Interest</h2>
         </div>
-        <ViewPOI />
+        <ViewPOI location={this.props.location} />
         <button className="button add" onClick={() => this.props.changeComponent()}>Add Points of Interest +</button>
       </div>
     );

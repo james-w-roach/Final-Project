@@ -43,8 +43,26 @@ export default class LocationPage extends React.Component {
 
   renderPage() {
     const { component } = this.state;
+    const { locations } = this.state;
+    let location;
+    if (!locations) {
+      location = this.props.location;
+    } else {
+      for (let i = 0; i < locations.length; i++) {
+        if (locations[i].name === this.props.location.name) {
+          location = locations[i];
+        } else {
+          location = this.props.location;
+        }
+      }
+    }
     if (component === 'location') {
-      return <ViewLocation getLocationData={this.getLocationData} location={this.props.location} changeComponent={this.changeComponent} />;
+      return (
+      <ViewLocation
+        getLocationData={this.getLocationData}
+        location={location}
+        changeComponent={this.changeComponent} />
+      );
     } else {
       return (
         <AddPOI
