@@ -156,14 +156,20 @@ ul {
   align-items: center;
 }
 
-.poi-list {
-  font-family: 'Rubik', serif;
+.poi-list-container {
+  max-height: 280px;
   background-color: white;
   border: solid 0.15rem #364e68;
   border-radius: 0.4rem;
-  max-height: 280px;
+  padding-bottom: 5px;
+}
+
+.poi-list {
+  font-family: 'Rubik', serif;
+  max-height: 250px;
   height: auto;
   margin: auto;
+  margin-bottom: 7px;
   position: relative;
   overflow: hidden;
   overflow-y: scroll;
@@ -196,6 +202,7 @@ ul {
   position: relative;
   width: 320px;
   font-size: 1rem;
+  margin-bottom: 0;
 }
 
 .search::placeholder {
@@ -206,7 +213,7 @@ ul {
   position: absolute;
   right: 11px;
   top: 11px;
-  bottom: 21px;
+  bottom: 11px;
   border-radius: 0 0.3rem 0.3rem 0;
   border: none;
   background-color: #364e68;
@@ -215,9 +222,9 @@ ul {
 }
 
 .results {
-  height: 565px;
+  height: 550px;
   margin: auto;
-  padding: 10px;
+  padding: 0 10px 10px;
   position: relative;
   overflow: hidden;
   overflow-y: scroll;
@@ -228,6 +235,16 @@ ul {
   right: 8px;
   top: 8px;
   padding: 0.2rem 0.6rem;
+}
+
+.foursquare-logo {
+  width: 200px;
+  margin-left: 10px;
+}
+
+.add-page {
+  margin-left: 14px;
+  margin-bottom: 5px;
 }
 
 @media screen and (min-width: 576px) {

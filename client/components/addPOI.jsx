@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../../server/public/powered-by-foursquare-blue.png';
 
 const clientId = process.env.FS_CLIENT_ID;
 const clientSecret = process.env.FS_CLIENT_SECRET;
@@ -66,6 +67,7 @@ export default class AddPOI extends React.Component {
           <input className="trip-list-item search" required="required" type="text" name="trip-name" placeholder="Search for a place:" onChange={this.handleChange} />
           <input type="submit" className="poi-search" value="Go" />
         </form>
+        <img className="foursquare-logo add-page" src={logo} />
         <ul className="results">{results}</ul>
         <button className="button add"
           onClick={() => {

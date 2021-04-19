@@ -1,14 +1,15 @@
 import React from 'react';
+import logo from '../../server/public/powered-by-foursquare-blue.png';
 
 export default class ViewPOI extends React.Component {
   render() {
-    let placesList;
+
     if (!this.props.location.poi[0]) {
-      placesList = <li className="poi-list-item">No places added yet</li>;
+      return <li className="trip-list-item">No places added yet</li>;
     } else {
-      placesList = this.props.location.poi.map(place => {
+      const placesList = this.props.location.poi.map(place => {
         return (
-          <li key={place.id} className="poi-list-item">
+          <li key={place.id} className="poi-list-item" onClick={() => this.props.setCoordinates(place.location.lat, place.location.lng)}>
             <div>
               <h3>{place.name}</h3> <br />
               <h4>{`${place.location.address}, ${place.location.formattedAddress[1]}, ${place.location.cc}`}</h4>
@@ -16,13 +17,16 @@ export default class ViewPOI extends React.Component {
           </li>
         );
       });
+      return (
+        <>
+          <div className="poi-list-container">
+            <ul className="poi-list">
+              {placesList}
+            </ul>
+            <img className="foursquare-logo" src={logo} />
+          </div>
+        </>
+      );
     }
-    return (
-      <>
-        <ul className="poi-list">
-          {placesList}
-        </ul>
-      </>
-    );
   }
 }
