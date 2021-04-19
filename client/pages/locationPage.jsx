@@ -52,7 +52,7 @@ export default class LocationPage extends React.Component {
     };
     fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`, req)
       .then(res => res.json())
-      .then(result => this.setState({ locations: result.locations }, () => this.changeComponent()));
+      .then(this.changeComponent());
   }
 
   renderPage() {
