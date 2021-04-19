@@ -33,11 +33,17 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.png$/i,
+        use: { loader: 'file-loader' }
       }
     ]
   },
   plugins: [
-    new webpack.EnvironmentPlugin(['MAPBOX_API_KEY'])
+    new webpack.EnvironmentPlugin(['MAPBOX_API_KEY']),
+    new webpack.EnvironmentPlugin(['FS_CLIENT_ID']),
+    new webpack.EnvironmentPlugin(['FS_CLIENT_SECRET'])
   ],
   devtool: 'source-map',
   devServer: {

@@ -152,30 +152,39 @@ ul {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
-  width: 20%;
+  width: 10%;
   align-items: center;
+}
+
+.poi-list-container {
+  max-height: 280px;
+  background-color: white;
+  border: solid 0.15rem #364e68;
+  border-radius: 0.4rem;
+  padding-bottom: 5px;
 }
 
 .poi-list {
   font-family: 'Rubik', serif;
-  background-color: white;
-  border: solid 0.15rem #364e68;
-  border-radius: 0.4rem;
-  height: 260px;
+  max-height: 250px;
+  height: auto;
   margin: auto;
-  padding: 10px;
+  margin-bottom: 7px;
   position: relative;
   overflow: hidden;
   overflow-y: scroll;
 }
 
 .poi-list li:not(:last-child) {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  border-bottom: solid thin lightgray;
 }
 
 .poi-list-item {
   color: #364e68;
   display: flex;
+  padding: 10px;
+  position: relative;
 }
 
 .poi-img {
@@ -183,6 +192,72 @@ ul {
   height: 100px;
   border-radius: 0.4rem;
   margin-right: 10px;
+}
+
+.poi-form {
+  position: relative;
+  padding: 10px;
+}
+
+.search {
+  position: relative;
+  width: 320px;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.search::placeholder {
+  color: #364e68;
+}
+
+.poi-search {
+  position: absolute;
+  right: 11px;
+  top: 11px;
+  bottom: 11px;
+  border-radius: 0 0.3rem 0.3rem 0;
+  border: none;
+  background-color: #364e68;
+  color: white;
+  padding: 0 1rem;
+}
+
+.results {
+  height: 550px;
+  margin: auto;
+  padding: 0 10px 10px;
+  position: relative;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.add-poi {
+  position: absolute;
+  right: 5px;
+  top: 42px;
+  width: 35px;
+  padding: 0.2rem 0.6rem;
+}
+
+.add-poi-text {
+  width: 90%;
+}
+
+.foursquare-logo {
+  width: 200px;
+  margin-left: 10px;
+}
+
+.fs-logo {
+  width: 35px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.add-page {
+  margin-left: 14px;
+  margin-bottom: 5px;
 }
 
 @media screen and (min-width: 576px) {

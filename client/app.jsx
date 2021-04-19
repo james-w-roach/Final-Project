@@ -12,6 +12,7 @@ export default class App extends React.Component {
     this.state = {
       view: 'itinerary',
       location: null,
+      tripId: null,
       route: parseRoute(window.location.hash)
     };
     this.renderPage = this.renderPage.bind(this);
@@ -32,10 +33,11 @@ export default class App extends React.Component {
     }
   }
 
-  toggleView(location) {
+  toggleView(location, tripId) {
     if (this.state.route.startsWith('#itinerary')) {
       this.setState({
-        location
+        location,
+        tripId
       }, () => { window.location.hash = '#location'; });
     } else if (this.state.route === '#location') {
       window.location.hash = '#itinerary';
@@ -54,7 +56,7 @@ export default class App extends React.Component {
       const trip = parseInt(route.split('/')[1]);
       return <Itinerary trip={trip} toggleView={this.toggleView} />;
     } else if (route === '#location') {
-      return <LocationPage toggleView={this.toggleView} location={this.state.location} />;
+      return <LocationPage toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
     } else if (route === '#itineraryList') {
       return <ItineraryList />;
     }

@@ -3,6 +3,10 @@ import LocationMap from './locationMap';
 import ViewPOI from './viewPOI';
 
 export default class ViewLocation extends React.Component {
+  componentDidMount() {
+    this.props.getLocationData();
+  }
+
   render() {
     if (!this.props.location) return null;
     return (
@@ -11,12 +15,12 @@ export default class ViewLocation extends React.Component {
           <a onClick={() => history.back()}><i className="fas fa-arrow-left location back-arrow"></i></a>
           <h2>{this.props.location.name.split(',')[0]} </h2>
         </div>
-        <LocationMap location={this.props.location} />
+        <LocationMap location={this.props.location} coordinates={this.state} />
         <div className="trip-list-item center">
           <h2>Points of Interest</h2>
         </div>
-        <ViewPOI />
-        <button className="button add">Add Points of Interest +</button>
+        <ViewPOI location={this.props.location} setCoordinates={this.setCoordinates} />
+        <button className="button add" onClick={() => this.props.changeComponent()}>Add Points of Interest +</button>
       </div>
     );
   }

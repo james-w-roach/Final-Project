@@ -12,5 +12,3 @@ export default class Itinerary extends React.Component {
     );
   }
 }
-
-// <ViewTrip trip={itinerary} toggleView={this.props.toggleView} />
