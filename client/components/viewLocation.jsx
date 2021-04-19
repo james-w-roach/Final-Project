@@ -3,21 +3,8 @@ import LocationMap from './locationMap';
 import ViewPOI from './viewPOI';
 
 export default class ViewLocation extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      lat: null,
-      lng: null
-    };
-    this.setCoordinates = this.setCoordinates.bind(this);
-  }
-
   componentDidMount() {
     this.props.getLocationData();
-  }
-
-  setCoordinates(lat, lng) {
-    this.setState({ lat, lng });
   }
 
   render() {

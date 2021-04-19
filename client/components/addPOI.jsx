@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../../server/public/powered-by-foursquare-blue.png';
+import fsLogo from '../../server/public/FS_logo.png';
 
 const clientId = process.env.FS_CLIENT_ID;
 const clientSecret = process.env.FS_CLIENT_SECRET;
@@ -32,8 +33,7 @@ export default class AddPOI extends React.Component {
       body: JSON.stringify(this.props.locations)
     };
     fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`, req)
-      .then(res => res.json())
-      .then(this.props.changeComponent());
+      .then(res => res.json());
   }
 
   search() {
@@ -54,9 +54,12 @@ export default class AddPOI extends React.Component {
       results = this.state.searchResult.map(result => {
         return (
           <li className="trip-list-item" key={result.id}>
-            <h3>{result.name}</h3> <br />
-            <h4>{`${result.location.address}, ${result.location.formattedAddress[1]}, ${result.location.cc}`}</h4>
+            <div className="add-poi-text">
+              <h3>{result.name}</h3> <br />
+              <h4>{`${result.location.address}, ${result.location.formattedAddress[1]}, ${result.location.cc}`}</h4>
+            </div>
             <button onClick={() => this.props.handleAdd(result)} className="add-poi button">+</button>
+            <a href={`http://foursquare.com/v/${result.id}`} rel="noreferrer" target="_blank"><img className="fs-logo" src={fsLogo}></img></a>
           </li>
         );
       });
@@ -72,6 +75,7 @@ export default class AddPOI extends React.Component {
         <button className="button add"
           onClick={() => {
             this.sendPostRequest();
+            this.props.changeComponent();
           }}>Save</button>
       </>
     );

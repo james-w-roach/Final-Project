@@ -23,6 +23,7 @@ export default class LocationPage extends React.Component {
   }
 
   changeComponent() {
+    this.getLocationData();
     const { component } = this.state;
     if (component === 'location') {
       this.setState({ component: 'add' });
@@ -70,7 +71,8 @@ export default class LocationPage extends React.Component {
         tripId={this.props.tripId}
         locations={this.state.locations}
         changeComponent={this.changeComponent}
-        handleAdd={this.handleAdd} />
+        handleAdd={this.handleAdd}
+        getLocationData={this.getLocationData} />
       );
     }
   }

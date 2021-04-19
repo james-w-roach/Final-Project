@@ -37,7 +37,6 @@ export default class ViewTrip extends React.Component {
           <a className="list-item" href={'#location'}
             onClick={() => {
               this.props.toggleView(location, itinerary.tripId);
-              history.forward();
             }}>
             <div>
               {location.name}

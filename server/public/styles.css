@@ -184,6 +184,7 @@ ul {
   color: #364e68;
   display: flex;
   padding: 10px;
+  position: relative;
 }
 
 .poi-img {
@@ -232,14 +233,26 @@ ul {
 
 .add-poi {
   position: absolute;
-  right: 8px;
-  top: 8px;
+  right: 5px;
+  top: 42px;
+  width: 35px;
   padding: 0.2rem 0.6rem;
+}
+
+.add-poi-text {
+  width: 90%;
 }
 
 .foursquare-logo {
   width: 200px;
   margin-left: 10px;
+}
+
+.fs-logo {
+  width: 35px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }
 
 .add-page {
