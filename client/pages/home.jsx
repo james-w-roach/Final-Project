@@ -10,7 +10,9 @@ export default function Home(props) {
     <>
       <img className="background-img" src={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/12.4935,41.8279,9.94,0/375x692?access_token=${token}`} />
       <Header/>
-      <HomeButtons />
+      <div className="page-container">
+        <HomeButtons />
+      </div>
       <NavBar />
     </>
   );

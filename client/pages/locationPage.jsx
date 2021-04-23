@@ -95,7 +95,9 @@ export default class LocationPage extends React.Component {
     return (
       <>
         <Header />
-        { this.renderPage() }
+        <div className="page-container">
+          { this.renderPage() }
+        </div>
         <NavBar />
       </>
     );

@@ -292,7 +292,11 @@ ul {
     font-size: 3rem;
     text-align: left;
     outline: none;
-    left: 1rem;
+  }
+
+  .page-container {
+    width: 80%;
+    margin: auto;
   }
 
   ::placeholder {
@@ -302,6 +306,10 @@ ul {
   .main {
     flex-direction: row;
     width: 100vw;
+  }
+
+  .navbar {
+    display: none;
   }
 }
 

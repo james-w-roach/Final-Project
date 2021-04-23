@@ -46,12 +46,14 @@ export default class ItineraryList extends React.Component {
     return (
       <>
         <Header />
-        <div className="main">
-          <div className="name">
-            <a className="back" href="" onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
-            Itineraries
+        <div className="page-container">
+          <div className="main">
+            <div className="name">
+              <a className="back" href="" onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
+              Itineraries
+            </div>
+            <ul className="trip-list">{list}</ul>
           </div>
-          <ul className="trip-list">{list}</ul>
         </div>
         <NavBar />
       </>
