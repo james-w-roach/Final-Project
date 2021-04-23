@@ -124,7 +124,7 @@ class Mapbox extends React.Component {
 
   getButtonText() {
     if (!this.state.location.name) {
-      return 'Search For a Location to Add';
+      return 'Search For a Location';
     } else if (!this.state.inLocations || this.state.inLocations === null) {
       return `Add ${this.state.location.name.split(',')[0]}`;
     } else {

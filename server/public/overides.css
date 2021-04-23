@@ -40,7 +40,7 @@
   }
 
   .mapboxgl-ctrl-geocoder {
-    width: 33%;
+    width: 50% !important;
   }
 
   .mapboxgl-ctrl-top-right {
@@ -51,8 +51,18 @@
     justify-content: center;
   }
 
+  .mapboxgl-ctrl-top-right > .mapboxgl-ctrl {
+    margin: 10px 0;
+  }
+
   .mapboxgl-ctrl-bottom-right,
   .mapboxgl-ctrl-bottom-left {
     position: relative;
+  }
+}
+
+@media screen and (min-width: 576) {
+  .mapboxgl-ctrl-geocoder {
+    width: 50%;
   }
 }
