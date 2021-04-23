@@ -31,19 +31,22 @@
   margin: 0 auto 10px;
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 376px) {
   .map-container {
     border: solid  #364e68;
     border-radius: 0.3rem;
-    width: 45vw;
-    height: 500px;
+    height: 100%;
     position: relative;
+  }
+
+  .mapboxgl-ctrl-geocoder {
+    width: 33%;
   }
 
   .mapboxgl-ctrl-top-right {
     width: 100%;
     top: 0;
-    left: 15px;
+    left: 0;
     display: flex;
     justify-content: center;
   }

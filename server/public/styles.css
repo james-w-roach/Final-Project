@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  max-width: 100%;
 }
 
 body {
@@ -285,34 +286,6 @@ ul {
   top: 60px;
 }
 
-@media screen and (min-width: 576px) {
-  .name {
-    background-color: transparent;
-    color: #364e68;
-    font-size: 3rem;
-    text-align: left;
-    outline: none;
-  }
-
-  .page-container {
-    width: 80%;
-    margin: auto;
-  }
-
-  ::placeholder {
-    color: #364e68;
-  }
-
-  .main {
-    flex-direction: row;
-    width: 100vw;
-  }
-
-  .navbar {
-    display: none;
-  }
-}
-
 .hidden {
   display: none;
 }
@@ -341,4 +314,83 @@ a {
 
 a:visited {
   text-decoration: none;
+}
+
+@media screen and (min-width: 376px) {
+  .map-form {
+    width: 100%;
+  }
+
+  .name {
+    position: relative;
+    background-color: transparent;
+    color: #364e68;
+    font-size: 2.5rem;
+    text-align: left;
+    outline: none;
+    left: 0;
+    padding: 1rem 0;
+  }
+
+  ::placeholder {
+    color: #364e68;
+  }
+
+  .page-container {
+    width: 95%;
+    margin: auto;
+  }
+
+  .main {
+    width: 100vw;
+    height: 550px;
+    flex-direction: column-reverse;
+  }
+
+  .navbar {
+    display: none;
+  }
+
+  .map-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .add,
+  .finish {
+    width: 40%;
+    left: 30%;
+    padding: 0.5rem 0.7rem;
+    font-size: 1rem;
+  }
+
+  .trip {
+    flex-direction: column;
+    justify-content: inherit;
+  }
+
+  .trip-list {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .trip-title {
+    display: flex;
+    align-items: center;
+  }
+
+  .back {
+    position: relative;
+    color: #364e68;
+    width: 20%;
+    height: 120%;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .page-container {
+    width: 80%;
+  }
 }

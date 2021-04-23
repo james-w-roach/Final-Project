@@ -165,14 +165,18 @@ class Mapbox extends React.Component {
       addClass = 'add button added';
     }
     return (
-      <div className="map-form">
-        <form onSubmit={this.handleLift}>
+      <>
+        <div className="map-box">
           <div ref={this.mapContainer} className="map-container" />
-          <input className="name" required="required" type="text" name="trip-name" placeholder="New Itinerary" onChange={this.handleChange} />
-          <input className={finishClass} type="submit" value="Finish Itinerary" />
-        </form>
-        <button onClick={this.handleClick} className={addClass}>{this.getButtonText()}</button>
-      </div>
+          <button onClick={this.handleClick} className={addClass}>{this.getButtonText()}</button>
+        </div>
+        <div className="map-form">
+          <form onSubmit={this.handleLift}>
+            <input className="name" required="required" type="text" name="trip-name" placeholder="New Itinerary" onChange={this.handleChange} />
+            <input className={finishClass} type="submit" value="Finish Itinerary" />
+          </form>
+        </div>
+      </>
     );
   }
 }
