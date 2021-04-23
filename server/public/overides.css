@@ -54,11 +54,6 @@
   .mapboxgl-ctrl-top-right > .mapboxgl-ctrl {
     margin: 10px 0;
   }
-
-  .mapboxgl-ctrl-bottom-right,
-  .mapboxgl-ctrl-bottom-left {
-    position: relative;
-  }
 }
 
 @media screen and (min-width: 576) {

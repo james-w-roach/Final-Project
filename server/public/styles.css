@@ -47,7 +47,8 @@ body {
   margin: 1rem 0;
 }
 
-.add {
+.add,
+.add-poi-large {
   position: absolute;
   bottom: 5px;
   width: 365px;
@@ -97,7 +98,8 @@ ul {
   width: 365px;
 }
 
-.trip-list-item {
+.trip-list-item,
+.location-text {
   font-family: 'Rubik', serif;
   color: #364e68;
   background-color: white;
@@ -365,6 +367,23 @@ a:visited {
     font-size: 1.2rem;
   }
 
+  .poi-list-container {
+    max-height: 160px;
+  }
+
+  .poi-list {
+    max-height: 140px;
+  }
+
+  .add-poi-large {
+    position: relative;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding: 0.7rem 0.5rem;
+    margin: 10px 0;
+  }
+
   .trip {
     flex-direction: column;
     justify-content: inherit;
@@ -398,6 +417,11 @@ a:visited {
     color: #364e68;
     width: 20%;
     height: 120%;
+  }
+
+  .location-page {
+    height: 100%;
+    padding: 10px 0 0;
   }
 }
 

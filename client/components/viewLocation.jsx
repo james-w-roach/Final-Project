@@ -8,16 +8,20 @@ export default class ViewLocation extends React.Component {
     if (!this.props.location) return null;
     return (
      <div className="location-page">
-        <div className="trip-list-item center">
+        <div className="location-text center">
           <a onClick={() => history.back()}><i className="fas fa-arrow-left location back-arrow"></i></a>
           <h2>{this.props.location.name.split(',')[0]} </h2>
         </div>
-        <LocationMap location={this.props.location} coordinates={this.state} />
-        <div className="trip-list-item center">
-          <h2>Points of Interest</h2>
+        <div className="column">
+          <LocationMap location={this.props.location} coordinates={this.state} />
         </div>
-        <ViewPOI location={this.props.location} setCoordinates={this.setCoordinates} />
-        <button className="button add" onClick={() => this.props.changeComponent()}>Add Points of Interest +</button>
+        <div className="column">
+          <div className="location-text center">
+            <h2>Points of Interest</h2>
+          </div>
+          <ViewPOI location={this.props.location} setCoordinates={this.setCoordinates} />
+          <button className="button add-poi-large" onClick={() => this.props.changeComponent()}>Add Points of Interest +</button>
+        </div>
       </div>
     );
   }
