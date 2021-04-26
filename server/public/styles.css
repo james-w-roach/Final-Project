@@ -280,7 +280,7 @@ ul {
 .navbar {
   height: 60px;
   background-color: white;
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   right: 0;
@@ -328,6 +328,14 @@ a {
 
 a:visited {
   text-decoration: none;
+}
+
+.header-nav {
+  display: none;
+}
+
+.h1-anchor {
+  color: white;
 }
 
 @media screen and (min-width: 376px) {
@@ -429,11 +437,21 @@ a:visited {
     color: #364e68;
     width: 20%;
     height: 120%;
+    align-items: initial;
   }
 
   .location-page {
     height: 100%;
     padding: 10px 0 0;
+  }
+
+  .header-nav {
+    display: initial;
+  }
+
+  .back-arrow {
+    position: relative;
+    top: 0;
   }
 }
 
@@ -469,9 +487,28 @@ a:visited {
   }
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 700px) {
   .trip-list-item {
     width: 43%;
+  }
+
+  .location-page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .location-map {
+    height: 400px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-basis: 45%;
+  }
+
+  .column {
+    width: 47%;
   }
 }
 
