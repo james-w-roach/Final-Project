@@ -426,10 +426,6 @@ a:visited {
     width: 100%;
   }
 
-  .trip-list-item:hover {
-    cursor: pointer;
-  }
-
   .trip-title {
     display: flex;
     align-items: center;
@@ -451,6 +447,11 @@ a:visited {
   .back-arrow {
     position: relative;
     top: 0;
+  }
+
+  .location {
+    position: absolute;
+    top: 9px;
   }
 }
 
@@ -519,6 +520,39 @@ a:visited {
   .column {
     width: 49%;
   }
+
+  .viewPOI {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  .title {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    padding: 0;
+    align-items: center;
+    font-size: 1.5rem;
+  }
+
+  .viewPOI-container {
+    height: 100%;
+  }
+
+  .poi-list {
+    max-height: 300px;
+  }
+
+  .poi-list-container {
+    max-height: 320px;
+  }
+
+  .location {
+    margin-right: 20px;
+    position: relative;
+    top: 0;
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -541,6 +575,8 @@ a:visited {
   }
 }
 
-.button:hover {
+.button:hover,
+.location:hover,
+.trip-list-item:hover {
   cursor: pointer;
 }
