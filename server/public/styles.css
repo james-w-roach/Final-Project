@@ -338,6 +338,13 @@ a:visited {
   color: white;
 }
 
+.location-map {
+  height: 200px;
+  border: solid #364e68;
+  border-radius: 0.4rem;
+  margin: 0 auto 10px;
+}
+
 @media screen and (min-width: 376px) {
   .map-form {
     width: 100%;
@@ -367,10 +374,6 @@ a:visited {
     width: 100vw;
     height: 550px;
     flex-direction: column-reverse;
-  }
-
-  .navbar {
-    display: none;
   }
 
   .map-box {
@@ -430,23 +433,19 @@ a:visited {
   .trip-title {
     display: flex;
     align-items: center;
+    width: 100%;
   }
 
   .back {
     position: relative;
     color: #364e68;
-    width: 20%;
-    height: 120%;
+    width: 60px;
     align-items: initial;
   }
 
   .location-page {
     height: 100%;
     padding: 10px 0 0;
-  }
-
-  .header-nav {
-    display: initial;
   }
 
   .back-arrow {
@@ -460,6 +459,16 @@ a:visited {
   .finish {
     width: 50%;
     left: 25%;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .header-nav {
+    display: initial;
+  }
+
+  .navbar {
+    display: none;
   }
 }
 
@@ -498,7 +507,7 @@ a:visited {
   }
 
   .location-map {
-    height: 400px;
+    height: 450px;
   }
 
   .row {
@@ -508,7 +517,7 @@ a:visited {
   }
 
   .column {
-    width: 47%;
+    width: 49%;
   }
 }
 
@@ -530,4 +539,8 @@ a:visited {
   .page-container {
     width: 900px;
   }
+}
+
+.button:hover {
+  cursor: pointer;
 }

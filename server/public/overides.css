@@ -24,13 +24,6 @@
   width: 100%;
 }
 
-.location-map {
-  height: 200px;
-  border: solid #364e68;
-  border-radius: 0.4rem;
-  margin: 0 auto 10px;
-}
-
 @media screen and (min-width: 376px) {
   .map-container {
     border: solid  #364e68;
