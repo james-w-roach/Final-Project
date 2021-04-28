@@ -70,7 +70,7 @@ body {
 
 .add {
   position: absolute;
-  bottom: 5px;
+  bottom: 10px;
   width: 365px;
   left: 5px;
   padding: 1rem 0.5rem;
@@ -87,7 +87,7 @@ body {
 
 .finish {
   position: absolute;
-  bottom: 5px;
+  bottom: 10px;
   left: 0.3rem;
   width: 365px;
   padding: 1rem 2rem;
@@ -438,6 +438,9 @@ a:visited {
     flex-wrap: wrap;
     left: 0;
     top: 0;
+    height: 75%;
+    overflow: hidden;
+    overflow-y: scroll;
   }
 
   .trip-list-item {
@@ -607,7 +610,9 @@ a:visited {
     left: 35%;
     font-size: 1.2rem;
   }
+}
 
+@media screen and (min-width: 1000px) {
   .page-container {
     width: 900px;
   }
