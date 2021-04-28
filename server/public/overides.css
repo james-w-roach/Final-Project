@@ -32,6 +32,10 @@
     position: relative;
   }
 
+  .background {
+    border: none;
+  }
+
   .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-right {
     bottom: 0;
   }
