@@ -171,7 +171,7 @@ class Mapbox extends React.Component {
           <button onClick={this.handleClick} className={addClass}>{this.getButtonText()}</button>
         </div>
         <div className="map-form">
-          <form onSubmit={this.handleLift}>
+          <form onSubmit={this.handleLift} autoComplete="off">
             <input className="name" required="required" type="text" name="trip-name" placeholder="New Itinerary" onChange={this.handleChange} />
             <input className={finishClass} type="submit" value="Finish Itinerary" />
           </form>
