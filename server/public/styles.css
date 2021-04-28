@@ -445,11 +445,16 @@ a:visited {
 
   .trip-list-item {
     width: 100%;
+    height: min-content;
   }
 
   .trip-title {
     display: flex;
     align-items: center;
+    width: 100%;
+  }
+
+  .itinerary-list {
     width: 100%;
   }
 
