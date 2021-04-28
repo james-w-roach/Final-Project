@@ -28,7 +28,7 @@ export default class AddPOI extends React.Component {
     const { lat, lng } = this.props.location;
     const ll = `${lat},${lng}`;
     const query = this.state.searchInput;
-    fetch(`https://api.foursquare.com/v2/venues/search?client_id=${clientId}&client_secret=${clientSecret}&ll=${ll}&query=${query}&limit=25&v=20210417`)
+    fetch(`https://api.foursquare.com/v2/venues/search?client_id=${clientId}&client_secret=${clientSecret}&ll=${ll}&query=${query}&limit=24&v=20210417`)
       .then(res => res.json())
       .then(result => this.setState({ searchResult: result.response.venues }));
   }
@@ -36,7 +36,7 @@ export default class AddPOI extends React.Component {
   render() {
     let results;
     if (!this.state.searchResult) {
-      results = <li className="trip-list-item">Search for places to add</li>;
+      results = <div></div>;
     } else {
       results = this.state.searchResult.map(result => {
         return (
@@ -55,12 +55,12 @@ export default class AddPOI extends React.Component {
       <>
         <div className="location-page">
           <form className="poi-form" onSubmit={this.search}>
-            <input className="trip-list-item search" required="required" type="text" name="trip-name" placeholder="Search for a place:" onChange={this.handleChange} />
+            <input className="search" required="required" type="text" name="trip-name" placeholder="Search for a place:" onChange={this.handleChange} />
             <input type="submit" className="poi-search" value="Go" />
           </form>
           <img className="foursquare-logo add-page" src={logo} />
           <ul className="results">{results}</ul>
-          <button className="button add"
+          <button className="save button"
             onClick={() => {
               this.props.sendPutRequest();
             }}>Save</button>
