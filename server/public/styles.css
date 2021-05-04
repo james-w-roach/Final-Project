@@ -1,5 +1,7 @@
 * {
   margin: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 body {
@@ -14,12 +16,32 @@ body {
   font-family: 'Spectral', serif;
   background-color: #98ccd3;
   color: white;
-  height: 6rem;
+  height: 60px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-anchor {
+  margin: 0 0.7rem;
+  color: white;
+  font-size: 1.2rem;
 }
 
 .home-buttons {
   display: flex;
   flex-direction: column;
+}
+
+.background-map {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .button {
@@ -34,7 +56,7 @@ body {
   font-family: 'Rubik', serif;
   position: relative;
   width: 375px;
-  height: 716px;
+  height: 692px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,15 +70,24 @@ body {
 
 .add {
   position: absolute;
-  bottom: 5px;
+  bottom: 10px;
   width: 365px;
   left: 5px;
   padding: 1rem 0.5rem;
 }
 
+.add-poi-large,
+.save {
+  position: absolute;
+  bottom: -10px;
+  width: 355px;
+  left: 10px;
+  padding: 1rem 0.5rem;
+}
+
 .finish {
   position: absolute;
-  bottom: 5px;
+  bottom: 10px;
   left: 0.3rem;
   width: 365px;
   padding: 1rem 2rem;
@@ -72,7 +103,7 @@ body {
   position: absolute;
   top: 0.3rem;
   left: 0.3rem;
-  width: 300px;
+  width: 365px;
   padding: 1rem 2rem;
 }
 
@@ -96,7 +127,9 @@ ul {
   width: 365px;
 }
 
-.trip-list-item {
+.trip-list-item,
+.location-text,
+.search {
   font-family: 'Rubik', serif;
   color: #364e68;
   background-color: white;
@@ -127,7 +160,9 @@ ul {
 }
 
 .location-page {
+  position: relative;
   padding: 10px;
+  height: 672px;
 }
 
 .locations {
@@ -157,7 +192,7 @@ ul {
 }
 
 .poi-list-container {
-  max-height: 280px;
+  max-height: 260px;
   background-color: white;
   border: solid 0.15rem #364e68;
   border-radius: 0.4rem;
@@ -166,7 +201,7 @@ ul {
 
 .poi-list {
   font-family: 'Rubik', serif;
-  max-height: 250px;
+  max-height: 230px;
   height: auto;
   margin: auto;
   margin-bottom: 7px;
@@ -196,14 +231,17 @@ ul {
 
 .poi-form {
   position: relative;
-  padding: 10px;
+  padding: 10px 0;
+  display: flex;
 }
 
 .search {
   position: relative;
-  width: 320px;
+  width: 90%;
   font-size: 1rem;
   margin-bottom: 0;
+  border-radius: 0.4rem 0 0 0.4rem;
+  outline: none;
 }
 
 .search::placeholder {
@@ -211,10 +249,6 @@ ul {
 }
 
 .poi-search {
-  position: absolute;
-  right: 11px;
-  top: 11px;
-  bottom: 11px;
   border-radius: 0 0.3rem 0.3rem 0;
   border: none;
   background-color: #364e68;
@@ -223,9 +257,9 @@ ul {
 }
 
 .results {
-  height: 550px;
+  max-height: 520px;
   margin: auto;
-  padding: 0 10px 10px;
+  padding: 0 0 10px;
   position: relative;
   overflow: hidden;
   overflow-y: scroll;
@@ -260,24 +294,27 @@ ul {
   margin-bottom: 5px;
 }
 
-@media screen and (min-width: 576px) {
-  .name {
-    background-color: transparent;
-    color: #364e68;
-    font-size: 3rem;
-    text-align: left;
-    outline: none;
-    left: 1rem;
-  }
+.navbar {
+  height: 60px;
+  background-color: white;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: 'Rubik', serif;
+  font-size: 1.5rem;
+}
 
-  ::placeholder {
-    color: #364e68;
-  }
+.navbar-anchor {
+  color: #364e68;
+}
 
-  .main {
-    flex-direction: row;
-    width: 100vw;
-  }
+.background-img {
+  position: absolute;
+  top: 60px;
 }
 
 .hidden {
@@ -308,4 +345,292 @@ a {
 
 a:visited {
   text-decoration: none;
+}
+
+.header-nav {
+  display: none;
+}
+
+.h1-anchor {
+  color: white;
+}
+
+.location-map {
+  height: 200px;
+  border: solid #364e68;
+  border-radius: 0.4rem;
+  margin: 0 auto 10px;
+}
+
+@media screen and (min-width: 376px) {
+  .map-form {
+    width: 100%;
+  }
+
+  .name {
+    position: relative;
+    background-color: transparent;
+    color: #364e68;
+    font-size: 2.5rem;
+    text-align: left;
+    outline: none;
+    left: 0;
+    padding: 1rem 0;
+  }
+
+  ::placeholder {
+    color: #364e68;
+  }
+
+  .page-container {
+    width: 95%;
+    margin: auto;
+  }
+
+  .main {
+    width: 100vw;
+    height: 550px;
+    flex-direction: column-reverse;
+  }
+
+  .map-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .add,
+  .finish,
+  .save {
+    width: 60%;
+    left: 20%;
+    padding: 0.5rem 0.3rem;
+    font-size: 1.2rem;
+  }
+
+  .poi-list-container {
+    max-height: 160px;
+  }
+
+  .poi-list {
+    max-height: 130px;
+  }
+
+  .add-poi-large {
+    position: relative;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding: 0.7rem 0.5rem;
+    margin: 10px 0;
+  }
+
+  .trip {
+    flex-direction: column;
+    justify-content: inherit;
+    align-items: baseline;
+  }
+
+  .trip-list {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    left: 0;
+    top: 0;
+    max-height: 75%;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+
+  .trip-list-item {
+    width: 100%;
+  }
+
+  .trip-title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .itinerary-list {
+    width: 100%;
+  }
+
+  .back {
+    position: relative;
+    color: #364e68;
+    width: 60px;
+    align-items: initial;
+  }
+
+  .location-page {
+    height: 100%;
+    padding: 10px 0 0;
+  }
+
+  .back-arrow {
+    position: relative;
+    top: 0;
+  }
+
+  .location {
+    position: absolute;
+    top: 9px;
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .add,
+  .finish,
+  .save {
+    width: 50%;
+    left: 25%;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .header-nav {
+    display: initial;
+  }
+
+  .navbar {
+    display: none;
+  }
+
+  .search {
+    width: unset;
+  }
+
+  .save {
+    top: 20px;
+    right: 0;
+    bottom: unset;
+    left: unset;
+    width: 80px;
+    height: 46px;
+  }
+
+  .trip-list-item {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .page-container {
+    width: 80%;
+  }
+
+  .add,
+  .finish {
+    width: 40%;
+    left: 30%;
+    padding: 0.5rem 0.7rem;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .trip-list-item {
+    width: 49%;
+    font-size: 1.2rem;
+  }
+
+  .trip-list {
+    justify-content: space-between;
+  }
+
+  .poi-search {
+    right: 50%;
+    top: 15%;
+    height: 46px;
+  }
+
+  .search {
+    width: 50%;
+  }
+
+  .results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .location-page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .location-map {
+    height: 450px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-basis: 45%;
+  }
+
+  .column {
+    width: 49%;
+  }
+
+  .viewPOI {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  .title {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    padding: 0;
+    align-items: center;
+    font-size: 1.5rem;
+  }
+
+  .viewPOI-container {
+    height: 100%;
+  }
+
+  .poi-list {
+    max-height: 290px;
+  }
+
+  .poi-list-container {
+    max-height: 320px;
+  }
+
+  .location {
+    margin-right: 20px;
+    position: relative;
+    top: 0;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .add,
+  .finish {
+    max-width: 100%;
+    width: 30%;
+    left: 35%;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .page-container {
+    width: 900px;
+  }
+}
+
+.button:hover,
+.location:hover,
+.trip-list-item:hover,
+.poi-search:hover {
+  cursor: pointer;
 }

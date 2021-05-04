@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/header';
+import NavBar from '../components/navbar';
 
 export default class ItineraryList extends React.Component {
   constructor(props) {
@@ -45,13 +46,18 @@ export default class ItineraryList extends React.Component {
     return (
       <>
         <Header />
-        <div className="main">
-          <div className="name">
-            <a className="back" href="" onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
-            Itineraries
+        <div className="page-container">
+          <div className="main trip">
+            <div className="itinerary-list">
+              <div className="name trip-title">
+                <a className="back" href="" onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
+                Itineraries
+              </div>
+              <ul className="trip-list">{list}</ul>
+            </div>
           </div>
-          <ul className="trip-list">{list}</ul>
         </div>
+        <NavBar />
       </>
     );
   }

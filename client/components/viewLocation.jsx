@@ -3,24 +3,31 @@ import LocationMap from './locationMap';
 import ViewPOI from './viewPOI';
 
 export default class ViewLocation extends React.Component {
-  componentDidMount() {
-    this.props.getLocationData();
-  }
 
   render() {
     if (!this.props.location) return null;
     return (
-     <div className="location-page">
-        <div className="trip-list-item center">
-          <a onClick={() => history.back()}><i className="fas fa-arrow-left location back-arrow"></i></a>
-          <h2>{this.props.location.name.split(',')[0]} </h2>
+      <div className="location-page">
+        <div className="row">
+          <div className="location-text center title">
+            <a onClick={() => history.back()}><i className="fas fa-arrow-left location back-arrow"></i></a>
+            <h2>{this.props.location.name.split(',')[0]} </h2>
+          </div>
         </div>
-        <LocationMap location={this.props.location} coordinates={this.state} />
-        <div className="trip-list-item center">
-          <h2>Points of Interest</h2>
+        <div className="row">
+          <div className="column">
+            <LocationMap location={this.props.location} coordinates={this.state} />
+          </div>
+          <div className="column viewPOI">
+            <div className="viewPOI-container">
+              <div className="location-text center">
+                <h2>Points of Interest</h2>
+              </div>
+              <ViewPOI location={this.props.location} setCoordinates={this.setCoordinates} />
+            </div>
+            <button className="button add-poi-large" onClick={() => this.props.changeComponent()}>Add Points of Interest +</button>
+          </div>
         </div>
-        <ViewPOI location={this.props.location} setCoordinates={this.setCoordinates} />
-        <button className="button add" onClick={() => this.props.changeComponent()}>Add Points of Interest +</button>
       </div>
     );
   }

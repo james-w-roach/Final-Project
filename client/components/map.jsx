@@ -124,7 +124,7 @@ class Mapbox extends React.Component {
 
   getButtonText() {
     if (!this.state.location.name) {
-      return 'Search For a Location to Add';
+      return 'Search For a Location';
     } else if (!this.state.inLocations || this.state.inLocations === null) {
       return `Add ${this.state.location.name.split(',')[0]}`;
     } else {
@@ -165,14 +165,18 @@ class Mapbox extends React.Component {
       addClass = 'add button added';
     }
     return (
-      <div>
-        <div ref={this.mapContainer} className="map-container" />
-        <button onClick={this.handleClick} className={addClass}>{this.getButtonText()}</button>
-        <form onSubmit={this.handleLift}>
-          <input className="name" required="required" type="text" name="trip-name" placeholder="New Itinerary" onChange={this.handleChange} />
-          <input className={finishClass} type="submit" value="Finish Itinerary" />
-        </form>
-      </div>
+      <>
+        <div className="map-box">
+          <div ref={this.mapContainer} className="map-container" />
+          <button onClick={this.handleClick} className={addClass}>{this.getButtonText()}</button>
+        </div>
+        <div className="map-form">
+          <form onSubmit={this.handleLift} autoComplete="off">
+            <input className="name" required="required" type="text" name="trip-name" placeholder="New Itinerary" onChange={this.handleChange} />
+            <input className={finishClass} type="submit" value="Finish Itinerary" />
+          </form>
+        </div>
+      </>
     );
   }
 }

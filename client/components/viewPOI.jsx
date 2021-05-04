@@ -5,11 +5,11 @@ import fsLogo from '../../server/public/FS_logo.png';
 export default class ViewPOI extends React.Component {
   render() {
     if (!this.props.location.poi[0]) {
-      return <li className="trip-list-item">No places added yet</li>;
+      return <li className="location-text">No places added yet</li>;
     } else {
       const placesList = this.props.location.poi.map(place => {
         return (
-          <li key={place.id} className="poi-list-item" onClick={() => this.props.setCoordinates(place.location.lat, place.location.lng)}>
+          <li key={place.id} className="poi-list-item" >
             <div>
               <h3>{place.name}</h3> <br />
               <h4>{`${place.location.address}, ${place.location.formattedAddress[1]}, ${place.location.cc}`}</h4>

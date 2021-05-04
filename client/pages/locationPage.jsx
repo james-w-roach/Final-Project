@@ -2,28 +2,28 @@ import React from 'react';
 import ViewLocation from '../components/viewLocation';
 import Header from '../components/header';
 import AddPOI from '../components/addPOI';
+import NavBar from '../components/navbar';
 
 export default class LocationPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       component: 'location',
-      locations: null
+      locations: []
     };
     this.changeComponent = this.changeComponent.bind(this);
     this.renderPage = this.renderPage.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
-    this.getLocationData = this.getLocationData.bind(this);
+    this.sendPutRequest = this.sendPutRequest.bind(this);
   }
 
-  getLocationData() {
+  componentDidMount() {
     fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`)
       .then(res => res.json())
       .then(result => this.setState({ locations: result.locations }));
   }
 
   changeComponent() {
-    this.getLocationData();
     const { component } = this.state;
     if (component === 'location') {
       this.setState({ component: 'add' });
@@ -40,6 +40,19 @@ export default class LocationPage extends React.Component {
         this.setState({ locations });
       }
     }
+  }
+
+  sendPutRequest() {
+    const req = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state.locations)
+    };
+    fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`, req)
+      .then(res => res.json())
+      .then(this.changeComponent());
   }
 
   renderPage() {
@@ -72,7 +85,8 @@ export default class LocationPage extends React.Component {
         locations={this.state.locations}
         changeComponent={this.changeComponent}
         handleAdd={this.handleAdd}
-        getLocationData={this.getLocationData} />
+        getLocationData={this.getLocationData}
+        sendPutRequest={this.sendPutRequest} />
       );
     }
   }
@@ -81,7 +95,10 @@ export default class LocationPage extends React.Component {
     return (
       <>
         <Header />
-        { this.renderPage() }
+        <div className="page-container">
+          { this.renderPage() }
+        </div>
+        <NavBar />
       </>
     );
   }
