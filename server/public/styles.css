@@ -362,6 +362,10 @@ a:visited {
   margin: 0 auto 10px;
 }
 
+.add-header {
+  margin-bottom: 0;
+}
+
 @media screen and (min-width: 376px) {
   .map-form {
     width: 100%;
@@ -503,7 +507,7 @@ a:visited {
   }
 
   .save {
-    top: 20px;
+    top: 75px;
     right: 0;
     bottom: unset;
     left: unset;
@@ -609,6 +613,11 @@ a:visited {
     margin-right: 20px;
     position: relative;
     top: 0;
+    left: 2px;
+  }
+
+  .save {
+    top: 63px;
   }
 }
 
@@ -633,4 +642,9 @@ a:visited {
 .trip-list-item:hover,
 .poi-search:hover {
   cursor: pointer;
+}
+
+.create:active {
+  background-color: white;
+  color: #364e68;
 }

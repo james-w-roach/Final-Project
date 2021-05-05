@@ -54,6 +54,10 @@ export default class AddPOI extends React.Component {
     return (
       <>
         <div className="location-page">
+          <div className="location-text center title add-header">
+            <a onClick={() => this.props.changeComponent()}><i className="fas fa-arrow-left location back-arrow"></i></a>
+            <h2>{this.props.location.name.split(',')[0]}</h2>
+          </div>
           <form className="poi-form" onSubmit={this.search}>
             <input className="search" required="required" type="text" name="trip-name" placeholder="Search for a place:" onChange={this.handleChange} />
             <input type="submit" className="poi-search" value="Go" />
