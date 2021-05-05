@@ -51,7 +51,12 @@ class Mapbox extends React.Component {
       })
         .on('result', result => {
           this.setState({ inLocations: null, showFinish: false });
-          const locationName = result.result['place_name_en-US'];
+          let locationName;
+          if (result.result['place_name_en-us']) {
+            locationName = result.result['place_name_en-us'];
+          } else {
+            locationName = result.result['place_name_en-US'];
+          }
           const lng = result.result.center[0];
           const lat = result.result.center[1];
           if (!this.state.locations[0]) {
