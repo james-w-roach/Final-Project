@@ -10,7 +10,8 @@ export default class AddPOI extends React.Component {
     super(props);
     this.state = {
       searchInput: '',
-      searchResult: null
+      searchResult: null,
+      isSearching: false
     };
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -24,18 +25,24 @@ export default class AddPOI extends React.Component {
   }
 
   search() {
+    this.setState({ isSearching: true });
     event.preventDefault();
     const { lat, lng } = this.props.location;
     const ll = `${lat},${lng}`;
     const query = this.state.searchInput;
     fetch(`https://api.foursquare.com/v2/venues/search?client_id=${clientId}&client_secret=${clientSecret}&ll=${ll}&query=${query}&limit=24&v=20210417`)
       .then(res => res.json())
-      .then(result => this.setState({ searchResult: result.response.venues }));
+      .then(result => this.setState({
+        searchResult: result.response.venues,
+        isSearching: false
+      }));
   }
 
   render() {
     let results;
-    if (!this.state.searchResult) {
+    if (this.state.isSearching) {
+      results = <div className="loader"></div>;
+    } else if (!this.state.searchResult) {
       results = <div></div>;
     } else {
       results = this.state.searchResult.map(result => {
