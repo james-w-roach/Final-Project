@@ -32,18 +32,29 @@ export default class AddPOI extends React.Component {
     const query = this.state.searchInput;
     fetch(`https://api.foursquare.com/v2/venues/search?client_id=${clientId}&client_secret=${clientSecret}&ll=${ll}&query=${query}&limit=24&v=20210417`)
       .then(res => res.json())
-      .then(result => this.setState({
-        searchResult: result.response.venues,
-        isSearching: false
-      }));
+      .then(result => {
+        if (result.response.venues.length === 0) {
+          this.setState({
+            searchResult: false,
+            isSearching: false
+          });
+        } else {
+          this.setState({
+            searchResult: result.response.venues,
+            isSearching: false
+          });
+        }
+      });
   }
 
   render() {
     let results;
     if (this.state.isSearching) {
       results = <div className="loader"></div>;
-    } else if (!this.state.searchResult) {
+    } else if (this.state.searchResult === null) {
       results = <div></div>;
+    } else if (this.state.searchResult === false) {
+      results = <li className="trip-list-item no-results">No results found</li>;
     } else {
       results = this.state.searchResult.map(result => {
         return (

@@ -308,6 +308,11 @@ ul {
   margin-bottom: 5px;
 }
 
+.no-results {
+  margin-top: 10px;
+  padding: 1rem 20px;
+}
+
 .navbar {
   height: 60px;
   background-color: white;
