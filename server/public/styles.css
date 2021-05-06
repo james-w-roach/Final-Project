@@ -56,7 +56,7 @@ body {
   font-family: 'Rubik', serif;
   position: relative;
   width: 375px;
-  height: 692px;
+  height: calc(100vh - 170px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,8 +69,8 @@ body {
 }
 
 .add {
-  position: absolute;
-  bottom: 10px;
+  position: fixed;
+  bottom: 70px;
   width: 365px;
   left: 5px;
   padding: 1rem 0.5rem;
@@ -78,19 +78,18 @@ body {
 
 .add-poi-large,
 .save {
-  position: absolute;
-  bottom: -10px;
+  position: relative;
   width: 355px;
-  left: 10px;
   padding: 1rem 0.5rem;
 }
 
 .finish {
-  position: absolute;
-  bottom: 10px;
+  position: fixed;
+  bottom: 70px;
   left: 0.3rem;
   width: 365px;
   padding: 1rem 2rem;
+  -webkit-appearance: none;
 }
 
 .name {
@@ -162,7 +161,6 @@ ul {
 .location-page {
   position: relative;
   padding: 10px;
-  height: 672px;
 }
 
 .locations {
@@ -249,6 +247,7 @@ ul {
 }
 
 .poi-search {
+  -webkit-appearance: none;
   border-radius: 0 0.3rem 0.3rem 0;
   border: none;
   background-color: #364e68;
@@ -301,6 +300,7 @@ ul {
   bottom: 0;
   right: 0;
   display: flex;
+  position: fixed;
   justify-content: space-around;
   align-items: center;
   font-family: 'Rubik', serif;
@@ -646,4 +646,8 @@ a:visited {
 .create:active {
   background-color: white;
   color: #364e68;
+}
+
+.page {
+  position: relative;
 }
