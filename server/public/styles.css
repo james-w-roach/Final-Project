@@ -405,6 +405,8 @@ a:visited {
   .add,
   .finish,
   .save {
+    position: absolute;
+    bottom: 10px;
     width: 60%;
     left: 20%;
     padding: 0.5rem 0.3rem;
