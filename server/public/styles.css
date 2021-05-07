@@ -374,6 +374,11 @@ a:visited {
   color: white;
 }
 
+.header-anchor:hover,
+.h1-anchor:hover {
+  color: #364e68;
+}
+
 .location-map {
   height: 200px;
   border: solid #364e68;
@@ -665,9 +670,18 @@ a:visited {
   cursor: pointer;
 }
 
-.create:active {
+.create:hover,
+.add:hover,
+.finish:hover,
+.save:hover,
+.add-poi-large:hover {
   background-color: white;
   color: #364e68;
+}
+
+.init:hover {
+  background-color: #364e68;
+  color: white;
 }
 
 .page {

@@ -159,11 +159,11 @@ class Mapbox extends React.Component {
     if (this.state.showFinish) {
       addClass = 'hidden';
       finishClass = 'finish button';
-    } else if (!this.state.inLocations) {
-      addClass = 'add button';
+    } else if (!this.state.location.name) {
+      addClass = 'add button init';
       finishClass = 'hidden';
-    } else if (!this.state.location) {
-      addClass = 'add button';
+    } else if (!this.state.inLocations) {
+      addClass = 'add button not-in-locations';
       finishClass = 'hidden';
     } else {
       finishClass = 'finish hidden';
