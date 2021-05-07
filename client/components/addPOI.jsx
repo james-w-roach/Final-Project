@@ -11,7 +11,8 @@ export default class AddPOI extends React.Component {
     this.state = {
       searchInput: '',
       searchResult: null,
-      isSearching: false
+      isSearching: false,
+      error: null
     };
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -44,6 +45,9 @@ export default class AddPOI extends React.Component {
             isSearching: false
           });
         }
+      })
+      .catch(err => {
+        this.setState({ error: err, isSearching: false });
       });
   }
 
@@ -51,10 +55,12 @@ export default class AddPOI extends React.Component {
     let results;
     if (this.state.isSearching) {
       results = <div className="loader"></div>;
-    } else if (this.state.searchResult === null) {
-      results = <div></div>;
     } else if (this.state.searchResult === false) {
       results = <li className="trip-list-item no-results">No results found</li>;
+    } else if (this.state.error) {
+      results = <li className="trip-list-item no-results">Search failed. Please make sure you are connected to the internet.</li >;
+    } else if (this.state.searchResult === null) {
+      results = <div></div>;
     } else {
       results = this.state.searchResult.map(result => {
         return (
