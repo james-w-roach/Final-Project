@@ -29,6 +29,7 @@ body {
   margin: 0 0.7rem;
   color: white;
   font-size: 1.2rem;
+  transition: color 0.3s;
 }
 
 .home-buttons {
@@ -200,7 +201,7 @@ ul {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
-  width: 10%;
+  width: 32px;
   align-items: center;
 }
 
@@ -264,10 +265,12 @@ ul {
 .poi-search {
   -webkit-appearance: none;
   border-radius: 0 0.3rem 0.3rem 0;
-  border: none;
+  border: solid 0.15rem #364e68;
+  border-left: none;
   background-color: #364e68;
   color: white;
   padding: 0 1rem;
+  transition: background-color 0.3s;
 }
 
 .results {
@@ -372,6 +375,7 @@ a:visited {
 
 .h1-anchor {
   color: white;
+  transition: color 0.3s;
 }
 
 .header-anchor:hover,
@@ -468,9 +472,6 @@ a:visited {
     flex-wrap: wrap;
     left: 0;
     top: 0;
-    max-height: 75%;
-    overflow: hidden;
-    overflow-y: scroll;
   }
 
   .trip-list-item {
@@ -663,6 +664,25 @@ a:visited {
   }
 }
 
+.create,
+.add,
+.finish,
+.save,
+.add-poi-large {
+  border: solid 0.15rem #364e68;
+  transition: background-color 0.3s;
+}
+
+.create:hover,
+.add:hover,
+.finish:hover,
+.save:hover,
+.add-poi-large:hover,
+.poi-search:hover {
+  background-color: white;
+  color: #364e68;
+}
+
 .button:hover,
 .location:hover,
 .trip-list-item:hover,
@@ -670,17 +690,21 @@ a:visited {
   cursor: pointer;
 }
 
-.create:hover,
-.add:hover,
-.finish:hover,
-.save:hover,
-.add-poi-large:hover {
-  background-color: white;
-  color: #364e68;
-}
-
 .init:hover {
   background-color: #364e68;
+  color: white;
+}
+
+.dynamic {
+  transition: background-color 0.3s;
+}
+
+.dynamic:hover {
+  background-color: #364e68;
+}
+
+.dynamic:hover a,
+.dynamic:hover i {
   color: white;
 }
 

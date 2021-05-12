@@ -46,6 +46,12 @@
     bottom: 0;
   }
 
+  .background-map > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-right,
+  .background-map > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-left {
+    position: absolute;
+    bottom: 0;
+  }
+
   .mapboxgl-ctrl-geocoder {
     width: 50% !important;
   }

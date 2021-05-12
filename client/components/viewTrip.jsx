@@ -33,7 +33,7 @@ export default class ViewTrip extends React.Component {
     const tripName = itinerary.tripName;
     const locationsList = itinerary.locations.map(location => {
       return (
-        <li className="trip-list-item" key={location.name.split(',')[0]} >
+        <li className="trip-list-item dynamic" key={location.name.split(',')[0]} >
           <a className="list-item" href={'#location'}
             onClick={() => {
               this.props.toggleView(location, itinerary.tripId);

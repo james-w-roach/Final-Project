@@ -29,7 +29,7 @@ export default class ItineraryList extends React.Component {
     } else {
       list = this.state.itineraries.map(itinerary => {
         return (
-          <li className="trip-list-item" key={itinerary.tripId}>
+          <li className="trip-list-item dynamic" key={itinerary.tripId}>
             <i className="fas fa-arrow-right trip-list-arrow"></i>
             <a className="list-item" href={`#itinerary/${itinerary.tripId}`} >
               <div>
