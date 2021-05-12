@@ -58,7 +58,7 @@ export default class AddPOI extends React.Component {
     } else if (this.state.searchResult === false) {
       results = <li className="trip-list-item no-results">No results found</li>;
     } else if (this.state.error) {
-      results = <li className="trip-list-item no-results">Search failed. Please make sure you are connected to the internet.</li >;
+      results = <li className="trip-list-item no-results">Search failed.</li >;
     } else if (this.state.searchResult === null) {
       results = <div></div>;
     } else {

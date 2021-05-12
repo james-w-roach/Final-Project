@@ -18,7 +18,13 @@ export default class LocationPage extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`)
+    let tripId;
+    if (!this.props.tripId) {
+      tripId = localStorage.getItem('TripID');
+    } else {
+      tripId = this.props.tripId;
+    }
+    fetch(`/api/travelPlanner/itineraries/${tripId}`)
       .then(res => res.json())
       .then(result => this.setState({ locations: result.locations }));
   }

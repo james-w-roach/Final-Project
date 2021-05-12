@@ -26,10 +26,16 @@ export default class App extends React.Component {
     window.addEventListener('beforeunload', () => {
       const locationJSON = JSON.stringify(this.state.location);
       localStorage.setItem('Location', locationJSON);
+      const tripIdJSON = JSON.stringify(this.state.tripId);
+      localStorage.setItem('TripID', tripIdJSON);
     });
     if (localStorage.getItem('Location')) {
       const locationParse = JSON.parse(localStorage.getItem('Location'));
       this.setState({ location: locationParse });
+    }
+    if (localStorage.getItem('TripID')) {
+      const tripIdParse = JSON.parse(localStorage.getItem('TripID'));
+      this.setState({ tripId: tripIdParse });
     }
   }
 

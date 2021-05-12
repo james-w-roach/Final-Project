@@ -146,11 +146,15 @@ class Mapbox extends React.Component {
 
   handleLift() {
     event.preventDefault();
-    const trip = {
-      tripName: this.state.tripName,
-      locations: this.state.locations
-    };
-    this.props.onSubmit(trip);
+    if (!this.state.locations[0]) {
+      window.alert('Please add at least one location to your itinerary to continue.');
+    } else {
+      const trip = {
+        tripName: this.state.tripName,
+        locations: this.state.locations
+      };
+      this.props.onSubmit(trip);
+    }
   }
 
   render() {
@@ -177,7 +181,7 @@ class Mapbox extends React.Component {
         </div>
         <div className="map-form">
           <form onSubmit={this.handleLift} autoComplete="off">
-            <input className="name" required="required" type="text" name="trip-name" placeholder="New Itinerary" onChange={this.handleChange} />
+            <input className="name" required="required" type="text" name="trip-name" placeholder="Itinerary Name" onChange={this.handleChange} />
             <input className={finishClass} type="submit" value="Finish Itinerary" />
           </form>
         </div>
