@@ -503,6 +503,7 @@ a:visited {
   .back-arrow {
     position: relative;
     top: 0;
+    transition: transform 0.3s;
   }
 
   .location {
@@ -710,4 +711,8 @@ a:visited {
 
 .page {
   position: relative;
+}
+
+.back-arrow:hover {
+  transform: scale(1.15);
 }
