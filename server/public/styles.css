@@ -140,6 +140,7 @@ ul {
   top: 75px;
   left: 5px;
   width: 365px;
+  padding-bottom: 60px;
 }
 
 .trip-list-item,
@@ -177,6 +178,7 @@ ul {
 .location-page {
   position: relative;
   padding: 10px;
+  margin-bottom: 60px;
 }
 
 .locations {
@@ -287,7 +289,11 @@ ul {
   right: 5px;
   top: 42px;
   width: 35px;
-  padding: 0.2rem 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 0.1rem #364e68;
+  transition: background-color 0.3s;
 }
 
 .add-poi-text {
@@ -630,11 +636,11 @@ a:visited {
   }
 
   .poi-list {
-    max-height: 290px;
+    max-height: 355px;
   }
 
   .poi-list-container {
-    max-height: 320px;
+    max-height: 385px;
   }
 
   .location {
@@ -679,7 +685,8 @@ a:visited {
 .finish:hover,
 .save:hover,
 .add-poi-large:hover,
-.poi-search:hover {
+.poi-search:hover,
+.add-poi:hover {
   background-color: white;
   color: #364e68;
 }
@@ -715,4 +722,13 @@ a:visited {
 
 .back-arrow:hover {
   transform: scale(1.15);
+}
+
+.solo {
+  top: 8.5px;
+  right: 8px;
+}
+
+.fs-logo:hover {
+  opacity: 0.9;
 }

@@ -12,7 +12,8 @@ export default class AddPOI extends React.Component {
       searchInput: '',
       searchResult: null,
       isSearching: false,
-      error: null
+      error: null,
+      added: null
     };
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -69,11 +70,20 @@ export default class AddPOI extends React.Component {
               <h3>{result.name}</h3> <br />
               <h4>{`${result.location.address}, ${result.location.formattedAddress[1]}, ${result.location.cc}`}</h4>
             </div>
-            <button onClick={() => this.props.handleAdd(result)} className="add-poi button">+</button>
+            <button onClick={() => {
+              this.props.handleAdd(result);
+              this.setState({ added: true });
+            }} className="add-poi button">+</button>
             <a href={`http://foursquare.com/v/${result.id}`} rel="noreferrer" target="_blank"><img className="fs-logo" src={fsLogo}></img></a>
           </li>
         );
       });
+    }
+    let saveButtonClass;
+    if (this.state.added) {
+      saveButtonClass = 'save button';
+    } else {
+      saveButtonClass = 'hidden';
     }
     return (
       <>
@@ -88,7 +98,7 @@ export default class AddPOI extends React.Component {
           </form>
           <img className="foursquare-logo add-page" src={logo} />
           <ul className="results">{results}</ul>
-          <button className="save button"
+          <button className={saveButtonClass}
             onClick={() => {
               this.props.sendPutRequest();
             }}>Save</button>
