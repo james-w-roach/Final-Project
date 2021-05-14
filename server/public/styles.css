@@ -289,6 +289,7 @@ ul {
   right: 5px;
   top: 42px;
   width: 35px;
+  height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -731,4 +732,13 @@ a:visited {
 
 .fs-logo:hover {
   opacity: 0.9;
+}
+
+.white {
+  background-color: white;
+  color: #364e68;
+}
+
+.white:hover {
+  cursor: initial;
 }

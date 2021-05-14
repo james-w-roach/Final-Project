@@ -13,7 +13,8 @@ export default class AddPOI extends React.Component {
       searchResult: null,
       isSearching: false,
       error: null,
-      added: null
+      added: null,
+      poi: this.props.location.poi
     };
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -67,12 +68,12 @@ export default class AddPOI extends React.Component {
         if (!result.location.address || !result.location.formattedAddress[1] || !result.location.cc) {
           return null;
         }
-        let content;
-        for (let i = 0; this.props.location.poi.length; i++) {
-          if (this.props.location.poi[i].id === result.id) {
+        let content = <i className="fas fa-plus"></i>;
+        let className = 'add-poi button';
+        for (let i = 0; i < this.state.poi.length; i++) {
+          if (this.state.poi[i].id === result.id) {
             content = <i className="fas fa-check"></i>;
-          } else {
-            content = <i className="fas fa-plus"></i>;
+            className = 'add-poi button white';
           }
         }
         return (
@@ -82,9 +83,14 @@ export default class AddPOI extends React.Component {
               <h4>{`${result.location.address}, ${result.location.formattedAddress[1]}, ${result.location.cc}`}</h4>
             </div>
             <button onClick={() => {
+              if (className === 'add-poi button white') {
+                return;
+              }
               this.props.handleAdd(result);
-              this.setState({ added: true });
-            }} className="add-poi button">
+              const { poi } = this.state;
+              const newPOI = poi.concat(result);
+              this.setState({ added: true, poi: newPOI });
+            }} className={className}>
               {content}
             </button>
             <a href={`http://foursquare.com/v/${result.id}`} rel="noreferrer" target="_blank"><img className="fs-logo" src={fsLogo}></img></a>
