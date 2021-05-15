@@ -15,7 +15,15 @@ export default class ViewTrip extends React.Component {
       .then(res => res.json())
       .then(itineraries => {
         if (!this.props.trip) {
-          this.setState({ itinerary: itineraries[(itineraries.length - 1)] });
+          let max = itineraries[0].tripId;
+          let newestTrip = itineraries[0];
+          for (let i = 1; i < itineraries.length; i++) {
+            if (itineraries[i].tripId > max) {
+              max = itineraries[i].tripId;
+              newestTrip = itineraries[i];
+            }
+          }
+          this.setState({ itinerary: newestTrip });
         } else {
           for (let i = 0; i < itineraries.length; i++) {
             if (itineraries[i].tripId === this.props.trip) {
