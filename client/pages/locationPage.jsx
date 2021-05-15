@@ -9,7 +9,8 @@ export default class LocationPage extends React.Component {
     super(props);
     this.state = {
       component: 'location',
-      locations: []
+      locations: [],
+      currentPOI: []
     };
     this.changeComponent = this.changeComponent.bind(this);
     this.renderPage = this.renderPage.bind(this);
@@ -39,16 +40,19 @@ export default class LocationPage extends React.Component {
   }
 
   handleAdd(result) {
-    const { locations } = this.state;
-    for (let i = 0; i < this.state.locations.length; i++) {
-      if (this.state.locations[i].name === this.props.location.name) {
-        locations[i].poi = locations[i].poi.concat(result);
-        this.setState({ locations });
-      }
-    }
+    const { currentPOI } = this.state;
+    const newPOIList = currentPOI.concat(result);
+    this.setState({ currentPOI: newPOIList });
   }
 
   sendPutRequest() {
+    const { locations, currentPOI } = this.state;
+    for (let i = 0; i < this.state.locations.length; i++) {
+      if (locations[i].name === this.props.location.name) {
+        locations[i].poi = locations[i].poi.concat(currentPOI);
+        this.setState({ locations, currentPOI: [] }, () => this.changeComponent());
+      }
+    }
     const req = {
       method: 'PUT',
       headers: {
@@ -57,23 +61,15 @@ export default class LocationPage extends React.Component {
       body: JSON.stringify(this.state.locations)
     };
     fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`, req)
-      .then(res => res.json())
-      .then(this.changeComponent());
+      .then(res => res.json());
   }
 
   renderPage() {
-    const { component } = this.state;
-    const { locations } = this.state;
-    let location;
-    if (!locations) {
-      location = this.props.location;
-    } else {
-      for (let i = 0; i < locations.length; i++) {
-        if (locations[i].name === this.props.location.name) {
-          location = locations[i];
-        } else {
-          location = this.props.location;
-        }
+    const { component, locations } = this.state;
+    let location = this.props.location;
+    for (let i = 0; i < locations.length; i++) {
+      if (locations[i].name === this.props.location.name) {
+        location = locations[i];
       }
     }
     if (component === 'location') {
@@ -86,12 +82,11 @@ export default class LocationPage extends React.Component {
     } else {
       return (
         <AddPOI
-        location={this.props.location}
+        location={location}
         tripId={this.props.tripId}
         locations={this.state.locations}
         changeComponent={this.changeComponent}
         handleAdd={this.handleAdd}
-        getLocationData={this.getLocationData}
         sendPutRequest={this.sendPutRequest} />
       );
     }

@@ -32,10 +32,12 @@ export default class App extends React.Component {
     if (localStorage.getItem('Location')) {
       const locationParse = JSON.parse(localStorage.getItem('Location'));
       this.setState({ location: locationParse });
+      localStorage.removeItem('Location');
     }
     if (localStorage.getItem('TripID')) {
       const tripIdParse = JSON.parse(localStorage.getItem('TripID'));
       this.setState({ tripId: tripIdParse });
+      localStorage.removeItem('TripID');
     }
   }
 
