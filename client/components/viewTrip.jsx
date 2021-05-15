@@ -39,6 +39,12 @@ export default class ViewTrip extends React.Component {
   render() {
     const { itinerary } = this.state;
     const tripName = itinerary.tripName;
+    let backClass;
+    if (this.props.route) {
+      backClass = 'back';
+    } else {
+      backClass = 'hidden';
+    }
     const locationsList = itinerary.locations.map(location => {
       return (
         <li className="trip-list-item dynamic" key={location.name.split(',')[0]} >
@@ -61,7 +67,7 @@ export default class ViewTrip extends React.Component {
       <>
         <div className="main trip">
           <div className="name trip-title">
-            <a className="back" href={'#itineraryList'} onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
+            <a className={backClass} href={'#itineraryList'} onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
             {tripName}
           </div>
           <ul className="trip-list">{locationsList}</ul>

@@ -59,10 +59,10 @@ export default class App extends React.Component {
     } if (route === '#create') {
       return <Create />;
     } if (route === '#itinerary') {
-      return <Itinerary toggleView={this.toggleView} />;
+      return <Itinerary route={false} toggleView={this.toggleView} />;
     } if (route.startsWith('#itinerary/')) {
       const trip = parseInt(route.split('/')[1]);
-      return <Itinerary trip={trip} toggleView={this.toggleView} />;
+      return <Itinerary route={true} trip={trip} toggleView={this.toggleView} />;
     } else if (route === '#location') {
       return <LocationPage toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
     } else if (route === '#itineraryList') {
