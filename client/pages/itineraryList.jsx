@@ -42,6 +42,9 @@ export default class ItineraryList extends React.Component {
         itineraries.splice(i, 1);
       }
     }
+    if (this.state.itineraries.length === 0) {
+      this.setState({ itineraries: 'No trips added yet' });
+    }
     const req = {
       method: 'DELETE',
       headers: {
@@ -79,7 +82,10 @@ export default class ItineraryList extends React.Component {
             <div className={this.setDeleteClass(itinerary.tripId)} id={itinerary.tripName}>
               Delete {itinerary.tripName}?
               <div>
-                <button className='delete-poi button' onClick={() => this.deleteItinerary(itinerary.tripId)}>Delete</button>
+                <button className='delete-poi button' onClick={() => {
+                  this.deleteItinerary(itinerary.tripId);
+                  this.setState({ isDeleting: false });
+                }}>Delete</button>
                 <button className='cancel button' onClick={() => this.setState({ isDeleting: false })}>Cancel</button>
               </div>
             </div>
