@@ -6,7 +6,9 @@ export default class ItineraryList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itineraries: []
+      itineraries: [],
+      isDeleting: null,
+      isEditing: null
     };
   }
 
@@ -24,13 +26,20 @@ export default class ItineraryList extends React.Component {
 
   render() {
     let list;
+    let listIcon = <i className="fas fa-arrow-right trip-list-arrow"></i>;
+    if (this.state.isEditing) {
+      listIcon =
+        <button className="delete button delete-itinerary" onClick={() => this.setState({ isDeleting: true })}>
+          <i className="fas fa-trash"></i>
+        </button>;
+    }
     if (typeof this.state.itineraries === 'string') {
       list = <div className="trip-list-item">{this.state.itineraries}</div>;
     } else {
       list = this.state.itineraries.map(itinerary => {
         return (
           <li className="trip-list-item dynamic" key={itinerary.tripId}>
-            <i className="fas fa-arrow-right trip-list-arrow"></i>
+            {listIcon}
             <a className="list-item" href={`#itinerary/${itinerary.tripId}`} >
               <div>
                 {itinerary.tripName}
@@ -43,6 +52,15 @@ export default class ItineraryList extends React.Component {
         );
       });
     }
+    let editIcon =
+      <button className="edit-button" onClick={() => this.setState({ isEditing: true })}>
+        <i className="fas fa-pen"></i>
+      </button>;
+    if (this.state.isEditing) {
+      editIcon = <button className="edit-button" onClick={() => this.setState({ isEditing: false })}>
+        <i className="fas fa-times x-icon"></i>
+      </button>;
+    }
     return (
       <>
         <Header />
@@ -52,6 +70,7 @@ export default class ItineraryList extends React.Component {
               <div className="name trip-title">
                 <a className="back" href="" onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
                 Itineraries
+                {editIcon}
               </div>
               <ul className="trip-list">{list}</ul>
             </div>
