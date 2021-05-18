@@ -92,4 +92,19 @@ app.put('/api/travelPlanner/itineraries/:tripId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.delete('/api/travelPlanner/itineraries/:tripId', (req, res, next) => {
+  const tripId = parseInt(req.params.tripId, 10);
+  const sql = `
+    delete from "itineraries"
+          where "tripId" = $1
+      returning *;
+  `;
+  const params = [tripId];
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);

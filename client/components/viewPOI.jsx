@@ -37,8 +37,10 @@ export default class ViewPOI extends React.Component {
             </button>
             <div className={this.setDeleteClass(place.id)} id={place.name}>
               <h3>Are you sure you want to delete {place.name}?</h3>
-              <button className='delete-poi button' onClick={() => this.props.deletePOI(place.id)}>Delete</button>
-              <button className='cancel button' onClick={() => this.setState({ isDeleting: false })}>Cancel</button>
+              <div>
+                <button className='delete-poi button' onClick={() => this.props.deletePOI(place.id)}>Delete</button>
+                <button className='cancel button' onClick={() => this.setState({ isDeleting: false })}>Cancel</button>
+              </div>
             </div>
           </li>
         );

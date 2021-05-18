@@ -336,7 +336,9 @@ ul {
   right: 0;
   background-color: white;
   padding: 5px 10px 0;
-  border-radius: 0.5rem;
+  border-radius: 0.4rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .delete {

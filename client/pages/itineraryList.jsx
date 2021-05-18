@@ -8,8 +8,11 @@ export default class ItineraryList extends React.Component {
     this.state = {
       itineraries: [],
       isDeleting: null,
-      isEditing: null
+      isEditing: null,
+      id: null
     };
+    this.deleteItinerary = this.deleteItinerary.bind(this);
+    this.setDeleteClass = this.setDeleteClass.bind(this);
   }
 
   componentDidMount() {
@@ -24,19 +27,44 @@ export default class ItineraryList extends React.Component {
       });
   }
 
+  setDeleteClass(tripId) {
+    if (this.state.isDeleting && tripId === this.state.id) {
+      return 'delete-module';
+    } else {
+      return 'hidden';
+    }
+  }
+
+  deleteItinerary(tripId) {
+    const { itineraries } = this.state;
+    for (let i = 0; i < itineraries.length; i++) {
+      if (itineraries[i].tripId === tripId) {
+        itineraries.splice(i, 1);
+      }
+    }
+    const req = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
+      .then(res => res.json());
+  }
+
   render() {
     let list;
     let listIcon = <i className="fas fa-arrow-right trip-list-arrow"></i>;
-    if (this.state.isEditing) {
-      listIcon =
-        <button className="delete button delete-itinerary" onClick={() => this.setState({ isDeleting: true })}>
-          <i className="fas fa-trash"></i>
-        </button>;
-    }
     if (typeof this.state.itineraries === 'string') {
       list = <div className="trip-list-item">{this.state.itineraries}</div>;
     } else {
       list = this.state.itineraries.map(itinerary => {
+        if (this.state.isEditing) {
+          listIcon =
+            <button className="delete button delete-itinerary" onClick={() => this.setState({ isDeleting: true, id: itinerary.tripId })}>
+              <i className="fas fa-trash"></i>
+            </button>;
+        }
         return (
           <li className="trip-list-item dynamic" key={itinerary.tripId}>
             {listIcon}
@@ -48,6 +76,13 @@ export default class ItineraryList extends React.Component {
                 {itinerary.locations.length} locations
               </div>
             </a>
+            <div className={this.setDeleteClass(itinerary.tripId)} id={itinerary.tripName}>
+              Delete {itinerary.tripName}?
+              <div>
+                <button className='delete-poi button' onClick={() => this.deleteItinerary(itinerary.tripId)}>Delete</button>
+                <button className='cancel button' onClick={() => this.setState({ isDeleting: false })}>Cancel</button>
+              </div>
+            </div>
           </li>
         );
       });
