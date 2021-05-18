@@ -52,7 +52,7 @@ export default class ViewTrip extends React.Component {
             onClick={() => {
               this.props.toggleView(location, itinerary.tripId);
             }}>
-            <div>
+            <div className="list-item-content">
               {location.name}
               <i className="fas fa-arrow-right list-arrow"></i>
             </div>

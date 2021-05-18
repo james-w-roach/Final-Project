@@ -22,12 +22,12 @@ export default class ViewPOI extends React.Component {
 
   render() {
     if (!this.props.location.poi[0]) {
-      return <li className="location-text">No places added yet</li>;
+      return <li className="location-text">No places added yet. To add a place, use the &apos;+&apos; button.</li>;
     } else {
       const placesList = this.props.location.poi.map(place => {
         return (
           <li key={place.id} className="poi-list-item" >
-            <div className="poi-list-item-content">
+            <div className="list-item-content">
               <h3>{place.name}</h3> <br />
               <h4>{`${place.location.address}, ${place.location.formattedAddress[1]}, ${place.location.cc}`}</h4>
             </div>
