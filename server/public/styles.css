@@ -654,6 +654,7 @@ a:visited {
     flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
+    max-height: 60vh;
   }
 }
 

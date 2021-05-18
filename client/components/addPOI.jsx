@@ -25,7 +25,7 @@ export default class AddPOI extends React.Component {
     this.setState({ isSearching: true });
     const { lat, lng } = this.props.location;
     const ll = `${lat},${lng}`;
-    fetch(`https://api.foursquare.com/v2/venues/explore?client_id=${clientId}&client_secret=${clientSecret}&ll=${ll}&limit=24&v=20210517`)
+    fetch(`https://api.foursquare.com/v2/venues/explore?client_id=${clientId}&client_secret=${clientSecret}&ll=${ll}&limit=84&v=20210517`)
       .then(res => res.json())
       .then(result => {
         if (result.response.groups.length === 0) {
