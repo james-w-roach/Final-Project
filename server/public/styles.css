@@ -284,7 +284,8 @@ ul {
   overflow-y: scroll;
 }
 
-.add-poi {
+.add-poi,
+.delete {
   position: absolute;
   right: 5px;
   top: 42px;
@@ -295,6 +296,45 @@ ul {
   align-items: center;
   border: solid 0.1rem #364e68;
   transition: background-color 0.3s;
+}
+
+.delete-module {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  padding: 5px 10px 0;
+  border-radius: 0.5rem;
+}
+
+.delete {
+  font-size: 1.2rem;
+}
+
+.delete-poi,
+.cancel {
+  font-size: 1rem;
+  margin: 5px 10px 0 0;
+  padding: 2px 8px;
+  border: 0.1rem solid #364e68;
+  transition: background-color 0.3s;
+}
+
+.delete:hover,
+.delete-poi:hover {
+  background-color: rgb(185, 24, 24);
+  border-color: rgb(185, 24, 24);
+}
+
+.cancel:hover {
+  background-color: white;
+  color: #364e68;
+}
+
+.poi-list-item-content {
+  padding-right: 35px;
 }
 
 .add-poi-text {
@@ -311,6 +351,8 @@ ul {
   position: absolute;
   right: 5px;
   top: 5px;
+  border-radius: 0.3rem;
+  transition: opacity 0.3s;
 }
 
 .add-page {
@@ -732,7 +774,7 @@ a:visited {
 }
 
 .fs-logo:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .white {

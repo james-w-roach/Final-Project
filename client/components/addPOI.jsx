@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from '../../server/public/powered-by-foursquare-blue.png';
-import fsLogo from '../../server/public/FS_logo.png';
+import logo from '../../server/public/images/powered-by-foursquare-blue.png';
+import fsLogo from '../../server/public/images/FS_logo.png';
 
 const clientId = process.env.FS_CLIENT_ID;
 const clientSecret = process.env.FS_CLIENT_SECRET;

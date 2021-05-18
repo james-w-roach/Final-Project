@@ -25,7 +25,7 @@ export default class ViewLocation extends React.Component {
                 <h2>Points of Interest</h2>
                 <button className="button add-poi solo" onClick={() => this.props.changeComponent()}>{content}</button>
               </div>
-              <ViewPOI location={this.props.location} setCoordinates={this.setCoordinates} />
+              <ViewPOI deletePOI={this.props.deletePOI} location={this.props.location} setCoordinates={this.setCoordinates} />
             </div>
           </div>
         </div>

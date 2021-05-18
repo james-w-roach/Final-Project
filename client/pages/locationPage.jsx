@@ -16,6 +16,31 @@ export default class LocationPage extends React.Component {
     this.renderPage = this.renderPage.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.sendPutRequest = this.sendPutRequest.bind(this);
+    this.deletePOI = this.deletePOI.bind(this);
+  }
+
+  deletePOI(id) {
+    const { locations } = this.state;
+    for (let i = 0; i < locations.length; i++) {
+      if (locations[i].name === this.props.location.name) {
+        for (let j = 0; j < locations[i].poi.length; j++) {
+          if (locations[i].poi[j].id === id) {
+            locations[i].poi.splice(j, 1);
+          }
+        }
+      }
+    }
+    this.setState({ locations }, () => {
+      const req = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state.locations)
+      };
+      fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`, req)
+        .then(res => res.json());
+    });
   }
 
   componentDidMount() {
@@ -77,7 +102,8 @@ export default class LocationPage extends React.Component {
       <ViewLocation
         getLocationData={this.getLocationData}
         location={location}
-        changeComponent={this.changeComponent} />
+        changeComponent={this.changeComponent}
+        deletePOI={this.deletePOI} />
       );
     } else {
       return (
