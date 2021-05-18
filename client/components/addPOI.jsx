@@ -18,6 +18,35 @@ export default class AddPOI extends React.Component {
     };
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.getRecommended = this.getRecommended.bind(this);
+  }
+
+  getRecommended() {
+    this.setState({ isSearching: true });
+    const { lat, lng } = this.props.location;
+    const ll = `${lat},${lng}`;
+    fetch(`https://api.foursquare.com/v2/venues/explore?client_id=${clientId}&client_secret=${clientSecret}&ll=${ll}&limit=24&v=20210517`)
+      .then(res => res.json())
+      .then(result => {
+        if (result.response.groups.length === 0) {
+          this.setState({
+            searchResult: false,
+            isSearching: false
+          });
+        } else {
+          const recommendations = [];
+          for (let i = 0; i < result.response.groups[0].items.length; i++) {
+            recommendations.push(result.response.groups[0].items[i].venue);
+          }
+          this.setState({
+            searchResult: recommendations,
+            isSearching: false
+          });
+        }
+      })
+      .catch(err => {
+        this.setState({ error: err, isSearching: false });
+      });
   }
 
   handleChange(event) {
@@ -33,7 +62,7 @@ export default class AddPOI extends React.Component {
     const { lat, lng } = this.props.location;
     const ll = `${lat},${lng}`;
     const query = this.state.searchInput;
-    fetch(`https://api.foursquare.com/v2/venues/search?client_id=${clientId}&client_secret=${clientSecret}&ll=${ll}&query=${query}&limit=24&v=20210417`)
+    fetch(`https://api.foursquare.com/v2/venues/search?client_id=${clientId}&client_secret=${clientSecret}&ll=${ll}&query=${query}&limit=24&v=20210517`)
       .then(res => res.json())
       .then(result => {
         if (result.response.venues.length === 0) {
@@ -118,6 +147,7 @@ export default class AddPOI extends React.Component {
           <form className="poi-form" onSubmit={this.search}>
             <input className="search" required="required" type="text" name="trip-name" placeholder="Search for a place:" onChange={this.handleChange} />
             <input type="submit" className="poi-search" value="Go" />
+            <button type="button" className="explore button" onClick={() => this.getRecommended()}>Explore</button>
           </form>
           <img className="foursquare-logo add-page" src={logo} />
           <ul className="results">{results}</ul>
