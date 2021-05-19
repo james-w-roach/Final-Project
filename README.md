@@ -45,7 +45,7 @@ The site can be accessed using this link: http://voyager-application.herokuapp.c
 ![Screen Shot 2021-05-18 at 6 45 57 PM](https://user-images.githubusercontent.com/76799878/118744604-7b6eaf80-b809-11eb-8cf1-b3963dca0ad6.png)
 ![Screen Shot 2021-05-18 at 6 50 09 PM](https://user-images.githubusercontent.com/76799878/118744845-e8824500-b809-11eb-8dc2-8bfebef9d218.png)
 
-## Running Voyager on Your Computer
+## How to Run Voyager on Your Computer
 
 To run Voyager on you machine follow these steps:
 1. To access the Mapbox API and Foursquare API, you will need an API key for both.
