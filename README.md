@@ -47,6 +47,10 @@ The site can be accessed using this link: http://voyager-application.herokuapp.c
 
 ## How to Run Voyager on Your Computer
 
+Requirements:
+- A development environemnt with node.js
+- Code editor (Virtual Studio)
+
 To run Voyager on you machine follow these steps:
 1. To access the Mapbox API and Foursquare API, you will need an API key for both.
 2. Go to these sites to create an account and obtain both keys: [Mapbox JavaScript API](https://docs.mapbox.com/mapbox-gl-js/api/), [Foursquare Places API](https://developer.foursquare.com/docs/places-api/).
