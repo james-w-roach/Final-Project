@@ -77,11 +77,13 @@ body {
   padding: 1rem 0.5rem;
 }
 
-.add-poi-large,
 .save {
-  position: relative;
-  width: 355px;
-  padding: 1rem 0.5rem;
+  position: absolute;
+  width: 80px;
+  padding: 5px 5px;
+  font-size: 1.1rem;
+  top: 20px;
+  right: 20px;
 }
 
 .edit-button {
@@ -518,14 +520,17 @@ a:visited {
   }
 
   .add,
-  .finish,
-  .save {
+  .finish {
     position: absolute;
     bottom: 10px;
     width: 60%;
     left: 20%;
     padding: 0.5rem 0.3rem;
     font-size: 1.2rem;
+  }
+
+  .save {
+    right: 10px;
   }
 
   .poi-list-container {
@@ -613,8 +618,7 @@ a:visited {
 
 @media screen and (min-width: 450px) {
   .add,
-  .finish,
-  .save {
+  .finish {
     width: 50%;
     left: 25%;
   }
