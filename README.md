@@ -48,7 +48,7 @@ The site can be accessed using this link: http://voyager-application.herokuapp.c
 ## How to Run Voyager on Your Computer
 
 Requirements:
-- A development environemnt with node.js
+- A development environment with node.js
 - Code editor (Virtual Studio)
 
 To run Voyager on you machine follow these steps:
