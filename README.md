@@ -45,3 +45,17 @@ The site can be accessed using this link: http://voyager-application.herokuapp.c
 ![Screen Shot 2021-05-18 at 6 45 57 PM](https://user-images.githubusercontent.com/76799878/118744604-7b6eaf80-b809-11eb-8cf1-b3963dca0ad6.png)
 ![Screen Shot 2021-05-18 at 6 50 09 PM](https://user-images.githubusercontent.com/76799878/118744845-e8824500-b809-11eb-8dc2-8bfebef9d218.png)
 
+## Running Voyager on Your Computer
+
+To run Voyager on you machine follow these steps:
+1. To access the Mapbox API and Foursquare API, you will need an API key for both.
+2. Go to these sites to create an account and obtain both keys: [Mapbox JavaScript API](https://docs.mapbox.com/mapbox-gl-js/api/), [Foursquare Places API](https://developer.foursquare.com/docs/places-api/).
+3. Once you have the API keys, clone the Voyager repo onto your computer or download the files directly.
+4. Navigate to the root of the Voyager directory in your dev environment.
+5. Use the 'npm install' command in your dev environment to install all dependencies and devDependencies.
+6. Open the Voyager directory in your code editor and navigate to the .env file.
+7. Assign your API keys to their respective variables.
+8. In your dev environment run the following command to start the PostgreSQL server: sudo service postgresql start
+9. This command will stop the server when needed: sudo service postgresql start
+10. In the root directory of Voyager, enter the following command: npm run dev
+11. Open localhost:3000 in your browser and you should be good to go!
