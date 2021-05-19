@@ -26,10 +26,18 @@ export default class App extends React.Component {
     window.addEventListener('beforeunload', () => {
       const locationJSON = JSON.stringify(this.state.location);
       localStorage.setItem('Location', locationJSON);
+      const tripIdJSON = JSON.stringify(this.state.tripId);
+      localStorage.setItem('TripID', tripIdJSON);
     });
     if (localStorage.getItem('Location')) {
       const locationParse = JSON.parse(localStorage.getItem('Location'));
       this.setState({ location: locationParse });
+      localStorage.removeItem('Location');
+    }
+    if (localStorage.getItem('TripID')) {
+      const tripIdParse = JSON.parse(localStorage.getItem('TripID'));
+      this.setState({ tripId: tripIdParse });
+      localStorage.removeItem('TripID');
     }
   }
 
@@ -51,10 +59,10 @@ export default class App extends React.Component {
     } if (route === '#create') {
       return <Create />;
     } if (route === '#itinerary') {
-      return <Itinerary toggleView={this.toggleView} />;
+      return <Itinerary route={false} toggleView={this.toggleView} />;
     } if (route.startsWith('#itinerary/')) {
-      const trip = parseInt(route.split('/')[1]);
-      return <Itinerary trip={trip} toggleView={this.toggleView} />;
+      const trip = parseInt(route.split('/')[1], 10);
+      return <Itinerary route={true} trip={trip} toggleView={this.toggleView} />;
     } else if (route === '#location') {
       return <LocationPage toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
     } else if (route === '#itineraryList') {

@@ -9,16 +9,48 @@ export default class LocationPage extends React.Component {
     super(props);
     this.state = {
       component: 'location',
-      locations: []
+      locations: [],
+      currentPOI: []
     };
     this.changeComponent = this.changeComponent.bind(this);
     this.renderPage = this.renderPage.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.sendPutRequest = this.sendPutRequest.bind(this);
+    this.deletePOI = this.deletePOI.bind(this);
+  }
+
+  deletePOI(id) {
+    const { locations } = this.state;
+    for (let i = 0; i < locations.length; i++) {
+      if (locations[i].name === this.props.location.name) {
+        for (let j = 0; j < locations[i].poi.length; j++) {
+          if (locations[i].poi[j].id === id) {
+            locations[i].poi.splice(j, 1);
+          }
+        }
+      }
+    }
+    this.setState({ locations }, () => {
+      const req = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state.locations)
+      };
+      fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`, req)
+        .then(res => res.json());
+    });
   }
 
   componentDidMount() {
-    fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`)
+    let tripId;
+    if (!this.props.tripId) {
+      tripId = localStorage.getItem('TripID');
+    } else {
+      tripId = this.props.tripId;
+    }
+    fetch(`/api/travelPlanner/itineraries/${tripId}`)
       .then(res => res.json())
       .then(result => this.setState({ locations: result.locations }));
   }
@@ -33,16 +65,19 @@ export default class LocationPage extends React.Component {
   }
 
   handleAdd(result) {
-    const { locations } = this.state;
-    for (let i = 0; i < this.state.locations.length; i++) {
-      if (this.state.locations[i].name === this.props.location.name) {
-        locations[i].poi = locations[i].poi.concat(result);
-        this.setState({ locations });
-      }
-    }
+    const { currentPOI } = this.state;
+    const newPOIList = currentPOI.concat(result);
+    this.setState({ currentPOI: newPOIList });
   }
 
   sendPutRequest() {
+    const { locations, currentPOI } = this.state;
+    for (let i = 0; i < this.state.locations.length; i++) {
+      if (locations[i].name === this.props.location.name) {
+        locations[i].poi = locations[i].poi.concat(currentPOI);
+        this.setState({ locations, currentPOI: [] }, () => this.changeComponent());
+      }
+    }
     const req = {
       method: 'PUT',
       headers: {
@@ -51,23 +86,15 @@ export default class LocationPage extends React.Component {
       body: JSON.stringify(this.state.locations)
     };
     fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`, req)
-      .then(res => res.json())
-      .then(this.changeComponent());
+      .then(res => res.json());
   }
 
   renderPage() {
-    const { component } = this.state;
-    const { locations } = this.state;
-    let location;
-    if (!locations) {
-      location = this.props.location;
-    } else {
-      for (let i = 0; i < locations.length; i++) {
-        if (locations[i].name === this.props.location.name) {
-          location = locations[i];
-        } else {
-          location = this.props.location;
-        }
+    const { component, locations } = this.state;
+    let location = this.props.location;
+    for (let i = 0; i < locations.length; i++) {
+      if (locations[i].name === this.props.location.name) {
+        location = locations[i];
       }
     }
     if (component === 'location') {
@@ -75,17 +102,17 @@ export default class LocationPage extends React.Component {
       <ViewLocation
         getLocationData={this.getLocationData}
         location={location}
-        changeComponent={this.changeComponent} />
+        changeComponent={this.changeComponent}
+        deletePOI={this.deletePOI} />
       );
     } else {
       return (
         <AddPOI
-        location={this.props.location}
+        location={location}
         tripId={this.props.tripId}
         locations={this.state.locations}
         changeComponent={this.changeComponent}
         handleAdd={this.handleAdd}
-        getLocationData={this.getLocationData}
         sendPutRequest={this.sendPutRequest} />
       );
     }

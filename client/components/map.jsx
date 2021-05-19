@@ -51,7 +51,12 @@ class Mapbox extends React.Component {
       })
         .on('result', result => {
           this.setState({ inLocations: null, showFinish: false });
-          const locationName = result.result['place_name_en-US'];
+          let locationName;
+          if (result.result['place_name_en-us']) {
+            locationName = result.result['place_name_en-us'];
+          } else {
+            locationName = result.result['place_name_en-US'];
+          }
           const lng = result.result.center[0];
           const lat = result.result.center[1];
           if (!this.state.locations[0]) {
@@ -141,11 +146,15 @@ class Mapbox extends React.Component {
 
   handleLift() {
     event.preventDefault();
-    const trip = {
-      tripName: this.state.tripName,
-      locations: this.state.locations
-    };
-    this.props.onSubmit(trip);
+    if (!this.state.locations[0]) {
+      window.alert('Please add at least one location to your itinerary to continue.');
+    } else {
+      const trip = {
+        tripName: this.state.tripName,
+        locations: this.state.locations
+      };
+      this.props.onSubmit(trip);
+    }
   }
 
   render() {
@@ -154,11 +163,11 @@ class Mapbox extends React.Component {
     if (this.state.showFinish) {
       addClass = 'hidden';
       finishClass = 'finish button';
-    } else if (!this.state.inLocations) {
-      addClass = 'add button';
+    } else if (!this.state.location.name) {
+      addClass = 'add button init';
       finishClass = 'hidden';
-    } else if (!this.state.location) {
-      addClass = 'add button';
+    } else if (!this.state.inLocations) {
+      addClass = 'add button not-in-locations';
       finishClass = 'hidden';
     } else {
       finishClass = 'finish hidden';
@@ -172,7 +181,7 @@ class Mapbox extends React.Component {
         </div>
         <div className="map-form">
           <form onSubmit={this.handleLift} autoComplete="off">
-            <input className="name" required="required" type="text" name="trip-name" placeholder="New Itinerary" onChange={this.handleChange} />
+            <input className="name" required="required" type="text" name="trip-name" placeholder="Itinerary Name" onChange={this.handleChange} />
             <input className={finishClass} type="submit" value="Finish Itinerary" />
           </form>
         </div>

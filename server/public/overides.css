@@ -2,7 +2,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
+  bottom: 60px;
   right: 0;
 }
 
@@ -12,12 +12,16 @@
   left: 15px;
 }
 
-.map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-right {
+.background-map > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-right,
+.background-map > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-left {
+  position: fixed;
   bottom: 65px;
 }
 
-.map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-left {
-  bottom: 65px;
+.map-box > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-right,
+.map-box > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-left {
+  position: fixed;
+  bottom: 130px;
 }
 
 .mapboxgl-ctrl-geocoder {
@@ -36,11 +40,15 @@
     border: none;
   }
 
-  .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-right {
+  .map-box > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-right,
+  .map-box > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-left {
+    position: absolute;
     bottom: 0;
   }
 
-  .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-left {
+  .background-map > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-right,
+  .background-map > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-left {
+    position: absolute;
     bottom: 0;
   }
 

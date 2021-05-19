@@ -29,6 +29,7 @@ body {
   margin: 0 0.7rem;
   color: white;
   font-size: 1.2rem;
+  transition: color 0.3s;
 }
 
 .home-buttons {
@@ -56,7 +57,7 @@ body {
   font-family: 'Rubik', serif;
   position: relative;
   width: 375px;
-  height: 692px;
+  height: calc(100vh - 170px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,28 +70,66 @@ body {
 }
 
 .add {
-  position: absolute;
-  bottom: 10px;
+  position: fixed;
+  bottom: 70px;
   width: 365px;
   left: 5px;
   padding: 1rem 0.5rem;
 }
 
-.add-poi-large,
 .save {
   position: absolute;
-  bottom: -10px;
-  width: 355px;
-  left: 10px;
-  padding: 1rem 0.5rem;
+  width: 80px;
+  padding: 5px 5px;
+  font-size: 1.1rem;
+  top: 20px;
+  right: 20px;
+}
+
+.edit-button {
+  position: absolute;
+  width: 35px;
+  text-align: center;
+  height: 35px;
+  right: 4%;
+  background-color: white;
+  color: #364e68;
+  padding: 5px 6px;
+  font-size: 1.2rem;
+  border-radius: 0.4rem;
+  top: 22%;
+  border: solid white 0.15rem;
+  transition: background-color 0.3s;
+}
+
+.edit-button:hover {
+  background-color: #364e68;
+  color: white;
+  cursor: pointer;
+}
+
+.loader {
+  margin: auto;
+  border: 15px solid white;
+  border-top: 15px solid #364e68;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .finish {
-  position: absolute;
-  bottom: 10px;
+  position: fixed;
+  bottom: 70px;
   left: 0.3rem;
   width: 365px;
   padding: 1rem 2rem;
+  -webkit-appearance: none;
 }
 
 .name {
@@ -125,6 +164,7 @@ ul {
   top: 75px;
   left: 5px;
   width: 365px;
+  padding-bottom: 60px;
 }
 
 .trip-list-item,
@@ -162,7 +202,7 @@ ul {
 .location-page {
   position: relative;
   padding: 10px;
-  height: 672px;
+  margin-bottom: 60px;
 }
 
 .locations {
@@ -187,7 +227,7 @@ ul {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
-  width: 10%;
+  width: 32px;
   align-items: center;
 }
 
@@ -218,7 +258,7 @@ ul {
 .poi-list-item {
   color: #364e68;
   display: flex;
-  padding: 10px;
+  padding: 10px 10px 15px;
   position: relative;
 }
 
@@ -237,11 +277,17 @@ ul {
 
 .search {
   position: relative;
-  width: 90%;
+  width: 70%;
   font-size: 1rem;
   margin-bottom: 0;
   border-radius: 0.4rem 0 0 0.4rem;
   outline: none;
+}
+
+.explore {
+  width: 20%;
+  font-size: 1rem;
+  margin-left: 5px;
 }
 
 .search::placeholder {
@@ -249,11 +295,16 @@ ul {
 }
 
 .poi-search {
+  -webkit-appearance: none;
   border-radius: 0 0.3rem 0.3rem 0;
-  border: none;
+  border: solid 0.15rem #364e68;
+  border-left: none;
   background-color: #364e68;
   color: white;
-  padding: 0 1rem;
+  transition: background-color 0.3s;
+  margin-left: -0.5px;
+  width: 11%;
+  font-size: 1rem;
 }
 
 .results {
@@ -265,12 +316,64 @@ ul {
   overflow-y: scroll;
 }
 
-.add-poi {
+.add-poi,
+.delete {
   position: absolute;
   right: 5px;
   top: 42px;
   width: 35px;
-  padding: 0.2rem 0.6rem;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 0.1rem #364e68;
+  transition: background-color 0.3s;
+}
+
+.delete-module {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  padding: 5px 10px 0;
+  border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.delete {
+  font-size: 1.2rem;
+}
+
+.delete-itinerary {
+  right: 10px;
+  top: 13px;
+}
+
+.delete-poi,
+.cancel {
+  font-size: 1rem;
+  margin: 5px 10px 0 0;
+  padding: 2px 8px;
+  border: 0.1rem solid #364e68;
+  transition: background-color 0.3s;
+}
+
+.delete:hover,
+.delete-poi:hover {
+  background-color: rgb(185, 24, 24);
+  border-color: rgb(185, 24, 24);
+}
+
+.cancel:hover {
+  background-color: white;
+  color: #364e68;
+}
+
+.list-item-content {
+  padding-right: 35px;
 }
 
 .add-poi-text {
@@ -287,6 +390,8 @@ ul {
   position: absolute;
   right: 5px;
   top: 5px;
+  border-radius: 0.3rem;
+  transition: opacity 0.3s;
 }
 
 .add-page {
@@ -294,14 +399,19 @@ ul {
   margin-bottom: 5px;
 }
 
+.no-results {
+  margin-top: 10px;
+  padding: 1rem 20px;
+}
+
 .navbar {
   height: 60px;
   background-color: white;
-  position: fixed;
   left: 0;
   bottom: 0;
   right: 0;
   display: flex;
+  position: fixed;
   justify-content: space-around;
   align-items: center;
   font-family: 'Rubik', serif;
@@ -353,6 +463,12 @@ a:visited {
 
 .h1-anchor {
   color: white;
+  transition: color 0.3s;
+}
+
+.header-anchor:hover,
+.h1-anchor:hover {
+  color: #364e68;
 }
 
 .location-map {
@@ -360,6 +476,10 @@ a:visited {
   border: solid #364e68;
   border-radius: 0.4rem;
   margin: 0 auto 10px;
+}
+
+.add-header {
+  margin-bottom: 0;
 }
 
 @media screen and (min-width: 376px) {
@@ -400,12 +520,17 @@ a:visited {
   }
 
   .add,
-  .finish,
-  .save {
+  .finish {
+    position: absolute;
+    bottom: 10px;
     width: 60%;
     left: 20%;
     padding: 0.5rem 0.3rem;
     font-size: 1.2rem;
+  }
+
+  .save {
+    right: 10px;
   }
 
   .poi-list-container {
@@ -438,9 +563,6 @@ a:visited {
     flex-wrap: wrap;
     left: 0;
     top: 0;
-    max-height: 75%;
-    overflow: hidden;
-    overflow-y: scroll;
   }
 
   .trip-list-item {
@@ -472,18 +594,31 @@ a:visited {
   .back-arrow {
     position: relative;
     top: 0;
+    transition: transform 0.3s;
   }
 
   .location {
     position: absolute;
     top: 9px;
   }
+
+  .edit-button {
+    background-color: #364e68;
+    color: white;
+    border-color: #364e68;
+    right: 0;
+    top: unset;
+  }
+
+  .edit-button:hover {
+    background-color: white;
+    color: #364e68;
+  }
 }
 
 @media screen and (min-width: 450px) {
   .add,
-  .finish,
-  .save {
+  .finish {
     width: 50%;
     left: 25%;
   }
@@ -499,16 +634,26 @@ a:visited {
   }
 
   .search {
-    width: unset;
+    width: 50%;
   }
 
   .save {
-    top: 20px;
+    top: 75px;
     right: 0;
     bottom: unset;
     left: unset;
-    width: 80px;
+    width: 15%;
     height: 46px;
+  }
+
+  .explore {
+    position: absolute;
+    right: 17%;
+    width: 20%;
+    padding: none;
+    height: 46px;
+    text-align: center;
+    font-size: 1.2rem;
   }
 
   .trip-list-item {
@@ -555,6 +700,7 @@ a:visited {
     flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
+    max-height: 60vh;
   }
 }
 
@@ -598,17 +744,22 @@ a:visited {
   }
 
   .poi-list {
-    max-height: 290px;
+    max-height: 355px;
   }
 
   .poi-list-container {
-    max-height: 320px;
+    max-height: 385px;
   }
 
   .location {
     margin-right: 20px;
     position: relative;
     top: 0;
+    left: 2px;
+  }
+
+  .save {
+    top: 63px;
   }
 }
 
@@ -628,9 +779,75 @@ a:visited {
   }
 }
 
+.create,
+.add,
+.finish,
+.save,
+.explore {
+  border: solid 0.15rem #364e68;
+  transition: background-color 0.3s;
+}
+
+.create:hover,
+.add:hover,
+.finish:hover,
+.save:hover,
+.add-poi-large:hover,
+.poi-search:hover,
+.add-poi:hover,
+.explore:hover {
+  background-color: white;
+  color: #364e68;
+}
+
 .button:hover,
 .location:hover,
 .trip-list-item:hover,
 .poi-search:hover {
   cursor: pointer;
+}
+
+.init:hover {
+  background-color: #364e68;
+  color: white;
+  cursor: initial;
+}
+
+.dynamic {
+  transition: background-color 0.3s;
+}
+
+.dynamic:hover {
+  background-color: #364e68;
+}
+
+.dynamic:hover a,
+.dynamic:hover i {
+  color: white;
+}
+
+.page {
+  position: relative;
+}
+
+.back-arrow:hover {
+  transform: scale(1.15);
+}
+
+.solo {
+  top: 8.5px;
+  right: 8px;
+}
+
+.fs-logo:hover {
+  opacity: 0.8;
+}
+
+.white {
+  background-color: white;
+  color: #364e68;
+}
+
+.white:hover {
+  cursor: initial;
 }

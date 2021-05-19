@@ -9,7 +9,7 @@ export default class Itinerary extends React.Component {
       <>
         <Header />
         <div className="page-container">
-          <ViewTrip toggleView={this.props.toggleView} trip={this.props.trip} />
+          <ViewTrip toggleView={this.props.toggleView} trip={this.props.trip} route={this.props.route} />
         </div>
         <NavBar />
       </>

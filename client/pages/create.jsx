@@ -8,10 +8,12 @@ export default class Create extends React.Component {
     return (
       <>
         <Header />
-        <div className="page-container">
-          <CreateForm />
+        <div className="page">
+          <div className="page-container">
+            <CreateForm />
+          </div>
+          <NavBar />
         </div>
-        <NavBar />
       </>
     );
   }
