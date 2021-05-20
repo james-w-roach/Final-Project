@@ -13,3 +13,12 @@ create table "public"."itineraries" (
   "createdAt"   timestamptz(6) not null default now(),
   primary key ("tripId")
 );
+
+create table "public"."users" (
+  "userId"         serial,
+  "username"       text           not null,
+  "hashedPassword" text           not null,
+  "createdAt"      timestamptz(6) not null default now(),
+  primary key ("userId"),
+  unique ("username")
+);

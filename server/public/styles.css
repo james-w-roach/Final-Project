@@ -482,6 +482,49 @@ a:visited {
   margin-bottom: 0;
 }
 
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+  padding: 10px 20px;
+  border: solid 0.15rem #364e68;
+  border-radius: 0.4rem;
+  color: #364e68;
+}
+
+.auth-form-header {
+  align-self: baseline;
+  margin-bottom: 10px;
+}
+
+.auth-input-container {
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.auth-input {
+  width: 70%;
+}
+
+.log-in {
+  font-size: 1.2rem;
+  padding: 3px 1rem;
+  border: solid 0.15rem #364e68;
+  transition: background-color 0.3s;
+}
+
+.log-in-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 @media screen and (min-width: 376px) {
   .map-form {
     width: 100%;
@@ -795,7 +838,8 @@ a:visited {
 .add-poi-large:hover,
 .poi-search:hover,
 .add-poi:hover,
-.explore:hover {
+.explore:hover,
+.log-in:hover {
   background-color: white;
   color: #364e68;
 }

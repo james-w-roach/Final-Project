@@ -5,6 +5,7 @@ import Itinerary from './pages/itinerary';
 import LocationPage from './pages/locationPage';
 import parseRoute from '../server/parseRoute';
 import ItineraryList from './pages/itineraryList';
+import Login from './pages/login';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -67,6 +68,8 @@ export default class App extends React.Component {
       return <LocationPage toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
     } else if (route === '#itineraryList') {
       return <ItineraryList />;
+    } else if (route === '#login' || route === '#sign-up') {
+      return <Login action={route} />;
     }
   }
 
