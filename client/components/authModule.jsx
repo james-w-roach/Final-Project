@@ -26,11 +26,11 @@ export default class AuthModule extends React.Component {
       },
       body: JSON.stringify(this.state)
     };
-    fetch(`/api/auth/${action}`, req)
+    fetch(`/api/travelPlanner/auth/${action}`, req)
       .then(res => res.json())
       .then(result => {
         if (action === 'sign-up') {
-          window.location.hash = 'sign-in';
+          window.location.hash = 'login';
         } else if (result.user && result.token) {
           this.props.onSignIn(result);
         }
@@ -46,12 +46,15 @@ export default class AuthModule extends React.Component {
     const text = action === 'sign-up'
       ? 'Already have an account? Log in'
       : 'No account? Register now';
+    const headerText = action === 'sign-up'
+      ? 'Make An Account'
+      : 'Sign In';
     const submitText = action === 'sign-up'
       ? 'Register'
       : 'Log In';
     return (
       <form className="auth-form" onSubmit={handleSubmit}>
-        <h2 className="auth-form-header">{submitText}</h2>
+        <h2 className="auth-form-header">{headerText}</h2>
         <div className="auth-input-container">
           <label htmlFor="username" className="auth-label">
             Username
@@ -66,7 +69,7 @@ export default class AuthModule extends React.Component {
         </div>
         <div className="log-in-row">
           <small>
-            <a className="text-muted" href={href}>
+            <a className="auth-anchor" href={href}>
               {text}
             </a>
           </small>

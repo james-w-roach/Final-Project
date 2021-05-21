@@ -505,10 +505,22 @@ a:visited {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .auth-input {
   width: 70%;
+  padding: 5px;
+  border: solid 0.15rem #364e68;
+  border-radius: 0.2rem;
+}
+
+.auth-label {
+  font-size: 1.1rem;
+}
+
+.auth-anchor {
+  color: #364e68;
 }
 
 .log-in {

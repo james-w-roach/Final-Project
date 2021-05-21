@@ -6,6 +6,7 @@ import LocationPage from './pages/locationPage';
 import parseRoute from '../server/parseRoute';
 import ItineraryList from './pages/itineraryList';
 import Login from './pages/login';
+import Header from './components/header';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,21 +15,27 @@ export default class App extends React.Component {
       view: 'itinerary',
       location: null,
       tripId: null,
+      loggedIn: null,
       route: parseRoute(window.location.hash)
     };
     this.renderPage = this.renderPage.bind(this);
     this.toggleView = this.toggleView.bind(this);
+    this.onSignIn = this.onSignIn.bind(this);
+    this.onSignOut = this.onSignOut.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('hashchange', () => {
-      this.setState({ route: window.location.hash });
+      const route = window.location.hash;
+      this.setState({ route });
     });
     window.addEventListener('beforeunload', () => {
       const locationJSON = JSON.stringify(this.state.location);
       localStorage.setItem('Location', locationJSON);
       const tripIdJSON = JSON.stringify(this.state.tripId);
       localStorage.setItem('TripID', tripIdJSON);
+      const loggedInJSON = JSON.stringify(this.state.loggedIn);
+      localStorage.setItem('LoggedIn', loggedInJSON);
     });
     if (localStorage.getItem('Location')) {
       const locationParse = JSON.parse(localStorage.getItem('Location'));
@@ -39,6 +46,11 @@ export default class App extends React.Component {
       const tripIdParse = JSON.parse(localStorage.getItem('TripID'));
       this.setState({ tripId: tripIdParse });
       localStorage.removeItem('TripID');
+    }
+    if (localStorage.getItem('LoggedIn')) {
+      const loggedInParse = JSON.parse(localStorage.getItem('LoggedIn'));
+      this.setState({ loggedIn: loggedInParse });
+      localStorage.removeItem('LoggedIn');
     }
   }
 
@@ -51,6 +63,16 @@ export default class App extends React.Component {
     } else if (this.state.route === '#location') {
       window.location.hash = '#itinerary';
     }
+  }
+
+  onSignIn(result) {
+    this.setState({ loggedIn: true });
+    window.location.hash = '#create';
+  }
+
+  onSignOut() {
+    this.setState({ loggedIn: null });
+    window.location.hash = '';
   }
 
   renderPage() {
@@ -69,13 +91,14 @@ export default class App extends React.Component {
     } else if (route === '#itineraryList') {
       return <ItineraryList />;
     } else if (route === '#login' || route === '#sign-up') {
-      return <Login action={route} />;
+      return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
     }
   }
 
   render() {
     return (
       <>
+        <Header loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} />
         { this.renderPage() }
       </>
     );

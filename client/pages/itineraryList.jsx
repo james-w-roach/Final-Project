@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../components/header';
 import NavBar from '../components/navbar';
 
 export default class ItineraryList extends React.Component {
@@ -104,7 +103,6 @@ export default class ItineraryList extends React.Component {
     }
     return (
       <>
-        <Header />
         <div className="page-container">
           <div className="main trip">
             <div className="itinerary-list">

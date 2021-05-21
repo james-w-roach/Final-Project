@@ -1,6 +1,5 @@
 import React from 'react';
 import ViewLocation from '../components/viewLocation';
-import Header from '../components/header';
 import AddPOI from '../components/addPOI';
 import NavBar from '../components/navbar';
 
@@ -121,7 +120,6 @@ export default class LocationPage extends React.Component {
   render() {
     return (
       <>
-        <Header />
         <div className="page-container">
           { this.renderPage() }
         </div>
