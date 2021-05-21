@@ -17,7 +17,13 @@ export default class ViewTrip extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/travelPlanner/itineraries')
+    let userId;
+    if (localStorage.getItem('UserID')) {
+      userId = localStorage.getItem('UserID');
+    } else {
+      userId = this.props.userId;
+    }
+    fetch(`/api/travelPlanner/itineraries/users/${userId}`)
       .then(res => res.json())
       .then(itineraries => {
         if (!this.props.trip) {

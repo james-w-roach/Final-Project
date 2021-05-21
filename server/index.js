@@ -40,12 +40,27 @@ app.get('/api/travelPlanner/itineraries', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/travelPlanner/itineraries/users/:userId', (req, res, next) => {
+  const userId = parseInt(req.params.userId, 10);
+  const sql = `
+    select *
+      from "itineraries"
+     where "userId" = $1
+  `;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.get('/api/travelPlanner/itineraries/:tripId', (req, res, next) => {
   const tripId = parseInt(req.params.tripId, 10);
   const sql = `
     select *
       from "itineraries"
-     where "tripId" = $1
+     where "tripId" = $1;
   `;
   const params = [tripId];
   db.query(sql, params)
@@ -56,7 +71,8 @@ app.get('/api/travelPlanner/itineraries/:tripId', (req, res, next) => {
 });
 
 app.post('/api/travelPlanner/itineraries', (req, res, next) => {
-  const { tripName, locations } = req.body;
+  const { tripName, locations } = req.body.trip;
+  const { userId } = req.body;
   const locationsJSON = JSON.stringify(locations);
   if (!tripName) {
     throw new ClientError(400, 'please enter an itinerary name');
@@ -64,11 +80,11 @@ app.post('/api/travelPlanner/itineraries', (req, res, next) => {
     throw new ClientError(400, 'please add one or more locations');
   }
   const sql = `
-     insert into "itineraries" ("tripName", "locations")
-          values ($1, $2)
-       returning "tripName", "locations"
+     insert into "itineraries" ("tripName", "locations", "userId")
+          values ($1, $2, $3)
+       returning "tripName", "locations", "userId";
   `;
-  const params = [tripName, locationsJSON];
+  const params = [tripName, locationsJSON, userId];
   db.query(sql, params)
     .then(result => {
       const [trip] = result.rows;

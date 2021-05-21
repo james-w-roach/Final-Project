@@ -8,7 +8,7 @@ export default class Create extends React.Component {
       <>
         <div className="page">
           <div className="page-container">
-            <CreateForm />
+            <CreateForm userId={this.props.userId} />
           </div>
           <NavBar />
         </div>

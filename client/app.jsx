@@ -16,6 +16,7 @@ export default class App extends React.Component {
       location: null,
       tripId: null,
       loggedIn: null,
+      userId: null,
       route: parseRoute(window.location.hash)
     };
     this.renderPage = this.renderPage.bind(this);
@@ -36,6 +37,8 @@ export default class App extends React.Component {
       localStorage.setItem('TripID', tripIdJSON);
       const loggedInJSON = JSON.stringify(this.state.loggedIn);
       localStorage.setItem('LoggedIn', loggedInJSON);
+      const userIdJSON = JSON.stringify(this.state.userId);
+      localStorage.setItem('UserID', userIdJSON);
     });
     if (localStorage.getItem('Location')) {
       const locationParse = JSON.parse(localStorage.getItem('Location'));
@@ -50,7 +53,11 @@ export default class App extends React.Component {
     if (localStorage.getItem('LoggedIn')) {
       const loggedInParse = JSON.parse(localStorage.getItem('LoggedIn'));
       this.setState({ loggedIn: loggedInParse });
-      localStorage.removeItem('LoggedIn');
+    }
+    if (localStorage.getItem('UserID')) {
+      const userIdParse = JSON.parse(localStorage.getItem('UserID'));
+      this.setState({ userId: userIdParse });
+      localStorage.removeItem('UserID');
     }
   }
 
@@ -66,30 +73,37 @@ export default class App extends React.Component {
   }
 
   onSignIn(result) {
-    this.setState({ loggedIn: true });
+    localStorage.setItem('LoggedIn', true);
+    this.setState({ loggedIn: true, userId: result.user.userId });
     window.location.hash = '#create';
   }
 
   onSignOut() {
+    localStorage.setItem('LoggedIn', false);
     this.setState({ loggedIn: null });
     window.location.hash = '';
   }
 
   renderPage() {
     const { route } = this.state;
+    const hash = window.location.hash;
+    if (!JSON.parse(localStorage.getItem('LoggedIn')) && (hash === '#create' || hash === '#itineraryList' || hash === '#location' || hash.startsWith('#itinerary'))) {
+      window.location.hash = '#login';
+      return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
+    }
     if (route === '') {
-      return <Home />;
+      return <Home loggedIn={this.state.loggedIn} />;
     } if (route === '#create') {
-      return <Create />;
+      return <Create userId={this.state.userId} />;
     } if (route === '#itinerary') {
-      return <Itinerary route={false} toggleView={this.toggleView} />;
+      return <Itinerary route={false} toggleView={this.toggleView} userId={this.state.userId} />;
     } if (route.startsWith('#itinerary/')) {
       const trip = parseInt(route.split('/')[1], 10);
-      return <Itinerary route={true} trip={trip} toggleView={this.toggleView} />;
+      return <Itinerary route={true} trip={trip} toggleView={this.toggleView} userId={this.state.userId} />;
     } else if (route === '#location') {
       return <LocationPage toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
     } else if (route === '#itineraryList') {
-      return <ItineraryList />;
+      return <ItineraryList userId={this.state.userId} />;
     } else if (route === '#login' || route === '#sign-up') {
       return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
     }

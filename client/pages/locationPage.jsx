@@ -51,7 +51,9 @@ export default class LocationPage extends React.Component {
     }
     fetch(`/api/travelPlanner/itineraries/${tripId}`)
       .then(res => res.json())
-      .then(result => this.setState({ locations: result.locations }));
+      .then(result => {
+        this.setState({ locations: result.locations });
+      });
   }
 
   changeComponent() {
