@@ -1,7 +1,6 @@
 import React from 'react';
 import AuthModule from '../components/authModule';
 import BackgroundMap from '../components/backgroundMap';
-import NavBar from '../components/navbar';
 
 export default class Login extends React.Component {
   render() {
@@ -14,7 +13,6 @@ export default class Login extends React.Component {
               <AuthModule onSignIn={this.props.onSignIn} action={this.props.action} />
             </div>
           </div>
-          <NavBar />
         </div>
       </>
     );

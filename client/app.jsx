@@ -7,6 +7,7 @@ import parseRoute from '../server/parseRoute';
 import ItineraryList from './pages/itineraryList';
 import Login from './pages/login';
 import Header from './components/header';
+import NavBar from './components/navbar';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -114,6 +115,7 @@ export default class App extends React.Component {
       <>
         <Header loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} />
         { this.renderPage() }
+        <NavBar loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} />
       </>
     );
   }

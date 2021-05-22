@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from '../components/navbar';
 
 export default class ItineraryList extends React.Component {
   constructor(props) {
@@ -120,7 +119,6 @@ export default class ItineraryList extends React.Component {
             </div>
           </div>
         </div>
-        <NavBar />
       </>
     );
   }

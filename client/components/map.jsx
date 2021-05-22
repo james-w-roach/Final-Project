@@ -50,6 +50,7 @@ class Mapbox extends React.Component {
         mapboxgl: mapboxgl
       })
         .on('result', result => {
+          document.activeElement.blur();
           this.setState({ inLocations: null, showFinish: false });
           let locationName;
           if (result.result['place_name_en-us']) {
@@ -147,6 +148,7 @@ class Mapbox extends React.Component {
   handleLift() {
     event.preventDefault();
     if (!this.state.locations[0]) {
+      document.activeElement.blur();
       window.alert('Please add at least one location to your itinerary to continue.');
     } else {
       const trip = {

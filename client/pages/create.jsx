@@ -1,6 +1,5 @@
 import React from 'react';
 import CreateForm from '../components/createForm';
-import NavBar from '../components/navbar';
 
 export default class Create extends React.Component {
   render() {
@@ -10,7 +9,6 @@ export default class Create extends React.Component {
           <div className="page-container">
             <CreateForm userId={this.props.userId} />
           </div>
-          <NavBar />
         </div>
       </>
     );

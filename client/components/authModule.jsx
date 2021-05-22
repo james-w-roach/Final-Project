@@ -44,10 +44,10 @@ export default class AuthModule extends React.Component {
       ? '#login'
       : '#sign-up';
     const text = action === 'sign-up'
-      ? 'Already have an account? Log in'
+      ? 'Already registered? Log in'
       : 'No account? Register now';
     const headerText = action === 'sign-up'
-      ? 'Make An Account'
+      ? 'Create Account'
       : 'Sign In';
     const submitText = action === 'sign-up'
       ? 'Register'
