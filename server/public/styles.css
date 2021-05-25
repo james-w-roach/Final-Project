@@ -102,12 +102,6 @@ body {
   transition: background-color 0.3s;
 }
 
-.edit-button:hover {
-  background-color: #364e68;
-  color: white;
-  cursor: pointer;
-}
-
 .loader {
   margin: auto;
   border: 15px solid white;
@@ -288,6 +282,7 @@ ul {
   width: 20%;
   font-size: 1rem;
   margin-left: 5px;
+  padding: 0;
 }
 
 .search::placeholder {
@@ -305,6 +300,7 @@ ul {
   margin-left: -0.5px;
   width: 11%;
   font-size: 1rem;
+  padding: 0;
 }
 
 .results {
@@ -323,9 +319,10 @@ ul {
   top: 42px;
   width: 35px;
   height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  padding: 5px 6px;
+  font-size: 1.2rem;
+  border: solid #364e68 0.15rem;
   transition: background-color 0.3s;
 }
 
@@ -358,17 +355,6 @@ ul {
   padding: 2px 8px;
   border: 0.1rem solid #364e68;
   transition: background-color 0.3s;
-}
-
-.delete:hover,
-.delete-poi:hover {
-  background-color: rgb(185, 24, 24);
-  border-color: rgb(185, 24, 24);
-}
-
-.cancel:hover {
-  background-color: white;
-  color: #364e68;
 }
 
 .list-item-content {
@@ -465,11 +451,6 @@ a:visited {
   transition: color 0.3s;
 }
 
-.header-anchor:hover,
-.h1-anchor:hover {
-  color: #69c9ee;
-}
-
 .location-map {
   height: 200px;
   border: solid #364e68;
@@ -539,6 +520,24 @@ a:visited {
 
 .log-in-row > small {
   margin-bottom: 10px;
+}
+
+.create,
+.add,
+.finish,
+.save,
+.explore {
+  border: solid 0.15rem #364e68;
+  transition: background-color 0.3s;
+}
+
+.dynamic {
+  transition: background-color 0.3s;
+}
+
+.white {
+  background-color: white;
+  color: #364e68;
 }
 
 @media screen and (min-width: 415px) {
@@ -660,9 +659,73 @@ a:visited {
     top: unset;
   }
 
+  .delete:hover,
+  .delete-poi:hover {
+    background-color: rgb(185, 24, 24);
+    border-color: rgb(185, 24, 24);
+  }
+
+  .cancel:hover,
   .edit-button:hover {
     background-color: white;
     color: #364e68;
+  }
+
+  .header-anchor:hover,
+  .h1-anchor:hover {
+    color: #69c9ee;
+  }
+
+  .create:hover,
+  .add:hover,
+  .finish:hover,
+  .save:hover,
+  .poi-search:hover,
+  .add-poi:hover,
+  .explore:hover,
+  .log-in:hover {
+    background-color: white;
+    color: #364e68;
+  }
+
+  .button:hover,
+  .location:hover,
+  .trip-list-item:hover,
+  .poi-search:hover {
+    cursor: pointer;
+  }
+
+  .init:hover {
+    background-color: #364e68;
+    color: white;
+    cursor: initial;
+  }
+
+  .dynamic:hover {
+    background-color: #364e68;
+  }
+
+  .dynamic:hover a,
+  .dynamic:hover i {
+    color: white;
+  }
+
+  .back-arrow:hover {
+    transform: scale(1.15);
+  }
+
+  .fs-logo:hover {
+    opacity: 0.8;
+  }
+
+  .white:hover {
+    cursor: initial;
+  }
+
+  .edit-button:hover {
+    background-color: #364e68;
+    color: white;
+    cursor: pointer;
   }
 }
 
@@ -700,9 +763,8 @@ a:visited {
     position: absolute;
     right: 17%;
     width: 20%;
-    padding: none;
+    padding: 0;
     height: 46px;
-    text-align: center;
     font-size: 1.2rem;
   }
 
@@ -864,75 +926,11 @@ a:visited {
   }
 }
 
-.create,
-.add,
-.finish,
-.save,
-.explore {
-  border: solid 0.15rem #364e68;
-  transition: background-color 0.3s;
-}
-
-.create:hover,
-.add:hover,
-.finish:hover,
-.save:hover,
-.poi-search:hover,
-.add-poi:hover,
-.explore:hover,
-.log-in:hover {
-  background-color: white;
-  color: #364e68;
-}
-
-.button:hover,
-.location:hover,
-.trip-list-item:hover,
-.poi-search:hover {
-  cursor: pointer;
-}
-
-.init:hover {
-  background-color: #364e68;
-  color: white;
-  cursor: initial;
-}
-
-.dynamic {
-  transition: background-color 0.3s;
-}
-
-.dynamic:hover {
-  background-color: #364e68;
-}
-
-.dynamic:hover a,
-.dynamic:hover i {
-  color: white;
-}
-
 .page {
   position: relative;
-}
-
-.back-arrow:hover {
-  transform: scale(1.15);
 }
 
 .solo {
   top: 8.5px;
   right: 8px;
-}
-
-.fs-logo:hover {
-  opacity: 0.8;
-}
-
-.white {
-  background-color: white;
-  color: #364e68;
-}
-
-.white:hover {
-  cursor: initial;
 }

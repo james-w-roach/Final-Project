@@ -14,11 +14,9 @@ export default class ItineraryList extends React.Component {
   }
 
   componentDidMount() {
-    let userId;
-    if (localStorage.getItem('UserID')) {
+    let userId = this.props.userId;
+    if (!userId) {
       userId = localStorage.getItem('UserID');
-    } else {
-      userId = this.props.userId;
     }
     fetch(`/api/travelPlanner/itineraries/users/${userId}`)
       .then(res => res.json())

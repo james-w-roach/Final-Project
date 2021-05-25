@@ -27,15 +27,15 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    if (localStorage.getItem('UserID')) {
+      const userIdParse = JSON.parse(localStorage.getItem('UserID'));
+      this.setState({ userId: userIdParse });
+    }
     window.addEventListener('hashchange', () => {
       const route = window.location.hash;
       this.setState({ route });
     });
     window.addEventListener('beforeunload', () => {
-      const locationJSON = JSON.stringify(this.state.location);
-      localStorage.setItem('Location', locationJSON);
-      const tripIdJSON = JSON.stringify(this.state.tripId);
-      localStorage.setItem('TripID', tripIdJSON);
       const loggedInJSON = JSON.stringify(this.state.loggedIn);
       localStorage.setItem('LoggedIn', loggedInJSON);
       const userIdJSON = JSON.stringify(this.state.userId);
@@ -44,21 +44,14 @@ export default class App extends React.Component {
     if (localStorage.getItem('Location')) {
       const locationParse = JSON.parse(localStorage.getItem('Location'));
       this.setState({ location: locationParse });
-      localStorage.removeItem('Location');
     }
     if (localStorage.getItem('TripID')) {
       const tripIdParse = JSON.parse(localStorage.getItem('TripID'));
       this.setState({ tripId: tripIdParse });
-      localStorage.removeItem('TripID');
     }
     if (localStorage.getItem('LoggedIn')) {
       const loggedInParse = JSON.parse(localStorage.getItem('LoggedIn'));
       this.setState({ loggedIn: loggedInParse });
-    }
-    if (localStorage.getItem('UserID')) {
-      const userIdParse = JSON.parse(localStorage.getItem('UserID'));
-      this.setState({ userId: userIdParse });
-      localStorage.removeItem('UserID');
     }
   }
 
@@ -67,7 +60,13 @@ export default class App extends React.Component {
       this.setState({
         location,
         tripId
-      }, () => { window.location.hash = '#location'; });
+      }, () => {
+        const locationJSON = JSON.stringify(this.state.location);
+        localStorage.setItem('Location', locationJSON);
+        const tripIdJSON = JSON.stringify(this.state.tripId);
+        localStorage.setItem('TripID', tripIdJSON);
+        window.location.hash = '#location';
+      });
     } else if (this.state.route === '#location') {
       window.location.hash = '#itinerary';
     }
@@ -75,12 +74,14 @@ export default class App extends React.Component {
 
   onSignIn(result) {
     localStorage.setItem('LoggedIn', true);
+    localStorage.setItem('UserID', result.user.userId);
     this.setState({ loggedIn: true, userId: result.user.userId });
     window.location.hash = '#create';
   }
 
   onSignOut() {
     localStorage.setItem('LoggedIn', false);
+    localStorage.removeItem('UserID');
     this.setState({ loggedIn: null });
     window.location.hash = '';
   }
