@@ -691,7 +691,8 @@ a:visited {
   .button:hover,
   .location:hover,
   .trip-list-item:hover,
-  .poi-search:hover {
+  .poi-search:hover,
+  .back-arrow:hover {
     cursor: pointer;
   }
 
