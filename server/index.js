@@ -128,7 +128,7 @@ app.delete('/api/travelPlanner/itineraries/:tripId', (req, res, next) => {
 app.post('/api/travelPlanner/auth/sign-up', (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
-    throw new ClientError(400, 'username and password are required');
+    throw new ClientError(400, 'Username and password are required.');
   }
   argon2
     .hash(password)
@@ -164,14 +164,14 @@ app.post('/api/travelPlanner/auth/login', (req, res, next) => {
     .then(result => {
       const [user] = result.rows;
       if (!user) {
-        throw new ClientError(401, 'invalid login');
+        throw new ClientError(401, 'Username not found.');
       }
       const { userId, hashedPassword } = user;
       return argon2
         .verify(hashedPassword, password)
         .then(isMatching => {
           if (!isMatching) {
-            throw new ClientError(401, 'invalid login');
+            throw new ClientError(401, 'Invalid username or password.');
           }
           const payload = { userId, username };
           const token = jwt.sign(payload, process.env.TOKEN_SECRET);

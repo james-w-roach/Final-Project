@@ -29,16 +29,21 @@ export default class AuthModule extends React.Component {
     fetch(`/api/travelPlanner/auth/${action}`, req)
       .then(res => res.json())
       .then(result => {
-        if (action === 'sign-up') {
+        if (result.error) {
+          this.setState({ error: result.error });
+        } else if (action === 'sign-up') {
           window.location.hash = 'login';
+          this.setState({ error: null });
         } else if (result.user && result.token) {
           this.props.onSignIn(result);
+          this.setState({ error: null });
         }
       });
   }
 
   render() {
     const { action } = this.props;
+    const { error } = this.state;
     const { handleChange, handleSubmit } = this;
     const href = action === 'sign-up'
       ? '#login'
@@ -52,6 +57,9 @@ export default class AuthModule extends React.Component {
     const submitText = action === 'sign-up'
       ? 'Register'
       : 'Log In';
+    const errorClass = !error
+      ? 'hidden'
+      : 'login-error';
     return (
       <form className="auth-form" onSubmit={handleSubmit}>
         <h2 className="auth-form-header">{headerText}</h2>
@@ -68,8 +76,11 @@ export default class AuthModule extends React.Component {
           <input className="auth-input" required id="password" type="password" name="password" onChange={handleChange} />
         </div>
         <div className="log-in-row">
+          <small className={errorClass}>
+            {error}
+          </small>
           <small>
-            <a className="auth-anchor" href={href}>
+            <a className="auth-anchor" href={href} onClick={() => this.setState({ error: null })}>
               {text}
             </a>
           </small>
