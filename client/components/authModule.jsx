@@ -75,10 +75,10 @@ export default class AuthModule extends React.Component {
           </label>
           <input className="auth-input" required id="password" type="password" name="password" onChange={handleChange} />
         </div>
+        <small className={errorClass}>
+          {error}
+        </small>
         <div className="log-in-row">
-          <small className={errorClass}>
-            {error}
-          </small>
           <small>
             <a className="auth-anchor" href={href} onClick={() => this.setState({ error: null })}>
               {text}
