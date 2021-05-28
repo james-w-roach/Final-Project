@@ -1,8 +1,6 @@
 import React from 'react';
 import ViewLocation from '../components/viewLocation';
-import Header from '../components/header';
 import AddPOI from '../components/addPOI';
-import NavBar from '../components/navbar';
 
 export default class LocationPage extends React.Component {
   constructor(props) {
@@ -52,7 +50,9 @@ export default class LocationPage extends React.Component {
     }
     fetch(`/api/travelPlanner/itineraries/${tripId}`)
       .then(res => res.json())
-      .then(result => this.setState({ locations: result.locations }));
+      .then(result => {
+        this.setState({ locations: result.locations });
+      });
   }
 
   changeComponent() {
@@ -121,11 +121,9 @@ export default class LocationPage extends React.Component {
   render() {
     return (
       <>
-        <Header />
         <div className="page-container">
           { this.renderPage() }
         </div>
-        <NavBar />
       </>
     );
   }

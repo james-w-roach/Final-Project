@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from '../components/header';
-import NavBar from '../components/navbar';
 
 export default class ItineraryList extends React.Component {
   constructor(props) {
@@ -16,7 +14,11 @@ export default class ItineraryList extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/travelPlanner/itineraries')
+    let userId = this.props.userId;
+    if (!userId) {
+      userId = localStorage.getItem('UserID');
+    }
+    fetch(`/api/travelPlanner/itineraries/users/${userId}`)
       .then(res => res.json())
       .then(itineraries => {
         if (itineraries.length === 0) {
@@ -104,7 +106,6 @@ export default class ItineraryList extends React.Component {
     }
     return (
       <>
-        <Header />
         <div className="page-container">
           <div className="main trip">
             <div className="itinerary-list">
@@ -116,7 +117,6 @@ export default class ItineraryList extends React.Component {
             </div>
           </div>
         </div>
-        <NavBar />
       </>
     );
   }

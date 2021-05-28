@@ -17,7 +17,13 @@ export default class ViewTrip extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/travelPlanner/itineraries')
+    let userId;
+    if (localStorage.getItem('UserID')) {
+      userId = localStorage.getItem('UserID');
+    } else {
+      userId = this.props.userId;
+    }
+    fetch(`/api/travelPlanner/itineraries/users/${userId}`)
       .then(res => res.json())
       .then(itineraries => {
         if (!this.props.trip) {
@@ -132,7 +138,7 @@ export default class ViewTrip extends React.Component {
       <>
         <div className="main trip">
           <div className="name trip-title">
-            <a className={backClass} href={'#itineraryList'} onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
+            <a className={backClass} onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
             {tripName}
             {editIcon}
           </div>

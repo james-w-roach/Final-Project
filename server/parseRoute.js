@@ -1,3 +1,3 @@
-export default function parseRoute(hashRoute) {
-  return hashRoute;
+export default function parseRoute(route) {
+  return route;
 }

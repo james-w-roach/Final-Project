@@ -14,7 +14,7 @@ body {
   align-items: center;
   justify-content: center;
   font-family: 'Spectral', serif;
-  background-color: #98ccd3;
+  background-color: #364e68;
   color: white;
   height: 60px;
 }
@@ -26,7 +26,7 @@ body {
 }
 
 .header-anchor {
-  margin: 0 0.7rem;
+  margin: 0 0 0 0.7rem;
   color: white;
   font-size: 1.2rem;
   transition: color 0.3s;
@@ -82,7 +82,7 @@ body {
   width: 80px;
   padding: 5px 5px;
   font-size: 1.1rem;
-  top: 20px;
+  top: 15px;
   right: 20px;
 }
 
@@ -100,12 +100,6 @@ body {
   top: 22%;
   border: solid white 0.15rem;
   transition: background-color 0.3s;
-}
-
-.edit-button:hover {
-  background-color: #364e68;
-  color: white;
-  cursor: pointer;
 }
 
 .loader {
@@ -181,6 +175,10 @@ ul {
   position: relative;
 }
 
+.location-text {
+  margin-bottom: 5px;
+}
+
 .center {
   text-align: center;
 }
@@ -201,7 +199,7 @@ ul {
 
 .location-page {
   position: relative;
-  padding: 10px;
+  padding: 5px 10px;
   margin-bottom: 60px;
 }
 
@@ -232,7 +230,7 @@ ul {
 }
 
 .poi-list-container {
-  max-height: 260px;
+  max-height: 195px;
   background-color: white;
   border: solid 0.15rem #364e68;
   border-radius: 0.4rem;
@@ -240,8 +238,8 @@ ul {
 }
 
 .poi-list {
+  max-height: 165px;
   font-family: 'Rubik', serif;
-  max-height: 230px;
   height: auto;
   margin: auto;
   margin-bottom: 7px;
@@ -288,6 +286,7 @@ ul {
   width: 20%;
   font-size: 1rem;
   margin-left: 5px;
+  padding: 0;
 }
 
 .search::placeholder {
@@ -305,6 +304,7 @@ ul {
   margin-left: -0.5px;
   width: 11%;
   font-size: 1rem;
+  padding: 0;
 }
 
 .results {
@@ -323,10 +323,10 @@ ul {
   top: 42px;
   width: 35px;
   height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: solid 0.1rem #364e68;
+  text-align: center;
+  padding: 5px 6px;
+  font-size: 1.2rem;
+  border: solid #364e68 0.15rem;
   transition: background-color 0.3s;
 }
 
@@ -359,17 +359,6 @@ ul {
   padding: 2px 8px;
   border: 0.1rem solid #364e68;
   transition: background-color 0.3s;
-}
-
-.delete:hover,
-.delete-poi:hover {
-  background-color: rgb(185, 24, 24);
-  border-color: rgb(185, 24, 24);
-}
-
-.cancel:hover {
-  background-color: white;
-  color: #364e68;
 }
 
 .list-item-content {
@@ -466,23 +455,103 @@ a:visited {
   transition: color 0.3s;
 }
 
-.header-anchor:hover,
-.h1-anchor:hover {
-  color: #364e68;
-}
-
 .location-map {
-  height: 200px;
+  height: 180px;
   border: solid #364e68;
   border-radius: 0.4rem;
-  margin: 0 auto 10px;
+  margin: 0 auto 5px;
 }
 
 .add-header {
   margin-bottom: 0;
 }
 
-@media screen and (min-width: 376px) {
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  padding: 10px 20px;
+  border: solid 0.15rem #364e68;
+  border-radius: 0.4rem;
+  color: #364e68;
+}
+
+.auth-form-header {
+  align-self: baseline;
+  margin-bottom: 10px;
+}
+
+.auth-input-container {
+  margin-bottom: 10px;
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 5px;
+  border: solid 0.15rem #364e68;
+  border-radius: 0.2rem;
+  font-size: 17px;
+}
+
+.auth-label {
+  font-size: 1.1rem;
+}
+
+.auth-anchor {
+  color: #364e68;
+}
+
+.log-in {
+  font-size: 1.2rem;
+  padding: 3px 1rem;
+  border: solid 0.15rem #364e68;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.log-in-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.log-in-row > small {
+  margin-bottom: 10px;
+}
+
+.login-error {
+  color: rgb(185, 24, 24);
+  align-self: baseline;
+  margin-bottom: 10px;
+}
+
+.create,
+.add,
+.finish,
+.save,
+.explore {
+  border: solid 0.15rem #364e68;
+  transition: background-color 0.3s;
+}
+
+.dynamic {
+  transition: background-color 0.3s;
+}
+
+.white {
+  background-color: white;
+  color: #364e68;
+}
+
+@media screen and (min-width: 415px) {
   .map-form {
     width: 100%;
   }
@@ -516,7 +585,7 @@ a:visited {
   .map-box {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 90%;
   }
 
   .add,
@@ -531,6 +600,7 @@ a:visited {
 
   .save {
     right: 10px;
+    top: 20px;
   }
 
   .poi-list-container {
@@ -539,15 +609,6 @@ a:visited {
 
   .poi-list {
     max-height: 130px;
-  }
-
-  .add-poi-large {
-    position: relative;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    padding: 0.7rem 0.5rem;
-    margin: 10px 0;
   }
 
   .trip {
@@ -591,6 +652,10 @@ a:visited {
     padding: 10px 0 0;
   }
 
+  .location-text {
+    margin-bottom: 10px;
+  }
+
   .back-arrow {
     position: relative;
     top: 0;
@@ -610,9 +675,70 @@ a:visited {
     top: unset;
   }
 
+  .delete:hover,
+  .delete-poi:hover {
+    background-color: rgb(185, 24, 24);
+    border-color: rgb(185, 24, 24);
+  }
+
+  .cancel:hover,
   .edit-button:hover {
     background-color: white;
     color: #364e68;
+  }
+
+  .header-anchor:hover,
+  .h1-anchor:hover {
+    color: #69c9ee;
+  }
+
+  .create:hover,
+  .add:hover,
+  .finish:hover,
+  .save:hover,
+  .poi-search:hover,
+  .add-poi:hover,
+  .explore:hover,
+  .log-in:hover,
+  .edit-button:hover {
+    background-color: white;
+    color: #364e68;
+  }
+
+  .button:hover,
+  .location:hover,
+  .trip-list-item:hover,
+  .poi-search:hover,
+  .back-arrow:hover,
+  .edit-button:hover {
+    cursor: pointer;
+  }
+
+  .init:hover {
+    background-color: #364e68;
+    color: white;
+    cursor: initial;
+  }
+
+  .dynamic:hover {
+    background-color: #364e68;
+  }
+
+  .dynamic:hover a,
+  .dynamic:hover i {
+    color: white;
+  }
+
+  .back-arrow:hover {
+    transform: scale(1.15);
+  }
+
+  .fs-logo:hover {
+    opacity: 0.8;
+  }
+
+  .white:hover {
+    cursor: initial;
   }
 }
 
@@ -638,7 +764,7 @@ a:visited {
   }
 
   .save {
-    top: 75px;
+    top: 85px;
     right: 0;
     bottom: unset;
     left: unset;
@@ -650,9 +776,8 @@ a:visited {
     position: absolute;
     right: 17%;
     width: 20%;
-    padding: none;
+    padding: 0;
     height: 46px;
-    text-align: center;
     font-size: 1.2rem;
   }
 
@@ -759,7 +884,34 @@ a:visited {
   }
 
   .save {
-    top: 63px;
+    top: 73px;
+  }
+
+  .auth-form {
+    width: 60%;
+  }
+
+  .auth-input-container {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .auth-input {
+    width: 70%;
+  }
+
+  .log-in {
+    width: unset;
+  }
+
+  .log-in-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .log-in-row > small {
+    margin-bottom: 0;
   }
 }
 
@@ -771,83 +923,27 @@ a:visited {
     left: 35%;
     font-size: 1.2rem;
   }
+
+  .auth-form {
+    width: 50%;
+  }
 }
 
 @media screen and (min-width: 1000px) {
   .page-container {
     width: 900px;
   }
-}
 
-.create,
-.add,
-.finish,
-.save,
-.explore {
-  border: solid 0.15rem #364e68;
-  transition: background-color 0.3s;
-}
-
-.create:hover,
-.add:hover,
-.finish:hover,
-.save:hover,
-.add-poi-large:hover,
-.poi-search:hover,
-.add-poi:hover,
-.explore:hover {
-  background-color: white;
-  color: #364e68;
-}
-
-.button:hover,
-.location:hover,
-.trip-list-item:hover,
-.poi-search:hover {
-  cursor: pointer;
-}
-
-.init:hover {
-  background-color: #364e68;
-  color: white;
-  cursor: initial;
-}
-
-.dynamic {
-  transition: background-color 0.3s;
-}
-
-.dynamic:hover {
-  background-color: #364e68;
-}
-
-.dynamic:hover a,
-.dynamic:hover i {
-  color: white;
+  .auth-form {
+    width: 40%;
+  }
 }
 
 .page {
   position: relative;
 }
 
-.back-arrow:hover {
-  transform: scale(1.15);
-}
-
 .solo {
   top: 8.5px;
   right: 8px;
-}
-
-.fs-logo:hover {
-  opacity: 0.8;
-}
-
-.white {
-  background-color: white;
-  color: #364e68;
-}
-
-.white:hover {
-  cursor: initial;
 }

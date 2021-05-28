@@ -1,15 +1,17 @@
 import React from 'react';
+import AuthModule from '../components/authModule';
 import BackgroundMap from '../components/backgroundMap';
-import HomeButtons from '../components/homeButtons';
 
-export default class Home extends React.Component {
+export default class Login extends React.Component {
   render() {
     return (
       <>
         <BackgroundMap />
         <div className="page">
           <div className="page-container">
-            <HomeButtons loggedIn={this.props.loggedIn} />
+            <div className="main">
+              <AuthModule onSignIn={this.props.onSignIn} action={this.props.action} />
+            </div>
           </div>
         </div>
       </>
