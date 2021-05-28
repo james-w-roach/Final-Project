@@ -699,7 +699,8 @@ a:visited {
   .poi-search:hover,
   .add-poi:hover,
   .explore:hover,
-  .log-in:hover {
+  .log-in:hover,
+  .edit-button:hover {
     background-color: white;
     color: #364e68;
   }
@@ -708,7 +709,8 @@ a:visited {
   .location:hover,
   .trip-list-item:hover,
   .poi-search:hover,
-  .back-arrow:hover {
+  .back-arrow:hover,
+  .edit-button:hover {
     cursor: pointer;
   }
 
@@ -737,12 +739,6 @@ a:visited {
 
   .white:hover {
     cursor: initial;
-  }
-
-  .edit-button:hover {
-    background-color: #364e68;
-    color: white;
-    cursor: pointer;
   }
 }
 
