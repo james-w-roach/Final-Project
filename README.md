@@ -37,13 +37,15 @@ The site can be accessed using this link: http://voyager-application.herokuapp.c
 
 ## Screenshots
 
-![Screen Shot 2021-05-18 at 6 40 14 PM](https://user-images.githubusercontent.com/76799878/118744595-76a9fb80-b809-11eb-89d5-145010133019.png)
-![Screen Shot 2021-05-18 at 6 42 55 PM](https://user-images.githubusercontent.com/76799878/118744599-7a3d8280-b809-11eb-9e5b-bc66edc3a574.png)
-![Screen Shot 2021-05-18 at 6 43 26 PM](https://user-images.githubusercontent.com/76799878/118744600-7ad61900-b809-11eb-9cb1-70de26fe917c.png)
-![Screen Shot 2021-05-18 at 6 44 54 PM](https://user-images.githubusercontent.com/76799878/118744601-7ad61900-b809-11eb-83ce-e1b96060f0ca.png)
-![Screen Shot 2021-05-18 at 6 45 14 PM](https://user-images.githubusercontent.com/76799878/118744603-7b6eaf80-b809-11eb-9e62-8df173422973.png)
-![Screen Shot 2021-05-18 at 6 45 57 PM](https://user-images.githubusercontent.com/76799878/118744604-7b6eaf80-b809-11eb-8cf1-b3963dca0ad6.png)
-![Screen Shot 2021-05-18 at 6 50 09 PM](https://user-images.githubusercontent.com/76799878/118744845-e8824500-b809-11eb-8dc2-8bfebef9d218.png)
+<img width="1029" alt="Voyager_Front_Page" src="https://user-images.githubusercontent.com/76799878/120382903-102cdf00-c2d9-11eb-8ebb-bf74a9dbec2a.png">
+<img width="1029" alt="Voyager_Sign_In" src="https://user-images.githubusercontent.com/76799878/120382911-128f3900-c2d9-11eb-950f-b89ade1d37ae.png">
+<img width="1029" alt="Voyager_Create" src="https://user-images.githubusercontent.com/76799878/120382926-16bb5680-c2d9-11eb-9e54-3cd78de7e6fb.png">
+<img width="1029" alt="Voyager_Trip_Page" src="https://user-images.githubusercontent.com/76799878/120382957-2175eb80-c2d9-11eb-884d-ef430a1b77c3.png">
+<img width="1029" alt="Voyager_Location_Page" src="https://user-images.githubusercontent.com/76799878/120382969-25097280-c2d9-11eb-85a5-c2d31674a306.png">
+<img width="1029" alt="Voyager_Add_POI" src="https://user-images.githubusercontent.com/76799878/120382978-28046300-c2d9-11eb-9c8a-7d9b1edb5fd3.png">
+<img width="1029" alt="Voyager_Delete_Location" src="https://user-images.githubusercontent.com/76799878/120383002-2dfa4400-c2d9-11eb-9b62-63726cd0e6f5.png">
+<img width="1029" alt="Voyager_Itineraries_List" src="https://user-images.githubusercontent.com/76799878/120383015-318dcb00-c2d9-11eb-83ef-0e6c20f46d5c.png">
+
 
 ## How to Run Voyager on Your Computer
 
