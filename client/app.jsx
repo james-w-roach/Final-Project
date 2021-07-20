@@ -7,7 +7,7 @@ import parseRoute from '../server/parseRoute';
 import ItineraryList from './pages/itineraryList';
 import Login from './pages/login';
 import Header from './components/header';
-import NavBar from './components/navbar';
+import NavDrawer from './components/navDrawer';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -18,12 +18,14 @@ export default class App extends React.Component {
       tripId: null,
       loggedIn: null,
       userId: null,
-      route: parseRoute(window.location.hash)
+      route: parseRoute(window.location.hash),
+      viewingNavDrawer: false
     };
     this.renderPage = this.renderPage.bind(this);
     this.toggleView = this.toggleView.bind(this);
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignOut = this.onSignOut.bind(this);
+    this.showDrawer = this.showDrawer.bind(this);
   }
 
   componentDidMount() {
@@ -86,6 +88,10 @@ export default class App extends React.Component {
     window.location.hash = '';
   }
 
+  showDrawer() {
+    this.setState({ viewingNavDrawer: !this.state.viewingNavDrawer });
+  }
+
   renderPage() {
     const { route } = this.state;
     const hash = window.location.hash;
@@ -112,11 +118,15 @@ export default class App extends React.Component {
   }
 
   render() {
+    const { viewingNavDrawer } = this.state;
+    const navDrawerClass = !viewingNavDrawer
+      ? 'nav-drawer'
+      : 'nav-drawer drawer-visible';
     return (
       <>
-        <Header loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} />
+        <Header loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} showDrawer={this.showDrawer} />
         { this.renderPage() }
-        <NavBar loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} />
+        <NavDrawer loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} navDrawerClass={navDrawerClass} />
       </>
     );
   }
