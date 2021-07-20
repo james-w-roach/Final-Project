@@ -126,7 +126,7 @@ export default class App extends React.Component {
       <>
         <Header loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} showDrawer={this.showDrawer} />
         { this.renderPage() }
-        <NavDrawer loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} navDrawerClass={navDrawerClass} />
+        <NavDrawer loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} showDrawer={this.showDrawer} navDrawerClass={navDrawerClass} />
       </>
     );
   }

@@ -56,7 +56,7 @@ body {
 .main {
   font-family: 'Rubik', serif;
   position: relative;
-  width: 375px;
+  width: 100%;
   height: calc(100vh - 170px);
   display: flex;
   align-items: center;
@@ -71,8 +71,8 @@ body {
 
 .add {
   position: fixed;
-  bottom: 70px;
-  width: 365px;
+  bottom: 5px;
+  width: calc(100% - 10px);
   left: 5px;
   padding: 1rem 0.5rem;
 }
@@ -119,9 +119,9 @@ body {
 
 .finish {
   position: fixed;
-  bottom: 70px;
+  bottom: 5px;
   left: 0.3rem;
-  width: 365px;
+  width: calc(100% - 10px);
   padding: 1rem 2rem;
   -webkit-appearance: none;
 }
@@ -136,7 +136,7 @@ body {
   position: absolute;
   top: 0.3rem;
   left: 0.3rem;
-  width: 365px;
+  width: calc(100% - 10px);
   padding: 1rem 2rem;
 }
 
@@ -157,8 +157,7 @@ ul {
   position: absolute;
   top: 75px;
   left: 5px;
-  width: 365px;
-  padding-bottom: 60px;
+  width: calc(100% - 10px);
 }
 
 .trip-list-item,
@@ -200,7 +199,6 @@ ul {
 .location-page {
   position: relative;
   padding: 5px 10px;
-  margin-bottom: 60px;
 }
 
 .locations {
@@ -230,7 +228,7 @@ ul {
 }
 
 .poi-list-container {
-  max-height: 195px;
+  max-height: calc(100vh - 400px);
   background-color: white;
   border: solid 0.15rem #364e68;
   border-radius: 0.4rem;
@@ -238,9 +236,8 @@ ul {
 }
 
 .poi-list {
-  max-height: 165px;
+  max-height: calc(100vh - 405px);
   font-family: 'Rubik', serif;
-  height: auto;
   margin: auto;
   margin-bottom: 7px;
   position: relative;
@@ -308,7 +305,7 @@ ul {
 }
 
 .results {
-  max-height: 520px;
+  height: calc(100vh - 215px);
   margin: auto;
   padding: 0 0 10px;
   position: relative;
@@ -436,6 +433,9 @@ a {
 
 .list-item {
   color: #364e68;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
 }
 
 .back {
@@ -552,7 +552,7 @@ a:visited {
 }
 
 .nav-drawer {
-  height: 100vh;
+  height: calc(100vh - 59px);
   transition: width 0.5s;
   position: absolute;
   right: 0;
@@ -565,7 +565,7 @@ a:visited {
   white-space: nowrap;
   padding-top: 1rem;
   width: 0;
-  top: 60px;
+  top: 59px;
   font-size: 1.2rem;
   z-index: 1000;
 }
@@ -607,6 +607,11 @@ a:visited {
     outline: none;
     left: 0;
     padding: 1rem 0;
+  }
+
+  .drawer-button {
+    position: relative;
+    right: unset;
   }
 
   ::placeholder {
@@ -782,6 +787,10 @@ a:visited {
   .white:hover {
     cursor: initial;
   }
+
+  .drawer-visible {
+    width: 40%;
+  }
 }
 
 @media screen and (min-width: 450px) {
@@ -793,14 +802,6 @@ a:visited {
 }
 
 @media screen and (min-width: 500px) {
-  .header-nav {
-    display: initial;
-  }
-
-  .navbar {
-    display: none;
-  }
-
   .search {
     width: 50%;
   }
@@ -954,6 +955,22 @@ a:visited {
 
   .log-in-row > small {
     margin-bottom: 0;
+  }
+
+  .drawer-button {
+    display: none !important;
+  }
+
+  .nav-drawer {
+    display: none;
+  }
+
+  .header-nav {
+    display: initial;
+  }
+
+  .navbar {
+    display: none;
   }
 }
 
