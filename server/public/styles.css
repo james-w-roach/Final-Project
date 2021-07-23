@@ -6,7 +6,7 @@
 
 body {
   margin: 0;
-  background-color: #ebf0f6;
+  background-color: #efe9e1;
 }
 
 .header {
@@ -28,8 +28,9 @@ body {
 .header-anchor {
   margin: 0;
   color: white;
+  border-radius: 0.5rem;
   font-size: 1.2rem;
-  transition: color 0.3s;
+  transition: background-color 0.3s;
   padding: 5px 10px;
 }
 
