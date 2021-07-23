@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class NavBar extends React.Component {
+export default class NavDrawer extends React.Component {
   render() {
     let content = 'Log Out';
     let loginHref = '';
@@ -15,14 +15,15 @@ export default class NavBar extends React.Component {
       loginHref = '';
     }
     return (
-      <div className="navbar">
-        <a className="navbar-anchor" href={createHref}>Create <i className="fas fa-plus"></i></a>
-        <a className="navbar-anchor" href={listHref}>Trips <i className="far fa-map"></i></a>
-        <a className="navbar-anchor"
+      <div className={this.props.navDrawerClass}>
+        <a className="drawer-anchor" href={createHref} onClick={this.props.showDrawer}>Create <i className="fas fa-plus"></i></a>
+        <a className="drawer-anchor" href={listHref} onClick={this.props.showDrawer}>Trips <i className="far fa-map"></i></a>
+        <a className="drawer-anchor"
           onClick={() => {
             if (this.props.loggedIn) {
               this.props.onSignOut();
             }
+            this.props.showDrawer();
           }}
           href={loginHref}>{content} <i className="fas fa-user"></i></a>
       </div>

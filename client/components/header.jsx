@@ -30,6 +30,7 @@ export default class Header extends React.Component {
                 }}
               href={loginHref}>{content} <i className="fas fa-user"></i></a>
             </div>
+            <i className="fas fa-bars drawer-button" id="drawer-button" onClick={this.props.showDrawer}></i>
           </div>
         </div>
       </div>
