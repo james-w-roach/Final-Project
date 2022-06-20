@@ -483,19 +483,19 @@ a:visited {
   justify-content: space-between;
   align-items: center;
   width: 80%;
-  padding: 10px 20px;
-  border: solid 0.15rem #0e58a8;
+  padding: 20px 30px;
+  box-shadow: 0 1px 3px gray;
   border-radius: 0.4rem;
   color: #0e58a8;
 }
 
 .auth-form-header {
   align-self: baseline;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .auth-input-container {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   width: 100%;
   flex-direction: column;
   display: flex;
@@ -505,10 +505,11 @@ a:visited {
 
 .auth-input {
   width: 100%;
-  padding: 5px;
-  border: solid 0.15rem #0e58a8;
-  border-radius: 0.2rem;
-  font-size: 17px;
+  padding: 5px 10px;
+  background-color: #e2e2e2;
+  border-radius: 0.4rem;
+  border: none;
+  font-size: 14px;
 }
 
 .auth-label {
@@ -521,10 +522,13 @@ a:visited {
 
 .log-in {
   font-size: 1.2rem;
-  padding: 3px 1rem;
-  border: solid 0.15rem #0e58a8;
+  padding: 8px 16px;
   transition: background-color 0.3s;
   width: 100%;
+  box-shadow: 0 1px 3px gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .log-in-row {
@@ -956,7 +960,7 @@ a:visited {
   }
 
   .auth-input {
-    width: 70%;
+    width: 68%;
   }
 
   .log-in {
