@@ -20,15 +20,15 @@ export default class Header extends React.Component {
           <div className="header-content">
             <a className="h1-anchor" href={''}><h1>Voyager</h1></a>
             <div className="header-nav">
-              <a className="header-anchor" href={createHref}>Create <i className="fas fa-plus"></i></a>
-              <a className="header-anchor" href={listHref}>Itineraries <i className="far fa-map"></i></a>
+              <a className="header-anchor" href={createHref}>Create</a>
+              <a className="header-anchor" href={listHref}>Itineraries</a>
               <a className="header-anchor"
                 onClick={() => {
                   if (this.props.loggedIn) {
                     this.props.onSignOut();
                   }
                 }}
-              href={loginHref}>{content} <i className="fas fa-user"></i></a>
+              href={loginHref}>{content}</a>
             </div>
             <i className="fas fa-bars drawer-button" id="drawer-button" onClick={this.props.showDrawer}></i>
           </div>

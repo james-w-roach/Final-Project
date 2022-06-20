@@ -14,7 +14,7 @@ body {
   align-items: center;
   justify-content: center;
   font-family: 'Spectral', serif;
-  background-color: #11467e;
+  background-color: #0e58a8;
   color: white;
   height: 60px;
 }
@@ -26,12 +26,13 @@ body {
 }
 
 .header-anchor {
-  margin: 0;
+  background-image: #0e58a8;
   color: white;
-  border-radius: 0.5rem;
-  font-size: 1.2rem;
+  box-shadow: 0px 1px 4px #062e59;
   transition: background-color 0.3s;
-  padding: 5px 10px;
+  padding: 4px 10px;
+  border-radius: 0.4rem;
+  margin-left: 12px;
 }
 
 .home-buttons {
@@ -49,7 +50,7 @@ body {
 }
 
 .button {
-  background-color: #11467e;
+  background-color: #0e58a8;
   color: white;
   font-size: 1.5rem;
   border: none;
@@ -97,7 +98,7 @@ body {
   height: 35px;
   right: 4%;
   background-color: white;
-  color: #11467e;
+  color: #0e58a8;
   padding: 5px 6px;
   font-size: 1.2rem;
   border-radius: 0.4rem;
@@ -110,7 +111,7 @@ body {
 .loader {
   margin: auto;
   border: 15px solid white;
-  border-top: 15px solid #11467e;
+  border-top: 15px solid #0e58a8;
   border-radius: 50%;
   width: 150px;
   height: 150px;
@@ -134,7 +135,7 @@ body {
 .name {
   font-size: 1.5rem;
   text-align: center;
-  background-color: #11467e;
+  background-color: #0e58a8;
   color: white;
   border: none;
   border-radius: 0.4rem;
@@ -151,7 +152,7 @@ body {
 
 .added {
   background-color: white;
-  color: #11467e;
+  color: #0e58a8;
 }
 
 ul {
@@ -169,7 +170,7 @@ ul {
 .location-text,
 .search {
   font-family: 'Rubik', serif;
-  color: #11467e;
+  color: #0e58a8;
   background-color: white;
   border: none;
   border-radius: 0.4rem;
@@ -261,7 +262,7 @@ ul {
 }
 
 .poi-list-item {
-  color: #11467e;
+  color: #0e58a8;
   display: flex;
   padding: 10px 10px 15px;
   position: relative;
@@ -297,7 +298,7 @@ ul {
 }
 
 .search::placeholder {
-  color: #11467e;
+  color: #0e58a8;
 }
 
 .poi-search {
@@ -305,7 +306,7 @@ ul {
   border-radius: 0 0.3rem 0.3rem 0;
   border: none;
   box-shadow: 0 1px 3px gray;
-  background-color: #11467e;
+  background-color: #0e58a8;
   color: white;
   transition: background-color 0.3s;
   margin-left: -0.5px;
@@ -363,7 +364,7 @@ ul {
   font-size: 1rem;
   margin: 5px 10px 0 0;
   padding: 2px 8px;
-  border: 0.1rem solid #11467e;
+  border: 0.1rem solid #0e58a8;
   transition: background-color 0.3s;
 }
 
@@ -414,7 +415,7 @@ ul {
 }
 
 .navbar-anchor {
-  color: #11467e;
+  color: #0e58a8;
 }
 
 .background-img {
@@ -441,7 +442,7 @@ a {
 }
 
 .list-item {
-  color: #11467e;
+  color: #0e58a8;
   width: 100%;
   height: 100%;
   display: inline-block;
@@ -483,9 +484,9 @@ a:visited {
   align-items: center;
   width: 80%;
   padding: 10px 20px;
-  border: solid 0.15rem #11467e;
+  border: solid 0.15rem #0e58a8;
   border-radius: 0.4rem;
-  color: #11467e;
+  color: #0e58a8;
 }
 
 .auth-form-header {
@@ -505,7 +506,7 @@ a:visited {
 .auth-input {
   width: 100%;
   padding: 5px;
-  border: solid 0.15rem #11467e;
+  border: solid 0.15rem #0e58a8;
   border-radius: 0.2rem;
   font-size: 17px;
 }
@@ -515,13 +516,13 @@ a:visited {
 }
 
 .auth-anchor {
-  color: #11467e;
+  color: #0e58a8;
 }
 
 .log-in {
   font-size: 1.2rem;
   padding: 3px 1rem;
-  border: solid 0.15rem #11467e;
+  border: solid 0.15rem #0e58a8;
   transition: background-color 0.3s;
   width: 100%;
 }
@@ -556,7 +557,7 @@ a:visited {
 
 .white {
   background-color: white;
-  color: #11467e;
+  color: #0e58a8;
 }
 
 .nav-drawer {
@@ -567,7 +568,7 @@ a:visited {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #11467e;
+  background-color: #0e58a8;
   color: white;
   overflow: hidden;
   white-space: nowrap;
@@ -609,7 +610,7 @@ a:visited {
   .name {
     position: relative;
     background-color: transparent;
-    color: #11467e;
+    color: #0e58a8;
     font-size: 2.5rem;
     text-align: left;
     outline: none;
@@ -623,7 +624,7 @@ a:visited {
   }
 
   ::placeholder {
-    color: #11467e;
+    color: #0e58a8;
   }
 
   .page-container {
@@ -697,7 +698,7 @@ a:visited {
 
   .back {
     position: relative;
-    color: #11467e;
+    color: #0e58a8;
     width: 60px;
     align-items: initial;
   }
@@ -723,7 +724,7 @@ a:visited {
   }
 
   .edit-button {
-    background-color: #11467e;
+    background-color: #0e58a8;
     color: white;
     right: 0;
     top: unset;
@@ -738,13 +739,12 @@ a:visited {
   .cancel:hover,
   .edit-button:hover {
     background-color: white;
-    color: #11467e;
+    color: #0e58a8;
   }
 
   .header-anchor:hover {
     background-color: white;
-    border-radius: 0.5rem;
-    color: #11467e;
+    color: #0e58a8;
   }
 
   .h1-anchor:hover {
@@ -761,7 +761,7 @@ a:visited {
   .log-in:hover,
   .edit-button:hover {
     background-color: white;
-    color: #11467e;
+    color: #0e58a8;
   }
 
   .button:hover,
@@ -774,13 +774,13 @@ a:visited {
   }
 
   .init:hover {
-    background-color: #11467e;
+    background-color: #0e58a8;
     color: white;
     cursor: initial;
   }
 
   .dynamic:hover {
-    background-color: #11467e;
+    background-color: #0e58a8;
   }
 
   .dynamic:hover a,
@@ -983,6 +983,9 @@ a:visited {
 
   .header-nav {
     display: initial;
+    height: 60px;
+    display: flex;
+    align-items: center;
   }
 
   .navbar {
