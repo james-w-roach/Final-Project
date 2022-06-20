@@ -53,6 +53,7 @@ body {
   font-size: 1.5rem;
   border: none;
   border-radius: 0.4rem;
+  box-shadow: 0 1px 3px gray;
 }
 
 .main {
@@ -100,7 +101,8 @@ body {
   font-size: 1.2rem;
   border-radius: 0.4rem;
   top: 22%;
-  border: solid white 0.15rem;
+  border: none;
+  box-shadow: 0 1px 3px gray;
   transition: background-color 0.3s;
 }
 
@@ -168,12 +170,17 @@ ul {
   font-family: 'Rubik', serif;
   color: #11467e;
   background-color: white;
-  border: solid 0.15rem #11467e;
+  border: none;
   border-radius: 0.4rem;
   list-style-type: none;
   padding: 0.7rem 15px;
   margin-bottom: 10px;
   position: relative;
+}
+
+.trip-list-item,
+.search {
+  box-shadow: 0 1px 3px gray;
 }
 
 .location-text {
@@ -295,8 +302,8 @@ ul {
 .poi-search {
   -webkit-appearance: none;
   border-radius: 0 0.3rem 0.3rem 0;
-  border: solid 0.15rem #11467e;
-  border-left: none;
+  border: none;
+  box-shadow: 0 1px 3px gray;
   background-color: #11467e;
   color: white;
   transition: background-color 0.3s;
@@ -325,7 +332,6 @@ ul {
   text-align: center;
   padding: 5px 6px;
   font-size: 1.2rem;
-  border: solid #11467e 0.15rem;
   transition: background-color 0.3s;
 }
 
@@ -540,7 +546,6 @@ a:visited {
 .finish,
 .save,
 .explore {
-  border: solid 0.15rem #11467e;
   transition: background-color 0.3s;
 }
 
@@ -719,7 +724,6 @@ a:visited {
   .edit-button {
     background-color: #11467e;
     color: white;
-    border-color: #11467e;
     right: 0;
     top: unset;
   }
