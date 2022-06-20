@@ -49,14 +49,14 @@ module.exports = {
     new webpack.EnvironmentPlugin(['FS_CLIENT_ID']),
     new webpack.EnvironmentPlugin(['FS_CLIENT_SECRET'])
   ],
-  devtool: 'source-map',
+  devtool: false,
   devServer: {
     host: '0.0.0.0',
     port: process.env.DEV_SERVER_PORT,
-    publicPath: '/',
-    contentBase: serverPublicPath,
-    watchContentBase: true,
-    stats: 'minimal',
+    static: {
+      publicPath: '/',
+      directory: serverPublicPath
+    },
     proxy: {
       '/api': `http://localhost:${process.env.PORT}`
     }
