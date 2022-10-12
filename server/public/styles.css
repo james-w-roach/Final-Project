@@ -2,18 +2,24 @@
   margin: 0;
   max-width: 100%;
   box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', serif;
 }
 
 body {
   margin: 0;
   background-color: #efe9e1;
+  font-weight: 500;
+}
+
+h4 {
+  font-weight: 400;
 }
 
 .header {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Spectral', serif;
+  font-weight: 700;
   background-color: #0e58a8;
   color: white;
   height: 60px;
@@ -59,7 +65,6 @@ body {
 }
 
 .main {
-  font-family: 'Rubik', serif;
   position: relative;
   width: 100%;
   height: calc(100vh - 170px);
@@ -169,7 +174,6 @@ ul {
 .trip-list-item,
 .location-text,
 .search {
-  font-family: 'Rubik', serif;
   color: #0e58a8;
   background-color: white;
   border: none;
@@ -248,7 +252,6 @@ ul {
 
 .poi-list {
   max-height: calc(100vh - 405px);
-  font-family: 'Rubik', serif;
   margin: auto;
   margin-bottom: 7px;
   position: relative;
@@ -410,7 +413,6 @@ ul {
   position: fixed;
   justify-content: space-around;
   align-items: center;
-  font-family: 'Rubik', serif;
   font-size: 1.5rem;
 }
 
