@@ -16,7 +16,7 @@ export default class Header extends React.Component {
     }
     return (
       <div className="header">
-        <a className="h1-anchor" href={''}><h1>Voyager</h1></a>
+        <a className="h1-anchor" href={''}><div className='h1-anchor-line h1-upper'></div><h1>Voyager</h1><div className='h1-anchor-line h1-lower'></div></a>
         <div className="header-nav">
           <a className="header-anchor" href={createHref}>Create<div className='anchor-line'></div></a>
           <a className="header-anchor" href={listHref}>Itineraries<div className='anchor-line'></div></a>

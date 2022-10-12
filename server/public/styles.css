@@ -45,6 +45,17 @@ h4 {
   transition: width 0.5s ease-in-out;
 }
 
+.h1-anchor-line {
+  width: 0%;
+  background-color: white;
+  height: 3px;
+  transition: width 0.5s ease-in-out;
+}
+
+.h1-lower {
+  margin-top: 3px;
+}
+
 .home-buttons {
   display: flex;
   flex-direction: column;
@@ -752,12 +763,9 @@ a:visited {
     color: #0e58a8;
   }
 
-  .header-anchor:hover .anchor-line {
+  .header-anchor:hover .anchor-line,
+  .h1-anchor:hover .h1-anchor-line {
     width: 100%;
-  }
-
-  .h1-anchor:hover {
-    opacity: 75%;
   }
 
   .create:hover,
