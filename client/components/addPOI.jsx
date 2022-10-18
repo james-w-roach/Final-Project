@@ -110,7 +110,7 @@ export default class AddPOI extends React.Component {
           }
         }
         return (
-          <li className="trip-list-item" key={result.id}>
+          <li className="trip-list-item poi-item" key={result.id}>
             <div className="add-poi-text">
               <h3>{result.name}</h3> <br />
               <h4>{`${result.location.address}, ${result.location.formattedAddress[1]}, ${result.location.cc}`}</h4>
