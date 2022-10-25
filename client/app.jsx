@@ -95,15 +95,20 @@ export default class App extends React.Component {
     this.setState({ viewingNavDrawer: !this.state.viewingNavDrawer });
   }
 
+  addGuestTrip = trip => {
+    this.setState({ guestTrip: trip}, () => console.log(this.state.guestTrip));
+    window.location.hash = '#itinerary'
+  }
+
   renderPage() {
     const { route } = this.state;
     const hash = window.location.hash;
     if (route === '') {
       return <Home loggedIn={this.state.loggedIn} />;
     } if (route === '#create') {
-      return <Create userId={this.state.userId} />;
+      return <Create addGuestTrip={this.addGuestTrip} userId={this.state.userId} />;
     } if (route === '#itinerary') {
-      return <Itinerary route={false} toggleView={this.toggleView} userId={this.state.userId} />;
+      return <Itinerary route={false} toggleView={this.toggleView} userId={this.state.userId} guestTrip={this.state.guestTrip} />;
     } if (route.startsWith('#itinerary/')) {
       const trip = parseInt(route.split('/')[1], 10);
       return <Itinerary route={true} trip={trip} toggleView={this.toggleView} userId={this.state.userId} />;

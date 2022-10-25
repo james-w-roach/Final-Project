@@ -28,7 +28,8 @@ export default class CreateForm extends React.Component {
           window.location.hash = '#itinerary';
         });
     } else {
-      console.log(trip);
+      trip.tripId = 1;
+      this.props.addGuestTrip(trip);
     }
   }
 
