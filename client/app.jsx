@@ -3,7 +3,6 @@ import Home from './pages/home';
 import Create from './pages/create';
 import Itinerary from './pages/itinerary';
 import LocationPage from './pages/locationPage';
-import parseRoute from '../server/parseRoute';
 import ItineraryList from './pages/itineraryList';
 import Login from './pages/login';
 import Header from './components/header';
@@ -18,7 +17,7 @@ export default class App extends React.Component {
       tripId: null,
       loggedIn: null,
       userId: null,
-      route: parseRoute(window.location.hash),
+      route: window.location.hash,
       viewingNavDrawer: false
     };
     this.renderPage = this.renderPage.bind(this);
@@ -95,10 +94,6 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     const hash = window.location.hash;
-    if (!JSON.parse(localStorage.getItem('LoggedIn')) && (hash === '#create' || hash === '#itineraryList' || hash === '#location' || hash.startsWith('#itinerary'))) {
-      window.location.hash = '#login';
-      return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
-    }
     if (route === '') {
       return <Home loggedIn={this.state.loggedIn} />;
     } if (route === '#create') {
