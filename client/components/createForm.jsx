@@ -8,24 +8,28 @@ export default class CreateForm extends React.Component {
   }
 
   handleSubmit(trip) {
-    const userId = this.props.userId;
-    const body = {
-      trip,
-      userId
-    };
-    const req = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify(body)
-    };
-    fetch('/api/travelPlanner/itineraries', req)
-      .then(res => {
-        res.json();
-        window.location.hash = '#itinerary';
-      });
+    if (this.props.userId) {
+      const userId = this.props.userId;
+      const body = {
+        trip,
+        userId
+      };
+      const req = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify(body)
+      };
+      fetch('/api/travelPlanner/itineraries', req)
+        .then(res => {
+          res.json();
+          window.location.hash = '#itinerary';
+        });
+    } else {
+      console.log(trip);
+    }
   }
 
   render() {

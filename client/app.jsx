@@ -39,8 +39,10 @@ export default class App extends React.Component {
     window.addEventListener('beforeunload', () => {
       const loggedInJSON = JSON.stringify(this.state.loggedIn);
       localStorage.setItem('LoggedIn', loggedInJSON);
-      const userIdJSON = JSON.stringify(this.state.userId);
-      localStorage.setItem('UserID', userIdJSON);
+      if (this.state.userId) {
+        const userIdJSON = JSON.stringify(this.state.userId);
+        localStorage.setItem('UserID', userIdJSON);
+      }
     });
     if (localStorage.getItem('Location')) {
       const locationParse = JSON.parse(localStorage.getItem('Location'));
@@ -83,8 +85,10 @@ export default class App extends React.Component {
   onSignOut() {
     localStorage.setItem('LoggedIn', false);
     localStorage.removeItem('UserID');
-    this.setState({ loggedIn: null });
+    localStorage.removeItem('Location');
+    localStorage.removeItem('TripID');
     window.location.hash = '';
+    this.setState({ loggedIn: null, userId: null, location: null, tripId: null });
   }
 
   showDrawer() {
