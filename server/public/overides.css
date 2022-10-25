@@ -29,12 +29,20 @@
   width: 100%;
 }
 
+.mapboxgl-canvas {
+  border-radius: 0.5rem;
+}
+
+.mapboxgl-ctrl {
+  border-radius: 0 0 0.5rem 0;
+}
+
 @media screen and (min-width: 376px) {
   .map-container {
-    border: solid  #11467e;
-    border-radius: 0.3rem;
+    border-radius: 0.5rem;
     height: 100%;
     position: relative;
+    box-shadow: 0 1px 3px gray;
   }
 
   .background {

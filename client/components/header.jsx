@@ -16,23 +16,19 @@ export default class Header extends React.Component {
     }
     return (
       <div className="header">
-        <div className="page-container">
-          <div className="header-content">
-            <a className="h1-anchor" href={''}><h1>Voyager</h1></a>
-            <div className="header-nav">
-              <a className="header-anchor" href={createHref}>Create <i className="fas fa-plus"></i></a>
-              <a className="header-anchor" href={listHref}>Itineraries <i className="far fa-map"></i></a>
-              <a className="header-anchor"
-                onClick={() => {
-                  if (this.props.loggedIn) {
-                    this.props.onSignOut();
-                  }
-                }}
-              href={loginHref}>{content} <i className="fas fa-user"></i></a>
-            </div>
-            <i className="fas fa-bars drawer-button" id="drawer-button" onClick={this.props.showDrawer}></i>
-          </div>
+        <a className="h1-anchor" href={''}><div className='h1-anchor-line h1-upper'></div><h1>Voyager</h1><div className='h1-anchor-line h1-lower'></div></a>
+        <div className="header-nav">
+          <a className="header-anchor" href={createHref}>Create<div className='anchor-line'></div></a>
+          <a className="header-anchor" href={listHref}>Itineraries<div className='anchor-line'></div></a>
+          <a className="header-anchor"
+            onClick={() => {
+              if (this.props.loggedIn) {
+                this.props.onSignOut();
+              }
+            }}
+            href={loginHref}>{content}<div className='anchor-line'></div></a>
         </div>
+        <i className="fas fa-bars drawer-button" id="drawer-button" onClick={this.props.showDrawer}></i>
       </div>
     );
   }

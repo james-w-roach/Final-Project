@@ -110,7 +110,7 @@ export default class ItineraryList extends React.Component {
           <div className="main trip">
             <div className="itinerary-list">
               <div className="name trip-title">
-                Itineraries
+                <h2 style={{ fontSize: '2.5rem' }}>Itineraries</h2>
                 {editIcon}
               </div>
               <ul className="trip-list">{list}</ul>

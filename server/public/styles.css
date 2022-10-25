@@ -2,36 +2,58 @@
   margin: 0;
   max-width: 100%;
   box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', serif;
 }
 
 body {
   margin: 0;
   background-color: #efe9e1;
+  font-weight: 500;
+}
+
+h4 {
+  font-weight: 400;
 }
 
 .header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-family: 'Spectral', serif;
-  background-color: #11467e;
+  justify-content: space-between;
+  font-weight: 700;
+  background-color: #0e58a8;
   color: white;
   height: 60px;
+  padding: 0 18px;
 }
 
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.h1-anchor > h1 {
+  margin-top: -4px;
 }
 
 .header-anchor {
-  margin: 0;
+  font-size: 20px;
+  margin-top: -2px;
   color: white;
-  border-radius: 0.5rem;
-  font-size: 1.2rem;
-  transition: background-color 0.3s;
-  padding: 5px 10px;
+  margin-left: 18px;
+}
+
+.anchor-line {
+  width: 0%;
+  background-color: white;
+  height: 3px;
+  margin-top: 1px;
+  transition: width 0.5s ease-in-out;
+}
+
+.h1-anchor-line {
+  width: 0%;
+  background-color: white;
+  height: 3px;
+  transition: width 0.5s ease-in-out;
+}
+
+.h1-lower {
+  margin-top: 3px;
 }
 
 .home-buttons {
@@ -45,18 +67,19 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
+  pointer-events: none;
 }
 
 .button {
-  background-color: #11467e;
+  background-color: #0e58a8;
   color: white;
   font-size: 1.5rem;
   border: none;
   border-radius: 0.4rem;
+  box-shadow: 0 1px 3px gray;
 }
 
 .main {
-  font-family: 'Rubik', serif;
   position: relative;
   width: 100%;
   height: calc(100vh - 170px);
@@ -95,19 +118,20 @@ body {
   height: 35px;
   right: 4%;
   background-color: white;
-  color: #11467e;
+  color: #0e58a8;
   padding: 5px 6px;
   font-size: 1.2rem;
   border-radius: 0.4rem;
   top: 22%;
-  border: solid white 0.15rem;
+  border: none;
+  box-shadow: 0 1px 3px gray;
   transition: background-color 0.3s;
 }
 
 .loader {
   margin: auto;
   border: 15px solid white;
-  border-top: 15px solid #11467e;
+  border-top: 15px solid #0e58a8;
   border-radius: 50%;
   width: 150px;
   height: 150px;
@@ -131,7 +155,7 @@ body {
 .name {
   font-size: 1.5rem;
   text-align: center;
-  background-color: #11467e;
+  background-color: #0e58a8;
   color: white;
   border: none;
   border-radius: 0.4rem;
@@ -148,7 +172,7 @@ body {
 
 .added {
   background-color: white;
-  color: #11467e;
+  color: #0e58a8;
 }
 
 ul {
@@ -165,15 +189,24 @@ ul {
 .trip-list-item,
 .location-text,
 .search {
-  font-family: 'Rubik', serif;
-  color: #11467e;
+  color: #0e58a8;
   background-color: white;
-  border: solid 0.15rem #11467e;
+  border: none;
   border-radius: 0.4rem;
   list-style-type: none;
-  padding: 0.7rem 15px;
   margin-bottom: 10px;
   position: relative;
+}
+
+.location-text,
+.search,
+.poi-item {
+  padding: 10px 15px;
+}
+
+.trip-list-item,
+.search {
+  box-shadow: 0 1px 3px gray;
 }
 
 .location-text {
@@ -232,14 +265,13 @@ ul {
 .poi-list-container {
   max-height: calc(100vh - 400px);
   background-color: white;
-  border: solid 0.15rem #11467e;
+  box-shadow: 0 1px 3px gray;
   border-radius: 0.4rem;
   padding-bottom: 5px;
 }
 
 .poi-list {
   max-height: calc(100vh - 405px);
-  font-family: 'Rubik', serif;
   margin: auto;
   margin-bottom: 7px;
   position: relative;
@@ -253,7 +285,7 @@ ul {
 }
 
 .poi-list-item {
-  color: #11467e;
+  color: #0e58a8;
   display: flex;
   padding: 10px 10px 15px;
   position: relative;
@@ -289,15 +321,15 @@ ul {
 }
 
 .search::placeholder {
-  color: #11467e;
+  color: #0e58a8;
 }
 
 .poi-search {
   -webkit-appearance: none;
   border-radius: 0 0.3rem 0.3rem 0;
-  border: solid 0.15rem #11467e;
-  border-left: none;
-  background-color: #11467e;
+  border: none;
+  box-shadow: 0 1px 3px gray;
+  background-color: #0e58a8;
   color: white;
   transition: background-color 0.3s;
   margin-left: -0.5px;
@@ -325,7 +357,6 @@ ul {
   text-align: center;
   padding: 5px 6px;
   font-size: 1.2rem;
-  border: solid #11467e 0.15rem;
   transition: background-color 0.3s;
 }
 
@@ -356,7 +387,7 @@ ul {
   font-size: 1rem;
   margin: 5px 10px 0 0;
   padding: 2px 8px;
-  border: 0.1rem solid #11467e;
+  border: 0.1rem solid #0e58a8;
   transition: background-color 0.3s;
 }
 
@@ -402,12 +433,11 @@ ul {
   position: fixed;
   justify-content: space-around;
   align-items: center;
-  font-family: 'Rubik', serif;
   font-size: 1.5rem;
 }
 
 .navbar-anchor {
-  color: #11467e;
+  color: #0e58a8;
 }
 
 .background-img {
@@ -434,9 +464,10 @@ a {
 }
 
 .list-item {
-  color: #11467e;
+  color: #0e58a8;
   width: 100%;
   height: 100%;
+  padding: 10px 15px;
   display: inline-block;
 }
 
@@ -459,7 +490,7 @@ a:visited {
 
 .location-map {
   height: 180px;
-  border: solid #11467e;
+  box-shadow: 0 1px 3px gray;
   border-radius: 0.4rem;
   margin: 0 auto 5px;
 }
@@ -475,19 +506,19 @@ a:visited {
   justify-content: space-between;
   align-items: center;
   width: 80%;
-  padding: 10px 20px;
-  border: solid 0.15rem #11467e;
+  padding: 20px 30px;
+  box-shadow: 0 1px 3px gray;
   border-radius: 0.4rem;
-  color: #11467e;
+  color: #0e58a8;
 }
 
 .auth-form-header {
   align-self: baseline;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .auth-input-container {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   width: 100%;
   flex-direction: column;
   display: flex;
@@ -497,10 +528,11 @@ a:visited {
 
 .auth-input {
   width: 100%;
-  padding: 5px;
-  border: solid 0.15rem #11467e;
-  border-radius: 0.2rem;
-  font-size: 17px;
+  padding: 5px 10px;
+  background-color: #e2e2e2;
+  border-radius: 0.4rem;
+  border: none;
+  font-size: 14px;
 }
 
 .auth-label {
@@ -508,15 +540,18 @@ a:visited {
 }
 
 .auth-anchor {
-  color: #11467e;
+  color: #0e58a8;
 }
 
 .log-in {
   font-size: 1.2rem;
-  padding: 3px 1rem;
-  border: solid 0.15rem #11467e;
+  padding: 8px 16px;
   transition: background-color 0.3s;
   width: 100%;
+  box-shadow: 0 1px 3px gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .log-in-row {
@@ -540,7 +575,6 @@ a:visited {
 .finish,
 .save,
 .explore {
-  border: solid 0.15rem #11467e;
   transition: background-color 0.3s;
 }
 
@@ -550,7 +584,7 @@ a:visited {
 
 .white {
   background-color: white;
-  color: #11467e;
+  color: #0e58a8;
 }
 
 .nav-drawer {
@@ -561,7 +595,7 @@ a:visited {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #11467e;
+  background-color: #0e58a8;
   color: white;
   overflow: hidden;
   white-space: nowrap;
@@ -603,7 +637,7 @@ a:visited {
   .name {
     position: relative;
     background-color: transparent;
-    color: #11467e;
+    color: #0e58a8;
     font-size: 2.5rem;
     text-align: left;
     outline: none;
@@ -617,7 +651,7 @@ a:visited {
   }
 
   ::placeholder {
-    color: #11467e;
+    color: #0e58a8;
   }
 
   .page-container {
@@ -691,7 +725,7 @@ a:visited {
 
   .back {
     position: relative;
-    color: #11467e;
+    color: #0e58a8;
     width: 60px;
     align-items: initial;
   }
@@ -717,9 +751,8 @@ a:visited {
   }
 
   .edit-button {
-    background-color: #11467e;
+    background-color: #0e58a8;
     color: white;
-    border-color: #11467e;
     right: 0;
     top: unset;
   }
@@ -733,17 +766,12 @@ a:visited {
   .cancel:hover,
   .edit-button:hover {
     background-color: white;
-    color: #11467e;
+    color: #0e58a8;
   }
 
-  .header-anchor:hover {
-    background-color: white;
-    border-radius: 0.5rem;
-    color: #11467e;
-  }
-
-  .h1-anchor:hover {
-    opacity: 75%;
+  .header-anchor:hover .anchor-line,
+  .h1-anchor:hover .h1-anchor-line {
+    width: 100%;
   }
 
   .create:hover,
@@ -756,7 +784,7 @@ a:visited {
   .log-in:hover,
   .edit-button:hover {
     background-color: white;
-    color: #11467e;
+    color: #0e58a8;
   }
 
   .button:hover,
@@ -769,13 +797,13 @@ a:visited {
   }
 
   .init:hover {
-    background-color: #11467e;
+    background-color: #0e58a8;
     color: white;
     cursor: initial;
   }
 
   .dynamic:hover {
-    background-color: #11467e;
+    background-color: #0e58a8;
   }
 
   .dynamic:hover a,
@@ -845,7 +873,7 @@ a:visited {
   .finish {
     width: 40%;
     left: 30%;
-    padding: 0.5rem 0.7rem;
+    padding: 0.5rem 10px;
     font-size: 1rem;
   }
 }
@@ -909,13 +937,18 @@ a:visited {
     background-color: transparent;
     border: none;
     display: flex;
-    padding: 0;
+    padding: 19px 8px 0px;
     align-items: center;
     font-size: 1.5rem;
+
   }
 
   .viewPOI-container {
     height: 100%;
+  }
+
+  .viewPOI-container > .location-text {
+    box-shadow: 0 1px 3px gray;
   }
 
   .poi-list {
@@ -947,7 +980,7 @@ a:visited {
   }
 
   .auth-input {
-    width: 70%;
+    width: 68%;
   }
 
   .log-in {
@@ -974,6 +1007,9 @@ a:visited {
 
   .header-nav {
     display: initial;
+    height: 60px;
+    display: flex;
+    align-items: center;
   }
 
   .navbar {
