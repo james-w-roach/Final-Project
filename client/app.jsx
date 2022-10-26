@@ -43,6 +43,10 @@ export default class App extends React.Component {
         const userIdJSON = JSON.stringify(this.state.userId);
         localStorage.setItem('UserID', userIdJSON);
       }
+      if (this.state.guestTrip) {
+        const guestTripJSON = JSON.stringify(this.state.guestTrip);
+        localStorage.setItem('Guest Trip', guestTripJSON);
+      }
     });
     if (localStorage.getItem('Location')) {
       const locationParse = JSON.parse(localStorage.getItem('Location'));
@@ -55,6 +59,10 @@ export default class App extends React.Component {
     if (localStorage.getItem('LoggedIn')) {
       const loggedInParse = JSON.parse(localStorage.getItem('LoggedIn'));
       this.setState({ loggedIn: loggedInParse });
+    }
+    if (localStorage.getItem('Guest Trip')) {
+      const guestTripParse = JSON.parse(localStorage.getItem('Guest Trip'));
+      this.setState({ guestTrip: guestTripParse });
     }
   }
 
