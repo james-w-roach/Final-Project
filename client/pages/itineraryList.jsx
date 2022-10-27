@@ -18,15 +18,27 @@ export default class ItineraryList extends React.Component {
     if (!userId) {
       userId = localStorage.getItem('UserID');
     }
-    fetch(`/api/travelPlanner/itineraries/users/${userId}`)
-      .then(res => res.json())
-      .then(itineraries => {
-        if (itineraries.length === 0) {
-          this.setState({ itineraries: 'No trips added yet' });
-        } else {
-          this.setState({ itineraries });
-        }
-      });
+    if (userId) {
+      fetch(`/api/travelPlanner/itineraries/users/${userId}`)
+        .then(res => res.json())
+        .then(itineraries => {
+          if (itineraries.length === 0) {
+            this.setState({ itineraries: 'No trips added yet' });
+          } else {
+            this.setState({ itineraries });
+          }
+        });
+    } else {
+      let { guestTrip } = this.props;
+      if (!guestTrip && localStorage.getItem('Guest Trip')) {
+        guestTrip = JSON.parse(localStorage.getItem('Guest Trip'));
+      }
+      if (guestTrip) {
+        this.setState({ itineraries: [guestTrip] });
+      } else {
+        this.setState({ itineraries: 'No trips added yet' });
+      }
+    }
   }
 
   setDeleteClass(tripId) {

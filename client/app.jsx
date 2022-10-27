@@ -123,7 +123,7 @@ export default class App extends React.Component {
     } else if (route === '#location') {
       return <LocationPage toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
     } else if (route === '#itineraryList') {
-      return <ItineraryList userId={this.state.userId} />;
+      return <ItineraryList guestTrip={this.state.guestTrip} userId={this.state.userId} />;
     } else if (route === '#login' || route === '#sign-up') {
       return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
     }
