@@ -42,17 +42,22 @@ export default class LocationPage extends React.Component {
   }
 
   componentDidMount() {
-    let tripId;
-    if (!this.props.tripId) {
-      tripId = localStorage.getItem('TripID');
-    } else {
-      tripId = this.props.tripId;
+    if (localStorage.getItem('Guest Trip')) {
+      const guestTrip = JSON.parse(localStorage.getItem('Guest Trip'));
+      this.setState({ locations: guestTrip.locations });
+    } else if (this.props.loggedIn) {
+      let tripId;
+      if (!this.props.tripId) {
+        tripId = localStorage.getItem('TripID');
+      } else {
+        tripId = this.props.tripId;
+      }
+      fetch(`/api/travelPlanner/itineraries/${tripId}`)
+        .then(res => res.json())
+        .then(result => {
+          this.setState({ locations: result.locations });
+        });
     }
-    fetch(`/api/travelPlanner/itineraries/${tripId}`)
-      .then(res => res.json())
-      .then(result => {
-        this.setState({ locations: result.locations });
-      });
   }
 
   changeComponent() {
@@ -89,6 +94,19 @@ export default class LocationPage extends React.Component {
       .then(res => res.json());
   }
 
+  addGuestPOI = () => {
+    const { locations, currentPOI } = this.state;
+    for (let i = 0; i < this.state.locations.length; i++) {
+      if (locations[i].name === this.props.location.name) {
+        locations[i].poi = locations[i].poi.concat(currentPOI);
+        this.setState({ locations, currentPOI: [] }, () => {
+          this.changeComponent()
+        });
+      }
+    }
+    this.props.updateGuestTrip(locations);
+  }
+
   renderPage() {
     const { component, locations } = this.state;
     let location = this.props.location;
@@ -113,7 +131,8 @@ export default class LocationPage extends React.Component {
         locations={this.state.locations}
         changeComponent={this.changeComponent}
         handleAdd={this.handleAdd}
-        sendPutRequest={this.sendPutRequest} />
+        sendPutRequest={this.sendPutRequest}
+        addGuestPOI={this.addGuestPOI} />
       );
     }
   }
