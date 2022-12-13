@@ -59,14 +59,18 @@ export default class ItineraryList extends React.Component {
     if (this.state.itineraries.length === 0) {
       this.setState({ itineraries: 'No trips added yet' });
     }
-    const req = {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
-      .then(res => res.json());
+    if (this.props.userId) {
+      const req = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
+        .then(res => res.json());
+    } else {
+      this.props.updateGuestTrip(null);
+    }
   }
 
   render() {
