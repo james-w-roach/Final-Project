@@ -40,7 +40,7 @@ export default class LocationPage extends React.Component {
         fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`, req)
           .then(res => res.json());
       } else {
-        this.props.updateGuestTrip(this.state.locations);
+        this.props.updateGuestPOI(this.state.locations);
       }
     });
   }
@@ -108,7 +108,7 @@ export default class LocationPage extends React.Component {
         });
       }
     }
-    this.props.updateGuestTrip(locations);
+    this.props.updateGuestPOI(locations);
   }
 
   renderPage() {

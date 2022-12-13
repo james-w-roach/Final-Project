@@ -75,19 +75,23 @@ export default class ViewTrip extends React.Component {
     this.setState({
       itinerary
     });
-    let tripId = this.props.trip;
-    if (!this.props.trip) {
-      tripId = this.state.max;
+    if (this.props.userId) {
+      let tripId = this.props.trip;
+      if (!this.props.trip) {
+        tripId = this.state.max;
+      }
+      const req = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(itinerary.locations)
+      };
+      fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
+        .then(res => res.json());
+    } else {
+      this.props.updateGuestTrip(itinerary);
     }
-    const req = {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(itinerary.locations)
-    };
-    fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
-      .then(res => res.json());
   }
 
   render() {
