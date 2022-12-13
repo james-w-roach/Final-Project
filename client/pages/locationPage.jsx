@@ -29,15 +29,19 @@ export default class LocationPage extends React.Component {
       }
     }
     this.setState({ locations }, () => {
-      const req = {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.state.locations)
-      };
-      fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`, req)
-        .then(res => res.json());
+      if (this.props.loggedIn) {
+        const req = {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.state.locations)
+        };
+        fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`, req)
+          .then(res => res.json());
+      } else {
+        this.props.updateGuestTrip(this.state.locations);
+      }
     });
   }
 

@@ -128,7 +128,7 @@ export default class App extends React.Component {
       const trip = parseInt(route.split('/')[1], 10);
       return <Itinerary route={true} trip={trip} toggleView={this.toggleView} userId={this.state.userId} />;
     } else if (route === '#location') {
-      return <LocationPage updateGuestTrip={this.updateGuestTrip} loggedIn={this.state.loggedIn}  toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
+      return <LocationPage updateGuestTrip={this.updateGuestTrip} loggedIn={this.state.loggedIn} toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
     } else if (route === '#itineraryList') {
       return <ItineraryList guestTrip={this.state.guestTrip} userId={this.state.userId} />;
     } else if (route === '#login' || route === '#sign-up') {
