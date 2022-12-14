@@ -23,9 +23,9 @@ export default class ItineraryList extends React.Component {
         .then(res => res.json())
         .then(itineraries => {
           if (itineraries.length === 0) {
-            this.setState({ itineraries: 'No trips added yet' });
+            this.setState({ itineraries: null });
           } else {
-            this.setState({ itineraries }, () => console.log(this.state.itineraries));
+            this.setState({ itineraries });
           }
         });
     } else {
@@ -35,6 +35,8 @@ export default class ItineraryList extends React.Component {
       }
       if (guestTrip) {
         this.setState({ itineraries: [guestTrip] });
+      } else {
+        this.setState({ itineraries: null });
       }
     }
   }
@@ -74,7 +76,9 @@ export default class ItineraryList extends React.Component {
   render() {
     let list;
     let listIcon = <i className="fas fa-arrow-right trip-list-arrow"></i>;
-    if (this.state.itineraries.length === 0) {
+    if (this.state.itineraries && this.state.itineraries.length === 0) {
+      list = null;
+    } else if (this.state.itineraries === null) {
       list = <div className="no-trips">
         <h2>Nothing to see here yet. <br />Click below to get started.</h2>
         <a className='create button no-trips-create' href='#create'>Create A Guest Itinerary</a>
