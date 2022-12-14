@@ -629,6 +629,29 @@ a:visited {
   width: 70%;
 }
 
+.no-trips {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 350px;
+  left: calc(50% - 175px);
+  top: 5vh;
+  line-height: 3rem;
+  color: #0e58a8;
+}
+
+.no-trips-create {
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+  margin: 1.5rem 0;
+  font-size: 22px;
+  width: 100%;
+  word-spacing: 2px;
+}
+
 @media screen and (min-width: 415px) {
   .map-form {
     width: 100%;
