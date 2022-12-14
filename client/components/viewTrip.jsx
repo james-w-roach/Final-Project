@@ -48,10 +48,10 @@ export default class ViewTrip extends React.Component {
           }
         });
     } else {
-      if (localStorage.getItem('Guest Trip')) {
-        this.setState({ itinerary: JSON.parse(localStorage.getItem('Guest Trip')) });
-      } else if (this.props.guestTrip) {
+      if (this.props.guestTrip) {
         this.setState({ itinerary: this.props.guestTrip });
+      } else if (localStorage.getItem('Guest Trip')) {
+        this.setState({ itinerary: JSON.parse(localStorage.getItem('Guest Trip')) });
       }
     }
 

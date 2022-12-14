@@ -25,7 +25,7 @@ export default class ItineraryList extends React.Component {
           if (itineraries.length === 0) {
             this.setState({ itineraries: 'No trips added yet' });
           } else {
-            this.setState({ itineraries });
+            this.setState({ itineraries }, () => console.log(this.state.itineraries));
           }
         });
     } else {

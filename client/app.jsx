@@ -86,7 +86,29 @@ export default class App extends React.Component {
   onSignIn(result) {
     localStorage.setItem('LoggedIn', true);
     localStorage.setItem('UserID', result.user.userId);
-    this.setState({ loggedIn: true, userId: result.user.userId });
+    if (this.state.guestTrip) {
+      const { guestTrip } = this.state;
+      const body = {
+        trip: guestTrip,
+        userId: result.user.userId
+      };
+      const req = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify(body)
+      };
+      fetch('/api/travelPlanner/itineraries', req)
+        .then(res => {
+          res.json();
+          window.location.hash = '#itineraryList';
+        });
+
+      localStorage.removeItem('Guest Trip');
+    }
+    this.setState({ loggedIn: true, userId: result.user.userId, guestTrip: null });
     window.location.hash = '#create';
   }
 
@@ -104,7 +126,8 @@ export default class App extends React.Component {
   }
 
   addGuestTrip = trip => {
-    this.setState({ guestTrip: trip}, () => console.log(this.state.guestTrip));
+    this.setState({ guestTrip: trip});
+    localStorage.setItem('Guest Trip', JSON.stringify(trip));
     window.location.hash = '#itinerary'
   }
 
