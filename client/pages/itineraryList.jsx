@@ -34,7 +34,12 @@ export default class ItineraryList extends React.Component {
         guestTrip = JSON.parse(localStorage.getItem('Guest Trip'));
       }
       if (guestTrip) {
-        this.setState({ itineraries: [guestTrip] });
+        const loginNotice = {
+          tripName: 'Sign in to create more than one trip.',
+          locations: 'Your guest trip will be saved.',
+          tripId: 'loginNotice'
+        };
+        this.setState({ itineraries: [guestTrip, loginNotice] });
       } else {
         this.setState({ itineraries: null });
       }
@@ -69,13 +74,13 @@ export default class ItineraryList extends React.Component {
       fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
         .then(res => res.json());
     } else {
+      this.setState({ itineraries: null });
       this.props.updateGuestTrip(null);
     }
   }
 
   render() {
     let list;
-    let listIcon = <i className="fas fa-arrow-right trip-list-arrow"></i>;
     if (this.state.itineraries && this.state.itineraries.length === 0) {
       list = null;
     } else if (this.state.itineraries === null) {
@@ -87,21 +92,26 @@ export default class ItineraryList extends React.Component {
       </div>;
     } else {
       list = this.state.itineraries.map(itinerary => {
-        if (this.state.isEditing) {
-          listIcon =
-            <button className="delete button delete-itinerary" onClick={() => this.setState({ isDeleting: true, id: itinerary.tripId })}>
+        const listIcon = this.state.isEditing && itinerary.tripId !== 'loginNotice'
+          ? <button className="delete button delete-itinerary" onClick={() => this.setState({ isDeleting: true, id: itinerary.tripId })}>
               <i className="fas fa-trash"></i>
-            </button>;
-        }
+            </button>
+          : <i className="fas fa-arrow-right trip-list-arrow"></i>;
+        const locations = itinerary.tripId === 'loginNotice'
+          ? itinerary.locations
+          : `${itinerary.locations.length} locations`
+        const href = itinerary.tripId === 'loginNotice'
+          ? '#login'
+          : `#itinerary/${itinerary.tripId}`
         return (
           <li className="trip-list-item dynamic" key={itinerary.tripId}>
             {listIcon}
-            <a className="list-item" href={`#itinerary/${itinerary.tripId}`} >
+            <a className="list-item" href={href} >
               <div>
                 {itinerary.tripName}
               </div>
               <div className="locations">
-                {itinerary.locations.length} locations
+                {locations}
               </div>
             </a>
             <div className={this.setDeleteClass(itinerary.tripId)} id={itinerary.tripName}>
