@@ -23,29 +23,38 @@ export default class ViewTrip extends React.Component {
     } else {
       userId = this.props.userId;
     }
-    fetch(`/api/travelPlanner/itineraries/users/${userId}`)
-      .then(res => res.json())
-      .then(itineraries => {
-        if (!this.props.trip) {
-          let max = itineraries[0].tripId;
-          let newestTrip = itineraries[0];
-          for (let i = 1; i < itineraries.length; i++) {
-            if (itineraries[i].tripId > max) {
-              max = itineraries[i].tripId;
-              newestTrip = itineraries[i];
+    if (userId) {
+      fetch(`/api/travelPlanner/itineraries/users/${userId}`)
+        .then(res => res.json())
+        .then(itineraries => {
+          if (!this.props.trip) {
+            let max = itineraries[0].tripId;
+            let newestTrip = itineraries[0];
+            for (let i = 1; i < itineraries.length; i++) {
+              if (itineraries[i].tripId > max) {
+                max = itineraries[i].tripId;
+                newestTrip = itineraries[i];
+              }
+            }
+            this.setState({ itinerary: newestTrip, max });
+          } else {
+            for (let i = 0; i < itineraries.length; i++) {
+              if (itineraries[i].tripId === this.props.trip) {
+                this.setState({
+                  itinerary: itineraries[i]
+                });
+              }
             }
           }
-          this.setState({ itinerary: newestTrip, max });
-        } else {
-          for (let i = 0; i < itineraries.length; i++) {
-            if (itineraries[i].tripId === this.props.trip) {
-              this.setState({
-                itinerary: itineraries[i]
-              });
-            }
-          }
-        }
-      });
+        });
+    } else {
+      if (this.props.guestTrip) {
+        this.setState({ itinerary: this.props.guestTrip });
+      } else if (localStorage.getItem('Guest Trip')) {
+        this.setState({ itinerary: JSON.parse(localStorage.getItem('Guest Trip')) });
+      }
+    }
+
   }
 
   setDeleteClass(name) {
@@ -66,19 +75,23 @@ export default class ViewTrip extends React.Component {
     this.setState({
       itinerary
     });
-    let tripId = this.props.trip;
-    if (!this.props.trip) {
-      tripId = this.state.max;
+    if (this.props.userId) {
+      let tripId = this.props.trip;
+      if (!this.props.trip) {
+        tripId = this.state.max;
+      }
+      const req = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(itinerary.locations)
+      };
+      fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
+        .then(res => res.json());
+    } else {
+      this.props.updateGuestTrip(itinerary);
     }
-    const req = {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(itinerary.locations)
-    };
-    fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
-      .then(res => res.json());
   }
 
   render() {

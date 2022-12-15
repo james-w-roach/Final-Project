@@ -6,7 +6,7 @@ export default class Itinerary extends React.Component {
     return (
       <>
         <div className="page-container">
-          <ViewTrip toggleView={this.props.toggleView} trip={this.props.trip} route={this.props.route} userId={this.props.userId} />
+          <ViewTrip toggleView={this.props.toggleView} trip={this.props.trip} updateGuestTrip={this.props.updateGuestTrip} route={this.props.route} userId={this.props.userId} />
         </div>
       </>
     );

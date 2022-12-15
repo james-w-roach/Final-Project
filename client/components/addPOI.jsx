@@ -153,7 +153,11 @@ export default class AddPOI extends React.Component {
           <ul className="results">{results}</ul>
           <button className={saveButtonClass}
             onClick={() => {
-              this.props.sendPutRequest();
+              if (this.props.userId) {
+                this.props.sendPutRequest();
+              } else {
+                this.props.addGuestPOI();
+              }
             }}>Save</button>
         </div>
       </>

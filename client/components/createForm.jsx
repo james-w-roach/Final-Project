@@ -8,31 +8,36 @@ export default class CreateForm extends React.Component {
   }
 
   handleSubmit(trip) {
-    const userId = this.props.userId;
-    const body = {
-      trip,
-      userId
-    };
-    const req = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify(body)
-    };
-    fetch('/api/travelPlanner/itineraries', req)
-      .then(res => {
-        res.json();
-        window.location.hash = '#itinerary';
-      });
+    if (this.props.userId) {
+      const userId = this.props.userId;
+      const body = {
+        trip,
+        userId
+      };
+      const req = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify(body)
+      };
+      fetch('/api/travelPlanner/itineraries', req)
+        .then(res => {
+          res.json();
+          window.location.hash = '#itinerary';
+        });
+    } else {
+      trip.tripId = 1;
+      this.props.addGuestTrip(trip);
+    }
   }
 
   render() {
     return (
       <div className="main">
         <Mapbox
-          onSubmit={this.handleSubmit}
+          onSubmit={this.handleSubmit} userId={this.props.userId} guestTrip={this.props.guestTrip}
         />
       </div>
     );
