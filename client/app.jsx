@@ -152,7 +152,7 @@ export default class App extends React.Component {
     } if (route === '#create') {
       return <Create addGuestTrip={this.addGuestTrip} userId={this.state.userId} />;
     } if (route === '#itinerary') {
-      return <Itinerary route={false} toggleView={this.toggleView} userId={this.state.userId} guestTrip={this.state.guestTrip} />;
+      return <Itinerary updateGuestTrip={this.updateGuestTrip} route={false} toggleView={this.toggleView} userId={this.state.userId} guestTrip={this.state.guestTrip} />;
     } if (route.startsWith('#itinerary/')) {
       const trip = parseInt(route.split('/')[1], 10);
       return <Itinerary updateGuestTrip={this.updateGuestTrip} route={true} trip={trip} toggleView={this.toggleView} userId={this.state.userId} />;
