@@ -150,7 +150,7 @@ export default class App extends React.Component {
     if (route === '') {
       return <Home loggedIn={this.state.loggedIn} />;
     } if (route === '#create') {
-      return <Create addGuestTrip={this.addGuestTrip} userId={this.state.userId} />;
+      return <Create addGuestTrip={this.addGuestTrip} guestTrip={this.state.guestTrip} userId={this.state.userId} />;
     } if (route === '#itinerary') {
       return <Itinerary updateGuestTrip={this.updateGuestTrip} route={false} toggleView={this.toggleView} userId={this.state.userId} guestTrip={this.state.guestTrip} />;
     } if (route.startsWith('#itinerary/')) {

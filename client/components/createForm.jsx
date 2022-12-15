@@ -37,7 +37,7 @@ export default class CreateForm extends React.Component {
     return (
       <div className="main">
         <Mapbox
-          onSubmit={this.handleSubmit}
+          onSubmit={this.handleSubmit} userId={this.props.userId} guestTrip={this.props.guestTrip}
         />
       </div>
     );

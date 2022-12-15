@@ -44,6 +44,12 @@ class Mapbox extends React.Component {
       });
     });
 
+    map.on('load', () => {
+      if (!this.props.userId && this.props.guestTrip) {
+        window.alert(`Your current guest itinerary, ${this.props.guestTrip.tripName}, will be deleted if you add another itinerary. Please create an account to save more than one trip.`)
+      }
+    });
+
     map.addControl(
       new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
@@ -175,6 +181,11 @@ class Mapbox extends React.Component {
       finishClass = 'finish hidden';
       addClass = 'add button added';
     }
+    const deletionNotice = !this.props.userId && this.props.guestTrip
+      ? <div className='deletion-notice'>
+        <p>{`${this.props.guestTrip.tripName} will be deleted if you add another itinerary. Please create an account to save more than one trip.`}</p>
+      </div>
+      : null;
     return (
       <>
         <div className="map-box">
@@ -182,6 +193,7 @@ class Mapbox extends React.Component {
           <button onClick={this.handleClick} className={addClass}>{this.getButtonText()}</button>
         </div>
         <div className="map-form">
+          {deletionNotice}
           <form onSubmit={this.handleLift} autoComplete="off">
             <input className="name" required="required" type="text" name="trip-name" placeholder="Itinerary Name" onChange={this.handleChange} />
             <input className={finishClass} type="submit" value="Finish Itinerary" />

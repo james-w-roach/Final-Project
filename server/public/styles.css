@@ -652,6 +652,10 @@ a:visited {
   word-spacing: 2px;
 }
 
+.deletion-notice {
+  display: none;
+}
+
 @media screen and (min-width: 415px) {
   .map-form {
     width: 100%;
@@ -692,6 +696,18 @@ a:visited {
     position: relative;
     width: 100%;
     height: 90%;
+  }
+
+  .deletion-notice {
+    background-color: rgb(232, 14, 14);
+    color: white;
+    font-size: 15px;
+    border-radius: 0.4rem;
+    padding: 7px 10px;
+    box-shadow: 0 1px 3px darkred;
+    margin: 15px 0 0;
+    text-align: center;
+    display: block;
   }
 
   .add,
