@@ -62,7 +62,7 @@ export default class ItineraryList extends React.Component {
       }
     }
     if (this.state.itineraries.length === 0) {
-      this.setState({ itineraries: 'No trips added yet' });
+      this.setState({ itineraries: null });
     }
     if (this.props.userId) {
       const req = {
@@ -84,12 +84,19 @@ export default class ItineraryList extends React.Component {
     if (this.state.itineraries && this.state.itineraries.length === 0) {
       list = null;
     } else if (this.state.itineraries === null) {
-      list = <div className="no-trips">
-        <h2>Nothing to see here yet. <br />Click below to get started.</h2>
-        <a className='create button no-trips-create' href='#create'>Create A Guest Itinerary</a>
-        <h2>OR</h2>
-        <a className='create button no-trips-create' href='#login'>Sign In To Create More</a>
-      </div>;
+      if (!this.props.userId) {
+        list = <div className="no-trips">
+          <h2>Nothing to see here yet. <br />Click below to get started.</h2>
+          <a className='create button no-trips-create' href='#create'>Create A Guest Itinerary</a>
+          <h2>OR</h2>
+          <a className='create button no-trips-create' href='#login'>Sign In To Create More</a>
+        </div>;
+      } else {
+        list = <div className="no-trips">
+          <h2>Nothing to see here yet. <br />Click below to add a trip!</h2>
+          <a className='create button no-trips-create' href='#create'>Create An Itinerary</a>
+        </div>;
+      }
     } else {
       list = this.state.itineraries.map(itinerary => {
         const listIcon = this.state.isEditing && itinerary.tripId !== 'loginNotice'
