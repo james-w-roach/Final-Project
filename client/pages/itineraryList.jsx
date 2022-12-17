@@ -131,6 +131,7 @@ export default class ItineraryList extends React.Component {
       </button>;
     }
     let noTripsModule = null;
+    let tripListModule = null;
     if (this.state.itineraries === null) {
       if (!this.props.userId) {
         noTripsModule = <div className="no-trips">
@@ -138,13 +139,19 @@ export default class ItineraryList extends React.Component {
           <a className='create button no-trips-create' href='#create'>Create A Guest Itinerary</a>
           <h2>OR</h2>
           <a className='create button no-trips-create' href='#login'>Sign In To Create More</a>
-        </div>
+        </div>;
       } else {
         noTripsModule = <div className="no-trips">
           <h2>Nothing to see here yet. <br />Click below to add a trip!</h2>
           <a className='create button no-trips-create' href='#create'>Create An Itinerary</a>
         </div>;
       }
+    } else {
+      tripListModule = <>
+        <ul className="trip-list">{list}</ul>
+        <div className='itinerary-map-container'>
+        </div>
+      </>
     }
     return (
       <>
@@ -156,10 +163,7 @@ export default class ItineraryList extends React.Component {
             </div>
             <div className="trip-list-container">
               {noTripsModule}
-              <ul className="trip-list">{list}</ul>
-              <div className='itinerary-map-container'>
-
-              </div>
+              {tripListModule}
             </div>
           </div>
         </div>
