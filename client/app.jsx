@@ -103,13 +103,13 @@ export default class App extends React.Component {
       fetch('/api/travelPlanner/itineraries', req)
         .then(res => {
           res.json();
-          window.location.hash = '#itineraryList';
+          window.location.hash = '#itineraries';
         });
 
       localStorage.removeItem('Guest Trip');
     }
     this.setState({ loggedIn: true, userId: result.user.userId, guestTrip: null });
-    window.location.hash = '#create';
+    window.location.hash = '#itineraries';
   }
 
   onSignOut() {
@@ -158,7 +158,7 @@ export default class App extends React.Component {
       return <Itinerary updateGuestTrip={this.updateGuestTrip} route={true} trip={trip} toggleView={this.toggleView} userId={this.state.userId} />;
     } else if (route === '#location') {
       return <LocationPage updateGuestPOI={this.updateGuestPOI} loggedIn={this.state.loggedIn} toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
-    } else if (route === '#itineraryList') {
+    } else if (route === '#itineraries') {
       return <ItineraryList updateGuestTrip={this.updateGuestTrip} guestTrip={this.state.guestTrip} userId={this.state.userId} />;
     } else if (route === '#login' || route === '#sign-up') {
       return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
