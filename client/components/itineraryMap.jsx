@@ -32,8 +32,14 @@ export default class ItineraryMap extends React.Component {
         center: [lng, lat],
         zoom: zoom
       });
+      const marker = new mapboxgl.Marker()
+        .setLngLat([lng, lat])
+        .addTo(map);
     } else {
       const lngLats = this.props.activeItinerary.locations.map(location => {
+        const marker = new mapboxgl.Marker()
+          .setLngLat([location.lng, location.lat])
+          .addTo(map);
         return { lng: location.lng, lat: location.lat };
       });
 
@@ -57,12 +63,18 @@ export default class ItineraryMap extends React.Component {
         }
       }
 
-      const bounds = [[lngMin - 1, latMin - 1], [lngMax + 1, latMax + 1]];
+      const bounds = [[lngMin - 2, latMin - 2], [lngMax + 2, latMax + 2]];
 
       const map = new mapboxgl.Map({
         container: this.mapContainer.current,
         style: 'mapbox://styles/mapbox/streets-v11',
         bounds
+      });
+
+      const markers = this.props.activeItinerary.locations.map(location => {
+        const marker = new mapboxgl.Marker()
+          .setLngLat([location.lng, location.lat])
+          .addTo(map);
       });
     }
 
