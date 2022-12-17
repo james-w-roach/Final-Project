@@ -630,7 +630,6 @@ a:visited {
 }
 
 .no-trips {
-  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -638,9 +637,9 @@ a:visited {
   text-align: center;
   width: 350px;
   left: calc(50% - 175px);
-  top: 5vh;
   line-height: 3rem;
   color: #0e58a8;
+  margin: 20px auto;
 }
 
 .no-trips-create {
@@ -739,8 +738,12 @@ a:visited {
     align-items: baseline;
   }
 
-  .trip-list {
+  .trip-list-container {
     width: 100%;
+  }
+
+  .trip-list {
+    width: 33%;
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -755,10 +758,6 @@ a:visited {
   .trip-title {
     display: flex;
     align-items: center;
-    width: 100%;
-  }
-
-  .itinerary-list {
     width: 100%;
   }
 

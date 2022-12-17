@@ -81,22 +81,8 @@ export default class ItineraryList extends React.Component {
 
   render() {
     let list;
-    if (this.state.itineraries && this.state.itineraries.length === 0) {
+    if ((this.state.itineraries && this.state.itineraries.length === 0) || this.state.itineraries === null) {
       list = null;
-    } else if (this.state.itineraries === null) {
-      if (!this.props.userId) {
-        list = <div className="no-trips">
-          <h2>Nothing to see here yet. <br />Click below to get started.</h2>
-          <a className='create button no-trips-create' href='#create'>Create A Guest Itinerary</a>
-          <h2>OR</h2>
-          <a className='create button no-trips-create' href='#login'>Sign In To Create More</a>
-        </div>;
-      } else {
-        list = <div className="no-trips">
-          <h2>Nothing to see here yet. <br />Click below to add a trip!</h2>
-          <a className='create button no-trips-create' href='#create'>Create An Itinerary</a>
-        </div>;
-      }
     } else {
       list = this.state.itineraries.map(itinerary => {
         const listIcon = this.state.isEditing && itinerary.tripId !== 'loginNotice'
@@ -144,15 +130,32 @@ export default class ItineraryList extends React.Component {
         <i className="fas fa-times x-icon"></i>
       </button>;
     }
+    let noTripsModule = null;
+    if (this.state.itineraries === null) {
+      if (!this.props.userId) {
+        noTripsModule = <div className="no-trips">
+          <h2>Nothing to see here yet. <br />Click below to get started.</h2>
+          <a className='create button no-trips-create' href='#create'>Create A Guest Itinerary</a>
+          <h2>OR</h2>
+          <a className='create button no-trips-create' href='#login'>Sign In To Create More</a>
+        </div>
+      } else {
+        noTripsModule = <div className="no-trips">
+          <h2>Nothing to see here yet. <br />Click below to add a trip!</h2>
+          <a className='create button no-trips-create' href='#create'>Create An Itinerary</a>
+        </div>;
+      }
+    }
     return (
       <>
         <div className="page-container">
           <div className="main trip">
-            <div className="itinerary-list">
+            <div className="trip-list-container">
               <div className="name trip-title">
                 <h2 style={{ fontSize: '2.5rem' }}>Itineraries</h2>
                 {editIcon}
               </div>
+              {noTripsModule}
               <ul className="trip-list">{list}</ul>
             </div>
           </div>
