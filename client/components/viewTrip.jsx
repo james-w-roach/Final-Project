@@ -103,7 +103,7 @@ export default class ViewTrip extends React.Component {
     } else {
       backClass = 'hidden';
     }
-    let listIcon = <i className="fas fa-arrow-right trip-list-arrow"></i>;
+    let listIcon = null;
     const locationsList = itinerary.locations.map(location => {
       if (this.state.isEditing) {
         listIcon =

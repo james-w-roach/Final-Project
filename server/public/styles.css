@@ -192,7 +192,7 @@ ul {
   color: #0e58a8;
   background-color: white;
   border: none;
-  border-radius: 0.4rem;
+  border-radius: 0.5rem;
   list-style-type: none;
   margin-bottom: 10px;
   position: relative;
@@ -206,7 +206,7 @@ ul {
 
 .trip-list-item,
 .search {
-  box-shadow: 0 1px 3px gray;
+  box-shadow: 0 1px 3px rgb(200, 200, 200);
 }
 
 .location-text {
@@ -368,7 +368,7 @@ ul {
   right: 0;
   background-color: white;
   padding: 5px 10px 0;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
 }
@@ -380,6 +380,7 @@ ul {
 .delete-itinerary {
   right: 10px;
   top: 13px;
+  box-shadow: 0 1px 2px #022042
 }
 
 .delete-poi,
@@ -918,7 +919,6 @@ a:visited {
 
 @media screen and (min-width: 640px) {
   .trip-list-item {
-    width: 49%;
     font-size: 1.2rem;
   }
 

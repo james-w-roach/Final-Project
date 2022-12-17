@@ -89,7 +89,7 @@ export default class ItineraryList extends React.Component {
           ? <button className="delete button delete-itinerary" onClick={() => this.setState({ isDeleting: true, id: itinerary.tripId })}>
               <i className="fas fa-trash"></i>
             </button>
-          : <i className="fas fa-arrow-right trip-list-arrow"></i>;
+          : null;
         const locations = itinerary.tripId === 'loginNotice'
           ? itinerary.locations
           : `${itinerary.locations.length} locations`
