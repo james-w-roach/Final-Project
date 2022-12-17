@@ -760,7 +760,14 @@ a:visited {
     margin-bottom: 15px;
   }
 
+  .active-trip {
+    background-color: #0e58a8;
+    color: white;
+    border-radius: 0.5rem;
+  }
+
   .itinerary-map-container {
+    position: relative;
     background-color: white;
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px lightgray;

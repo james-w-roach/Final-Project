@@ -1,10 +1,12 @@
 import React from 'react';
+import ItineraryMap from '../components/itineraryMap';
 
 export default class ItineraryList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       itineraries: [],
+      activeItinerary: null,
       isDeleting: null,
       isEditing: null,
       id: null
@@ -25,7 +27,7 @@ export default class ItineraryList extends React.Component {
           if (itineraries.length === 0) {
             this.setState({ itineraries: null });
           } else {
-            this.setState({ itineraries });
+            this.setState({ itineraries, activeItinerary: itineraries[0] });
           }
         });
     } else {
@@ -39,7 +41,7 @@ export default class ItineraryList extends React.Component {
           locations: 'Your guest trip will be saved.',
           tripId: 'loginNotice'
         };
-        this.setState({ itineraries: [guestTrip, loginNotice] });
+        this.setState({ itineraries: [guestTrip, loginNotice], activeItinerary: guestTrip });
       } else {
         this.setState({ itineraries: null });
       }
@@ -96,10 +98,13 @@ export default class ItineraryList extends React.Component {
         const href = itinerary.tripId === 'loginNotice'
           ? '#login'
           : `#itinerary/${itinerary.tripId}`
+        const active = itinerary.tripId === this.state.activeItinerary.tripId
+          ? ' active-trip'
+          : '';
         return (
-          <li className="trip-list-item dynamic" key={itinerary.tripId}>
+          <li className='trip-list-item dynamic' key={itinerary.tripId} onClick={() => this.setState({ activeItinerary: itinerary })}>
             {listIcon}
-            <a className="list-item" href={href} >
+            <a className={`list-item${active}`} href={href} >
               <div>
                 {itinerary.tripName}
               </div>
@@ -150,9 +155,11 @@ export default class ItineraryList extends React.Component {
       tripListModule = <>
         <ul className="trip-list">{list}</ul>
         <div className='itinerary-map-container'>
+          <ItineraryMap activeItinerary={this.state.activeItinerary} />
         </div>
       </>
     }
+    if (!this.state.activeItinerary) return null;
     return (
       <>
         <div className="page-container">
