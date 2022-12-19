@@ -151,7 +151,7 @@ export default class ItineraryList extends React.Component {
           <a className='create button no-trips-create' href='#create'>Create An Itinerary</a>
         </div>;
       }
-    } else {
+    } else if (this.state.activeItinerary) {
       tripListModule = <>
         <ul className="trip-list">{list}</ul>
         <div className='itinerary-map-container'>
@@ -159,7 +159,6 @@ export default class ItineraryList extends React.Component {
         </div>
       </>
     }
-    if (!this.state.activeItinerary) return null;
     return (
       <>
         <div className="page-container">
