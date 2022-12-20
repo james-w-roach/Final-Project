@@ -112,9 +112,6 @@ export default class ItineraryMap extends React.Component {
         .addTo(this.map.current);
     } else {
       const lngLats = this.props.activeItinerary.locations.map(location => {
-        const marker = new mapboxgl.Marker({ color: '#0e58a8' })
-          .setLngLat([location.lng, location.lat])
-          .addTo(this.map.current);
         return { lng: location.lng, lat: location.lat };
       });
 
@@ -144,6 +141,12 @@ export default class ItineraryMap extends React.Component {
         container: this.mapContainer.current,
         style: 'mapbox://styles/mapbox/streets-v11',
         bounds
+      });
+
+      this.props.activeItinerary.locations.map(location => {
+        const marker = new mapboxgl.Marker({ color: '#0e58a8' })
+          .setLngLat([location.lng, location.lat])
+          .addTo(this.map.current);
       });
 
     }

@@ -163,7 +163,7 @@ export default class ItineraryList extends React.Component {
         <i className="fas fa-pen"></i>
       </button>;
     if (this.state.isEditing) {
-      editIcon = <button className="edit-button" onClick={() => this.setState({ isEditing: false })}>
+      editIcon = <button className="edit-button" onClick={() => this.setState({ isEditing: false, isDeleting: false })}>
         <i className="fas fa-times x-icon"></i>
       </button>;
     }
