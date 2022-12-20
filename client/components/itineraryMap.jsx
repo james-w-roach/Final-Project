@@ -26,8 +26,8 @@ export default class ItineraryMap extends React.Component {
 
     this.setState({ activeItinerary: this.props.activeItinerary });
 
-    for (let i = 0; i < this.map.current._markers.length; i++) {
-      this.map.current._markers[i].remove();
+    while (this.map.current._markers.length) {
+      this.map.current._markers[0].remove();
     }
 
     if (this.props.activeItinerary.locations.length === 1) {
@@ -40,20 +40,12 @@ export default class ItineraryMap extends React.Component {
 
       const { zoom } = this.state;
 
-      for (let i = 0; i < this.map.current._markers.length; i++) {
-        this.map.current._markers[i].remove();
-      }
-
       const marker = new mapboxgl.Marker({ color: '#0e58a8' })
         .setLngLat([lng, lat])
         .addTo(this.map.current);
 
       this.map.current.flyTo({ center: [lng, lat], zoom, speed: 1 });
     } else {
-
-      for (let i = 0; i < this.map.current._markers.length; i++) {
-        this.map.current._markers[i].remove();
-      }
 
       const lngLats = this.props.activeItinerary.locations.map(location => {
         const marker = new mapboxgl.Marker({ color: '#0e58a8' })
