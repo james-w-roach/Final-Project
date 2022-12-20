@@ -10,7 +10,7 @@ export default class ItineraryList extends React.Component {
       isDeleting: null,
       isEditing: null,
       id: null,
-      matches: window.matchMedia('(min-width: 1000px)').matches
+      matches: window.matchMedia('(min-width: 700px)').matches
     };
     this.deleteItinerary = this.deleteItinerary.bind(this);
     this.setDeleteClass = this.setDeleteClass.bind(this);
@@ -48,7 +48,7 @@ export default class ItineraryList extends React.Component {
       }
     }
 
-    window.matchMedia('(min-width: 1000px)').addEventListener('change', e => {
+    window.matchMedia('(min-width: 700px)').addEventListener('change', e => {
       this.setState({ matches: e.matches })
     });
   }

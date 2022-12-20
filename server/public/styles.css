@@ -124,7 +124,7 @@ h4 {
   border-radius: 0.4rem;
   top: calc(50% - 15px);
   border: none;
-  box-shadow: 0 1px 3px gray;
+  box-shadow: 0 1px 3px #022042;
   transition: background-color 0.3s;
   display: grid;
 }
@@ -720,26 +720,6 @@ a:visited {
     padding: 1rem 0;
   }
 
-  .trip-list-header {
-    position: relative;
-    padding: 0 0 10px;
-    margin-bottom: 10px;
-    text-align: left;
-    background-color: transparent;
-    top: unset;
-    left: unset;
-    width: 100%;
-  }
-
-  .trip-list-header>h2 {
-    font-size: 2rem;
-    color: #0e58a8;
-  }
-
-  .edit-button {
-    top: 0;
-  }
-
   .drawer-button {
     position: relative;
     right: unset;
@@ -805,46 +785,6 @@ a:visited {
     flex-direction: column;
     justify-content: inherit;
     align-items: baseline;
-  }
-
-  .trip-list-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    padding: 20px 0 0;
-  }
-
-  .trip-list {
-    overflow: hidden;
-    overflow-y: scroll;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    left: 0;
-    top: 0;
-    padding: 0 3px;
-  }
-
-  .trip-list-item {
-    width: 100%;
-    margin-bottom: 15px;
-  }
-
-  .trip-list-module {
-    width: 40%;
-    height: calc(100vh - 100px);
-  }
-
-  .itinerary-map-container {
-    position: relative;
-    background-color: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px lightgray;
-    width: 60%;
-    height: 100%;
-    margin-left: 15px;
-    left: unset;
-    top: unset;
   }
 
   .trip-title {
@@ -930,15 +870,6 @@ a:visited {
     cursor: initial;
   }
 
-  .dynamic:hover {
-    background-color: #0e58a8;
-  }
-
-  .dynamic:hover a,
-  .dynamic:hover i {
-    color: white;
-  }
-
   .back-arrow:hover {
     transform: scale(1.15);
   }
@@ -989,14 +920,6 @@ a:visited {
 
   .trip-list-item {
     font-size: 1.1rem;
-  }
-
-  .trip-list-module {
-    width: 33%;
-  }
-
-  .itinerary-map-container {
-    width: 67%;
   }
 
 }
@@ -1145,12 +1068,73 @@ a:visited {
     display: none;
   }
 
+  .edit-button {
+    top: 0;
+  }
+
+  .trip-list-header {
+    position: relative;
+    padding: 0 0 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    background-color: transparent;
+    top: unset;
+    left: unset;
+    width: 100%;
+  }
+
+  .trip-list-header>h2 {
+    font-size: 2rem;
+    color: #0e58a8;
+  }
+
+  .trip-list-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 20px 0 0;
+  }
+
+  .trip-list {
+    overflow: hidden;
+    overflow-y: scroll;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    top: 0;
+    padding: 0 3px;
+  }
+
+  .trip-list-item {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
   .trip-list-module {
     width: 25%;
+    height: calc(100vh - 100px);
   }
 
   .itinerary-map-container {
+    position: relative;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px lightgray;
     width: 75%;
+    height: 100%;
+    margin-left: 15px;
+    left: unset;
+    top: unset;
+  }
+
+  .dynamic:hover {
+    background-color: #0e58a8;
+  }
+
+  .dynamic:hover a,
+  .dynamic:hover i {
+    color: white;
   }
 }
 
