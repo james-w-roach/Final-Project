@@ -412,8 +412,7 @@ ul {
 .cancel {
   font-size: 1rem;
   margin: 5px 10px 0 0;
-  padding: 2px 8px;
-  border: 0.1rem solid #0e58a8;
+  padding: 4px 8px;
   transition: background-color 0.3s;
 }
 
