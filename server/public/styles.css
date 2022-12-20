@@ -181,9 +181,17 @@ ul {
   padding-left: 0;
 }
 
+.itinerary-map-container {
+  width: calc(100% - 10px);
+  position: absolute;
+  height: 250px;
+  top: 75px;
+  left: 5px;
+}
+
 .trip-list {
   position: absolute;
-  top: 80px;
+  top: 335px;
   left: 5px;
   width: calc(100% - 10px);
 }
@@ -486,6 +494,31 @@ a {
   transition: background-color 0.3s ease-in-out;
 }
 
+.active-trip {
+  background-color: #0e58a8;
+  color: white;
+  border-radius: 0.5rem;
+}
+
+.mobile-list-item-anchor {
+  position: absolute;
+  color: #0e58a8;
+  background-color: white;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 25%;
+  right: 10px;
+  padding: 10px;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px #022042;
+}
+
+.editing-position {
+  right: 50px;
+}
+
 .back {
   color: white;
 }
@@ -781,11 +814,6 @@ a:visited {
     padding: 20px 0 0;
   }
 
-  .trip-list-module {
-    width: 20%;
-    height: calc(100vh - 100px);
-  }
-
   .trip-list {
     overflow: hidden;
     overflow-y: scroll;
@@ -802,10 +830,9 @@ a:visited {
     margin-bottom: 15px;
   }
 
-  .active-trip {
-    background-color: #0e58a8;
-    color: white;
-    border-radius: 0.5rem;
+  .trip-list-module {
+    width: 40%;
+    height: calc(100vh - 100px);
   }
 
   .itinerary-map-container {
@@ -813,8 +840,11 @@ a:visited {
     background-color: white;
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px lightgray;
-    width: 80%;
+    width: 60%;
+    height: 100%;
     margin-left: 15px;
+    left: unset;
+    top: unset;
   }
 
   .trip-title {
@@ -960,6 +990,15 @@ a:visited {
   .trip-list-item {
     font-size: 1.1rem;
   }
+
+  .trip-list-module {
+    width: 33%;
+  }
+
+  .itinerary-map-container {
+    width: 67%;
+  }
+
 }
 
 @media screen and (min-width: 576px) {
@@ -1105,6 +1144,14 @@ a:visited {
   .navbar {
     display: none;
   }
+
+  .trip-list-module {
+    width: 25%;
+  }
+
+  .itinerary-map-container {
+    width: 75%;
+  }
 }
 
 @media screen and (min-width: 900px) {
@@ -1125,6 +1172,14 @@ a:visited {
 
   .auth-form {
     width: 40%;
+  }
+
+  .trip-list-module {
+    width: 20%;
+  }
+
+  .itinerary-map-container {
+    width: 80%;
   }
 }
 

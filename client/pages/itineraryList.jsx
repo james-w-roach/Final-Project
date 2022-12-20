@@ -9,7 +9,8 @@ export default class ItineraryList extends React.Component {
       activeItinerary: null,
       isDeleting: null,
       isEditing: null,
-      id: null
+      id: null,
+      matches: window.matchMedia('(min-width: 1000px)').matches
     };
     this.deleteItinerary = this.deleteItinerary.bind(this);
     this.setDeleteClass = this.setDeleteClass.bind(this);
@@ -46,6 +47,10 @@ export default class ItineraryList extends React.Component {
         this.setState({ itineraries: null });
       }
     }
+
+    window.matchMedia('(min-width: 1000px)').addEventListener('change', e => {
+      this.setState({ matches: e.matches })
+    });
   }
 
   setDeleteClass(tripId) {
@@ -101,15 +106,14 @@ export default class ItineraryList extends React.Component {
         const active = itinerary.tripId === this.state.activeItinerary.tripId
           ? ' active-trip'
           : '';
-        return (
-          <li className='trip-list-item dynamic' key={itinerary.tripId}
-            onMouseEnter={() => {
-              if (this.state.activeItinerary.tripId !== itinerary.tripId) {
-                this.setState({ activeItinerary: itinerary })
-              };
-            }}>
-            {listIcon}
-            <a className={`list-item${active}`} href={href} >
+        const anchorPosition = this.state.isEditing
+          ? ' editing-position'
+          : '';
+        const listItemAnchor = this.state.activeItinerary.tripId === itinerary.tripId
+          ? <a className={`mobile-list-item-anchor${anchorPosition}`} href={href}>View</a>
+          : null;
+        const listItem = this.state.matches
+          ? <a className={`list-item${active}`} href={href}>
               <div>
                 {itinerary.tripName}
               </div>
@@ -117,6 +121,29 @@ export default class ItineraryList extends React.Component {
                 {locations}
               </div>
             </a>
+          : <div className={`list-item${active}`}>
+              <div>
+                {itinerary.tripName}
+              </div>
+              <div className="locations">
+                {locations}
+              </div>
+              {listItemAnchor}
+            </div>;
+        return (
+          <li className='trip-list-item dynamic' key={itinerary.tripId}
+            onMouseEnter={() => {
+              if (this.state.activeItinerary.tripId !== itinerary.tripId && this.state.matches) {
+                this.setState({ activeItinerary: itinerary })
+              };
+            }}
+            onClick={() => {
+              if (this.state.activeItinerary.tripId !== itinerary.tripId && !this.state.matches) {
+                this.setState({ activeItinerary: itinerary })
+              };
+            }}>
+            {listIcon}
+            {listItem}
             <div className={this.setDeleteClass(itinerary.tripId)} id={itinerary.tripName}>
               Delete {itinerary.tripName}?
               <div>
