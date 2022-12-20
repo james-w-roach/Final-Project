@@ -683,13 +683,13 @@ a:visited {
   }
 
   .page-container {
-    width: 95%;
+    width: 97%;
     margin: auto;
   }
 
   .main {
     width: 100vw;
-    height: 550px;
+    height: calc(100vh - 80px);
     flex-direction: column-reverse;
   }
 
@@ -747,7 +747,11 @@ a:visited {
   }
 
   .trip-list {
-    width: 33%;
+    width: 20%;
+    height: calc(100vh - 160px);
+    padding: 0 3px;
+    overflow: hidden;
+    overflow-y: scroll;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -771,7 +775,7 @@ a:visited {
     background-color: white;
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px lightgray;
-    width: 67%;
+    width: 80%;
     margin-left: 15px;
   }
 
@@ -1082,9 +1086,6 @@ a:visited {
 }
 
 @media screen and (min-width: 1000px) {
-  .page-container {
-    width: 900px;
-  }
 
   .auth-form {
     width: 40%;
