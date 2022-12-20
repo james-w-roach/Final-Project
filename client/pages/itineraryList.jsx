@@ -102,7 +102,12 @@ export default class ItineraryList extends React.Component {
           ? ' active-trip'
           : '';
         return (
-          <li className='trip-list-item dynamic' key={itinerary.tripId} onClick={() => this.setState({ activeItinerary: itinerary })}>
+          <li className='trip-list-item dynamic' key={itinerary.tripId}
+            onMouseEnter={() => {
+              if (this.state.activeItinerary.tripId !== itinerary.tripId) {
+                this.setState({ activeItinerary: itinerary })
+              };
+            }}>
             {listIcon}
             <a className={`list-item${active}`} href={href} >
               <div>

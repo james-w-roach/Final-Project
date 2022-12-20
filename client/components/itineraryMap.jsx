@@ -11,17 +11,24 @@ export default class ItineraryMap extends React.Component {
     this.state = {
       lng: '',
       lat: '',
-      zoom: 10
+      zoom: 10,
+      activeItinerary: null
     };
     this.mapContainer = React.createRef();
+    this.map = React.createRef();
   }
 
   componentDidUpdate() {
-    document.querySelector('.mapboxgl-canary').remove();
-    document.querySelector('.mapboxgl-canvas-container').remove();
-    document.querySelector('.mapboxgl-control-container').remove();
 
-    const { zoom } = this.state;
+    if (!this.map.current) return;
+
+    if (this.props.activeItinerary.tripId === this.state.activeItinerary.tripId) return;
+
+    this.setState({ activeItinerary: this.props.activeItinerary });
+
+    for (let i = 0; i < this.map.current._markers.length; i++) {
+      this.map.current._markers[i].remove();
+    }
 
     if (this.props.activeItinerary.locations.length === 1) {
       const lng = this.props.activeItinerary
@@ -30,20 +37,28 @@ export default class ItineraryMap extends React.Component {
       const lat = this.props.activeItinerary
         ? this.props.activeItinerary.locations[0].lat
         : '';
-      const map = new mapboxgl.Map({
-        container: this.mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [lng, lat],
-        zoom: zoom
-      });
+
+      const { zoom } = this.state;
+
+      for (let i = 0; i < this.map.current._markers.length; i++) {
+        this.map.current._markers[i].remove();
+      }
+
       const marker = new mapboxgl.Marker()
         .setLngLat([lng, lat])
-        .addTo(map);
+        .addTo(this.map.current);
+
+      this.map.current.flyTo({ center: [lng, lat], zoom, speed: 1 });
     } else {
+
+      for (let i = 0; i < this.map.current._markers.length; i++) {
+        this.map.current._markers[i].remove();
+      }
+
       const lngLats = this.props.activeItinerary.locations.map(location => {
         const marker = new mapboxgl.Marker()
           .setLngLat([location.lng, location.lat])
-          .addTo(map);
+          .addTo(this.map.current);
         return { lng: location.lng, lat: location.lat };
       });
 
@@ -69,21 +84,20 @@ export default class ItineraryMap extends React.Component {
 
       const bounds = [[lngMin - 2, latMin - 2], [lngMax + 2, latMax + 2]];
 
-      const map = new mapboxgl.Map({
-        container: this.mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v11',
-        bounds
-      });
-
-      const markers = this.props.activeItinerary.locations.map(location => {
+      /*const markers = this.props.activeItinerary.locations.map(location => {
         const marker = new mapboxgl.Marker()
           .setLngLat([location.lng, location.lat])
-          .addTo(map);
-      });
+          .addTo(this.map.current);
+      });*/
+
+      this.map.current.fitBounds(bounds, { speed: 1 });
     }
   }
 
   componentDidMount() {
+
+    if (this.map.current) return;
+
     const { zoom } = this.state;
 
     if (this.props.activeItinerary.locations.length === 1) {
@@ -93,7 +107,7 @@ export default class ItineraryMap extends React.Component {
       const lat = this.props.activeItinerary
         ? this.props.activeItinerary.locations[0].lat
         : '';
-      const map = new mapboxgl.Map({
+      this.map.current = new mapboxgl.Map({
         container: this.mapContainer.current,
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [lng, lat],
@@ -101,12 +115,12 @@ export default class ItineraryMap extends React.Component {
       });
       const marker = new mapboxgl.Marker()
         .setLngLat([lng, lat])
-        .addTo(map);
+        .addTo(this.map.current);
     } else {
       const lngLats = this.props.activeItinerary.locations.map(location => {
         const marker = new mapboxgl.Marker()
           .setLngLat([location.lng, location.lat])
-          .addTo(map);
+          .addTo(this.map.current);
         return { lng: location.lng, lat: location.lat };
       });
 
@@ -132,7 +146,7 @@ export default class ItineraryMap extends React.Component {
 
       const bounds = [[lngMin - 2, latMin - 2], [lngMax + 2, latMax + 2]];
 
-      const map = new mapboxgl.Map({
+      this.map.current = new mapboxgl.Map({
         container: this.mapContainer.current,
         style: 'mapbox://styles/mapbox/streets-v11',
         bounds
@@ -141,9 +155,11 @@ export default class ItineraryMap extends React.Component {
       const markers = this.props.activeItinerary.locations.map(location => {
         const marker = new mapboxgl.Marker()
           .setLngLat([location.lng, location.lat])
-          .addTo(map);
+          .addTo(this.map.current);
       });
+
     }
+    this.setState({ activeItinerary: this.props.activeItinerary });
   }
 
   render() {
