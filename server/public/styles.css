@@ -398,9 +398,14 @@ ul {
 }
 
 .delete-itinerary {
+  height: 50%;
+  width: 40px;
   right: 10px;
-  top: calc(50% - 15px);
-  box-shadow: 0 1px 2px #022042
+  top: 25%;
+  box-shadow: 0 1px 2px #022042;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .delete-poi,
@@ -516,7 +521,7 @@ a {
 }
 
 .editing-position {
-  right: 50px;
+  right: 60px;
 }
 
 .back {
