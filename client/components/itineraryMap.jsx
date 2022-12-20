@@ -44,7 +44,7 @@ export default class ItineraryMap extends React.Component {
         this.map.current._markers[i].remove();
       }
 
-      const marker = new mapboxgl.Marker()
+      const marker = new mapboxgl.Marker({ color: '#0e58a8' })
         .setLngLat([lng, lat])
         .addTo(this.map.current);
 
@@ -56,7 +56,7 @@ export default class ItineraryMap extends React.Component {
       }
 
       const lngLats = this.props.activeItinerary.locations.map(location => {
-        const marker = new mapboxgl.Marker()
+        const marker = new mapboxgl.Marker({ color: '#0e58a8' })
           .setLngLat([location.lng, location.lat])
           .addTo(this.map.current);
         return { lng: location.lng, lat: location.lat };
@@ -84,12 +84,6 @@ export default class ItineraryMap extends React.Component {
 
       const bounds = [[lngMin - 2, latMin - 2], [lngMax + 2, latMax + 2]];
 
-      /*const markers = this.props.activeItinerary.locations.map(location => {
-        const marker = new mapboxgl.Marker()
-          .setLngLat([location.lng, location.lat])
-          .addTo(this.map.current);
-      });*/
-
       this.map.current.fitBounds(bounds, { speed: 1 });
     }
   }
@@ -113,12 +107,12 @@ export default class ItineraryMap extends React.Component {
         center: [lng, lat],
         zoom: zoom
       });
-      const marker = new mapboxgl.Marker()
+      const marker = new mapboxgl.Marker({ color: '#0e58a8' })
         .setLngLat([lng, lat])
         .addTo(this.map.current);
     } else {
       const lngLats = this.props.activeItinerary.locations.map(location => {
-        const marker = new mapboxgl.Marker()
+        const marker = new mapboxgl.Marker({ color: '#0e58a8' })
           .setLngLat([location.lng, location.lat])
           .addTo(this.map.current);
         return { lng: location.lng, lat: location.lat };
@@ -150,12 +144,6 @@ export default class ItineraryMap extends React.Component {
         container: this.mapContainer.current,
         style: 'mapbox://styles/mapbox/streets-v11',
         bounds
-      });
-
-      const markers = this.props.activeItinerary.locations.map(location => {
-        const marker = new mapboxgl.Marker()
-          .setLngLat([location.lng, location.lat])
-          .addTo(this.map.current);
       });
 
     }
