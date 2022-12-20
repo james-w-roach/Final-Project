@@ -145,6 +145,10 @@ export default class ItineraryMap extends React.Component {
     this.setState({ activeItinerary: this.props.activeItinerary });
   }
 
+  componentWillUnmount() {
+    this.map.current.remove();
+  }
+
   render() {
     return <div ref={this.mapContainer} className="location-map" style={{ height: '100%' }} />;
   }
