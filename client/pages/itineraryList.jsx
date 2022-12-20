@@ -158,7 +158,13 @@ export default class ItineraryList extends React.Component {
       }
     } else if (this.state.activeItinerary) {
       tripListModule = <>
-        <ul className="trip-list">{list}</ul>
+        <div className='trip-list-module'>
+          <div className='trip-list-header'>
+            <h2 style={{ fontSize: '1.5rem' }}>Itineraries</h2>
+            {editIcon}
+          </div>
+          <ul className="trip-list">{list}</ul>
+          </div>
         <div className='itinerary-map-container'>
           <ItineraryMap activeItinerary={this.state.activeItinerary} />
         </div>
@@ -168,10 +174,6 @@ export default class ItineraryList extends React.Component {
       <>
         <div className="page-container">
           <div className="main trip">
-            <div className="name trip-title">
-              <h2 style={{ fontSize: '2.5rem' }}>Itineraries</h2>
-              {editIcon}
-            </div>
             <div className="trip-list-container">
               {noTripsModule}
               {tripListModule}

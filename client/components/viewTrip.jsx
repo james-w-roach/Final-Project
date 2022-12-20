@@ -152,7 +152,7 @@ export default class ViewTrip extends React.Component {
         <div className="main trip">
           <div className="name trip-title">
             <a className={backClass} onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
-            <h2 style={{ fontSize: '2.5rem' }}>{tripName}</h2>
+            <h2 style={{ fontSize: '1.5rem' }}>{tripName}</h2>
             {editIcon}
           </div>
           <ul className="trip-list">{locationsList}</ul>
