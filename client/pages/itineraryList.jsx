@@ -63,13 +63,19 @@ export default class ItineraryList extends React.Component {
 
   deleteItinerary(tripId) {
     const { itineraries } = this.state;
+    let currentIndex;
     for (let i = 0; i < itineraries.length; i++) {
       if (itineraries[i].tripId === tripId) {
         itineraries.splice(i, 1);
+        currentIndex = i;
       }
     }
     if (this.state.itineraries.length === 0) {
-      this.setState({ itineraries: null });
+      this.setState({ itineraries: null, activeItinerary: null });
+    } else if (this.state.itineraries.length <= currentIndex) {
+      this.setState({ activeItinerary: this.state.itineraries[currentIndex - 1] });
+    } else {
+      this.setState({ activeItinerary: this.state.itineraries[currentIndex] });
     }
     if (this.props.userId) {
       const req = {
@@ -81,7 +87,7 @@ export default class ItineraryList extends React.Component {
       fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
         .then(res => res.json());
     } else {
-      this.setState({ itineraries: null });
+      this.setState({ itineraries: null, activeItinerary: null });
       this.props.updateGuestTrip(null);
     }
   }
@@ -133,12 +139,12 @@ export default class ItineraryList extends React.Component {
         return (
           <li className='trip-list-item dynamic' key={itinerary.tripId}
             onMouseEnter={() => {
-              if (this.state.activeItinerary.tripId !== itinerary.tripId && this.state.matches) {
+              if (this.state.activeItinerary.tripId !== itinerary.tripId && this.state.matches && itinerary.tripId !== 'loginNotice') {
                 this.setState({ activeItinerary: itinerary })
               };
             }}
             onClick={() => {
-              if (this.state.activeItinerary.tripId !== itinerary.tripId && !this.state.matches) {
+              if (this.state.activeItinerary.tripId !== itinerary.tripId && !this.state.matches && itinerary.tripId !== 'loginNotice') {
                 this.setState({ activeItinerary: itinerary })
               };
             }}>
