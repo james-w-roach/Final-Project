@@ -21,6 +21,7 @@ class Mapbox extends React.Component {
       showFinish: null
     };
     this.mapContainer = React.createRef();
+    this.map = React.createRef();
     this.handleClick = this.handleClick.bind(this);
     this.getButtonText = this.getButtonText.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -29,28 +30,28 @@ class Mapbox extends React.Component {
 
   componentDidMount() {
     const { lng, lat, zoom } = this.state;
-    const map = new mapboxgl.Map({
+    this.map.current = new mapboxgl.Map({
       container: this.mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [lng, lat],
       zoom: zoom
     });
 
-    map.on('move', () => {
+    this.map.current.on('move', () => {
       this.setState({
-        lng: map.getCenter().lng.toFixed(4),
-        lat: map.getCenter().lat.toFixed(4),
-        zoom: map.getZoom().toFixed(2)
+        lng: this.map.current.getCenter().lng.toFixed(4),
+        lat: this.map.current.getCenter().lat.toFixed(4),
+        zoom: this.map.current.getZoom().toFixed(2)
       });
     });
 
-    map.on('load', () => {
+    this.map.current.on('load', () => {
       if (!this.props.userId && this.props.guestTrip) {
         window.alert(`Your current guest itinerary, ${this.props.guestTrip.tripName}, will be deleted if you add another itinerary. Please create an account to save more than one trip.`)
       }
     });
 
-    map.addControl(
+    this.map.current.addControl(
       new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl
@@ -112,6 +113,10 @@ class Mapbox extends React.Component {
           }
         })
     );
+  }
+
+  componentWillUnmount() {
+    this.map.current.remove();
   }
 
   handleClick() {
