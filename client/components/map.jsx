@@ -54,7 +54,8 @@ class Mapbox extends React.Component {
     this.map.current.addControl(
       new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl
+        mapboxgl: mapboxgl,
+        flyTo: { speed: 1 }
       })
         .on('result', result => {
           document.activeElement.blur();
