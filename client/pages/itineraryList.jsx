@@ -103,9 +103,14 @@ export default class ItineraryList extends React.Component {
               <i className="fas fa-trash"></i>
             </button>
           : null;
-        const locations = itinerary.tripId === 'loginNotice'
-          ? itinerary.locations
-          : `${itinerary.locations.length} locations`
+        let locations;
+        if (itinerary.tripId === 'loginNotice') {
+          locations = itinerary.locations;
+        } else if (itinerary.locations.length > 1) {
+          locations = `${itinerary.locations.length} locations`;
+        } else {
+          locations = `${itinerary.locations.length} location`;
+        }
         const href = itinerary.tripId === 'loginNotice'
           ? '#login'
           : `#itinerary/${itinerary.tripId}`
