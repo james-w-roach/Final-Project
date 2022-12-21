@@ -103,7 +103,7 @@ export default class ViewTrip extends React.Component {
     } else {
       backClass = 'hidden';
     }
-    let listIcon = <i className="fas fa-arrow-right trip-list-arrow"></i>;
+    let listIcon = null;
     const locationsList = itinerary.locations.map(location => {
       if (this.state.isEditing) {
         listIcon =
@@ -143,7 +143,7 @@ export default class ViewTrip extends React.Component {
         <i className="fas fa-pen"></i>
       </button>;
     if (this.state.isEditing) {
-      editIcon = <button className="edit-button" onClick={() => this.setState({ isEditing: false })}>
+      editIcon = <button className="edit-button" onClick={() => this.setState({ isEditing: false, isDeleting: false })}>
         <i className="fas fa-times x-icon"></i>
       </button>;
     }
@@ -152,7 +152,7 @@ export default class ViewTrip extends React.Component {
         <div className="main trip">
           <div className="name trip-title">
             <a className={backClass} onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
-            <h2 style={{ fontSize: '2.5rem' }}>{tripName}</h2>
+            <h2 style={{ fontSize: '1.5rem' }}>{tripName}</h2>
             {editIcon}
           </div>
           <ul className="trip-list">{locationsList}</ul>

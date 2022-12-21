@@ -1,13 +1,16 @@
 import React from 'react';
+import ItineraryMap from '../components/itineraryMap';
 
 export default class ItineraryList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       itineraries: [],
+      activeItinerary: null,
       isDeleting: null,
       isEditing: null,
-      id: null
+      id: null,
+      matches: window.matchMedia('(min-width: 700px)').matches
     };
     this.deleteItinerary = this.deleteItinerary.bind(this);
     this.setDeleteClass = this.setDeleteClass.bind(this);
@@ -25,7 +28,7 @@ export default class ItineraryList extends React.Component {
           if (itineraries.length === 0) {
             this.setState({ itineraries: null });
           } else {
-            this.setState({ itineraries });
+            this.setState({ itineraries, activeItinerary: itineraries[0] });
           }
         });
     } else {
@@ -39,11 +42,15 @@ export default class ItineraryList extends React.Component {
           locations: 'Your guest trip will be saved.',
           tripId: 'loginNotice'
         };
-        this.setState({ itineraries: [guestTrip, loginNotice] });
+        this.setState({ itineraries: [guestTrip, loginNotice], activeItinerary: guestTrip });
       } else {
         this.setState({ itineraries: null });
       }
     }
+
+    window.matchMedia('(min-width: 700px)').addEventListener('change', e => {
+      this.setState({ matches: e.matches })
+    });
   }
 
   setDeleteClass(tripId) {
@@ -56,13 +63,19 @@ export default class ItineraryList extends React.Component {
 
   deleteItinerary(tripId) {
     const { itineraries } = this.state;
+    let currentIndex;
     for (let i = 0; i < itineraries.length; i++) {
       if (itineraries[i].tripId === tripId) {
         itineraries.splice(i, 1);
+        currentIndex = i;
       }
     }
     if (this.state.itineraries.length === 0) {
-      this.setState({ itineraries: null });
+      this.setState({ itineraries: null, activeItinerary: null });
+    } else if (this.state.itineraries.length <= currentIndex) {
+      this.setState({ activeItinerary: this.state.itineraries[currentIndex - 1] });
+    } else {
+      this.setState({ activeItinerary: this.state.itineraries[currentIndex] });
     }
     if (this.props.userId) {
       const req = {
@@ -74,46 +87,44 @@ export default class ItineraryList extends React.Component {
       fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
         .then(res => res.json());
     } else {
-      this.setState({ itineraries: null });
+      this.setState({ itineraries: null, activeItinerary: null });
       this.props.updateGuestTrip(null);
     }
   }
 
   render() {
     let list;
-    if (this.state.itineraries && this.state.itineraries.length === 0) {
+    if ((this.state.itineraries && this.state.itineraries.length === 0) || this.state.itineraries === null) {
       list = null;
-    } else if (this.state.itineraries === null) {
-      if (!this.props.userId) {
-        list = <div className="no-trips">
-          <h2>Nothing to see here yet. <br />Click below to get started.</h2>
-          <a className='create button no-trips-create' href='#create'>Create A Guest Itinerary</a>
-          <h2>OR</h2>
-          <a className='create button no-trips-create' href='#login'>Sign In To Create More</a>
-        </div>;
-      } else {
-        list = <div className="no-trips">
-          <h2>Nothing to see here yet. <br />Click below to add a trip!</h2>
-          <a className='create button no-trips-create' href='#create'>Create An Itinerary</a>
-        </div>;
-      }
     } else {
       list = this.state.itineraries.map(itinerary => {
         const listIcon = this.state.isEditing && itinerary.tripId !== 'loginNotice'
           ? <button className="delete button delete-itinerary" onClick={() => this.setState({ isDeleting: true, id: itinerary.tripId })}>
               <i className="fas fa-trash"></i>
             </button>
-          : <i className="fas fa-arrow-right trip-list-arrow"></i>;
-        const locations = itinerary.tripId === 'loginNotice'
-          ? itinerary.locations
-          : `${itinerary.locations.length} locations`
+          : null;
+        let locations;
+        if (itinerary.tripId === 'loginNotice') {
+          locations = itinerary.locations;
+        } else if (itinerary.locations.length > 1) {
+          locations = `${itinerary.locations.length} locations`;
+        } else {
+          locations = `${itinerary.locations.length} location`;
+        }
         const href = itinerary.tripId === 'loginNotice'
           ? '#login'
           : `#itinerary/${itinerary.tripId}`
-        return (
-          <li className="trip-list-item dynamic" key={itinerary.tripId}>
-            {listIcon}
-            <a className="list-item" href={href} >
+        const active = itinerary.tripId === this.state.activeItinerary.tripId
+          ? ' active-trip'
+          : '';
+        const anchorPosition = this.state.isEditing
+          ? ' editing-position'
+          : '';
+        const listItemAnchor = this.state.activeItinerary.tripId === itinerary.tripId
+          ? <a className={`mobile-list-item-anchor${anchorPosition}`} href={href}>View</a>
+          : null;
+        const listItem = this.state.matches
+          ? <a className={`list-item${active}`} href={href}>
               <div>
                 {itinerary.tripName}
               </div>
@@ -121,6 +132,29 @@ export default class ItineraryList extends React.Component {
                 {locations}
               </div>
             </a>
+          : <div className={`list-item${active}`}>
+              <div>
+                {itinerary.tripName}
+              </div>
+              <div className="locations">
+                {locations}
+              </div>
+              {listItemAnchor}
+            </div>;
+        return (
+          <li className='trip-list-item dynamic' key={itinerary.tripId}
+            onMouseEnter={() => {
+              if (this.state.activeItinerary.tripId !== itinerary.tripId && this.state.matches && itinerary.tripId !== 'loginNotice') {
+                this.setState({ activeItinerary: itinerary })
+              };
+            }}
+            onClick={() => {
+              if (this.state.activeItinerary.tripId !== itinerary.tripId && !this.state.matches && itinerary.tripId !== 'loginNotice') {
+                this.setState({ activeItinerary: itinerary })
+              };
+            }}>
+            {listIcon}
+            {listItem}
             <div className={this.setDeleteClass(itinerary.tripId)} id={itinerary.tripName}>
               Delete {itinerary.tripName}?
               <div>
@@ -140,20 +174,47 @@ export default class ItineraryList extends React.Component {
         <i className="fas fa-pen"></i>
       </button>;
     if (this.state.isEditing) {
-      editIcon = <button className="edit-button" onClick={() => this.setState({ isEditing: false })}>
+      editIcon = <button className="edit-button" onClick={() => this.setState({ isEditing: false, isDeleting: false })}>
         <i className="fas fa-times x-icon"></i>
       </button>;
+    }
+    let noTripsModule = null;
+    let tripListModule = null;
+    if (this.state.itineraries === null) {
+      if (!this.props.userId) {
+        noTripsModule = <div className="no-trips">
+          <h2>Nothing to see here yet. <br />Click below to get started.</h2>
+          <a className='create button no-trips-create' href='#create'>Create A Guest Itinerary</a>
+          <h2>OR</h2>
+          <a className='create button no-trips-create' href='#login'>Sign In To Create More</a>
+        </div>;
+      } else {
+        noTripsModule = <div className="no-trips">
+          <h2>Nothing to see here yet. <br />Click below to add a trip!</h2>
+          <a className='create button no-trips-create' href='#create'>Create An Itinerary</a>
+        </div>;
+      }
+    } else if (this.state.activeItinerary) {
+      tripListModule = <>
+        <div className='trip-list-module'>
+          <div className='trip-list-header'>
+            <h2 style={{ fontSize: '1.5rem' }}>Itineraries</h2>
+            {editIcon}
+          </div>
+          <ul className="trip-list">{list}</ul>
+          </div>
+        <div className='itinerary-map-container'>
+          <ItineraryMap activeItinerary={this.state.activeItinerary} />
+        </div>
+      </>
     }
     return (
       <>
         <div className="page-container">
           <div className="main trip">
-            <div className="itinerary-list">
-              <div className="name trip-title">
-                <h2 style={{ fontSize: '2.5rem' }}>Itineraries</h2>
-                {editIcon}
-              </div>
-              <ul className="trip-list">{list}</ul>
+            <div className="trip-list-container">
+              {noTripsModule}
+              {tripListModule}
             </div>
           </div>
         </div>

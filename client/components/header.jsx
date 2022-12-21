@@ -13,7 +13,7 @@ export default class Header extends React.Component {
         <a className="h1-anchor" href={''}><div className='h1-anchor-line h1-upper'></div><h1>Voyager</h1><div className='h1-anchor-line h1-lower'></div></a>
         <div className="header-nav">
           <a className="header-anchor" href="#create">Create<div className='anchor-line'></div></a>
-          <a className="header-anchor" href="#itineraryList">Itineraries<div className='anchor-line'></div></a>
+          <a className="header-anchor" href="#itineraries">Itineraries<div className='anchor-line'></div></a>
           <a className="header-anchor"
             onClick={() => {
               if (this.props.loggedIn) {
