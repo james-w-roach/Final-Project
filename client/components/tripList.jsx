@@ -58,14 +58,14 @@ export default class TripList extends React.Component {
           ? <a className={`mobile-list-item-anchor${anchorPosition}`} onClick={() => this.props.switchView()}>View</a>
           : null;
         const listItem = this.state.matches
-          ? <a className={`list-item${active}`} href={href}>
+          ? <div className={`list-item${active}`}>
             <div>
               {itinerary.tripName}
             </div>
             <div className="locations">
               {locations}
             </div>
-          </a>
+          </div>
           : <div className={`list-item${active}`}>
             <div>
               {itinerary.tripName}
@@ -85,6 +85,8 @@ export default class TripList extends React.Component {
             onClick={() => {
               if (this.props.activeItinerary.tripId !== itinerary.tripId && !this.state.matches && itinerary.tripId !== 'loginNotice') {
                 this.props.switchItinerary(itinerary);
+              }
+              if (this.state.matches) {
                 this.props.switchView();
               }
             }}>
