@@ -1,9 +1,8 @@
 import React from 'react';
 import Home from './pages/home';
 import Create from './pages/create';
-import Itinerary from './pages/itinerary';
 import LocationPage from './pages/locationPage';
-import ItineraryList from './pages/itineraryList';
+import ItineraryPage from './pages/itineraryPage';
 import Login from './pages/login';
 import Header from './components/header';
 import NavDrawer from './components/navDrawer';
@@ -18,7 +17,10 @@ export default class App extends React.Component {
       loggedIn: null,
       userId: null,
       route: window.location.hash,
-      viewingNavDrawer: false
+      viewingNavDrawer: false,
+      itineraries: [],
+      activeItinerary: null,
+      view: 'itineraries'
     };
     this.renderPage = this.renderPage.bind(this);
     this.toggleView = this.toggleView.bind(this);
@@ -32,10 +34,12 @@ export default class App extends React.Component {
       const userIdParse = JSON.parse(localStorage.getItem('UserID'));
       this.setState({ userId: userIdParse });
     }
+
     window.addEventListener('hashchange', () => {
       const route = window.location.hash;
       this.setState({ route });
     });
+
     window.addEventListener('beforeunload', () => {
       const loggedInJSON = JSON.stringify(this.state.loggedIn);
       localStorage.setItem('LoggedIn', loggedInJSON);
@@ -48,6 +52,7 @@ export default class App extends React.Component {
         localStorage.setItem('Guest Trip', guestTripJSON);
       }
     });
+
     if (localStorage.getItem('Location')) {
       const locationParse = JSON.parse(localStorage.getItem('Location'));
       this.setState({ location: locationParse });
@@ -63,6 +68,77 @@ export default class App extends React.Component {
     if (localStorage.getItem('Guest Trip')) {
       const guestTripParse = JSON.parse(localStorage.getItem('Guest Trip'));
       this.setState({ guestTrip: guestTripParse });
+    }
+
+    let userId = this.state.userId;
+    if (!userId) {
+      userId = localStorage.getItem('UserID');
+    }
+
+    if (userId) {
+      fetch(`/api/travelPlanner/itineraries/users/${userId}`)
+        .then(res => res.json())
+        .then(itineraries => {
+          if (itineraries.length === 0) {
+            this.setState({ itineraries: null });
+          } else {
+            this.setState({ itineraries, activeItinerary: itineraries[0] });
+          }
+        });
+    } else {
+      let { guestTrip } = this.state;
+      if (!guestTrip && localStorage.getItem('Guest Trip')) {
+        guestTrip = JSON.parse(localStorage.getItem('Guest Trip'));
+      }
+      if (guestTrip) {
+        const loginNotice = {
+          tripName: 'Sign in to create more than one trip.',
+          locations: 'Your guest trip will be saved.',
+          tripId: 'loginNotice'
+        };
+        this.setState({ itineraries: [guestTrip, loginNotice], activeItinerary: guestTrip });
+      } else {
+        this.setState({ itineraries: null });
+      }
+    }
+  }
+
+  setDeleteClass = tripId => {
+    if (this.state.isDeleting && tripId === this.state.id) {
+      return 'delete-module';
+    } else {
+      return 'hidden';
+    }
+  }
+
+  deleteItinerary = tripId => {
+    const { itineraries } = this.state;
+    let currentIndex;
+    for (let i = 0; i < itineraries.length; i++) {
+      if (itineraries[i].tripId === tripId) {
+        itineraries.splice(i, 1);
+        currentIndex = i;
+      }
+    }
+    if (this.state.itineraries.length === 0) {
+      this.setState({ itineraries: null, activeItinerary: null });
+    } else if (this.state.itineraries.length <= currentIndex) {
+      this.setState({ activeItinerary: this.state.itineraries[currentIndex - 1] });
+    } else {
+      this.setState({ activeItinerary: this.state.itineraries[currentIndex] });
+    }
+    if (this.state.userId) {
+      const req = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
+        .then(res => res.json());
+    } else {
+      this.setState({ itineraries: null, activeItinerary: null });
+      this.updateGuestTrip(null);
     }
   }
 
@@ -144,6 +220,18 @@ export default class App extends React.Component {
     this.setState({ guestTrip });
   }
 
+  switchView = () => {
+    if (this.state.view === 'itineraries') {
+      this.setState({ view: 'itinerary' });
+    } else {
+      this.setState({ view: 'itineraries' });
+    }
+  }
+
+  switchItinerary = itinerary => {
+    this.setState({ activeItinerary: itinerary });
+  }
+
   renderPage() {
     const { route } = this.state;
     const hash = window.location.hash;
@@ -151,15 +239,10 @@ export default class App extends React.Component {
       return <Home loggedIn={this.state.loggedIn} />;
     } if (route === '#create') {
       return <Create addGuestTrip={this.addGuestTrip} guestTrip={this.state.guestTrip} userId={this.state.userId} />;
-    } if (route === '#itinerary') {
-      return <Itinerary updateGuestTrip={this.updateGuestTrip} route={false} toggleView={this.toggleView} userId={this.state.userId} guestTrip={this.state.guestTrip} />;
-    } if (route.startsWith('#itinerary/')) {
-      const trip = parseInt(route.split('/')[1], 10);
-      return <Itinerary updateGuestTrip={this.updateGuestTrip} route={true} trip={trip} toggleView={this.toggleView} userId={this.state.userId} />;
     } else if (route === '#location') {
       return <LocationPage updateGuestPOI={this.updateGuestPOI} loggedIn={this.state.loggedIn} toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
     } else if (route === '#itineraries') {
-      return <ItineraryList updateGuestTrip={this.updateGuestTrip} guestTrip={this.state.guestTrip} userId={this.state.userId} />;
+      return <ItineraryPage itineraries={this.state.itineraries} activeItinerary={this.state.activeItinerary} switchItinerary={this.switchItinerary} switchView={this.switchView} view={this.state.view} deleteItinerary={this.deleteItinerary} guestTrip={this.state.guestTrip} userId={this.state.userId} />;
     } else if (route === '#login' || route === '#sign-up') {
       return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
     }

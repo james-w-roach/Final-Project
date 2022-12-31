@@ -12,7 +12,8 @@ export default class ItineraryMap extends React.Component {
       lng: '',
       lat: '',
       zoom: 10,
-      activeItinerary: null
+      activeItinerary: null,
+      activeLocation: null
     };
     this.mapContainer = React.createRef();
     this.map = React.createRef();
@@ -24,13 +25,39 @@ export default class ItineraryMap extends React.Component {
 
     if (this.props.activeItinerary.tripId === this.state.activeItinerary.tripId) return;
 
-    this.setState({ activeItinerary: this.props.activeItinerary });
+    if (this.props.activeLocation) {
+      this.setState({ activeLocation: this.props.activeLocation });
+    }
+
+    if (this.props.activeItinerary) {
+      this.setState({ activeItinerary: this.props.activeItinerary });
+    }
 
     while (this.map.current._markers.length) {
       this.map.current._markers[0].remove();
     }
 
-    if (this.props.activeItinerary.locations.length === 1) {
+    if (this.props.activeLocation) {
+      const lng = this.props.activeLocation
+        ? this.props.activeLocation.lng
+        : '';
+      const lat = this.props.activeLocation
+        ? this.props.activeLocation.lat
+        : '';
+
+      this.map.current = new mapboxgl.Map({
+        container: this.mapContainer.current,
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [lng, lat],
+        zoom: zoom
+      });
+
+      const marker = new mapboxgl.Marker({ color: '#0e58a8' })
+        .setLngLat([lng, lat])
+        .addTo(this.map.current);
+
+      this.map.current.flyTo({ center: [lng, lat], zoom, speed: 1 });
+    } else if (this.props.activeItinerary.locations.length === 1) {
       const lng = this.props.activeItinerary
         ? this.props.activeItinerary.locations[0].lng
         : '';
@@ -86,7 +113,23 @@ export default class ItineraryMap extends React.Component {
 
     const { zoom } = this.state;
 
-    if (this.props.activeItinerary.locations.length === 1) {
+    if (this.props.activeLocation) {
+      const lng = this.props.activeLocation
+        ? this.props.activeLocation.lng
+        : '';
+      const lat = this.props.activeLocation
+        ? this.props.activeLocation.lat
+        : '';
+      this.map.current = new mapboxgl.Map({
+        container: this.mapContainer.current,
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [lng, lat],
+        zoom: zoom
+      });
+      const marker = new mapboxgl.Marker({ color: '#0e58a8' })
+        .setLngLat([lng, lat])
+        .addTo(this.map.current);
+    } else if (this.props.activeItinerary.locations.length === 1) {
       const lng = this.props.activeItinerary
         ? this.props.activeItinerary.locations[0].lng
         : '';
