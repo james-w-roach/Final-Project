@@ -35,7 +35,7 @@ export default class ItineraryPage extends React.Component {
       if (this.props.view === 'itineraries') {
         listContent = <TripList itineraries={this.props.itineraries} activeItinerary={this.props.activeItinerary} switchItinerary={this.props.switchItinerary} switchView={this.props.switchView} view={this.props.view} deleteItinerary={this.props.deleteItinerary} />;
       } else if (this.props.view === 'itinerary') {
-        listContent = <ViewTrip itineraries={this.props.itineraries} activeItinerary={this.props.activeItinerary} switchItinerary={this.props.switchItinerary} switchView={this.props.switchView} view={this.props.view} deleteItinerary={this.props.deleteItinerary} />;
+        listContent = <ViewTrip toggleView={this.props.toggleView} itineraries={this.props.itineraries} activeItinerary={this.props.activeItinerary} switchItinerary={this.props.switchItinerary} switchView={this.props.switchView} view={this.props.view} deleteItinerary={this.props.deleteItinerary} />;
       }
       pageContent = (
         <>

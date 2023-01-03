@@ -143,7 +143,7 @@ export default class App extends React.Component {
   }
 
   toggleView(location, tripId) {
-    if (this.state.route.startsWith('#itinerary')) {
+    if (this.state.route === '#itineraries') {
       this.setState({
         location,
         tripId
@@ -242,7 +242,7 @@ export default class App extends React.Component {
     } else if (route === '#location') {
       return <LocationPage updateGuestPOI={this.updateGuestPOI} loggedIn={this.state.loggedIn} toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
     } else if (route === '#itineraries') {
-      return <ItineraryPage itineraries={this.state.itineraries} activeItinerary={this.state.activeItinerary} switchItinerary={this.switchItinerary} switchView={this.switchView} view={this.state.view} deleteItinerary={this.deleteItinerary} guestTrip={this.state.guestTrip} userId={this.state.userId} />;
+      return <ItineraryPage toggleView={this.toggleView} itineraries={this.state.itineraries} activeItinerary={this.state.activeItinerary} switchItinerary={this.switchItinerary} switchView={this.switchView} view={this.state.view} deleteItinerary={this.deleteItinerary} guestTrip={this.state.guestTrip} userId={this.state.userId} />;
     } else if (route === '#login' || route === '#sign-up') {
       return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
     }

@@ -142,6 +142,7 @@ export default class LocationPage extends React.Component {
   }
 
   render() {
+    if (!this.state.locations) return null;
     return (
       <>
         <div className="page-container">
