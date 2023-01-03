@@ -82,12 +82,14 @@ export default class TripList extends React.Component {
                 this.props.switchItinerary(itinerary);
               }
             }}
-            onClick={() => {
-              if (this.props.activeItinerary.tripId !== itinerary.tripId && !this.state.matches && itinerary.tripId !== 'loginNotice') {
-                this.props.switchItinerary(itinerary);
-              }
-              if (this.state.matches) {
-                this.props.switchView();
+            onClick={event => {
+              if (!this.state.isEditing) {
+                if (this.props.activeItinerary.tripId !== itinerary.tripId && !this.state.matches && itinerary.tripId !== 'loginNotice') {
+                  this.props.switchItinerary(itinerary);
+                }
+                if (this.state.matches) {
+                  this.props.switchView();
+                }
               }
             }}>
             {listIcon}
