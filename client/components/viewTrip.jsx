@@ -111,6 +111,9 @@ export default class ViewTrip extends React.Component {
             <i className="fas fa-trash"></i>
           </button>;
       }
+      const name = location.name.includes(',')
+        ? location.name.split(',')[0]
+        : location.name;
       return (
         <li className="trip-list-item dynamic" key={location.name.split(',')[0]} >
           <a className="list-item" href={'#location'}
@@ -118,7 +121,7 @@ export default class ViewTrip extends React.Component {
               this.props.toggleView(location, itinerary.tripId);
             }}>
             <div className="list-item-content">
-              {location.name}
+              {name}
             </div>
             <div className="icons">
               {location.poi.length} <i className="fas fa-map-marker-alt"></i>
