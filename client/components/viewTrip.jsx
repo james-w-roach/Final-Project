@@ -115,7 +115,7 @@ export default class ViewTrip extends React.Component {
         ? location.name.split(',')[0]
         : location.name;
       return (
-        <li className="trip-list-item dynamic" key={location.name.split(',')[0]} >
+        <li className="trip-list-item dynamic" key={location.name.split(',')[0]} onMouseEnter={() => this.props.switchActiveLocation(location)}>
           <a className="list-item" href={'#location'}
             onClick={() => {
               this.props.toggleView(location, itinerary.tripId);

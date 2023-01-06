@@ -35,13 +35,13 @@ export default class ItineraryPage extends React.Component {
       if (this.props.view === 'itineraries') {
         listContent = <TripList userId={this.props.userId} itineraries={this.props.itineraries} activeItinerary={this.props.activeItinerary} switchItinerary={this.props.switchItinerary} switchView={this.props.switchView} view={this.props.view} deleteItinerary={this.props.deleteItinerary} />;
       } else if (this.props.view === 'itinerary') {
-        listContent = <ViewTrip userId={this.props.userId} toggleView={this.props.toggleView} itineraries={this.props.itineraries} activeItinerary={this.props.activeItinerary} switchItinerary={this.props.switchItinerary} switchView={this.props.switchView} view={this.props.view} deleteItinerary={this.props.deleteItinerary} />;
+        listContent = <ViewTrip switchActiveLocation={this.props.switchActiveLocation} userId={this.props.userId} toggleView={this.props.toggleView} itineraries={this.props.itineraries} activeItinerary={this.props.activeItinerary} switchItinerary={this.props.switchItinerary} switchView={this.props.switchView} view={this.props.view} deleteItinerary={this.props.deleteItinerary} />;
       }
       pageContent = (
         <>
           {listContent}
           <div className='itinerary-map-container'>
-            <ItineraryMap activeItinerary={this.props.activeItinerary} />
+            <ItineraryMap activeLocation={this.props.activeLocation} activeItinerary={this.props.activeItinerary} />
           </div>
         </>
       )

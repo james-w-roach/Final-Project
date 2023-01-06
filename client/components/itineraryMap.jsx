@@ -23,7 +23,9 @@ export default class ItineraryMap extends React.Component {
 
     if (!this.map.current) return;
 
-    if (this.props.activeItinerary.tripId === this.state.activeItinerary.tripId) return;
+    if (this.props.activeItinerary.tripId === this.state.activeItinerary.tripId && !this.props.activeLocation) return;
+
+    if(this.props.activeLocation === this.state.activeLocation) return;
 
     if (this.props.activeLocation) {
       this.setState({ activeLocation: this.props.activeLocation });
@@ -33,9 +35,7 @@ export default class ItineraryMap extends React.Component {
       this.setState({ activeItinerary: this.props.activeItinerary });
     }
 
-    while (this.map.current._markers.length) {
-      this.map.current._markers[0].remove();
-    }
+    const { zoom } = this.state;
 
     if (this.props.activeLocation) {
       const lng = this.props.activeLocation
@@ -45,12 +45,7 @@ export default class ItineraryMap extends React.Component {
         ? this.props.activeLocation.lat
         : '';
 
-      this.map.current = new mapboxgl.Map({
-        container: this.mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [lng, lat],
-        zoom: zoom
-      });
+      this.map.current.flyTo({ center: [lng, lat], zoom, speed: 1 });
 
       const marker = new mapboxgl.Marker({ color: '#0e58a8' })
         .setLngLat([lng, lat])
@@ -58,6 +53,11 @@ export default class ItineraryMap extends React.Component {
 
       this.map.current.flyTo({ center: [lng, lat], zoom, speed: 1 });
     } else if (this.props.activeItinerary.locations.length === 1) {
+
+      while (this.map.current._markers.length) {
+        this.map.current._markers[0].remove();
+      }
+
       const lng = this.props.activeItinerary
         ? this.props.activeItinerary.locations[0].lng
         : '';
@@ -65,14 +65,16 @@ export default class ItineraryMap extends React.Component {
         ? this.props.activeItinerary.locations[0].lat
         : '';
 
-      const { zoom } = this.state;
-
       const marker = new mapboxgl.Marker({ color: '#0e58a8' })
         .setLngLat([lng, lat])
         .addTo(this.map.current);
 
       this.map.current.flyTo({ center: [lng, lat], zoom, speed: 1 });
     } else {
+
+      while (this.map.current._markers.length) {
+        this.map.current._markers[0].remove();
+      }
 
       const lngLats = this.props.activeItinerary.locations.map(location => {
         const marker = new mapboxgl.Marker({ color: '#0e58a8' })
