@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class ViewTrip extends React.Component {
+export default class Trip extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -97,12 +97,6 @@ export default class ViewTrip extends React.Component {
   render() {
     const { itinerary } = this.state;
     const tripName = itinerary.tripName;
-    let backClass;
-    if (this.props.route) {
-      backClass = 'back';
-    } else {
-      backClass = 'hidden';
-    }
     let listIcon = null;
     const locationsList = itinerary.locations.map(location => {
       if (this.state.isEditing) {
@@ -153,8 +147,11 @@ export default class ViewTrip extends React.Component {
     return (
       <>
         <div className='trip-list-module'>
-          <div className='trip-list-header'>
-            <a className={backClass} onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
+          <div className='trip-list-header trip-header'>
+            <a className='back' onClick={() => {
+              this.props.switchView();
+              this.props.switchActiveLocation();
+            }}><i className="fas fa-arrow-left back-arrow"></i></a>
             <h2 style={{ fontSize: '1.5rem' }}>{tripName}</h2>
             {editIcon}
           </div>

@@ -23,9 +23,11 @@ export default class ItineraryMap extends React.Component {
 
     if (!this.map.current) return;
 
-    if (this.props.activeItinerary.tripId === this.state.activeItinerary.tripId && !this.props.activeLocation) return;
+    if (this.props.activeLocation && this.props.activeLocation === this.state.activeLocation) return;
 
-    if(this.props.activeLocation === this.state.activeLocation) return;
+    if (!this.props.activeLocation && this.state.activeLocation) {
+      this.setState({ activeLocation: null });
+    } else if (this.props.activeItinerary.tripId === this.state.activeItinerary.tripId && !this.props.activeLocation) return;
 
     if (this.props.activeLocation) {
       this.setState({ activeLocation: this.props.activeLocation });

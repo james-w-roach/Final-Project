@@ -233,7 +233,11 @@ export default class App extends React.Component {
   }
 
   switchActiveLocation = activeLocation => {
-    this.setState({ activeLocation });
+    if (!activeLocation) {
+      this.setState({ activeLocation: null });
+    } else {
+      this.setState({ activeLocation });
+    }
   }
 
   renderPage() {
