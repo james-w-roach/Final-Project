@@ -53,11 +53,8 @@ export default class Trip extends React.Component {
     this.setState({
       itinerary
     });
-    if (this.props.userId) {
-      let tripId = this.props.trip;
-      if (!this.props.trip) {
-        tripId = this.state.max;
-      }
+    if (this.props.userId && this.props.activeItinerary) {
+      const tripId = this.props.activeItinerary.tripId;
       const req = {
         method: 'PUT',
         headers: {
@@ -66,7 +63,8 @@ export default class Trip extends React.Component {
         body: JSON.stringify(itinerary.locations)
       };
       fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
-        .then(res => res.json());
+        .then(res => res.json())
+        .then(() => this.props.updateItineraries());
     } else {
       this.props.updateGuestTrip(itinerary);
     }

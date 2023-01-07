@@ -254,7 +254,7 @@ export default class App extends React.Component {
     } else if (route === '#location') {
       return <LocationPage updateGuestPOI={this.updateGuestPOI} loggedIn={this.state.loggedIn} toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
     } else if (route === '#itineraries') {
-      return <ItineraryPage toggleView={this.toggleView} itineraries={this.state.itineraries} activeItinerary={this.state.activeItinerary} activeLocation={this.state.activeLocation} switchItinerary={this.switchItinerary} switchActiveLocation={this.switchActiveLocation} switchView={this.switchView} view={this.state.view} deleteItinerary={this.deleteItinerary} guestTrip={this.state.guestTrip} userId={this.state.userId} />;
+      return <ItineraryPage toggleView={this.toggleView} itineraries={this.state.itineraries} updateItineraries={this.updateItineraries} activeItinerary={this.state.activeItinerary} activeLocation={this.state.activeLocation} switchItinerary={this.switchItinerary} switchActiveLocation={this.switchActiveLocation} switchView={this.switchView} view={this.state.view} deleteItinerary={this.deleteItinerary} guestTrip={this.state.guestTrip} userId={this.state.userId} />;
     } else if (route === '#login' || route === '#sign-up') {
       return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
     }
