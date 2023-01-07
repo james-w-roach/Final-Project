@@ -502,7 +502,8 @@ a {
   transition: background-color 0.3s ease-in-out;
 }
 
-.active-trip {
+.active-trip,
+.active-location {
   background-color: #0e58a8;
   color: white;
   border-radius: 0.5rem;

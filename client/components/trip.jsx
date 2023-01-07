@@ -23,30 +23,8 @@ export default class Trip extends React.Component {
     } else {
       userId = this.props.userId;
     }
-    if (userId) {
-      fetch(`/api/travelPlanner/itineraries/users/${userId}`)
-        .then(res => res.json())
-        .then(itineraries => {
-          if (!this.props.trip) {
-            let max = itineraries[0].tripId;
-            let newestTrip = itineraries[0];
-            for (let i = 1; i < itineraries.length; i++) {
-              if (itineraries[i].tripId > max) {
-                max = itineraries[i].tripId;
-                newestTrip = itineraries[i];
-              }
-            }
-            this.setState({ itinerary: newestTrip, max });
-          } else {
-            for (let i = 0; i < itineraries.length; i++) {
-              if (itineraries[i].tripId === this.props.trip) {
-                this.setState({
-                  itinerary: itineraries[i]
-                });
-              }
-            }
-          }
-        });
+    if (userId && this.props.activeItinerary) {
+      this.setState({ itinerary: this.props.activeItinerary });
     } else {
       if (this.props.guestTrip) {
         this.setState({ itinerary: this.props.guestTrip });
@@ -108,9 +86,12 @@ export default class Trip extends React.Component {
       const name = location.name.includes(',')
         ? location.name.split(',')[0]
         : location.name;
+      let active = location.name === this.props.activeLocation.name
+        ? ' active-location'
+        : '';
       return (
         <li className="trip-list-item dynamic" key={location.name.split(',')[0]} onMouseEnter={() => this.props.switchActiveLocation(location)}>
-          <a className="list-item" href={'#location'}
+          <a className={`list-item${active}`} href={'#location'}
             onClick={() => {
               this.props.toggleView(location, itinerary.tripId);
             }}>

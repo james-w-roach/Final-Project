@@ -70,6 +70,10 @@ export default class App extends React.Component {
       this.setState({ guestTrip: guestTripParse });
     }
 
+    this.updateItineraries();
+  }
+
+  updateItineraries = () => {
     let userId = this.state.userId;
     if (!userId) {
       userId = localStorage.getItem('UserID');
@@ -246,7 +250,7 @@ export default class App extends React.Component {
     if (route === '') {
       return <Home loggedIn={this.state.loggedIn} />;
     } if (route === '#create') {
-      return <Create addGuestTrip={this.addGuestTrip} guestTrip={this.state.guestTrip} userId={this.state.userId} />;
+      return <Create switchItinerary={this.switchItinerary} updateItineraries={this.updateItineraries} addGuestTrip={this.addGuestTrip} guestTrip={this.state.guestTrip} userId={this.state.userId} />;
     } else if (route === '#location') {
       return <LocationPage updateGuestPOI={this.updateGuestPOI} loggedIn={this.state.loggedIn} toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
     } else if (route === '#itineraries') {

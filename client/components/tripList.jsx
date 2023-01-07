@@ -89,6 +89,7 @@ export default class TripList extends React.Component {
                 }
                 if (this.state.matches) {
                   this.props.switchView();
+                  this.props.switchActiveLocation(itinerary.locations[0]);
                 }
               }
             }}>
