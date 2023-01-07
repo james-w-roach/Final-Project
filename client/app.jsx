@@ -18,7 +18,7 @@ export default class App extends React.Component {
       userId: null,
       route: window.location.hash,
       viewingNavDrawer: false,
-      itineraries: [],
+      itineraries: null,
       activeItinerary: null,
       view: 'itineraries'
     };
@@ -84,7 +84,7 @@ export default class App extends React.Component {
         .then(res => res.json())
         .then(itineraries => {
           if (itineraries.length === 0) {
-            this.setState({ itineraries: null });
+            this.setState({ itineraries: [] });
           } else {
             this.setState({ itineraries, activeItinerary: itineraries[0] });
           }
@@ -102,7 +102,7 @@ export default class App extends React.Component {
         };
         this.setState({ itineraries: [guestTrip, loginNotice], activeItinerary: guestTrip });
       } else {
-        this.setState({ itineraries: null });
+        this.setState({ itineraries: [] });
       }
     }
   }
@@ -188,7 +188,7 @@ export default class App extends React.Component {
 
       localStorage.removeItem('Guest Trip');
     }
-    this.setState({ loggedIn: true, userId: result.user.userId, guestTrip: null });
+    this.setState({ loggedIn: true, userId: result.user.userId, itineraries: null, guestTrip: null }, () => this.updateItineraries());
     window.location.hash = '#itineraries';
   }
 
@@ -198,7 +198,7 @@ export default class App extends React.Component {
     localStorage.removeItem('Location');
     localStorage.removeItem('TripID');
     window.location.hash = '';
-    this.setState({ loggedIn: null, userId: null, location: null, tripId: null });
+    this.setState({ loggedIn: null, userId: null, location: null, tripId: null, itineraries: [], view: 'itineraries' });
   }
 
   showDrawer() {

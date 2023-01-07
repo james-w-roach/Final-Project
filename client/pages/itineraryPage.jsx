@@ -15,23 +15,25 @@ export default class ItineraryPage extends React.Component {
   }
 
   render() {
-    let pageContent = null;
+    let itineraryContent = null;
+    let noItineraryContent = null;
     let listContent;
-    if (this.props.itineraries === null) {
+    if (this.props.itineraries && !this.props.itineraries.length) {
       if (!this.props.userId) {
-        pageContent = <div className="no-trips">
+        noItineraryContent = <div className="no-trips">
           <h2>Nothing to see here yet. <br />Click below to get started.</h2>
           <a className='create button no-trips-create' href='#create'>Create A Guest Itinerary</a>
           <h2>OR</h2>
           <a className='create button no-trips-create' href='#login'>Sign In To Create More</a>
         </div>;
       } else {
-        pageContent = <div className="no-trips">
+        noItineraryContent = <div className="no-trips">
           <h2>Nothing to see here yet. <br />Click below to add a trip!</h2>
           <a className='create button no-trips-create' href='#create'>Create An Itinerary</a>
         </div>;
       }
-    } else if (this.props.activeItinerary) {
+    }
+    if (this.props.itineraries && this.props.itineraries.length && this.props.activeItinerary) {
       if (this.props.view === 'itineraries') {
         listContent = (
           <TripList
@@ -64,7 +66,7 @@ export default class ItineraryPage extends React.Component {
           />
         );
       }
-      pageContent = (
+      itineraryContent = (
         <>
           {listContent}
           <div className='itinerary-map-container'>
@@ -78,7 +80,8 @@ export default class ItineraryPage extends React.Component {
         <div className="page-container">
           <div className="main trip">
             <div className="trip-list-container">
-              {pageContent}
+              {noItineraryContent}
+              {itineraryContent}
             </div>
           </div>
         </div>
