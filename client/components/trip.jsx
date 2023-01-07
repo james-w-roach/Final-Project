@@ -89,19 +89,22 @@ export default class Trip extends React.Component {
       let active = location.name === this.props.activeLocation.name
         ? ' active-location'
         : '';
+      const listItemAnchor = this.props.activeLocation.name === location.name && !this.state.isEditing
+        ? <a className={`mobile-list-item-anchor`} href={'#location'} onClick={() => {
+          this.props.toggleView(location, itinerary.tripId);
+        }}>View</a>
+        : null;
       return (
-        <li className="trip-list-item dynamic" key={location.name.split(',')[0]} onMouseEnter={() => this.props.switchActiveLocation(location)}>
-          <a className={`list-item${active}`} href={'#location'}
-            onClick={() => {
-              this.props.toggleView(location, itinerary.tripId);
-            }}>
+        <li className="trip-list-item dynamic" key={location.name.split(',')[0]} onClick={() => this.props.switchActiveLocation(location)}>
+          <div className={`list-item${active}`}>
             <div className="list-item-content">
               {name}
             </div>
             <div className="icons">
               {location.poi.length} <i className="fas fa-map-marker-alt"></i>
             </div>
-          </a>
+            {listItemAnchor}
+          </div>
           {listIcon}
           <div className={this.setDeleteClass(location.name)} id={location.name}>
             Delete {location.name.split(',')[0]}?

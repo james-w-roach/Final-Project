@@ -278,7 +278,6 @@ ul {
 }
 
 .icons {
-  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   width: 32px;
@@ -404,7 +403,7 @@ ul {
 .delete-itinerary {
   height: 50%;
   width: 40px;
-  right: 10px;
+  right: 15px;
   top: 25%;
   box-shadow: 0 1px 2px #022042;
   display: flex;
@@ -518,10 +517,11 @@ a {
   justify-content: center;
   align-items: center;
   top: 25%;
-  right: 10px;
+  right: 15px;
   padding: 10px;
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px #022042;
+  transition: background-color 0.3s;
 }
 
 .editing-position {
@@ -882,6 +882,11 @@ a:visited {
     cursor: initial;
   }
 
+  .mobile-list-item-anchor:hover {
+    background-color: #0e58a8;
+    color: white;
+  }
+
   .back-arrow:hover {
     transform: scale(1.15);
   }
@@ -1144,7 +1149,7 @@ a:visited {
     background-color: #0e58a8;
   }
 
-  .dynamic:hover a,
+  .dynamic:hover .list-item,
   .dynamic:hover i {
     color: white;
   }

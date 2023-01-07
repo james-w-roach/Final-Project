@@ -7,15 +7,8 @@ export default class TripList extends React.Component {
     this.state = {
       isDeleting: false,
       isEditing: false,
-      id: null,
-      matches: window.matchMedia('(min-width: 700px)').matches
+      id: null
     };
-  }
-
-  componentDidMount() {
-    window.matchMedia('(min-width: 700px)').addEventListener('change', e => {
-      this.setState({ matches: e.matches })
-    });
   }
 
   setDeleteClass(tripId) {
@@ -54,47 +47,29 @@ export default class TripList extends React.Component {
         const anchorPosition = this.state.isEditing
           ? ' editing-position'
           : '';
-        const listItemAnchor = this.props.activeItinerary.tripId === itinerary.tripId
-          ? <a className={`mobile-list-item-anchor${anchorPosition}`} onClick={() => this.props.switchView()}>View</a>
+        const listItemAnchor = this.props.activeItinerary.tripId === itinerary.tripId && !this.state.isEditing
+          ? <a className={`mobile-list-item-anchor${anchorPosition}`} onClick={() => {
+              this.props.switchView();
+              this.props.switchActiveLocation(itinerary.locations[0]);
+            }}>View</a>
           : null;
-        const listItem = this.state.matches
-          ? <div className={`list-item${active}`}>
-            <div>
-              {itinerary.tripName}
-            </div>
-            <div className="locations">
-              {locations}
-            </div>
-          </div>
-          : <div className={`list-item${active}`}>
-            <div>
-              {itinerary.tripName}
-            </div>
-            <div className="locations">
-              {locations}
-            </div>
-            {listItemAnchor}
-          </div>;
         return (
           <li className='trip-list-item dynamic' key={itinerary.tripId}
-            onMouseEnter={() => {
-              if (this.props.activeItinerary.tripId !== itinerary.tripId && this.state.matches && itinerary.tripId !== 'loginNotice') {
-                this.props.switchItinerary(itinerary);
-              }
-            }}
             onClick={event => {
-              if (!this.state.isEditing) {
-                if (this.props.activeItinerary.tripId !== itinerary.tripId && !this.state.matches && itinerary.tripId !== 'loginNotice') {
-                  this.props.switchItinerary(itinerary);
-                }
-                if (this.state.matches) {
-                  this.props.switchView();
-                  this.props.switchActiveLocation(itinerary.locations[0]);
-                }
+              if (this.props.activeItinerary.tripId !== itinerary.tripId && itinerary.tripId !== 'loginNotice') {
+                this.props.switchItinerary(itinerary);
               }
             }}>
             {listIcon}
-            {listItem}
+            <div className={`list-item${active}`}>
+              <div>
+                {itinerary.tripName}
+              </div>
+              <div className="locations">
+                {locations}
+              </div>
+              {listItemAnchor}
+            </div>
             <div className={this.setDeleteClass(itinerary.tripId)} id={itinerary.tripName}>
               Delete {itinerary.tripName}?
               <div>
