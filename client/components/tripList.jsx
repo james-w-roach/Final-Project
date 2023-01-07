@@ -40,7 +40,7 @@ export default class TripList extends React.Component {
         }
         const href = itinerary.tripId === 'loginNotice'
           ? '#login'
-          : `#itinerary/${itinerary.tripId}`
+          : '#itineraries'
         const active = itinerary.tripId === this.props.activeItinerary.tripId
           ? ' active-trip'
           : '';

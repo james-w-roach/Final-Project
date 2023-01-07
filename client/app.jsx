@@ -159,7 +159,7 @@ export default class App extends React.Component {
         window.location.hash = '#location';
       });
     } else if (this.state.route === '#location') {
-      window.location.hash = '#itinerary';
+      window.location.hash = '#itineraries';
     }
   }
 
@@ -206,15 +206,15 @@ export default class App extends React.Component {
   }
 
   addGuestTrip = trip => {
-    this.setState({ guestTrip: trip});
+    this.setState({ guestTrip: trip }, () => this.updateItineraries());
     localStorage.setItem('Guest Trip', JSON.stringify(trip));
-    window.location.hash = '#itinerary'
+    window.location.hash = '#itineraries'
   }
 
   updateGuestTrip = itinerary => {
     const guestTrip = itinerary;
     localStorage.setItem('Guest Trip', JSON.stringify(guestTrip));
-    this.setState({ guestTrip });
+    this.setState({ guestTrip }, () => this.updateItineraries());
   }
 
   updateGuestPOI = locations => {
@@ -250,11 +250,34 @@ export default class App extends React.Component {
     if (route === '') {
       return <Home loggedIn={this.state.loggedIn} />;
     } if (route === '#create') {
-      return <Create switchItinerary={this.switchItinerary} updateItineraries={this.updateItineraries} addGuestTrip={this.addGuestTrip} guestTrip={this.state.guestTrip} userId={this.state.userId} />;
+      return <Create
+      switchItinerary={this.switchItinerary}
+      updateItineraries={this.updateItineraries}
+      addGuestTrip={this.addGuestTrip}
+      guestTrip={this.state.guestTrip}
+      userId={this.state.userId} />;
     } else if (route === '#location') {
-      return <LocationPage updateGuestPOI={this.updateGuestPOI} loggedIn={this.state.loggedIn} toggleView={this.toggleView} location={this.state.location} tripId={this.state.tripId} />;
+      return <LocationPage
+      updateGuestPOI={this.updateGuestPOI}
+      loggedIn={this.state.loggedIn}
+      toggleView={this.toggleView}
+      location={this.state.location}
+      tripId={this.state.tripId} />;
     } else if (route === '#itineraries') {
-      return <ItineraryPage toggleView={this.toggleView} itineraries={this.state.itineraries} updateItineraries={this.updateItineraries} activeItinerary={this.state.activeItinerary} activeLocation={this.state.activeLocation} switchItinerary={this.switchItinerary} switchActiveLocation={this.switchActiveLocation} switchView={this.switchView} view={this.state.view} deleteItinerary={this.deleteItinerary} guestTrip={this.state.guestTrip} userId={this.state.userId} />;
+      return <ItineraryPage
+        toggleView={this.toggleView}
+        itineraries={this.state.itineraries}
+        updateItineraries={this.updateItineraries}
+        activeItinerary={this.state.activeItinerary}
+        activeLocation={this.state.activeLocation}
+        switchItinerary={this.switchItinerary}
+        switchActiveLocation={this.switchActiveLocation}
+        switchView={this.switchView}
+        view={this.state.view}
+        deleteItinerary={this.deleteItinerary}
+        guestTrip={this.state.guestTrip}
+        updateGuestTrip={this.updateGuestTrip}
+        userId={this.state.userId} />;
     } else if (route === '#login' || route === '#sign-up') {
       return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
     }

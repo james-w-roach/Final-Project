@@ -64,8 +64,20 @@ export default class Trip extends React.Component {
       };
       fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
         .then(res => res.json())
-        .then(() => this.props.updateItineraries());
+        .then(() => {
+          this.props.updateItineraries();
+          if (itinerary.locations.length) {
+            this.props.switchActiveLocation(itinerary.locations[0]);
+          } else {
+            this.props.switchActiveLocation();
+          }
+        });
     } else {
+      if (itinerary.locations.length) {
+        this.props.switchActiveLocation(itinerary.locations[0]);
+      } else {
+        this.props.switchActiveLocation();
+      }
       this.props.updateGuestTrip(itinerary);
     }
   }
@@ -94,7 +106,12 @@ export default class Trip extends React.Component {
         }}>View</a>
         : null;
       return (
-        <li className="trip-list-item dynamic" key={location.name.split(',')[0]} onClick={() => this.props.switchActiveLocation(location)}>
+        <li className="trip-list-item dynamic" key={location.name.split(',')[0]}
+          onClick={event => {
+            if (event.target.className !== 'delete-poi button') {
+              this.props.switchActiveLocation(location);
+            }
+          }}>
           <div className={`list-item${active}`}>
             <div className="list-item-content">
               {name}
