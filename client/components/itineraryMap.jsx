@@ -39,7 +39,7 @@ export default class ItineraryMap extends React.Component {
 
     const { zoom } = this.state;
 
-    if (this.props.activeLocation) {
+    if (this.props.activeLocation && this.props.activeLocation.lng && this.props.activeLocation.lat) {
       const lng = this.props.activeLocation
         ? this.props.activeLocation.lng
         : '';
@@ -72,7 +72,7 @@ export default class ItineraryMap extends React.Component {
         .addTo(this.map.current);
 
       this.map.current.flyTo({ center: [lng, lat], zoom, speed: 1 });
-    } else {
+    } else if (this.props.activeItinerary.locations.length) {
 
       while (this.map.current._markers.length) {
         this.map.current._markers[0].remove();
@@ -117,7 +117,7 @@ export default class ItineraryMap extends React.Component {
 
     const { zoom } = this.state;
 
-    if (this.props.activeLocation) {
+    if (this.props.activeLocation && this.props.activeLocation.lng && this.props.activeLocation.lat) {
       const lng = this.props.activeLocation
         ? this.props.activeLocation.lng
         : '';
@@ -149,7 +149,7 @@ export default class ItineraryMap extends React.Component {
       const marker = new mapboxgl.Marker({ color: '#0e58a8' })
         .setLngLat([lng, lat])
         .addTo(this.map.current);
-    } else {
+    } else if (this.props.activeItinerary.locations.length) {
       const lngLats = this.props.activeItinerary.locations.map(location => {
         return { lng: location.lng, lat: location.lat };
       });
@@ -188,6 +188,12 @@ export default class ItineraryMap extends React.Component {
           .addTo(this.map.current);
       });
 
+    } else {
+      this.map.current = new mapboxgl.Map({
+        container: this.mapContainer.current,
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [1, 2]
+      });
     }
     this.setState({ activeItinerary: this.props.activeItinerary });
   }

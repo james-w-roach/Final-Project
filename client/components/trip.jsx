@@ -74,7 +74,8 @@ export default class Trip extends React.Component {
     const { itinerary } = this.state;
     const tripName = itinerary.tripName;
     let listIcon = null;
-    const locationsList = itinerary.locations.map(location => {
+    const locationsList = itinerary.locations.length
+    ? itinerary.locations.map(location => {
       if (this.state.isEditing) {
         listIcon =
           <button className="delete button delete-itinerary" onClick={() => this.setState({ isDeleting: true, name: location.name })}>
@@ -116,7 +117,17 @@ export default class Trip extends React.Component {
           </div>
         </li>
       );
-    });
+    })
+    : <li className="trip-list-item dynamic">
+      <div className={`list-item active-location`}>
+        <div className="list-item-content">
+          No locations found.
+        </div>
+      </div>
+    </li>;
+
+    // Users will be able to add more locations from here soon
+
     let editIcon =
       <button className="edit-button" onClick={() => this.setState({ isEditing: true })}>
         <i className="fas fa-pen"></i>

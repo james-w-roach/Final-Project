@@ -33,10 +33,10 @@ export default class TripList extends React.Component {
         let locations;
         if (itinerary.tripId === 'loginNotice') {
           locations = itinerary.locations;
-        } else if (itinerary.locations.length > 1) {
-          locations = `${itinerary.locations.length} locations`;
-        } else {
+        } else if (itinerary.locations.length === 1) {
           locations = `${itinerary.locations.length} location`;
+        } else {
+          locations = `${itinerary.locations.length} locations`;
         }
         const href = itinerary.tripId === 'loginNotice'
           ? '#login'
