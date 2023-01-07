@@ -32,7 +32,6 @@ export default class Trip extends React.Component {
         this.setState({ itinerary: JSON.parse(localStorage.getItem('Guest Trip')) });
       }
     }
-
   }
 
   setDeleteClass(name) {
@@ -97,10 +96,10 @@ export default class Trip extends React.Component {
       const name = location.name.includes(',')
         ? location.name.split(',')[0]
         : location.name;
-      let active = location.name === this.props.activeLocation.name
+      let active = this.props.activeLocation && location.name === this.props.activeLocation.name
         ? ' active-location'
         : '';
-      const listItemAnchor = this.props.activeLocation.name === location.name && !this.state.isEditing
+      const listItemAnchor = this.props.activeLocation && this.props.activeLocation.name === location.name && !this.state.isEditing
         ? <a className={`mobile-list-item-anchor`} href={'#location'} onClick={() => {
           this.props.toggleView(location, itinerary.tripId);
         }}>View</a>

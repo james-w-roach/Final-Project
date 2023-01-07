@@ -51,6 +51,14 @@ export default class App extends React.Component {
         const guestTripJSON = JSON.stringify(this.state.guestTrip);
         localStorage.setItem('Guest Trip', guestTripJSON);
       }
+      if (this.state.activeItinerary) {
+        const activeItineraryJSON = JSON.stringify(this.state.activeItinerary);
+        localStorage.setItem('Active Itinerary', activeItineraryJSON);
+      }
+      if (this.state.activeLocation || this.state.activeLocation === null) {
+        const activeLocationJSON = JSON.stringify(this.state.activeLocation);
+        localStorage.setItem('Active Location', activeLocationJSON);
+      }
     });
 
     if (localStorage.getItem('Location')) {
@@ -86,7 +94,30 @@ export default class App extends React.Component {
           if (itineraries.length === 0) {
             this.setState({ itineraries: [] });
           } else {
-            this.setState({ itineraries, activeItinerary: itineraries[0] });
+            this.setState({ itineraries }, () => {
+              if (!this.state.activeItinerary && localStorage.getItem('Active Itinerary')) {
+                const activeItineraryParse = JSON.parse(localStorage.getItem('Active Itinerary'));
+                this.setState({ activeItinerary: activeItineraryParse });
+              } else {
+                let activeItinerary;
+                for (let i = 0; i < itineraries.length; i++) {
+                  if (itineraries[i].tripId ===this.state.activeItinerary.tripId) {
+                    activeItinerary = itineraries[i];
+                  }
+                }
+                if (activeItinerary) {
+                  this.setState({ activeItinerary });
+                } else {
+                  this.setState({ activeItinerary: itineraries[0] });
+                }
+              }
+              if (!this.state.activeLocation && localStorage.getItem('Active Location')) {
+                const activeLocationParse = JSON.parse(localStorage.getItem('Active Location'));
+                if (activeLocationParse) {
+                  this.setState({ activeLocation: activeLocationParse, view: 'itinerary' });
+                }
+              }
+            });
           }
         });
     } else {
@@ -258,11 +289,13 @@ export default class App extends React.Component {
       userId={this.state.userId} />;
     } else if (route === '#location') {
       return <LocationPage
+      userId={this.state.userId}
       updateGuestPOI={this.updateGuestPOI}
       loggedIn={this.state.loggedIn}
       toggleView={this.toggleView}
       location={this.state.location}
-      tripId={this.state.tripId} />;
+      tripId={this.state.tripId}
+      updateItineraries={this.updateItineraries} />;
     } else if (route === '#itineraries') {
       return <ItineraryPage
         toggleView={this.toggleView}
