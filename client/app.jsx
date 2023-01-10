@@ -101,7 +101,7 @@ export default class App extends React.Component {
               } else {
                 let activeItinerary;
                 for (let i = 0; i < itineraries.length; i++) {
-                  if (itineraries[i].tripId ===this.state.activeItinerary.tripId) {
+                  if (this.state.activeItinerary && itineraries[i].tripId === this.state.activeItinerary.tripId) {
                     activeItinerary = itineraries[i];
                   }
                 }
