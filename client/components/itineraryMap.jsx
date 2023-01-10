@@ -126,7 +126,7 @@ export default class ItineraryMap extends React.Component {
         : '';
       this.map.current = new mapboxgl.Map({
         container: this.mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v11',
+        style: 'mapbox://styles/mapbox/streets-v12',
         center: [lng, lat],
         zoom: zoom
       });
@@ -142,7 +142,7 @@ export default class ItineraryMap extends React.Component {
         : '';
       this.map.current = new mapboxgl.Map({
         container: this.mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v11',
+        style: 'mapbox://styles/mapbox/streets-v12',
         center: [lng, lat],
         zoom: zoom
       });
@@ -178,7 +178,7 @@ export default class ItineraryMap extends React.Component {
 
       this.map.current = new mapboxgl.Map({
         container: this.mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v11',
+        style: 'mapbox://styles/mapbox/streets-v12',
         bounds
       });
 
@@ -191,7 +191,7 @@ export default class ItineraryMap extends React.Component {
     } else {
       this.map.current = new mapboxgl.Map({
         container: this.mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v11',
+        style: 'mapbox://styles/mapbox/streets-v12',
         center: [1, 2]
       });
     }
