@@ -1144,7 +1144,7 @@ a:visited {
     overflow: hidden;
     overflow-y: scroll;
     position: relative;
-    display: unset;
+    display: block;
     height: calc(100% - 50px);
     width: 100%;
     left: 0;
