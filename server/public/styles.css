@@ -1220,6 +1220,7 @@ a:visited {
 
   .trip-list-module {
     width: 38%;
+    margin-right: 10px;
   }
 
   .itinerary-map-container {
