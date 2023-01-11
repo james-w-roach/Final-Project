@@ -49,13 +49,14 @@ export default class LocationPage extends React.Component {
     if (localStorage.getItem('Guest Trip')) {
       const guestTrip = JSON.parse(localStorage.getItem('Guest Trip'));
       this.setState({ locations: guestTrip.locations });
-    } else if (this.props.loggedIn) {
+    } else {
       let tripId;
       if (!this.props.tripId) {
         tripId = localStorage.getItem('TripID');
       } else {
         tripId = this.props.tripId;
       }
+
       fetch(`/api/travelPlanner/itineraries/${tripId}`)
         .then(res => res.json())
         .then(result => {
@@ -95,7 +96,8 @@ export default class LocationPage extends React.Component {
       body: JSON.stringify(this.state.locations)
     };
     fetch(`/api/travelPlanner/itineraries/${this.props.tripId}`, req)
-      .then(res => res.json());
+      .then(res => res.json())
+      .then(this.props.updateItineraries());
   }
 
   addGuestPOI = () => {
@@ -136,12 +138,14 @@ export default class LocationPage extends React.Component {
         changeComponent={this.changeComponent}
         handleAdd={this.handleAdd}
         sendPutRequest={this.sendPutRequest}
-        addGuestPOI={this.addGuestPOI} />
+        addGuestPOI={this.addGuestPOI}
+        userId={this.props.userId} />
       );
     }
   }
 
   render() {
+    if (!this.state.locations) return null;
     return (
       <>
         <div className="page-container">

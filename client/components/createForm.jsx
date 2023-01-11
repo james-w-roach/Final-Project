@@ -23,9 +23,10 @@ export default class CreateForm extends React.Component {
         body: JSON.stringify(body)
       };
       fetch('/api/travelPlanner/itineraries', req)
-        .then(res => {
-          res.json();
-          window.location.hash = '#itinerary';
+        .then(res => res.json())
+        .then(() => {
+          this.props.updateItineraries();
+          window.location.hash = '#itineraries';
         });
     } else {
       trip.tripId = 1;

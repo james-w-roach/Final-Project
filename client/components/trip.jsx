@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class ViewTrip extends React.Component {
+export default class Trip extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,30 +23,8 @@ export default class ViewTrip extends React.Component {
     } else {
       userId = this.props.userId;
     }
-    if (userId) {
-      fetch(`/api/travelPlanner/itineraries/users/${userId}`)
-        .then(res => res.json())
-        .then(itineraries => {
-          if (!this.props.trip) {
-            let max = itineraries[0].tripId;
-            let newestTrip = itineraries[0];
-            for (let i = 1; i < itineraries.length; i++) {
-              if (itineraries[i].tripId > max) {
-                max = itineraries[i].tripId;
-                newestTrip = itineraries[i];
-              }
-            }
-            this.setState({ itinerary: newestTrip, max });
-          } else {
-            for (let i = 0; i < itineraries.length; i++) {
-              if (itineraries[i].tripId === this.props.trip) {
-                this.setState({
-                  itinerary: itineraries[i]
-                });
-              }
-            }
-          }
-        });
+    if (userId && this.props.activeItinerary) {
+      this.setState({ itinerary: this.props.activeItinerary });
     } else {
       if (this.props.guestTrip) {
         this.setState({ itinerary: this.props.guestTrip });
@@ -54,7 +32,6 @@ export default class ViewTrip extends React.Component {
         this.setState({ itinerary: JSON.parse(localStorage.getItem('Guest Trip')) });
       }
     }
-
   }
 
   setDeleteClass(name) {
@@ -75,11 +52,8 @@ export default class ViewTrip extends React.Component {
     this.setState({
       itinerary
     });
-    if (this.props.userId) {
-      let tripId = this.props.trip;
-      if (!this.props.trip) {
-        tripId = this.state.max;
-      }
+    if (this.props.userId && this.props.activeItinerary) {
+      const tripId = this.props.activeItinerary.tripId;
       const req = {
         method: 'PUT',
         headers: {
@@ -88,8 +62,21 @@ export default class ViewTrip extends React.Component {
         body: JSON.stringify(itinerary.locations)
       };
       fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
-        .then(res => res.json());
+        .then(res => res.json())
+        .then(() => {
+          this.props.updateItineraries();
+          if (itinerary.locations.length) {
+            this.props.switchActiveLocation(itinerary.locations[0]);
+          } else {
+            this.props.switchActiveLocation();
+          }
+        });
     } else {
+      if (itinerary.locations.length) {
+        this.props.switchActiveLocation(itinerary.locations[0]);
+      } else {
+        this.props.switchActiveLocation();
+      }
       this.props.updateGuestTrip(itinerary);
     }
   }
@@ -97,33 +84,42 @@ export default class ViewTrip extends React.Component {
   render() {
     const { itinerary } = this.state;
     const tripName = itinerary.tripName;
-    let backClass;
-    if (this.props.route) {
-      backClass = 'back';
-    } else {
-      backClass = 'hidden';
-    }
     let listIcon = null;
-    const locationsList = itinerary.locations.map(location => {
+    const locationsList = itinerary.locations.length
+    ? itinerary.locations.map(location => {
       if (this.state.isEditing) {
         listIcon =
           <button className="delete button delete-itinerary" onClick={() => this.setState({ isDeleting: true, name: location.name })}>
             <i className="fas fa-trash"></i>
           </button>;
       }
+      const name = location.name.includes(',')
+        ? location.name.split(',')[0]
+        : location.name;
+      let active = this.props.activeLocation && location.name === this.props.activeLocation.name
+        ? ' active-location'
+        : '';
+      const listItemAnchor = this.props.activeLocation && this.props.activeLocation.name === location.name && !this.state.isEditing
+        ? <a className={`mobile-list-item-anchor`} href={'#location'} onClick={() => {
+          this.props.toggleView(location, itinerary.tripId);
+        }}>View</a>
+        : null;
       return (
-        <li className="trip-list-item dynamic" key={location.name.split(',')[0]} >
-          <a className="list-item" href={'#location'}
-            onClick={() => {
-              this.props.toggleView(location, itinerary.tripId);
-            }}>
+        <li className="trip-list-item dynamic" key={location.name.split(',')[0]}
+          onClick={event => {
+            if (event.target.className !== 'delete-poi button') {
+              this.props.switchActiveLocation(location);
+            }
+          }}>
+          <div className={`list-item${active}`}>
             <div className="list-item-content">
-              {location.name}
+              {name}
             </div>
             <div className="icons">
               {location.poi.length} <i className="fas fa-map-marker-alt"></i>
             </div>
-          </a>
+            {listItemAnchor}
+          </div>
           {listIcon}
           <div className={this.setDeleteClass(location.name)} id={location.name}>
             Delete {location.name.split(',')[0]}?
@@ -137,7 +133,17 @@ export default class ViewTrip extends React.Component {
           </div>
         </li>
       );
-    });
+    })
+    : <li className="trip-list-item dynamic">
+      <div className={`list-item active-location`}>
+        <div className="list-item-content">
+          No locations found.
+        </div>
+      </div>
+    </li>;
+
+    // Users will be able to add more locations from here soon
+
     let editIcon =
       <button className="edit-button" onClick={() => this.setState({ isEditing: true })}>
         <i className="fas fa-pen"></i>
@@ -149,9 +155,12 @@ export default class ViewTrip extends React.Component {
     }
     return (
       <>
-        <div className="main trip">
-          <div className="name trip-title">
-            <a className={backClass} onClick={() => history.back()}><i className="fas fa-arrow-left back-arrow"></i></a>
+        <div className='trip-list-module'>
+          <div className='trip-list-header trip-header'>
+            <a className='back' onClick={() => {
+              this.props.switchView();
+              this.props.switchActiveLocation();
+            }}><i className="fas fa-arrow-left back-arrow"></i></a>
             <h2 style={{ fontSize: '1.5rem' }}>{tripName}</h2>
             {editIcon}
           </div>

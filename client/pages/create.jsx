@@ -7,7 +7,7 @@ export default class Create extends React.Component {
       <>
         <div className="page">
           <div className="page-container">
-            <CreateForm userId={this.props.userId} addGuestTrip={this.props.addGuestTrip} guestTrip={this.props.guestTrip} />
+            <CreateForm updateItineraries={this.props.updateItineraries} switchItinerary={this.props.switchItinerary} userId={this.props.userId} addGuestTrip={this.props.addGuestTrip} guestTrip={this.props.guestTrip} />
           </div>
         </div>
       </>
