@@ -1259,6 +1259,11 @@ a:visited {
     width: 75%;
   }
 
+  .location-page {
+    max-width: 1250px;
+    margin: auto;
+  }
+
 }
 
 @media screen and (min-width: 1400px) {
