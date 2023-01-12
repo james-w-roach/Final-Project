@@ -26,7 +26,6 @@ export default class CreateForm extends React.Component {
         .then(res => res.json())
         .then(() => {
           this.props.updateItineraries();
-          window.location.hash = '#itineraries';
         });
     } else {
       trip.tripId = 1;
