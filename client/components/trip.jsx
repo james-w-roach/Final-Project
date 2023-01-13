@@ -105,7 +105,7 @@ export default class Trip extends React.Component {
         }}>View</a>
         : null;
       return (
-        <li className="trip-list-item dynamic" key={location.name.split(',')[0]}
+        <li className="trip-list-item dynamic" key={location.name}
           onClick={event => {
             if (event.target.className !== 'delete-poi button') {
               this.props.switchActiveLocation(location);

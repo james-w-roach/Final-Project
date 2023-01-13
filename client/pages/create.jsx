@@ -31,7 +31,6 @@ export default class Create extends React.Component {
         tripName: this.state.tripName,
         locations: this.state.locations
       }
-      console.log(trip);
       const body = {
         trip,
         userId
@@ -142,7 +141,7 @@ export default class Create extends React.Component {
 
   updateTripName = event => {
     const tripName = event.target.value;
-    this.setState({ tripName }, () => console.log(this.state.tripName));
+    this.setState({ tripName });
   }
 
   toggleFinish = boolean => {
@@ -169,6 +168,7 @@ export default class Create extends React.Component {
                 handleSubmit={this.handleSubmit}
                 showFinish={this.state.showFinish}
                 updateTripName={this.updateTripName}
+                locations={this.state.locations}
               />
               <CreateMap
                 userId={this.props.userId}

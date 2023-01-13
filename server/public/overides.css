@@ -96,7 +96,7 @@ a.mapboxgl-ctrl-logo {
 
 @media screen and (min-width: 900px) {
   .mapboxgl-ctrl-top-right {
-    width: calc((100vw - 40px)/5 - 3px);
+    width: calc((100vw - 40px)/5 - 5px);
     top: 175px;
     left: calc(-20vw + -8px);
     height: 41px;
