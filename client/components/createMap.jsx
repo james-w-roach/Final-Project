@@ -11,9 +11,9 @@ export default class CreateMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lng: 1,
-      lat: 1,
-      zoom: 1,
+      lng: -40,
+      lat: 30,
+      zoom: 2,
       location: {},
       inLocations: null,
       tripName: '',
@@ -79,7 +79,7 @@ export default class CreateMap extends React.Component {
     const { lng, lat, zoom } = this.state;
     this.map.current = new mapboxgl.Map({
       container: this.mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: 'mapbox://styles/mapbox/streets-v12',
       center: [lng, lat],
       zoom: zoom
     });
@@ -102,7 +102,7 @@ export default class CreateMap extends React.Component {
       new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl,
-        flyTo: { speed: 1 }
+        flyTo: { speed: 0.8 }
       })
         .on('result', result => {
           document.activeElement.blur();
