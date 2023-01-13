@@ -161,7 +161,7 @@ export default class Trip extends React.Component {
               this.props.switchView();
               this.props.switchActiveLocation();
             }}><i className="fas fa-arrow-left back-arrow"></i></a>
-            <h2 style={{ fontSize: '1.5rem' }}>{tripName}</h2>
+            <h2 style={{ fontSize: '1.1rem', maxWidth: '190px', overflow: 'scroll', display: 'inline' }}>{tripName}</h2>
             {editIcon}
           </div>
           <ul className="trip-list">{locationsList}</ul>
