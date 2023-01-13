@@ -1,44 +1,17 @@
 import React from 'react';
-import Mapbox from './map';
 
 export default class CreateForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(trip) {
-    if (this.props.userId) {
-      const userId = this.props.userId;
-      const body = {
-        trip,
-        userId
-      };
-      const req = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-        body: JSON.stringify(body)
-      };
-      fetch('/api/travelPlanner/itineraries', req)
-        .then(res => res.json())
-        .then(() => {
-          this.props.updateItineraries();
-        });
-    } else {
-      trip.tripId = 1;
-      this.props.addGuestTrip(trip);
-    }
-  }
 
   render() {
     return (
-      <div className="main">
-        <Mapbox
-          onSubmit={this.handleSubmit} userId={this.props.userId} guestTrip={this.props.guestTrip}
-        />
+      <div className="map-form">
+        <h2 className='create-form-header'>New Itinerary</h2>
+        <form onSubmit={this.handleLift} autoComplete="off">
+          <label className='create-form-label' htmlFor='trip-name'>Itinerary Name</label>
+          <input className="name create-form-name" required="required" type="text" name="trip-name" placeholder="Give your trip a name." onChange={this.handleChange} />
+        </form>
+        <h3 className='create-form-subheader'>Add Locations</h3>
+        <ul className="trip-list create-list"></ul>
       </div>
     );
   }

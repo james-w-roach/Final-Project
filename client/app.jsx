@@ -97,7 +97,6 @@ export default class App extends React.Component {
             this.setState({ itineraries }, () => {
               if (window.location.hash === '#create') {
                 this.setState({ activeItinerary: itineraries[itineraries.length - 1] });
-                window.location.hash = '#itineraries';
               } else {
                 if (!this.state.activeItinerary && localStorage.getItem('Active Itinerary')) {
                   const activeItineraryParse = JSON.parse(localStorage.getItem('Active Itinerary'));
