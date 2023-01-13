@@ -81,7 +81,7 @@ export default class App extends React.Component {
     this.updateItineraries();
   }
 
-  updateItineraries = () => {
+  updateItineraries = newItinerary => {
     let userId = this.state.userId;
     if (!userId) {
       userId = localStorage.getItem('UserID');
@@ -95,8 +95,9 @@ export default class App extends React.Component {
             this.setState({ itineraries: [] });
           } else {
             this.setState({ itineraries }, () => {
-              if (window.location.hash === '#create') {
+              if (window.location.hash === '#create' && newItinerary) {
                 this.setState({ activeItinerary: itineraries[itineraries.length - 1] });
+                window.location.hash = '#itineraries';
               } else {
                 if (!this.state.activeItinerary && localStorage.getItem('Active Itinerary')) {
                   const activeItineraryParse = JSON.parse(localStorage.getItem('Active Itinerary'));

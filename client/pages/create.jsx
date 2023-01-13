@@ -5,11 +5,33 @@ import CreateMap from '../components/createMap';
 export default class Create extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      locations: [],
+      location: {},
+      inLocations: null,
+      tripName: '',
+      showFinish: null
+    }
   }
 
-  handleSubmit = trip => {
+  handleSubmit = () => {
+    event.preventDefault();
+    if (!this.state.locations[0]) {
+      document.activeElement.blur();
+      window.alert('Please add at least one location to your itinerary to continue.');
+      return;
+    } else if (!this.state.tripName) {
+      document.activeElement.blur();
+      window.alert('Please add a name for your trip to continue.');
+      return;
+    }
     if (this.props.userId) {
       const userId = this.props.userId;
+      const trip = {
+        tripName: this.state.tripName,
+        locations: this.state.locations
+      }
+      console.log(trip);
       const body = {
         trip,
         userId
@@ -25,30 +47,139 @@ export default class Create extends React.Component {
       fetch('/api/travelPlanner/itineraries', req)
         .then(res => res.json())
         .then(() => {
-          this.props.updateItineraries();
-          window.location.hash = '#itineraries';
+          this.props.updateItineraries(true);
         });
     } else {
       trip.tripId = 1;
       this.props.addGuestTrip(trip);
     }
   }
+
+  addLocation = result => {
+    this.setState({ inLocations: null }, () => this.toggleFinish(false));
+    let locationName;
+    if (result.result['place_name_en-us']) {
+      locationName = result.result['place_name_en-us'];
+    } else {
+      locationName = result.result['place_name_en-US'];
+    }
+    const lng = result.result.center[0];
+    const lat = result.result.center[1];
+    if (!this.state.locations[0]) {
+      this.setState({
+        location: {
+          name: locationName,
+          lat,
+          lng,
+          restaurants: [],
+          poi: []
+        },
+        inLocations: false
+      });
+    } else {
+      for (let i = 0; i < this.state.locations.length; i++) {
+        if (this.state.locations[i].name === locationName) {
+          this.setState({
+            location: {
+              name: locationName,
+              lat,
+              lng,
+              restaurants: [],
+              poi: []
+            },
+            inLocations: true
+          }, () => setTimeout(() => {
+            this.toggleFinish(true);
+          }, 2000));
+          break;
+        }
+      }
+      if (!this.state.inLocations) {
+        this.setState({
+          location: {
+            name: locationName,
+            lat,
+            lng,
+            restaurants: [],
+            poi: []
+          },
+          inLocations: false
+        });
+      }
+    }
+  }
+
+  handleClick = () => {
+    if (!this.state.location.name) {
+      return;
+    }
+    if (!this.state.inLocations) {
+      const newLocation = this.state.location;
+      this.setState({
+        locations: this.state.locations.concat(newLocation),
+        inLocations: true
+      }, () => {
+        this.toggleFinish(false);
+        setTimeout(() => {
+          this.toggleFinish(true);
+        }, 2000);
+      }
+      );
+    } else {
+      window.alert(`${this.state.location.name.split(',')[0]} has already been added.`);
+    }
+  }
+
+  getButtonText = () => {
+    if (!this.state.location.name) {
+      return 'Search For a Location';
+    } else if (!this.state.inLocations || this.state.inLocations === null) {
+      return `Add ${this.state.location.name.split(',')[0]}`;
+    } else {
+      return `${this.state.location.name.split(',')[0]} Added!`;
+    }
+  }
+
+  updateTripName = event => {
+    const tripName = event.target.value;
+    this.setState({ tripName }, () => console.log(this.state.tripName));
+  }
+
+  toggleFinish = boolean => {
+    if (boolean) {
+      this.setState({ showFinish: true });
+    } else {
+      this.setState({ showFinish: false });
+    }
+  }
+
   render() {
+    const deletionNotice = !this.props.userId && this.props.guestTrip
+      ? <div className='deletion-notice'>
+        <p>{`${this.props.guestTrip.tripName} will be deleted if you add another itinerary. Please create an account to save more than one trip.`}</p>
+      </div>
+      : null;
     return (
       <>
         <div className="page">
           <div className="page-container">
             <div className="main create-page">
+              {deletionNotice}
               <CreateForm
                 handleSubmit={this.handleSubmit}
-                updateItineraries={this.props.updateItineraries}
-                switchItinerary={this.props.switchItinerary}
-                userId={this.props.userId}
-                addGuestTrip={this.props.addGuestTrip}
-                guestTrip={this.props.guestTrip}
+                showFinish={this.state.showFinish}
+                updateTripName={this.updateTripName}
               />
               <CreateMap
-                onSubmit={this.handleSubmit} userId={this.props.userId} guestTrip={this.props.guestTrip}
+                userId={this.props.userId}
+                guestTrip={this.props.guestTrip}
+                addLocation={this.addLocation}
+                showFinish={this.state.showFinish}
+                toggleFinish={this.toggleFinish}
+                location={this.state.location}
+                inLocations={this.state.inLocations}
+                handleClick={this.handleClick}
+                getButtonText={this.getButtonText}
               />
             </div>
           </div>
