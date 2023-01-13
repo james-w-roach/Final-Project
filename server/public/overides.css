@@ -116,6 +116,10 @@ a.mapboxgl-ctrl-logo {
     height: 100%;
   }
 
+  .mapboxgl-ctrl-geocoder input::placeholder {
+    color: black;
+  }
+
   .mapboxgl-ctrl-geocoder svg {
     top: calc(50% - 10px);
   }

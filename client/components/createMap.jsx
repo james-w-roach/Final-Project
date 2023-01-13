@@ -11,9 +11,9 @@ export default class CreateMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lng: -70.9,
-      lat: 42.35,
-      zoom: 9,
+      lng: 1,
+      lat: 1,
+      zoom: 1,
       location: {},
       inLocations: null,
       tripName: '',
