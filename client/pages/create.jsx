@@ -152,6 +152,18 @@ export default class Create extends React.Component {
     }
   }
 
+  deleteLocation = location => {
+    if (location) {
+      const { locations } = this.state;
+      for (let i = 0; i < locations.length; i++) {
+        if (locations[i].name === location) {
+          locations.splice(i, 1);
+        }
+      }
+      this.setState({ locations });
+    }
+  }
+
   render() {
     const deletionNotice = !this.props.userId && this.props.guestTrip
       ? <div className='deletion-notice'>
@@ -169,6 +181,7 @@ export default class Create extends React.Component {
                 showFinish={this.state.showFinish}
                 updateTripName={this.updateTripName}
                 locations={this.state.locations}
+                deleteLocation={this.deleteLocation}
               />
               <CreateMap
                 userId={this.props.userId}

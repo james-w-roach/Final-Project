@@ -1201,15 +1201,36 @@ a:visited {
     padding: 0 3px;
   }
 
-  .locations-subheader {
+  .locations-subheader-container {
     position: absolute;
-    top: 295px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 315px;
+    width: calc(20% - 5px);
+  }
+
+  .edit-locations {
+    position: relative;
+    top: unset;
+    right: unset;
+    width: 25px;
+    height: 25px;
+    font-size: 0.8rem;
+    display: block;
+    padding: 0;
+  }
+
+  .delete-location {
+    flex-direction: row;
+    padding: 5px;
+    justify-content: space-between;
   }
 
   .create-list {
     overflow-x: visible;
     padding: 0;
-    top: 155px;
+    top: 165px;
     height: calc(100vh - 420px);
   }
 

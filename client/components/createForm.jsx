@@ -1,8 +1,34 @@
 import React from 'react';
 
 export default class CreateForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isEditing: false,
+      isDeleting: false,
+      name: ''
+    }
+  }
+
+  setDeleteClass(name) {
+    if (this.state.isDeleting && name === this.state.name) {
+      return 'delete-module delete-location';
+    } else {
+      return 'hidden';
+    }
+  }
 
   render() {
+    let editIcon =
+      <button className="edit-button edit-locations" onClick={() => this.setState({ isEditing: true })}>
+        <i className="fas fa-pen"></i>
+      </button>;
+    if (this.state.isEditing) {
+      editIcon = <button className="edit-button edit-locations" onClick={() => this.setState({ isEditing: false, isDeleting: false })}>
+        <i className="fas fa-times x-icon"></i>
+      </button>;
+    }
+
     const finishClass = this.props.showFinish
       ? 'finish button'
       : 'hidden';
@@ -11,30 +37,29 @@ export default class CreateForm extends React.Component {
       const name = location.name.includes(',')
         ? location.name.split(',')[0]
         : location.name;
-       return (
-         <li className="trip-list-item" key={location.name}
-           /* onClick={event => {
-             if (event.target.className !== 'delete-poi button') {
-               this.props.switchActiveLocation(location);
-             }
-           } */>
-           <div className='list-item'>
-             <div className="list-item-content">
-               {name}
-             </div>
-           </div>
-           {/* {listIcon}
-           <div className={this.setDeleteClass(location.name)} id={location.name}>
-             Delete {location.name.split(',')[0]}?
-             <div>
-               <button className='delete-poi button' onClick={() => {
-                 this.deleteLocation(location.name);
-                 this.setState({ isDeleting: false });
-               }}>Delete</button>
-               <button className='cancel button' onClick={() => this.setState({ isDeleting: false })}>Cancel</button>
-             </div>
-              </div> */}
-         </li>
+      let listIcon;
+      if (this.state.isEditing) {
+        listIcon =
+          <button className="delete button delete-itinerary" style={{ top: '15%', height: '70%', right: '10px' }} onClick={() => this.setState({ isDeleting: true, name: location.name })}>
+            <i className="fas fa-trash"></i>
+          </button>;
+      }
+      return (
+        <li className="trip-list-item" key={location.name}>
+          <div className='list-item'>
+            <div className="list-item-content">
+              {name}
+            </div>
+          </div>
+          {listIcon}
+          <div className={this.setDeleteClass(location.name)} id={location.name}>
+            <button className='delete-poi button' style={{ margin: '0', width: 'calc(50% - 5px)' }} onClick={() => {
+              this.props.deleteLocation(location.name);
+              this.setState({ isDeleting: false });
+            }}>Delete</button>
+            <button className='cancel button' style={{ margin: '0', width: 'calc(50% - 5px)' }} onClick={() => this.setState({ isDeleting: false })}>Cancel</button>
+          </div>
+        </li>
        );
      })
       : <li className = "trip-list-item">
@@ -53,7 +78,10 @@ export default class CreateForm extends React.Component {
           <input className={finishClass} type="submit" value="Finish Itinerary" />
         </form>
         <h3 className='create-form-subheader'>Add Locations</h3>
-        <h3 className='create-form-subheader locations-subheader'>Locations</h3>
+        <div className='locations-subheader-container'>
+          <h3 className='create-form-subheader' style={{ margin: '0' }}>Locations</h3>
+          {editIcon}
+        </div>
         <ul className="trip-list create-list">{locations}</ul>
       </div>
     );
