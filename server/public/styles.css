@@ -88,18 +88,72 @@ h4 {
   justify-content: center;
 }
 
+.create-page {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  padding: 145px 5px 5px;
+}
+
+.create-form-name {
+  border: none;
+  outline: none;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgb(200, 200, 200);
+  font-size: 1rem;
+  font-weight: 300;
+  color: black;
+  padding: 10px 12.5px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.map-box {
+  width: 100%;
+}
+
+.map-form {
+  width: 100%;
+  margin-top: 75px;
+}
+
 .create {
   border-radius: 0.4rem;
   padding: 1.5rem;
   margin: 1rem 0;
 }
 
-.add {
-  position: fixed;
-  bottom: 5px;
+.create-form-label,
+.create-form-subheader {
+  color: #0e58a8;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.add-locations {
+  display: none;
+}
+
+.add,
+.finish {
+  position: absolute;
+  top: 405px;
   width: calc(100% - 10px);
   left: 5px;
-  padding: 1rem 0.5rem;
+  height: 50px;
+  font-size: 1.2rem;
+}
+
+.half {
+  width: calc(50% - 10px);
+}
+
+.finish-half {
+  width: calc(50% - 10px);
+  right: 5px;
+  left: unset;
 }
 
 .save {
@@ -129,6 +183,27 @@ h4 {
   display: grid;
 }
 
+.edit-locations {
+  box-shadow: 0 1px 3px rgb(200, 200, 200);
+}
+
+.locations-subheader-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.edit-locations {
+  position: relative;
+  top: unset;
+  right: unset;
+  width: 30px;
+  height: 30px;
+  font-size: 0.8rem;
+  display: block;
+  padding: 0;
+}
+
 .loader {
   margin: auto;
   border: 15px solid white;
@@ -144,17 +219,9 @@ h4 {
   100% { transform: rotate(360deg); }
 }
 
-.finish {
-  position: fixed;
-  bottom: 5px;
-  left: 0.3rem;
-  width: calc(100% - 10px);
-  padding: 1rem 2rem;
-  -webkit-appearance: none;
-}
-
 .name,
-.trip-list-header {
+.trip-list-header,
+.create-form-header {
   font-size: 1.5rem;
   text-align: center;
   background-color: #0e58a8;
@@ -170,6 +237,10 @@ h4 {
 
 ::placeholder {
   color: rgba(255, 255, 255, 1);
+}
+
+.create-form-name::placeholder {
+  color: black;
 }
 
 .added {
@@ -194,6 +265,10 @@ ul {
   top: 345px;
   left: 5px;
   width: calc(100% - 10px);
+}
+
+.create-list {
+  top: 600px;
 }
 
 .trip-list-item {
@@ -389,6 +464,12 @@ ul {
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
+}
+
+.delete-location {
+  flex-direction: row;
+  padding: 5px;
+  justify-content: space-between;
 }
 
 .delete {
@@ -715,9 +796,6 @@ a:visited {
 }
 
 @media screen and (min-width: 415px) {
-  .map-form {
-    width: 100%;
-  }
 
   .name {
     position: relative;
@@ -753,8 +831,6 @@ a:visited {
 
   .map-box {
     position: relative;
-    width: 100%;
-    height: 90%;
   }
 
   .deletion-notice {
@@ -767,16 +843,6 @@ a:visited {
     margin: 15px 0 0;
     text-align: center;
     display: block;
-  }
-
-  .add,
-  .finish {
-    position: absolute;
-    bottom: 10px;
-    width: 60%;
-    left: 20%;
-    padding: 0.5rem 0.3rem;
-    font-size: 1.2rem;
   }
 
   .save {
@@ -890,14 +956,6 @@ a:visited {
   }
 }
 
-@media screen and (min-width: 450px) {
-  .add,
-  .finish {
-    width: 50%;
-    left: 25%;
-  }
-}
-
 @media screen and (min-width: 500px) {
   .search {
     width: 50%;
@@ -927,18 +985,28 @@ a:visited {
 
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 640px) {
 
   .add,
   .finish {
-    width: 40%;
-    left: 30%;
-    padding: 0.5rem 10px;
-    font-size: 1rem;
+    width: calc(50% - 5px);
+    left: unset;
+    right: 5px;
+    top: 85px;
   }
-}
 
-@media screen and (min-width: 650px) {
+  .map-form {
+    margin-top: 20px;
+  }
+
+  .itinerary-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .create-form-name {
+    width: 49%;
+  }
 
   .itinerary-map-container,
   .location-map {
@@ -947,6 +1015,10 @@ a:visited {
 
   .trip-list {
     top: 445px;
+  }
+
+  .create-list {
+    top: 665px;
   }
 
   .trip-list,
@@ -989,14 +1061,22 @@ a:visited {
   .map-box {
     height: 100%;
     width: 75%;
-    margin-left: 10px;
   }
 
   .create-form-header {
+    position: relative;
     color: #0e58a8;
     border-bottom: solid thin #0e58a8;
+    margin: 0;
+    padding: 0;
     padding-bottom: 5px;
     margin-bottom: 20px;
+    text-align: left;
+    background-color: transparent;
+    border-radius: 0;
+    top: unset;
+    left: unset;
+    width: unset
   }
 
   .create-form-label,
@@ -1006,8 +1086,20 @@ a:visited {
     font-weight: bold;
   }
 
+  .add-locations {
+    display: block;
+  }
+
+  .create-form-label {
+    margin-top: 0;
+  }
+
   .create-form-subheader {
     margin-top: 15px;
+  }
+
+  .locations-subheader-container .create-form-subheader {
+    margin: 0;
   }
 
   .create-form-name {
@@ -1020,10 +1112,6 @@ a:visited {
     padding: 10px 12.5px;
     margin-top: 10px;
     width: 100%;
-  }
-
-  .create-form-name::placeholder {
-    color: black;
   }
 
   .location-page {
@@ -1203,28 +1291,13 @@ a:visited {
 
   .locations-subheader-container {
     position: absolute;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     top: 315px;
     width: calc(20% - 5px);
   }
 
   .edit-locations {
-    position: relative;
-    top: unset;
-    right: unset;
     width: 25px;
     height: 25px;
-    font-size: 0.8rem;
-    display: block;
-    padding: 0;
-  }
-
-  .delete-location {
-    flex-direction: row;
-    padding: 5px;
-    justify-content: space-between;
   }
 
   .create-list {
@@ -1246,6 +1319,7 @@ a:visited {
 
   .trip-list-module,
   .map-form {
+    margin-top: 0;
     width: 25%;
     height: calc(100vh - 100px);
   }
@@ -1291,7 +1365,7 @@ a:visited {
 
   .add,
   .finish {
-    width: calc(20% - 4px);
+    width: calc(38% - 10px);
     height: 41px;
     bottom: unset;
     top: 255px;
@@ -1306,7 +1380,14 @@ a:visited {
   .trip-list-module,
   .map-form {
     width: 38%;
+  }
+
+  .trip-list-module {
     margin-right: 10px;
+  }
+
+  .map-form {
+    padding-right: 10px;
   }
 
   .itinerary-map-container,

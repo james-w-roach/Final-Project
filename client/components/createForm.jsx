@@ -72,14 +72,14 @@ export default class CreateForm extends React.Component {
     return (
       <div className="map-form">
         <h2 className='create-form-header'>New Itinerary</h2>
-        <form onSubmit={() => this.props.handleSubmit()} autoComplete="off">
+        <form onSubmit={() => this.props.handleSubmit()} autoComplete="off" className='itinerary-form'>
           <label className='create-form-label' htmlFor='trip-name'>Itinerary Name</label>
-          <input className="name create-form-name" required="required" type="text" maxLength='20' name="trip-name" placeholder="Give your trip a name." onChange={event => this.props.updateTripName(event)} />
+          <input className="create-form-name" required="required" type="text" maxLength='20' name="trip-name" placeholder="Give your trip a name." onChange={event => this.props.updateTripName(event)} />
           <input className={finishClass} type="submit" value="Finish Itinerary" />
         </form>
-        <h3 className='create-form-subheader'>Add Locations</h3>
+        <h3 className='create-form-subheader add-locations'>Add Locations</h3>
         <div className='locations-subheader-container'>
-          <h3 className='create-form-subheader' style={{ margin: '0' }}>Locations</h3>
+          <h3 className='create-form-subheader'>Locations</h3>
           {editIcon}
         </div>
         <ul className="trip-list create-list">{locations}</ul>

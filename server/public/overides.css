@@ -1,32 +1,23 @@
 .map-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: calc(100vh - 60px);
+  height: 250px;
+  width: 100%;
+  overflow: visible;
+  box-shadow: 0 1px 3px rgb(200, 200, 200);
+  border-radius: 0.5rem;
 }
 
 .mapboxgl-ctrl-top-right {
-  width: calc(100% - 10px);
-  top: 70px;
-  left: 5px;
+  width: 100%;
+  top: -70px;
+  left: 0px;
+}
+
+.mapboxgl-ctrl-geocoder {
+  border-radius: 0.4rem !important;
 }
 
 .mapboxgl-ctrl-top-right .mapboxgl-ctrl {
   float: left;
-}
-
-.background-map > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-right,
-.background-map > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-left {
-  position: fixed;
-  bottom: 0;
-}
-
-.map-box > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-right,
-.map-box > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-left {
-  position: fixed;
-  bottom: 75px;
 }
 
 .mapboxgl-ctrl-geocoder {
@@ -53,12 +44,46 @@ a.mapboxgl-ctrl-logo {
   outline: none;
 }
 
-@media screen and (min-width: 415px) {
+@media screen and (min-width: 640px) {
+
   .map-container {
-    border-radius: 0.5rem;
+    height: 350px;
+  }
+
+  .mapboxgl-ctrl-geocoder {
+    width: calc(50% - 5px) !important;
+    max-width: calc(50% - 5px) !important;
+  }
+
+  .mapboxgl-ctrl-geocoder input {
+    font: inherit;
+    width: 100%;
+    border: 0;
+    background-color: transparent;
+    margin: 0;
+    height: 50px;
+    color: #404040;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 6px 45px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .mapboxgl-ctrl-geocoder svg {
+    position: absolute;
+    top: 13px;
+    left: 12px;
+    width: 23px;
+    height: 23px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+
+  .map-container {
     height: 100%;
     position: relative;
-    box-shadow: 0 1px 3px gray;
   }
 
   .background {
@@ -92,9 +117,7 @@ a.mapboxgl-ctrl-logo {
   .mapboxgl-ctrl-top-right > .mapboxgl-ctrl {
     margin: 10px 0;
   }
-}
 
-@media screen and (min-width: 900px) {
   .mapboxgl-ctrl-top-right {
     width: calc((100vw - 40px)/5 - 5px);
     top: 175px;
@@ -125,7 +148,6 @@ a.mapboxgl-ctrl-logo {
   }
 
   .map-container {
-    overflow: visible;
     position: unset;
   }
 }
