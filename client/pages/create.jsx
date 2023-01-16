@@ -117,6 +117,10 @@ export default class Create extends React.Component {
       return;
     }
     if (!this.state.inLocations) {
+      if (this.state.locations.length === 20) {
+        window.alert('You have reached the limit of 20 locations.');
+        return;
+      }
       const newLocation = this.state.location;
       this.setState({
         locations: this.state.locations.concat(newLocation),
