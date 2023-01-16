@@ -259,11 +259,15 @@ export default class App extends React.Component {
     this.setState({ guestTrip });
   }
 
-  switchView = () => {
-    if (this.state.view === 'itineraries') {
-      this.setState({ view: 'itinerary' });
+  switchView = view => {
+    if (view && view === 'itineraries') {
+      this.setState({ view: 'itineraries' }, () => this.switchActiveLocation());
     } else {
-      this.setState({ view: 'itineraries' });
+      if (this.state.view === 'itineraries') {
+        this.setState({ view: 'itinerary' });
+      } else {
+        this.setState({ view: 'itineraries' });
+      }
     }
   }
 
@@ -324,9 +328,9 @@ export default class App extends React.Component {
       : 'nav-drawer drawer-visible';
     return (
       <>
-        <Header loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} showDrawer={this.showDrawer} />
+        <Header loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} showDrawer={this.showDrawer} switchView={this.switchView} />
         { this.renderPage() }
-        <NavDrawer loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} showDrawer={this.showDrawer} navDrawerClass={navDrawerClass} />
+        <NavDrawer loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} showDrawer={this.showDrawer} switchView={this.switchView} navDrawerClass={navDrawerClass} />
       </>
     );
   }
