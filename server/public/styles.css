@@ -1134,6 +1134,40 @@ a:visited {
     height: 450px;
   }
 
+  .text-button {
+    background-color: #0e58a8;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    width: calc(50% - 5px);
+    padding: 10px;
+    font-size: 1rem;
+    box-shadow: 0 1px 3px rgb(200, 200, 200);
+    transition: background-color 0.3s;
+  }
+
+  .text-button:hover {
+    background-color: white;
+    color:#0e58a8;
+    cursor: pointer;
+  }
+
+  .header-button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+
+  .trip-list-h2 {
+    color: #0e58a8;
+    padding-bottom: 5px;
+    border-bottom: solid thin #0e58a8;
+    font-size: 1.5rem;
+    font-weight: bold;
+    overflow: scroll;
+    display: block;
+  }
+
   .row {
     display: flex;
     justify-content: space-between;
