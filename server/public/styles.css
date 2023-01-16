@@ -1572,13 +1572,13 @@ a:visited {
 
   .trip-list-module,
   .map-form {
-    max-width: 400px;
+    width: 400px;
   }
 
   .add,
   .finish,
   .locations-subheader-container {
-    max-width: 390px;
+    width: 390px;
   }
 
   .itinerary-map-container,

@@ -49,7 +49,11 @@ export default class Create extends React.Component {
           this.props.updateItineraries(true);
         });
     } else {
-      trip.tripId = 1;
+      const trip = {
+        tripName: this.state.tripName,
+        locations: this.state.locations,
+        tripId: 1
+      }
       this.props.addGuestTrip(trip);
     }
   }

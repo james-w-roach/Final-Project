@@ -18,7 +18,6 @@ export default class Trip extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.state.matches);
     window.matchMedia('(min-width: 900px)').addEventListener('change', e => {
       this.setState({ matches: e.matches });
     });
