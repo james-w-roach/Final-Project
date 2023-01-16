@@ -86,7 +86,7 @@
     position: relative;
   }
 
-  .mapboxgl-canvas {
+  .map-box > .map-container > .mapboxgl-canvas-container > .mapboxgl-canvas {
     left: 10px;
   }
 

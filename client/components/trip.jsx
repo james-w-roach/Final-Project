@@ -200,7 +200,7 @@ export default class Trip extends React.Component {
       <>
         <div className='trip-list-module'>
           {headerContent}
-          <ul className="trip-list">{locationsList}</ul>
+          <ul className="trip-list itinerary">{locationsList}</ul>
         </div>
       </>
     );
