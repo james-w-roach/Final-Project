@@ -4,7 +4,7 @@ Voyager is a travel planner that lets users create and edit itineraries. Users c
 
 ## Demo
 
-The site can be accessed using this link: https://voyager-web-app.herokuapp.com/
+The site can be accessed using this link: https://voyager.herokuapp.com/
 
 ## Features
 - User can create an itinerary
