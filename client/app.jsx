@@ -130,6 +130,12 @@ export default class App extends React.Component {
         guestTrip = JSON.parse(localStorage.getItem('Guest Trip'));
       }
       if (guestTrip) {
+        if (!this.state.activeLocation && localStorage.getItem('Active Location')) {
+          const activeLocationParse = JSON.parse(localStorage.getItem('Active Location'));
+          if (activeLocationParse) {
+            this.setState({ activeLocation: activeLocationParse, view: 'itinerary' });
+          }
+        }
         const loginNotice = {
           tripName: 'Sign in to create more than one trip.',
           locations: 'Your guest trip will be saved.',
