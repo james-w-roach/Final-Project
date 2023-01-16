@@ -160,7 +160,7 @@ export default class App extends React.Component {
       }
     }
     if (this.state.itineraries.length === 0) {
-      this.setState({ itineraries: null, activeItinerary: null });
+      this.setState({ itineraries: [], activeItinerary: null });
     } else if (this.state.itineraries.length <= currentIndex) {
       this.setState({ activeItinerary: this.state.itineraries[currentIndex - 1] });
     } else {
@@ -176,7 +176,7 @@ export default class App extends React.Component {
       fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
         .then(res => res.json());
     } else {
-      this.setState({ itineraries: null, activeItinerary: null });
+      this.setState({ itineraries: [], activeItinerary: null });
       this.updateGuestTrip(null);
     }
   }
@@ -223,7 +223,7 @@ export default class App extends React.Component {
 
       localStorage.removeItem('Guest Trip');
     }
-    this.setState({ loggedIn: true, userId: result.user.userId, itineraries: null, guestTrip: null }, () => this.updateItineraries());
+    this.setState({ loggedIn: true, userId: result.user.userId, itineraries: [], guestTrip: null }, () => this.updateItineraries());
     window.location.hash = '#itineraries';
   }
 

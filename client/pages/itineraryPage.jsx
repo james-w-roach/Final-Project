@@ -12,7 +12,7 @@ export default class ItineraryPage extends React.Component {
     let itineraryContent = null;
     let noItineraryContent = null;
     let listContent;
-    if ((this.props.itineraries && !this.props.itineraries.length) || !this.props.itineraries) {
+    if (this.props.itineraries && !this.props.itineraries.length) {
       if (!this.props.userId) {
         noItineraryContent = <div className="no-trips">
           <h2>Nothing to see here yet. <br />Click below to get started.</h2>
