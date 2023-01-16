@@ -794,7 +794,15 @@ a:visited {
 }
 
 .deletion-notice {
-  display: none;
+  background-color: rgb(232, 14, 14);
+  color: white;
+  font-size: 14px !important;
+  border-radius: 0.4rem;
+  padding: 7px 10px;
+  box-shadow: 0 1px 3px darkred;
+  margin-bottom: 10px;
+  text-align: center;
+  display: block;
 }
 
 .trip-list-container {
@@ -841,18 +849,6 @@ a:visited {
 
   .map-box {
     position: relative;
-  }
-
-  .deletion-notice {
-    background-color: rgb(232, 14, 14);
-    color: white;
-    font-size: 15px;
-    border-radius: 0.4rem;
-    padding: 7px 10px;
-    box-shadow: 0 1px 3px darkred;
-    margin: 15px 0 0;
-    text-align: center;
-    display: block;
   }
 
   .save {

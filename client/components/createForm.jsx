@@ -69,6 +69,11 @@ export default class CreateForm extends React.Component {
           </div>
         </div>
       </li>;
+    const deletionNotice = !this.props.userId && this.props.guestTrip
+      ? <li className="trip-list-item deletion-notice">
+        <p>{`If you save this trip, ${this.props.guestTrip.tripName} will be deleted. Please create an account to add more trips.`}</p>
+      </li>
+      : null;
     return (
       <div className="map-form">
         <h2 className='create-form-header'>New Itinerary</h2>
@@ -82,7 +87,10 @@ export default class CreateForm extends React.Component {
           <h3 className='create-form-subheader'>Locations</h3>
           {editIcon}
         </div>
-        <ul className="trip-list create-list">{locations}</ul>
+        <ul className="trip-list create-list">
+          {deletionNotice}
+          {locations}
+        </ul>
       </div>
     );
   }

@@ -169,23 +169,19 @@ export default class Create extends React.Component {
   }
 
   render() {
-    const deletionNotice = !this.props.userId && this.props.guestTrip
-      ? <div className='deletion-notice'>
-        <p>{`${this.props.guestTrip.tripName} will be deleted if you add another itinerary. Please create an account to save more than one trip.`}</p>
-      </div>
-      : null;
     return (
       <>
         <div className="page">
           <div className="page-container">
             <div className="main create-page">
-              {deletionNotice}
               <CreateForm
                 handleSubmit={this.handleSubmit}
                 showFinish={this.state.showFinish}
                 updateTripName={this.updateTripName}
                 locations={this.state.locations}
                 deleteLocation={this.deleteLocation}
+                userId={this.props.userId}
+                guestTrip={this.props.guestTrip}
               />
               <CreateMap
                 userId={this.props.userId}

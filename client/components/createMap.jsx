@@ -36,12 +36,6 @@ export default class CreateMap extends React.Component {
       });
     });
 
-    this.map.current.on('load', () => {
-      if (!this.props.userId && this.props.guestTrip) {
-        window.alert(`Your current guest itinerary, ${this.props.guestTrip.tripName}, will be deleted if you add another itinerary. Please create an account to save more than one trip.`)
-      }
-    });
-
     this.map.current.addControl(
       new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
@@ -70,7 +64,6 @@ export default class CreateMap extends React.Component {
     } else {
       addClass = 'add button added';
     }
-
     return (
       <>
         <div className="map-box">
