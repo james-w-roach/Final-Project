@@ -178,7 +178,7 @@ export default class Trip extends React.Component {
     const headerContent = this.state.matches
       ? <div className='trip-list-header' style={{ marginBottom: '5px' }}>
           <div className='trip-list-header-row'>
-            <h2 className="trip-list-h2">{tripName}</h2>
+            <h2 className="trip-list-h2" style={{ height: '35px' }}>{tripName}</h2>
           </div>
           <div className='trip-list-header-row header-button-row'>
             <button className='text-button' onClick={() => {
