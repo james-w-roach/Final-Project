@@ -1,5 +1,7 @@
 set client_min_messages to warning;
 
+drop schema "public" cascade;
+
 create schema if not exists "public";
 
 create table if not exists "public"."itineraries" (
