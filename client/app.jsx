@@ -1,5 +1,4 @@
 import React from 'react';
-import Home from './pages/home';
 import Create from './pages/create';
 import LocationPage from './pages/locationPage';
 import ItineraryPage from './pages/itineraryPage';
@@ -283,9 +282,7 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     const hash = window.location.hash;
-    if (route === '') {
-      return <Home loggedIn={this.state.loggedIn} />;
-    } if (route === '#create') {
+    if (route === ''|| route === '#create') {
       return <Create
       updateItineraries={this.updateItineraries}
       addGuestTrip={this.addGuestTrip}
