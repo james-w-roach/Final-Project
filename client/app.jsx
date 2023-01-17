@@ -294,19 +294,21 @@ export default class App extends React.Component {
     const hash = window.location.hash;
     if (route === ''|| route === '#create') {
       return <Create
-      updateItineraries={this.updateItineraries}
-      addGuestTrip={this.addGuestTrip}
-      guestTrip={this.state.guestTrip}
-      userId={this.state.userId} />;
+        updateItineraries={this.updateItineraries}
+        addGuestTrip={this.addGuestTrip}
+        guestTrip={this.state.guestTrip}
+        userId={this.state.userId}
+      />;
     } else if (route === '#location') {
       return <LocationPage
-      userId={this.state.userId}
-      updateGuestPOI={this.updateGuestPOI}
-      loggedIn={this.state.loggedIn}
-      toggleView={this.toggleView}
-      location={this.state.location}
-      tripId={this.state.tripId}
-      updateItineraries={this.updateItineraries} />;
+        userId={this.state.userId}
+        updateGuestPOI={this.updateGuestPOI}
+        loggedIn={this.state.loggedIn}
+        toggleView={this.toggleView}
+        location={this.state.location}
+        tripId={this.state.tripId}
+        updateItineraries={this.updateItineraries}
+      />;
     } else if (route === '#itineraries') {
       return <ItineraryPage
         toggleView={this.toggleView}
@@ -321,9 +323,16 @@ export default class App extends React.Component {
         deleteItinerary={this.deleteItinerary}
         guestTrip={this.state.guestTrip}
         updateGuestTrip={this.updateGuestTrip}
-        userId={this.state.userId} />;
+        userId={this.state.userId}
+      />;
     } else if (route === '#login' || route === '#sign-up') {
-      return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
+      if (this.state.userId && this.state.loggedIn) {
+        window.location.hash = '#itineraries';
+      } else {
+        return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
+      }
+    } else {
+      window.location.hash = '#create';
     }
   }
 
