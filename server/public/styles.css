@@ -1160,7 +1160,6 @@ a:visited {
     border-bottom: solid thin #0e58a8;
     font-size: 1.5rem;
     font-weight: bold;
-    overflow: scroll;
     display: block;
   }
 
