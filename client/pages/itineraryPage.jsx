@@ -8,12 +8,6 @@ export default class ItineraryPage extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    window.matchMedia('(min-width: 700px)').addEventListener('change', e => {
-      this.setState({ matches: e.matches })
-    });
-  }
-
   render() {
     let itineraryContent = null;
     let noItineraryContent = null;

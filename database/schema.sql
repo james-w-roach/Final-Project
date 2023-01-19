@@ -2,9 +2,9 @@ set client_min_messages to warning;
 
 drop schema "public" cascade;
 
-create schema "public";
+create schema if not exists "public";
 
-create table "public"."itineraries" (
+create table if not exists "public"."itineraries" (
   "tripId"      serial,
   "tripName"    text           not null,
   "locations"   json           not null,
@@ -13,7 +13,7 @@ create table "public"."itineraries" (
   primary key ("tripId")
 );
 
-create table "public"."users" (
+create table if not exists "public"."users" (
   "userId"         serial,
   "username"       text           not null,
   "hashedPassword" text           not null,

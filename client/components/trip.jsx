@@ -10,13 +10,17 @@ export default class Trip extends React.Component {
         isDeleting: null,
         name: null,
         max: null
-      }
+      },
+      matches: window.matchMedia('(min-width: 900px)').matches
     };
     this.deleteLocation = this.deleteLocation.bind(this);
     this.setDeleteClass = this.setDeleteClass.bind(this);
   }
 
   componentDidMount() {
+    window.matchMedia('(min-width: 900px)').addEventListener('change', e => {
+      this.setState({ matches: e.matches });
+    });
     let userId;
     if (localStorage.getItem('UserID')) {
       userId = localStorage.getItem('UserID');
@@ -32,6 +36,10 @@ export default class Trip extends React.Component {
         this.setState({ itinerary: JSON.parse(localStorage.getItem('Guest Trip')) });
       }
     }
+  }
+
+  componentWillUnmount() {
+    window.matchMedia('(min-width: 900px)').removeEventListener('change', this.handler);
   }
 
   setDeleteClass(name) {
@@ -105,7 +113,7 @@ export default class Trip extends React.Component {
         }}>View</a>
         : null;
       return (
-        <li className="trip-list-item dynamic" key={location.name.split(',')[0]}
+        <li className="trip-list-item dynamic" key={location.name}
           onClick={event => {
             if (event.target.className !== 'delete-poi button') {
               this.props.switchActiveLocation(location);
@@ -144,27 +152,54 @@ export default class Trip extends React.Component {
 
     // Users will be able to add more locations from here soon
 
-    let editIcon =
-      <button className="edit-button" onClick={() => this.setState({ isEditing: true })}>
-        <i className="fas fa-pen"></i>
-      </button>;
-    if (this.state.isEditing) {
-      editIcon = <button className="edit-button" onClick={() => this.setState({ isEditing: false, isDeleting: false })}>
-        <i className="fas fa-times x-icon"></i>
-      </button>;
+    let editIcon;
+    if (this.state.matches) {
+      if (this.state.isEditing) {
+        editIcon = <button className="text-button" onClick={() => this.setState({ isEditing: false, isDeleting: false })}>
+          Done
+        </button>;
+      } else {
+        editIcon = <button className="text-button" onClick={() => this.setState({ isEditing: true })}>
+          Edit
+        </button>;
+      }
+    } else {
+      if (this.state.isEditing) {
+        editIcon = <button className="edit-button" onClick={() => this.setState({ isEditing: false, isDeleting: false })}>
+          <i className="fas fa-times x-icon"></i>
+        </button>;
+      } else {
+        editIcon = <button className="edit-button" onClick={() => this.setState({ isEditing: true })}>
+          <i className="fas fa-pen"></i>
+        </button>;
+      }
     }
+    const headerContent = this.state.matches
+      ? <div className='trip-list-header' style={{ marginBottom: '5px' }}>
+          <div className='trip-list-header-row'>
+            <h2 className="trip-list-h2" style={{ height: '35px' }}>{tripName}</h2>
+          </div>
+          <div className='trip-list-header-row header-button-row'>
+            <button className='text-button' onClick={() => {
+              this.props.switchView();
+              this.props.switchActiveLocation();
+            }}>Back</button>
+            {editIcon}
+          </div>
+        </div>
+      : <div className='trip-list-header trip-header'>
+          <a className='back' onClick={() => {
+            this.props.switchView();
+            this.props.switchActiveLocation();
+          }}><i className="fas fa-arrow-left back-arrow"></i></a>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{tripName}</h2>
+          {editIcon}
+        </div>;
     return (
       <>
         <div className='trip-list-module'>
-          <div className='trip-list-header trip-header'>
-            <a className='back' onClick={() => {
-              this.props.switchView();
-              this.props.switchActiveLocation();
-            }}><i className="fas fa-arrow-left back-arrow"></i></a>
-            <h2 style={{ fontSize: '1.5rem' }}>{tripName}</h2>
-            {editIcon}
-          </div>
-          <ul className="trip-list">{locationsList}</ul>
+          {headerContent}
+          <ul className="trip-list itinerary">{locationsList}</ul>
         </div>
       </>
     );

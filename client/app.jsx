@@ -1,5 +1,4 @@
 import React from 'react';
-import Home from './pages/home';
 import Create from './pages/create';
 import LocationPage from './pages/locationPage';
 import ItineraryPage from './pages/itineraryPage';
@@ -81,7 +80,7 @@ export default class App extends React.Component {
     this.updateItineraries();
   }
 
-  updateItineraries = () => {
+  updateItineraries = newItinerary => {
     let userId = this.state.userId;
     if (!userId) {
       userId = localStorage.getItem('UserID');
@@ -95,26 +94,31 @@ export default class App extends React.Component {
             this.setState({ itineraries: [] });
           } else {
             this.setState({ itineraries }, () => {
-              if (!this.state.activeItinerary && localStorage.getItem('Active Itinerary')) {
-                const activeItineraryParse = JSON.parse(localStorage.getItem('Active Itinerary'));
-                this.setState({ activeItinerary: activeItineraryParse });
+              if (window.location.hash === '#create' && newItinerary) {
+                this.setState({ activeItinerary: itineraries[itineraries.length - 1] });
+                window.location.hash = '#itineraries';
               } else {
-                let activeItinerary;
-                for (let i = 0; i < itineraries.length; i++) {
-                  if (this.state.activeItinerary && itineraries[i].tripId === this.state.activeItinerary.tripId) {
-                    activeItinerary = itineraries[i];
+                if (!this.state.activeItinerary && localStorage.getItem('Active Itinerary')) {
+                  const activeItineraryParse = JSON.parse(localStorage.getItem('Active Itinerary'));
+                  this.setState({ activeItinerary: activeItineraryParse });
+                } else {
+                  let activeItinerary;
+                  for (let i = 0; i < itineraries.length; i++) {
+                    if (this.state.activeItinerary && itineraries[i].tripId === this.state.activeItinerary.tripId) {
+                      activeItinerary = itineraries[i];
+                    }
+                  }
+                  if (activeItinerary) {
+                    this.setState({ activeItinerary });
+                  } else {
+                    this.setState({ activeItinerary: itineraries[0] });
                   }
                 }
-                if (activeItinerary) {
-                  this.setState({ activeItinerary });
-                } else {
-                  this.setState({ activeItinerary: itineraries[0] });
-                }
-              }
-              if (!this.state.activeLocation && localStorage.getItem('Active Location')) {
-                const activeLocationParse = JSON.parse(localStorage.getItem('Active Location'));
-                if (activeLocationParse) {
-                  this.setState({ activeLocation: activeLocationParse, view: 'itinerary' });
+                if (!this.state.activeLocation && localStorage.getItem('Active Location')) {
+                  const activeLocationParse = JSON.parse(localStorage.getItem('Active Location'));
+                  if (activeLocationParse) {
+                    this.setState({ activeLocation: activeLocationParse, view: 'itinerary' });
+                  }
                 }
               }
             });
@@ -126,6 +130,12 @@ export default class App extends React.Component {
         guestTrip = JSON.parse(localStorage.getItem('Guest Trip'));
       }
       if (guestTrip) {
+        if (!this.state.activeLocation && localStorage.getItem('Active Location')) {
+          const activeLocationParse = JSON.parse(localStorage.getItem('Active Location'));
+          if (activeLocationParse) {
+            this.setState({ activeLocation: activeLocationParse, view: 'itinerary' });
+          }
+        }
         const loginNotice = {
           tripName: 'Sign in to create more than one trip.',
           locations: 'Your guest trip will be saved.',
@@ -156,7 +166,7 @@ export default class App extends React.Component {
       }
     }
     if (this.state.itineraries.length === 0) {
-      this.setState({ itineraries: null, activeItinerary: null });
+      this.setState({ itineraries: [], activeItinerary: null });
     } else if (this.state.itineraries.length <= currentIndex) {
       this.setState({ activeItinerary: this.state.itineraries[currentIndex - 1] });
     } else {
@@ -172,7 +182,7 @@ export default class App extends React.Component {
       fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
         .then(res => res.json());
     } else {
-      this.setState({ itineraries: null, activeItinerary: null });
+      this.setState({ itineraries: [], activeItinerary: null });
       this.updateGuestTrip(null);
     }
   }
@@ -219,7 +229,7 @@ export default class App extends React.Component {
 
       localStorage.removeItem('Guest Trip');
     }
-    this.setState({ loggedIn: true, userId: result.user.userId, itineraries: null, guestTrip: null }, () => this.updateItineraries());
+    this.setState({ loggedIn: true, userId: result.user.userId, itineraries: [], guestTrip: null }, () => this.updateItineraries());
     window.location.hash = '#itineraries';
   }
 
@@ -255,11 +265,15 @@ export default class App extends React.Component {
     this.setState({ guestTrip });
   }
 
-  switchView = () => {
-    if (this.state.view === 'itineraries') {
-      this.setState({ view: 'itinerary' });
+  switchView = view => {
+    if (view && view === 'itineraries') {
+      this.setState({ view: 'itineraries' }, () => this.switchActiveLocation());
     } else {
-      this.setState({ view: 'itineraries' });
+      if (this.state.view === 'itineraries') {
+        this.setState({ view: 'itinerary' });
+      } else {
+        this.setState({ view: 'itineraries' });
+      }
     }
   }
 
@@ -278,24 +292,23 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     const hash = window.location.hash;
-    if (route === '') {
-      return <Home loggedIn={this.state.loggedIn} />;
-    } if (route === '#create') {
+    if (route === ''|| route === '#create') {
       return <Create
-      switchItinerary={this.switchItinerary}
-      updateItineraries={this.updateItineraries}
-      addGuestTrip={this.addGuestTrip}
-      guestTrip={this.state.guestTrip}
-      userId={this.state.userId} />;
+        updateItineraries={this.updateItineraries}
+        addGuestTrip={this.addGuestTrip}
+        guestTrip={this.state.guestTrip}
+        userId={this.state.userId}
+      />;
     } else if (route === '#location') {
       return <LocationPage
-      userId={this.state.userId}
-      updateGuestPOI={this.updateGuestPOI}
-      loggedIn={this.state.loggedIn}
-      toggleView={this.toggleView}
-      location={this.state.location}
-      tripId={this.state.tripId}
-      updateItineraries={this.updateItineraries} />;
+        userId={this.state.userId}
+        updateGuestPOI={this.updateGuestPOI}
+        loggedIn={this.state.loggedIn}
+        toggleView={this.toggleView}
+        location={this.state.location}
+        tripId={this.state.tripId}
+        updateItineraries={this.updateItineraries}
+      />;
     } else if (route === '#itineraries') {
       return <ItineraryPage
         toggleView={this.toggleView}
@@ -310,9 +323,16 @@ export default class App extends React.Component {
         deleteItinerary={this.deleteItinerary}
         guestTrip={this.state.guestTrip}
         updateGuestTrip={this.updateGuestTrip}
-        userId={this.state.userId} />;
+        userId={this.state.userId}
+      />;
     } else if (route === '#login' || route === '#sign-up') {
-      return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
+      if (this.state.userId && this.state.loggedIn) {
+        window.location.hash = '#itineraries';
+      } else {
+        return <Login onSignIn={this.onSignIn} action={route.split('#')[1]} />;
+      }
+    } else {
+      window.location.hash = '#create';
     }
   }
 
@@ -323,9 +343,9 @@ export default class App extends React.Component {
       : 'nav-drawer drawer-visible';
     return (
       <>
-        <Header loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} showDrawer={this.showDrawer} />
+        <Header loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} showDrawer={this.showDrawer} switchView={this.switchView} />
         { this.renderPage() }
-        <NavDrawer loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} showDrawer={this.showDrawer} navDrawerClass={navDrawerClass} />
+        <NavDrawer loggedIn={this.state.loggedIn} onSignOut={this.onSignOut} showDrawer={this.showDrawer} switchView={this.switchView} navDrawerClass={navDrawerClass} />
       </>
     );
   }

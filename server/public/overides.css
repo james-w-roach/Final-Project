@@ -1,32 +1,23 @@
 .map-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: calc(100vh - 60px);
+  height: 250px;
+  width: 100%;
+  overflow: visible;
+  box-shadow: 0 1px 3px rgb(200, 200, 200);
+  border-radius: 0.5rem;
 }
 
 .mapboxgl-ctrl-top-right {
-  width: calc(100% - 10px);
-  top: 70px;
-  left: 5px;
+  width: 100%;
+  top: -70px;
+  left: 0px;
+}
+
+.mapboxgl-ctrl-geocoder {
+  border-radius: 0.4rem !important;
 }
 
 .mapboxgl-ctrl-top-right .mapboxgl-ctrl {
   float: left;
-}
-
-.background-map > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-right,
-.background-map > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-left {
-  position: fixed;
-  bottom: 0;
-}
-
-.map-box > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-right,
-.map-box > .map-container > .mapboxgl-control-container > .mapboxgl-ctrl-bottom-left {
-  position: fixed;
-  bottom: 75px;
 }
 
 .mapboxgl-ctrl-geocoder {
@@ -41,16 +32,66 @@
   border-radius: 0 0 0.5rem 0;
 }
 
-a.mapboxgl-ctrl-logo {
-  margin: 0 0 -4px 0;
+.mapboxgl-ctrl-geocoder input {
+  font-size: 1rem;
 }
 
-@media screen and (min-width: 415px) {
+.mapboxgl-ctrl-geocoder input:focus {
+  outline: none;
+}
+
+@media screen and (min-width: 640px) {
+
   .map-container {
-    border-radius: 0.5rem;
+    height: 350px;
+  }
+
+  .mapboxgl-ctrl-geocoder {
+    width: calc(50% - 5px) !important;
+    max-width: calc(50% - 5px) !important;
+    display: flex;
+    align-items: center;
+  }
+
+  .mapboxgl-ctrl-geocoder input {
+    font: inherit;
+    width: 100%;
+    border: 0;
+    background-color: transparent;
+    margin: 0;
+    height: 50px;
+    color: #404040;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 6px 45px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .mapboxgl-ctrl-geocoder--icon {
+    margin-top: 8px !important;
+    margin-left: 4px !important;
+  }
+
+  .mapboxgl-ctrl-geocoder--icon-close {
+    margin-top: 12px !important;
+    margin-right: 4px !important;
+  }
+}
+
+@media screen and (min-width: 900px) {
+
+  .map-container {
     height: 100%;
     position: relative;
-    box-shadow: 0 1px 3px gray;
+  }
+
+  .map-box > .map-container > .mapboxgl-canvas-container > .mapboxgl-canvas {
+    left: 10px;
+  }
+
+  a.mapboxgl-ctrl-logo {
+    margin: 0 0 0 10px;
   }
 
   .background {
@@ -83,5 +124,92 @@ a.mapboxgl-ctrl-logo {
 
   .mapboxgl-ctrl-top-right > .mapboxgl-ctrl {
     margin: 10px 0;
+  }
+
+  .mapboxgl-ctrl-top-right {
+    width: calc(38vw - 25px);
+    top: 175px;
+    left: calc(-38vw - -15px);
+    height: 41px;
+  }
+
+  .mapboxgl-ctrl-top-right > .mapboxgl-ctrl {
+    margin: 0;
+  }
+
+  .mapboxgl-ctrl-geocoder {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100%;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 1px 3px rgb(200, 200, 200) !important;
+  }
+
+  .mapboxgl-ctrl-geocoder input {
+    height: 100%;
+  }
+
+  .mapboxgl-ctrl-geocoder input::placeholder {
+    color: black;
+  }
+
+  .mapboxgl-ctrl-geocoder svg {
+    top: calc(50% - 10px);
+  }
+
+  .map-container {
+    position: unset;
+  }
+
+  .mapboxgl-ctrl-geocoder--icon {
+    margin-top: 0px !important;
+    margin-left: 4px !important;
+  }
+
+  .mapboxgl-ctrl-geocoder--icon-close {
+    margin-top: 5px !important;
+    margin-right: 4px !important;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .mapboxgl-ctrl-top-right {
+    width: calc(((100vw - 40px) / 3.333333333333) - 12.5px);
+    left: calc(((-100vw - 40px) / 3.333333333333) + 25px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .mapboxgl-ctrl-top-right {
+    width: calc(((100vw - 40px) / 4) - 10px);
+    left: calc(((-100vw - 40px) / 4) + 20px);
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .mapboxgl-ctrl-top-right {
+    width: calc(((100vw - 40px) / 5) - 10px);
+    left: -25%;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .mapboxgl-ctrl-top-right {
+    width: calc(((100vw - 40px) / 5.55555555556) - 10px);
+    left: -22%;
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  .mapboxgl-ctrl-top-right {
+    width: calc(((100vw - 40px) / 6.66666666667) - 10px);
+    left: -17.6%;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .mapboxgl-ctrl-top-right {
+    width: 390px;
+    left: calc(0% - 400px);
   }
 }

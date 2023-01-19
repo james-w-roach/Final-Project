@@ -11,7 +11,10 @@ export default class NavDrawer extends React.Component {
     return (
       <div className={this.props.navDrawerClass}>
         <a className="drawer-anchor" href='#create' onClick={this.props.showDrawer}>Create <i className="fas fa-plus"></i></a>
-        <a className="drawer-anchor" href='#itineraries' onClick={this.props.showDrawer}>Trips <i className="far fa-map"></i></a>
+        <a className="drawer-anchor" href='#itineraries' onClick={() => {
+          this.props.showDrawer();
+          this.props.switchView('itineraries');
+        }}>Trips <i className="far fa-map"></i></a>
         <a className="drawer-anchor"
           onClick={() => {
             if (this.props.loggedIn) {
