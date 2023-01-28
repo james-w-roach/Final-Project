@@ -95,8 +95,8 @@ export default class App extends React.Component {
             this.setState({ itineraries: [] });
           } else {
             this.setState({ itineraries }, () => {
-              if (window.location.hash === '#create' && newItinerary) {
-                this.setState({ activeItinerary: itineraries[itineraries.length - 1] });
+              if ((window.location.hash === '#create' || window.location.hash === '#edit') && newItinerary) {
+                this.setState({ activeItinerary: itineraries[itineraries.length - 1], editingTrip: false });
                 window.location.hash = '#itineraries';
               } else {
                 if (!this.state.activeItinerary && localStorage.getItem('Active Itinerary')) {

@@ -69,7 +69,7 @@ export default class Trip extends React.Component {
         },
         body: JSON.stringify(itinerary.locations)
       };
-      fetch(`/api/travelPlanner/itineraries/${tripId}`, req)
+      fetch(`/api/travelPlanner/itineraries/locations/${tripId}`, req)
         .then(res => res.json())
         .then(() => {
           this.props.updateItineraries();

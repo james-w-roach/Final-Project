@@ -41,15 +41,24 @@ export default class Create extends React.Component {
         trip,
         userId
       };
+      const method = this.props.activeItinerary && this.props.editingTrip
+        ? 'PUT'
+        : 'POST';
+      const tripId = this.props.activeItinerary && this.props.editingTrip
+        ? this.props.activeItinerary.tripId
+        : null;
+      const route = this.props.activeItinerary && this.props.editingTrip
+        ? `/api/travelPlanner/itineraries/${tripId}`
+        : '/api/travelPlanner/itineraries';
       const req = {
-        method: 'POST',
+        method,
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json'
         },
         body: JSON.stringify(body)
       };
-      fetch('/api/travelPlanner/itineraries', req)
+      fetch(route, req)
         .then(res => res.json())
         .then(() => {
           this.props.updateItineraries(true);

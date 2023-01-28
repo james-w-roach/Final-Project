@@ -93,7 +93,7 @@ app.post('/api/travelPlanner/itineraries', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.put('/api/travelPlanner/itineraries/:tripId', (req, res, next) => {
+app.put('/api/travelPlanner/itineraries/locations/:tripId', (req, res, next) => {
   const locationsJSON = JSON.stringify(req.body);
   const tripId = parseInt(req.params.tripId, 10);
   const sql = `
@@ -103,6 +103,26 @@ app.put('/api/travelPlanner/itineraries/:tripId', (req, res, next) => {
     returning "locations";
   `;
   const params = [locationsJSON, tripId];
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
+app.put('/api/travelPlanner/itineraries/:tripId', (req, res, next) => {
+  const { trip } = req.body;
+  const locationsJSON = JSON.stringify(trip.locations);
+  const tripName = trip.tripName;
+  const tripId = parseInt(req.params.tripId, 10);
+  const sql = `
+     update "itineraries"
+        set "locations" = $1,
+            "tripName" = $2
+      where "tripId" = $3
+    returning "locations";
+  `;
+  const params = [locationsJSON, tripName, tripId];
   db.query(sql, params)
     .then(result => {
       res.status(200).json(result.rows[0]);
