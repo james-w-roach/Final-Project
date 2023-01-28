@@ -154,25 +154,13 @@ export default class Trip extends React.Component {
 
     let editIcon;
     if (this.state.matches) {
-      if (this.state.isEditing) {
-        editIcon = <button className="text-button" onClick={() => this.setState({ isEditing: false, isDeleting: false })}>
-          Done
-        </button>;
-      } else {
-        editIcon = <button className="text-button" onClick={() => this.setState({ isEditing: true })}>
-          Edit
-        </button>;
-      }
+      editIcon = <button className="text-button" onClick={() => this.props.editTrip(true)}>
+        Edit
+      </button>;
     } else {
-      if (this.state.isEditing) {
-        editIcon = <button className="edit-button" onClick={() => this.setState({ isEditing: false, isDeleting: false })}>
-          <i className="fas fa-times x-icon"></i>
-        </button>;
-      } else {
-        editIcon = <button className="edit-button" onClick={() => this.setState({ isEditing: true })}>
-          <i className="fas fa-pen"></i>
-        </button>;
-      }
+      editIcon = <button className="edit-button" onClick={() => this.props.editTrip(true)}>
+        <i className="fas fa-pen"></i>
+      </button>;
     }
     const headerContent = this.state.matches
       ? <div className='trip-list-header' style={{ marginBottom: '5px' }}>

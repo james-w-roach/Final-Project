@@ -19,7 +19,8 @@ export default class App extends React.Component {
       viewingNavDrawer: false,
       itineraries: null,
       activeItinerary: null,
-      view: 'itineraries'
+      view: 'itineraries',
+      editingTrip: false
     };
     this.renderPage = this.renderPage.bind(this);
     this.toggleView = this.toggleView.bind(this);
@@ -289,15 +290,23 @@ export default class App extends React.Component {
     }
   }
 
+  editTrip = boolean => {
+    if (boolean) {
+      this.setState({ editingTrip: true }, () => window.location.hash = '#edit');
+    }
+  }
+
   renderPage() {
     const { route } = this.state;
     const hash = window.location.hash;
-    if (route === ''|| route === '#create') {
+    if (route === '' || route === '#create' || route === '#edit') {
       return <Create
         updateItineraries={this.updateItineraries}
         addGuestTrip={this.addGuestTrip}
         guestTrip={this.state.guestTrip}
         userId={this.state.userId}
+        editingTrip={this.state.editingTrip}
+        activeItinerary={this.state.activeItinerary}
       />;
     } else if (route === '#location') {
       return <LocationPage
@@ -324,6 +333,7 @@ export default class App extends React.Component {
         guestTrip={this.state.guestTrip}
         updateGuestTrip={this.updateGuestTrip}
         userId={this.state.userId}
+        editTrip={this.editTrip}
       />;
     } else if (route === '#login' || route === '#sign-up') {
       if (this.state.userId && this.state.loggedIn) {

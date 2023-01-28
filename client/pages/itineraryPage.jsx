@@ -57,6 +57,7 @@ export default class ItineraryPage extends React.Component {
             deleteItinerary={this.props.deleteItinerary}
             guestTrip={this.props.guestTrip}
             updateGuestTrip={this.props.updateGuestTrip}
+            editTrip={this.props.editTrip}
           />
         );
       }

@@ -14,6 +14,12 @@ export default class Create extends React.Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.editingTrip && this.props.activeItinerary) {
+      this.setState({ locations: this.props.activeItinerary.locations, tripName: this.props.activeItinerary.tripName, showFinish: true });
+    }
+  }
+
   handleSubmit = () => {
     event.preventDefault();
     if (!this.state.locations[0]) {
@@ -186,6 +192,8 @@ export default class Create extends React.Component {
                 deleteLocation={this.deleteLocation}
                 userId={this.props.userId}
                 guestTrip={this.props.guestTrip}
+                editingTrip={this.props.editingTrip}
+                activeItinerary={this.props.activeItinerary}
               />
               <CreateMap
                 userId={this.props.userId}

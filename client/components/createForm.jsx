@@ -74,13 +74,22 @@ export default class CreateForm extends React.Component {
         <p>{`If you save this trip, ${this.props.guestTrip.tripName} will be deleted. Please create an account to add more trips.`}</p>
       </li>
       : null;
+    const createFormHeaderContent = this.props.editingTrip && this.props.activeItinerary
+      ? 'Edit Itinerary'
+      : 'New Itinerary';
+    const tripName = this.props.editingTrip && this.props.activeItinerary
+      ? this.props.activeItinerary.tripName
+      : null;
+    const submitValue = this.props.editingTrip && this.props.activeItinerary
+      ? 'Save Changes'
+      : 'Finish Itinerary';
     return (
       <div className="map-form">
-        <h2 className='create-form-header'>New Itinerary</h2>
+        <h2 className='create-form-header'>{createFormHeaderContent}</h2>
         <form onSubmit={() => this.props.handleSubmit()} autoComplete="off" className='itinerary-form'>
           <label className='create-form-label' htmlFor='trip-name'>Itinerary Name</label>
-          <input className="create-form-name" required="required" type="text" maxLength='20' name="trip-name" placeholder="Give your trip a name." onChange={event => this.props.updateTripName(event)} />
-          <input className={finishClass} type="submit" value="Finish Itinerary" />
+          <input className="create-form-name" required="required" type="text" maxLength='20' name="trip-name" defaultValue={tripName} placeholder="Give your trip a name." onChange={event => this.props.updateTripName(event)} />
+          <input className={finishClass} type="submit" value={submitValue} />
         </form>
         <h3 className='create-form-subheader add-locations'>Add Locations</h3>
         <div className='locations-subheader-container'>
