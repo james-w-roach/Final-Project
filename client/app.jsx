@@ -37,7 +37,11 @@ export default class App extends React.Component {
 
     window.addEventListener('hashchange', () => {
       const route = window.location.hash;
-      this.setState({ route });
+      if (route === '#create') {
+        this.setState({ editingTrip: false, route });
+      } else {
+        this.setState({ route });
+      }
     });
 
     window.addEventListener('beforeunload', () => {

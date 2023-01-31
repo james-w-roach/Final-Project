@@ -18,6 +18,18 @@ export default class CreateForm extends React.Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.editingTrip) {
+      this.setState({ editingEnabled: true });
+    }
+  }
+
+  componentDidUpdate() {
+    if (!this.props.editingTrip && this.state.editingEnabled) {
+      this.setState({ editingEnabled: false });
+    }
+  }
+
   render() {
     let editIcon =
       <button className="edit-button edit-locations" onClick={() => this.setState({ isEditing: true })}>
@@ -77,9 +89,9 @@ export default class CreateForm extends React.Component {
     const createFormHeaderContent = this.props.editingTrip && this.props.activeItinerary
       ? 'Edit Itinerary'
       : 'New Itinerary';
-    const tripName = this.props.editingTrip && this.props.activeItinerary
+    const tripName = this.state.editingEnabled && this.props.activeItinerary
       ? this.props.activeItinerary.tripName
-      : null;
+      : '';
     const submitValue = this.props.editingTrip && this.props.activeItinerary
       ? 'Save Changes'
       : 'Finish Itinerary';

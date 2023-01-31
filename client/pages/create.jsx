@@ -14,9 +14,15 @@ export default class Create extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    if (!this.props.editingTrip && this.state.editingEnabled) {
+      this.setState({ locations: [], tripName: '', showFinish: false, editingEnabled: false });
+    }
+  }
+
   componentDidMount() {
     if (this.props.editingTrip && this.props.activeItinerary) {
-      this.setState({ locations: this.props.activeItinerary.locations, tripName: this.props.activeItinerary.tripName, showFinish: true });
+      this.setState({ locations: this.props.activeItinerary.locations, tripName: this.props.activeItinerary.tripName, showFinish: true, editingEnabled: true });
     }
   }
 
