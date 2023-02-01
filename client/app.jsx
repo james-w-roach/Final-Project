@@ -39,6 +39,9 @@ export default class App extends React.Component {
       const route = window.location.hash;
       if (route === '#create') {
         this.setState({ editingTrip: false, route });
+      } else if (route === '#edit' && !this.state.editingTrip) {
+        window.location.hash = '#create';
+        this.setState({ route: '#create' });
       } else {
         this.setState({ route });
       }
