@@ -89,7 +89,7 @@ export default class CreateForm extends React.Component {
     const createFormHeaderContent = this.props.editingTrip && this.props.activeItinerary
       ? 'Edit Itinerary'
       : 'New Itinerary';
-    const tripName = this.state.editingEnabled && this.props.activeItinerary
+    const tripName = this.props.editingTrip && this.props.activeItinerary && this.props.activeItinerary.tripName
       ? this.props.activeItinerary.tripName
       : '';
     const submitValue = this.props.editingTrip && this.props.activeItinerary

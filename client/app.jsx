@@ -66,6 +66,8 @@ export default class App extends React.Component {
         const activeLocationJSON = JSON.stringify(this.state.activeLocation);
         localStorage.setItem('Active Location', activeLocationJSON);
       }
+      const editingTripJSON = JSON.stringify(this.state.editingTrip);
+      localStorage.setItem('Editing Trip', editingTripJSON);
     });
 
     if (localStorage.getItem('Location')) {
@@ -83,6 +85,10 @@ export default class App extends React.Component {
     if (localStorage.getItem('Guest Trip')) {
       const guestTripParse = JSON.parse(localStorage.getItem('Guest Trip'));
       this.setState({ guestTrip: guestTripParse });
+    }
+    if (localStorage.getItem('Editing Trip')) {
+      const editingTripParse = JSON.parse(localStorage.getItem('Editing Trip'));
+      this.setState({ editingTrip: editingTripParse });
     }
 
     this.updateItineraries();
